@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 # Inputs
 ub = 10
 lb = 0
-h = 0.1
-N = int((ub - lb)/h)
+dx = 0.1
+N = int((ub - lb)/dx)
 x = zeros(N)
 y = zeros(N)
 analytical = zeros(N)
@@ -20,8 +20,8 @@ analytical[0] = 2
 
 # Derivative function
 for i in range(1, N):
-    y[i] = y[i-1] + h*sin(5*x[i-1]) # dy/dx = sin(5x)
-    x[i] = x[i-1] + h
+    y[i] = y[i-1] + dx*sin(5*x[i-1]) # dy/dx = sin(5x)
+    x[i] = x[i-1] + dx
     analytical[i] = -1/5*(cos(5*x[i]) - 11) # Analytical solution
 
 # Plot
