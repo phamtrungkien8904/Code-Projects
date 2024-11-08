@@ -15,7 +15,7 @@ N_C = zeros(N)
 
 # Constants
 k1 = 0.2
-k2 = 0.1
+k2 = 0.2
 
 # Initial conditions
 t[0] = 0
@@ -40,3 +40,5 @@ plt.xlabel('$x$')
 plt.ylabel('$y$')
 plt.title('Finite Difference')
 plt.show()
+
+## Radiative balance: k1*N_A = k2*N_B
