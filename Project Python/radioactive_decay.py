@@ -1,33 +1,41 @@
-# Method to solve ordinary differential equations using finite difference method
-
 from math import sin, cos, pi
 from numpy import zeros 
 import matplotlib.pyplot as plt
 
 # Inputs
-ub = 10
-lb = 0
-dx = 0.1
-N = int((ub - lb)/dx)
-x = zeros(N)
-y = zeros(N)
-analytical = zeros(N)
+N_A0 = 1000
+t_end = 20
+t_start= 0
+dt = 0.01
+N = int((t_end - t_start)/dt)
+t = zeros(N)
+N_A = zeros(N)
+N_B = zeros(N)
+N_C = zeros(N)
+
+# Constants
+k1 = 0.2
+k2 = 0.1
 
 # Initial conditions
-x[0] = 0
-y[0] = 2
-analytical[0] = 2
+t[0] = 0
+N_A[0] = N_A0
+N_B[0] = 0
+N_C[0] = 0
+
 
 # Derivative function
 for i in range(1, N):
-    y[i] = y[i-1] + dx*sin(5*x[i-1]) # dy/dx = sin(5x)
-    x[i] = x[i-1] + dx
-    analytical[i] = -1/5*(cos(5*x[i]) - 11) # Analytical solution
+    N_A[i] = N_A[i-1] - dt*k1*N_A[i-1]
+    N_B[i] = N_B[i-1] + dt*(k1*N_A[i-1] - k2*N_B[i-1])
+    N_C[i] = N_C[i-1] + dt*k2*N_B[i-1]
+    t[i] = t[i-1] + dt
 
 # Plot
-plt.plot(x, y, label='Numerical')
-plt.plot(x, analytical, label='Analytical')
-plt.legend(['Numerical', 'Analytical'])
+plt.plot(t, N_A, label='A')
+plt.plot(t, N_B, label='B')
+plt.plot(t, N_C, label='C')
+plt.legend(['A', 'B', 'C']) 
 plt.xlabel('$x$')
 plt.ylabel('$y$')
 plt.title('Finite Difference')
