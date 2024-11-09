@@ -8,8 +8,8 @@ a = 0.5  # 2a - distance between plates
 Vmax = 100
 Vmin = -100
 
-Nx = 200
-Ny = 100
+Nx = 500
+Ny = 250
 
 eps = (Vmax - Vmin) / 1e5
 
@@ -113,14 +113,16 @@ cbar.set_ticks(np.linspace(Vmin, Vmax, num=9))  # Set colorbar ticks to range of
 plt.xlabel('x [m]')
 plt.ylabel('y [m]')
 plt.axis('tight')  # Fit the image to the axis border
-plt.show()
 
 # FIGURES
 plt.figure(figsize=(10, 6))
 plt.title('Electric Field Magnitude')
-plt.pcolor(x, y, E, shading='auto', cmap='jet')
-plt.colorbar(label='Electric Field [V/m]')
+c = plt.pcolor(x, y, E, shading='auto', cmap='jet', vmin=0, vmax=Emax)  # Set vmin and vmax
+cbar = plt.colorbar(c, label='Electric Field [V/m]')  # Set colorbar label
+cbar.set_ticks(np.linspace(0, Emax, num=9))  # Set colorbar ticks to range of V
 plt.xlabel('x [m]')
 plt.ylabel('y [m]')
-plt.axis('equal')
+plt.axis('tight')  # Fit the image to the axis border
+
+# Show both figures
 plt.show()
