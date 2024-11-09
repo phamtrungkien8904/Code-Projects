@@ -3,7 +3,6 @@ from numpy import zeros
 import matplotlib.pyplot as plt
 
 # Inputs
-N_A0 = 1000
 t_end = 20
 t_start= 0
 dt = 0.01
@@ -19,8 +18,8 @@ k2 = 0.2
 
 # Initial conditions
 t[0] = 0
-N_A[0] = N_A0
-N_B[0] = 0
+N_A[0] = 1000
+N_B[0] = 500
 N_C[0] = 0
 
 # Derivative function
