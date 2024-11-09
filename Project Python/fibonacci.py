@@ -16,4 +16,3 @@ fib = []
 for i in range(n):
     fib.append(fibonacci(i))
 print(fib)
-
