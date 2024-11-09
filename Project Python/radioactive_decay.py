@@ -3,7 +3,7 @@ from numpy import zeros
 import matplotlib.pyplot as plt
 
 # Inputs
-t_end = 20
+t_end = 30
 t_start= 0
 dt = 0.01
 N = int((t_end - t_start)/dt)

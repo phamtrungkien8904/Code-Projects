@@ -5,10 +5,10 @@ from numpy import zeros
 import matplotlib.pyplot as plt
 
 # Inputs
-ub = 10
-lb = 0
+x_end = 10
+x_start = 0
 dx = 0.1
-N = int((ub - lb)/dx)
+N = int((x_end - x_start)/dx)
 x = zeros(N)
 y = zeros(N)
 analytical = zeros(N)
