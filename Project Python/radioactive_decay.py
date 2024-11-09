@@ -38,6 +38,8 @@ plt.legend(['A', 'B', 'C'])
 plt.xlabel('$x$')
 plt.ylabel('$y$')
 plt.title('Chain of Radioactive Decay')
+plt.grid()
 plt.show()
+
 
 ## Radiative balance: k1*N_A = k2*N_B
