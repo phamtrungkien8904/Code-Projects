@@ -8,8 +8,8 @@ a = 0.5  # 2a - distance between plates
 Vmax = 100
 Vmin = -100
 
-Nx = 200
-Ny = 100
+Nx = 500
+Ny = 250
 
 eps = (Vmax - Vmin) / 1e5
 
@@ -102,13 +102,14 @@ Ex[mask] = 0
 Ey[mask] = 0
 
 # Commented out the plotting section
-step = 3  # Change this value to adjust density (higher = fewer vectors)
+step = 2  # Change this value to adjust density (higher = fewer vectors)
 plt.figure(figsize=(10, 6))
 plt.title('Electric Field and Potential Distribution')
-plt.pcolor(x, y, V, shading='auto', cmap='jet', vmin=Vmin, vmax=Vmax)  # Set vmin and vmax
+c = plt.pcolor(x, y, V, shading='auto', cmap='jet', vmin=Vmin, vmax=Vmax)  # Set vmin and vmax
 plt.contour(x, y, V, levels=contour_range_V, colors='k', linewidths=1, linestyles='solid')
 plt.quiver(x[::step], y[::step], Ex[::step, ::step], Ey[::step, ::step], scale=800, headwidth=1, headlength=1)  # Adjust scale and head size
-plt.colorbar(label='Potential [V]', ticks=np.linspace(-100, 100, 11))  # Set colorbar ticks
+cbar = plt.colorbar(c, label='Potential [V]')  # Set colorbar label
+cbar.set_ticks(np.linspace(Vmin, Vmax, num=9))  # Set colorbar ticks to range of V
 plt.xlabel('x [m]')
 plt.ylabel('y [m]')
 plt.axis('tight')  # Fit the image to the axis border
