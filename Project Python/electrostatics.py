@@ -8,8 +8,8 @@ a = 0.5  # 2a - distance between plates
 Vmax = 100
 Vmin = -100
 
-Nx = 500
-Ny = 250
+Nx = 1000
+Ny = 500
 
 eps = (Vmax - Vmin) / 1e5
 
