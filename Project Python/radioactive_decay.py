@@ -1,4 +1,3 @@
-from math import sin, cos, pi
 from numpy import zeros 
 import matplotlib.pyplot as plt
 
@@ -19,7 +18,7 @@ k2 = 0.2
 # Initial conditions
 t[0] = 0
 N_A[0] = 1000
-N_B[0] = 500
+N_B[0] = 0
 N_C[0] = 0
 
 # Derivative function
