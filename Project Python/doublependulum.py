@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from numpy import cos, sin
-
 import matplotlib.animation as animation
 
 G = 9.8  # acceleration due to gravity, in m/s^2
