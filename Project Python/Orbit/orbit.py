@@ -73,6 +73,3 @@ def simulate_orbit(initial_position, initial_velocity, dt=0.01, tmax=20.0, GM=1.
                                   repeat=False, interval=interval, blit=True)
     plt.grid()
     plt.show()
-
-# Example usage:
-simulate_orbit(initial_position=(1.0, 0.0), initial_velocity=(0.0, 1.1))
