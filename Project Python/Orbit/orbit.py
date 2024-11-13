@@ -2,7 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-def simulate_orbit(initial_position, initial_velocity, dt=0.01, tmax=20.0, GM=1.0):
+
+
+def simulate_orbit(initial_position, initial_velocity, dt, tmax, GM):
     # Initial conditions
     x = np.zeros(int(tmax / dt))
     y = np.zeros(int(tmax / dt))
@@ -13,6 +15,12 @@ def simulate_orbit(initial_position, initial_velocity, dt=0.01, tmax=20.0, GM=1.
     # Set initial position and velocity
     x[0], y[0] = initial_position
     vx[0], vy[0] = initial_velocity
+    # Ananlytical solution for orbit
+    h = vy[0] * x[0] - vx[0] * y[0] 
+    p = h**2 / GM
+    E = 0.5 * (vx[0]**2 + vy[0]**2) - GM / np.sqrt(x[0]**2 + y[0]**2)
+    e = np.sqrt(1 + 2 * p * E / GM)
+    phi = np.arccos((p/np.linalg.norm(x[0], y[0]) - 1) / e) - np.arccos(x[0] / np.linalg.norm([x[0], y[0]]))
 
     fig, ax = plt.subplots()
     line, = ax.plot([], [], linestyle='-', lw=2)  # Set the line style to solid
@@ -24,10 +32,11 @@ def simulate_orbit(initial_position, initial_velocity, dt=0.01, tmax=20.0, GM=1.
     r_text = ax.text(0.02, 0.90, '', transform=ax.transAxes)
     v_text = ax.text(0.02, 0.85, '', transform=ax.transAxes)  # Velocity text
 
-    # Plot y = sin(x) from x = -1 to x = 1
-    x_sin = np.linspace(-1, 1, 400)
-    y_sin = np.sin(x_sin)
-    ax.plot(x_sin, y_sin, 'g-', lw=2)  # Green line for y = sin(x)
+    # Plot analytical solution
+    theta_analytical = np.linspace(0, 2 * np.pi, 0.1)
+    x_analytical = p / (1 + e * np.cos(theta_analytical + phi)) * np.cos(theta_analytical)
+    y_analytical = p / (1 + e * np.cos(theta_analytical + phi)) * np.sin(theta_analytical)
+    ax.plot(x_analytical, y_analytical, 'g-', lw=2)  
 
     ax.set_xlim(-2, 2)
     ax.set_ylim(-2, 2)
@@ -73,3 +82,12 @@ def simulate_orbit(initial_position, initial_velocity, dt=0.01, tmax=20.0, GM=1.
                                   repeat=False, interval=interval, blit=True)
     plt.grid()
     plt.show()
+
+# Initial conditions
+initial_position = [1.0, 0.0]
+initial_velocity = [0.0, 1.0]
+dt = 0.01
+tmax = 10
+GM = 1
+
+simulate_orbit(initial_position, initial_velocity, dt, tmax, GM)
