@@ -4,7 +4,7 @@ import matplotlib.animation as animation
 
 
 
-def simulate_orbit(initial_position, initial_velocity, dt, tmax, GM):
+def simulate_orbit(initial_position, initial_velocity, dt, tmax, GM, R):
     # Initial conditions
     x = np.zeros(int(tmax / dt))
     y = np.zeros(int(tmax / dt))
@@ -16,35 +16,21 @@ def simulate_orbit(initial_position, initial_velocity, dt, tmax, GM):
     x[0], y[0] = initial_position
     vx[0], vy[0] = initial_velocity
 
-    # Analytical solution for orbit
-    h = vy[0] * x[0] - vx[0] * y[0]
-    p = h**2 / GM
-    E = 0.5 * (vx[0]**2 + vy[0]**2) - GM / np.sqrt(x[0]**2 + y[0]**2)
-    e = np.sqrt(1 + 2 * p * E / GM)
-    phi = np.arccos((p / np.linalg.norm([x[0], y[0]]) - 1) / e)
-    c = np.linalg.norm([x[0], y[0]])
-    print(h, p, e,E , phi, c)
-
     # Set up the figure, the axis, and the plot element we want to animate
     fig, ax = plt.subplots()
-    line, = ax.plot([], [], linestyle='-', lw=2)  # Set the line style to solid
-    ball = plt.Circle((x[0], y[0]), 0.05)
-    center = plt.Circle((0, 0), 0.1, color='r', fill=True)  # Static circle at (0,0)
+    dashed, = ax.plot([], [], linestyle='--', lw=1)  # Dashed line for the radius
+    orbit, = ax.plot([], [], linestyle='-', color='c',lw=1)  # Orbit line
+    ball = plt.Circle((x[0], y[0]), R/20, color='b', fill=True)  # Ball at initial position
+    line, = ax.plot([], [], linestyle='-', color='b', lw=2.5)  # Set the line style to solid
+    center = plt.Circle((0, 0), R/20, color='r', fill=True)  # Static circle at (0,0)
     ax.add_patch(ball)
     ax.add_patch(center)
     time_text = ax.text(0.02, 0.95, '', transform=ax.transAxes)
     r_text = ax.text(0.02, 0.90, '', transform=ax.transAxes)
     v_text = ax.text(0.02, 0.85, '', transform=ax.transAxes)  # Velocity text
 
-    # Plot analytical solution
-    theta_analytical = np.linspace(0, 2 * np.pi, 100)
-    x_analytical = p / (1 + e * np.cos(theta_analytical + phi)) * np.cos(theta_analytical)
-    y_analytical = p / (1 + e * np.cos(theta_analytical + phi)) * np.sin(theta_analytical)
-    ax.plot(x_analytical, y_analytical, 'k--', lw=1)  # Plot analytical solution
-
-
-    ax.set_xlim(-2, 2)
-    ax.set_ylim(-2, 2)
+    ax.set_xlim(-2*R, 2*R)
+    ax.set_ylim(-2*R, 2*R)
     ax.set_xlabel('x /m')
     ax.set_ylabel('y /m')
     ax.set_aspect('equal')  # Scale x and y axes equally
@@ -53,9 +39,11 @@ def simulate_orbit(initial_position, initial_velocity, dt, tmax, GM):
         time_text.set_text('')
         r_text.set_text('')
         v_text.set_text('')
-        line.set_data([], [])
+        line.set_data(x, y)  # Set the full orbit data for the line
+        dashed.set_data(x, y)  # Set the full orbit data for the dashed line
+        orbit.set_data(x, y)  # Set the full orbit data for the orbit
         ball.set_center((x[0], y[0]))
-        return line, ball, time_text, r_text, v_text
+        return line, dashed, orbit, ball, time_text, r_text, v_text
 
     def animate(i):
         """Draw the frame i of the animation."""
@@ -71,29 +59,33 @@ def simulate_orbit(initial_position, initial_velocity, dt, tmax, GM):
 
         start = max(0, i - 100)
         line.set_data(x[start:i+1], y[start:i+1])
+        dashed.set_data([0, x[i]], [0, y[i]])
+        orbit.set_data(x[0:i+1], y[0:i+1])
         ball.set_center((x[i], y[i]))
 
         # Update the time text
-        time_text.set_text(f'Time = {t[i]:.2f} s')
-        r_text.set_text(f'r = {np.linalg.norm([x[i], y[i]]):.2f} m')
+        time_text.set_text(f'Time = {t[i]/dt:.2f} days')
+        r_text.set_text(f'r = {np.linalg.norm([x[i], y[i]])/10e11:.2f} e11 m')
         v_text.set_text(f'v = {np.linalg.norm([vx[i], vy[i]]):.2f} m/s')  # Update velocity text
 
-        return line, ball, time_text, r_text, v_text
+        return orbit, dashed, line, ball, time_text, r_text, v_text  # Return line after orbit and dashed
 
     # Interval between frames in ms, total number of frames to use.
-    interval, nframes = 1000 * dt, int(tmax / dt)
+    interval, nframes = 10, int(tmax / dt)
     # Animate once (set repeat=False so the animation doesn't loop).
     ani = animation.FuncAnimation(fig, animate, frames=nframes, init_func=init,
                                   repeat=False, interval=interval, blit=True)
     plt.grid()
     plt.show()
 
-# Initial conditions
-initial_position = [1.0, 0]
-initial_velocity = [0.0, 1.0]
-dt = 0.01
-tmax = 10
-GM = 1
+# Constants
+AU = 1.496e11  # Astronomical unit in meters
+R = AU  # Scale the plot to 1 AU
+initial_position = [AU, 0]  # 1 AU from the Sun
+initial_velocity = [0, 29780]  # Approximate orbital speed of Earth in m/s
+dt = 24* 60 * 60  # Time step in seconds (1 hour)
+tmax = 365 * 24 * 60 * 60  # One year in seconds
+GM = 1.32712440018e20  # Gravitational constant * mass of the Sun (m^3/s^2)
 
-simulate_orbit(initial_position, initial_velocity, dt, tmax, GM)
+simulate_orbit(initial_position, initial_velocity, dt, tmax, GM, R)
 
