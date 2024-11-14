@@ -130,7 +130,7 @@ def simulate_orbit(initial_position_1, initial_velocity_1, initial_position_2, i
 
 
     # Interval between frames in ms, total number of frames to use.
-    interval, nframes = 50, int(tmax / dt)
+    interval, nframes = 40, int(tmax / dt)
     # Animate once (set repeat=False so the animation doesn't loop).
     ani = animation.FuncAnimation(fig, animate, frames=nframes, init_func=init,
                                   repeat=False, interval=interval, blit=True)
