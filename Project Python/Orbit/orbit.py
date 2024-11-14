@@ -15,13 +15,17 @@ def simulate_orbit(initial_position, initial_velocity, dt, tmax, GM):
     # Set initial position and velocity
     x[0], y[0] = initial_position
     vx[0], vy[0] = initial_velocity
-    # Ananlytical solution for orbit
-    h = vy[0] * x[0] - vx[0] * y[0] 
+
+    # Analytical solution for orbit
+    h = vy[0] * x[0] - vx[0] * y[0]
     p = h**2 / GM
     E = 0.5 * (vx[0]**2 + vy[0]**2) - GM / np.sqrt(x[0]**2 + y[0]**2)
     e = np.sqrt(1 + 2 * p * E / GM)
-    phi = np.arccos((p/np.linalg.norm(x[0], y[0]) - 1) / e) - np.arccos(x[0] / np.linalg.norm([x[0], y[0]]))
+    phi = np.arccos((p / np.linalg.norm([x[0], y[0]]) - 1) / e)
+    c = np.linalg.norm([x[0], y[0]])
+    print(h, p, e,E , phi, c)
 
+    # Set up the figure, the axis, and the plot element we want to animate
     fig, ax = plt.subplots()
     line, = ax.plot([], [], linestyle='-', lw=2)  # Set the line style to solid
     ball = plt.Circle((x[0], y[0]), 0.05)
@@ -33,10 +37,11 @@ def simulate_orbit(initial_position, initial_velocity, dt, tmax, GM):
     v_text = ax.text(0.02, 0.85, '', transform=ax.transAxes)  # Velocity text
 
     # Plot analytical solution
-    theta_analytical = np.linspace(0, 2 * np.pi, 0.1)
+    theta_analytical = np.linspace(0, 2 * np.pi, 100)
     x_analytical = p / (1 + e * np.cos(theta_analytical + phi)) * np.cos(theta_analytical)
     y_analytical = p / (1 + e * np.cos(theta_analytical + phi)) * np.sin(theta_analytical)
-    ax.plot(x_analytical, y_analytical, 'g-', lw=2)  
+    ax.plot(x_analytical, y_analytical, 'k--', lw=1)  # Plot analytical solution
+
 
     ax.set_xlim(-2, 2)
     ax.set_ylim(-2, 2)
@@ -84,10 +89,11 @@ def simulate_orbit(initial_position, initial_velocity, dt, tmax, GM):
     plt.show()
 
 # Initial conditions
-initial_position = [1.0, 0.0]
+initial_position = [1.0, 0]
 initial_velocity = [0.0, 1.0]
 dt = 0.01
 tmax = 10
 GM = 1
 
 simulate_orbit(initial_position, initial_velocity, dt, tmax, GM)
+
