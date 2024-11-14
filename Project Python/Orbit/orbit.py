@@ -20,10 +20,10 @@ def simulate_orbit(initial_position, initial_velocity, dt, tmax, GM, R):
     fig, ax = plt.subplots()
     dashed, = ax.plot([], [], linestyle='--', lw=1)  # Dashed line for the radius
     orbit, = ax.plot([], [], linestyle='--', color='c',lw=1)  # Orbit line
-    ball = plt.Circle((x[0], y[0]), R/20, color='b', fill=True)  # Ball at initial position
+    planet = plt.Circle((x[0], y[0]), R/20, color='b', fill=True)  # planet at initial position
     line, = ax.plot([], [], linestyle='-', color='b', lw=2.5)  # Set the line style to solid
     center = plt.Circle((0, 0), R/20, color='r', fill=True)  # Static circle at (0,0)
-    ax.add_patch(ball)
+    ax.add_patch(planet)
     ax.add_patch(center)
     time_text = ax.text(0.02, 0.95, '', transform=ax.transAxes)
     r_text = ax.text(0.02, 0.90, '', transform=ax.transAxes)
@@ -42,8 +42,8 @@ def simulate_orbit(initial_position, initial_velocity, dt, tmax, GM, R):
         line.set_data(x, y)  # Set the full orbit data for the line
         dashed.set_data(x, y)  # Set the full orbit data for the dashed line
         orbit.set_data(x, y)  # Set the full orbit data for the orbit
-        ball.set_center((x[0], y[0]))
-        return line, dashed, orbit, ball, time_text, r_text, v_text
+        planet.set_center((x[0], y[0]))
+        return line, dashed, orbit, planet, time_text, r_text, v_text
 
     def animate(i):
         """Draw the frame i of the animation."""
@@ -61,14 +61,14 @@ def simulate_orbit(initial_position, initial_velocity, dt, tmax, GM, R):
         line.set_data(x[start:i+1], y[start:i+1])
         dashed.set_data([0, x[i]], [0, y[i]])
         orbit.set_data(x[0:i+1], y[0:i+1])
-        ball.set_center((x[i], y[i]))
+        planet.set_center((x[i], y[i]))
 
         # Update the time text
         time_text.set_text(f'Time = {t[i]/dt:.2f} days')
         r_text.set_text(f'r = {np.linalg.norm([x[i], y[i]])/10e11:.2f} e11 m')
         v_text.set_text(f'v = {np.linalg.norm([vx[i], vy[i]]):.2f} m/s')  # Update velocity text
 
-        return orbit, dashed, line, ball, time_text, r_text, v_text  # Return line after orbit and dashed
+        return orbit, dashed, line, planet, time_text, r_text, v_text  # Return line after orbit and dashed
 
     # Interval between frames in ms, total number of frames to use.
     interval, nframes = 10, int(tmax / dt)
