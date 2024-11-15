@@ -124,13 +124,13 @@ def simulate_orbit(initial_position_1, initial_velocity_1, initial_position_2, i
         ship.set_center((x_ship[i], y_ship[i]))
 
         # Update the time text
-        time_text.set_text(f'Time = {t[i]/dt:.2f} days')
+        time_text.set_text(f'Time = {t[i]/(24*60*60):.2f} days')
 
         return orbit_1, planet_1, line_1, orbit_2, planet_2, line_2, spaceship, ship, line_ship, time_text
 
 
     # Interval between frames in ms, total number of frames to use.
-    interval, nframes = 50, int(tmax / dt)
+    interval, nframes = 10, int(tmax / dt)
     # Animate once (set repeat=False so the animation doesn't loop).
     ani = animation.FuncAnimation(fig, animate, frames=nframes, init_func=init,
                                   repeat=False, interval=interval, blit=True)
@@ -148,8 +148,8 @@ theta = np.pi /4  # Angle between Earth and Mars
 initial_position_2 = [1.524 * AU * np.cos(theta), 1.524 * AU * np.sin(theta)]  # 1.524 AU from the Sun (Mars)
 initial_velocity_2 = [-24007* np.sin(theta), 24007* np.cos(theta)]  # Approximate orbital speed of Mars in m/s
 initial_position_ship = [AU, 0]  # Initial position of the spaceship (same as Earth)
-initial_velocity_ship = [0, 50000]  # Initial velocity of the spaceship (same as Earth)
-dt = 24 * 60 * 60  # Time step in seconds (1 day)
+initial_velocity_ship = [0, 100000]  # Initial velocity of the spaceship (same as Earth)
+dt =  60 * 60  # Time step in seconds (hrs)
 tmax = 0.3* 366 * 24 * 60 * 60  # 0.7 years in seconds
 GM = 1.32712440018e20  # Gravitational constant * mass of the Sun (m^3/s^2)
 
