@@ -14,10 +14,10 @@ x, y, z = np.meshgrid(np.linspace(-lim, lim, grid_size), 0,
                       np.linspace(-lim, lim, grid_size), indexing='ij')
 
 # Create the two oscillating charges with opposite directions
-charge1 = pc.OscillatingCharge(origin=(-1e-9, 0, 0), direction=(1, 0, 0),
-                               amplitude=2e-9, omega=7.49e+16)
-charge2 = pc.OscillatingCharge(origin=(1e-9, 0, 0), direction=(-1, 0, 0),
-                               amplitude=2e-9, omega=7.49e+16)
+charge1 = pc.OscillatingCharge(origin=(0, 0, 0), direction=(1, 0, 0),
+                               amplitude=1.5e-9, omega=7.49e+16)
+charge2 = pc.OscillatingCharge(origin=(0, 0, 0), direction=(-1, 0, 0),
+                               amplitude=1.5e-9, omega=7.49e+16)
 
 # Create a simulation that includes both charges
 simulation = pc.Simulation([charge1, charge2])
@@ -51,6 +51,7 @@ def _update_animation(frame):
     u = E_total[0][:, 0, :]
     v = E_total[2][:, 0, :]
     im.set_data(np.sqrt(u**2 + v**2).T)
+    im.set_cmap('viridis')  # Set a different colormap for better color differentiation
 
     # Update the positions of the charges
     pos1.set_offsets((charge1.xpos(t), 0))
