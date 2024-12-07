@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 
 # Directory containing JSON files
-directory = r"D:\Chat log\test"
+directory = "/home/kien/Desktop/specific"
 
 # Initialize a list to store all message timestamps
 timestamps = []
@@ -14,13 +14,13 @@ timestamps = []
 for filename in os.listdir(directory):
     if filename.endswith(".json"):
         filepath = os.path.join(directory, filename)
-        with open(filepath, 'r', encoding='utf-8') as file:
+        with open(filepath, 'r', encoding='utf-8', errors='ignore') as file:
             data = json.load(file)
             # Extract timestamps from the messages
             for message in data.get("messages", []):
-                timestamp_ms = message.get("timestamp")
+                timestamp_ms = message.get("timestamp_ms")
                 if timestamp_ms:  # Check if timestamp exists
-                    timestamps.append(timestamp_ms // 1000)  # Convert ms to seconds
+                    timestamps.append(int(timestamp_ms) // 1000)  # Convert ms to seconds
 
 # Convert timestamps to datetime
 dates = [datetime.fromtimestamp(ts) for ts in timestamps]
@@ -31,6 +31,10 @@ df["year_month"] = df["date"].dt.to_period("M")  # Group by year and month
 
 # Count messages per month
 message_counts = df["year_month"].value_counts().sort_index()
+
+# Calculate the total number of messages
+total_messages = message_counts.sum()
+print(f"Total number of messages: {total_messages}")
 
 # Plot a bar chart
 plt.figure(figsize=(12, 6))
