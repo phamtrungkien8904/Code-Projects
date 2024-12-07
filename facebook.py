@@ -18,9 +18,9 @@ for filename in os.listdir(directory):
             data = json.load(file)
             # Extract timestamps from the messages
             for message in data.get("messages", []):
-                timestamp_ms = message.get("timestamp_ms")
+                timestamp_ms = message.get("timestamp")
                 if timestamp_ms:  # Check if timestamp exists
-                    timestamps.append(int(timestamp_ms) // 1000)  # Convert ms to seconds
+                    timestamps.append(timestamp_ms // 1000)  # Convert ms to seconds
 
 # Convert timestamps to datetime
 dates = [datetime.fromtimestamp(ts) for ts in timestamps]
@@ -39,7 +39,7 @@ print(f"Total number of messages: {total_messages}")
 # Plot a bar chart
 plt.figure(figsize=(12, 6))
 message_counts.plot(kind="bar", color="skyblue")
-plt.title("Number of Messages Per Month (em be Anh)", fontsize=16)
+plt.title("Number of Messages Per Month", fontsize=16)
 plt.xlabel("Month", fontsize=14)
 plt.ylabel("Number of Messages", fontsize=14)
 plt.xticks(rotation=45)
