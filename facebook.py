@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 
 # Directory containing JSON files
-directory = r"D:\Chat log\facebook-smithsjohnny9-2024-10-26-BHXOEbju\your_facebook_activity\messages\inbox\342022739557090"
+directory = r"D:\Chat log\testfb"
 
 # Initialize a list to store all message timestamps
 timestamps = []
@@ -39,13 +39,27 @@ print(f"Total number of messages: {total_messages}")
 
 # Plot a bar chart
 plt.figure(figsize=(12, 6))
-message_counts.plot(kind="bar", color="skyblue")
+ax = message_counts.plot(kind="bar", color="skyblue", label='Messages')
 plt.title("Number of Messages Per Month", fontsize=16)
 plt.xlabel("Month", fontsize=14)
 plt.ylabel("Number of Messages", fontsize=14)
 plt.xticks(rotation=45)
 plt.grid(axis='y', linestyle="--", alpha=0.7)
 plt.tight_layout()
+
+# Add a line connecting the columns
+ax.plot(message_counts.index.astype(str), message_counts.values, color='orange', marker='o', linestyle='-', linewidth=2, label='Trend Line')
+
+# Add total number of messages as text annotation
+plt.text(0.2, 0.95, f'Total Messages: {total_messages}', 
+         horizontalalignment='right', 
+         verticalalignment='top', 
+         transform=plt.gca().transAxes, 
+         fontsize=12, 
+         bbox=dict(facecolor='white', alpha=0.5))
+
+# Add legend
+plt.legend()
 
 # Show the plot
 plt.show()
