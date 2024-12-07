@@ -5,22 +5,23 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 
 # Directory containing JSON files
-directory = "/home/kien/Desktop/specific"
+directory = r"D:\Chat log\facebook-smithsjohnny9-2024-10-26-BHXOEbju\your_facebook_activity\messages\inbox\342022739557090"
 
 # Initialize a list to store all message timestamps
 timestamps = []
 
 # Iterate through all JSON files in the directory
-for filename in os.listdir(directory):
-    if filename.endswith(".json"):
-        filepath = os.path.join(directory, filename)
-        with open(filepath, 'r', encoding='utf-8', errors='ignore') as file:
-            data = json.load(file)
-            # Extract timestamps from the messages
-            for message in data.get("messages", []):
-                timestamp_ms = message.get("timestamp")
-                if timestamp_ms:  # Check if timestamp exists
-                    timestamps.append(timestamp_ms // 1000)  # Convert ms to seconds
+for root, _, files in os.walk(directory):
+    for filename in files:
+        if filename.endswith(".json"):
+            filepath = os.path.join(root, filename)
+            with open(filepath, 'r', encoding='utf-8', errors='ignore') as file:
+                data = json.load(file)
+                # Extract timestamps from the messages
+                for message in data.get("messages", []):
+                    timestamp_ms = message.get("timestamp")
+                    if timestamp_ms:  # Check if timestamp exists
+                        timestamps.append(timestamp_ms // 1000)  # Convert ms to seconds
 
 # Convert timestamps to datetime
 dates = [datetime.fromtimestamp(ts) for ts in timestamps]
