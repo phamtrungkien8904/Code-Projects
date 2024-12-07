@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 
 # Directory containing JSON files
-directory = r"D:\Chat log\testfb"
+directory = r"D:\Chat log\specific"
 
 # Initialize a list to store all message timestamps
 timestamps = []
