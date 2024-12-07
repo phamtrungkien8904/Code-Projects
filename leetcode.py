@@ -1,17 +1,22 @@
 class Solution(object):
-    def longestCommonPrefix(self, strs):
+    def merge(self, nums1, m, nums2, n):
         """
-        :type strs: List[str]
-        :rtype: str
+        :type nums1: List[int]
+        :type m: int
+        :type nums2: List[int]
+        :type n: int
+        :rtype: None Do not return anything, modify nums1 in-place instead.
         """
-        if not strs:
-            return ""
-        for i in range(len(strs[0])):
-            for string in strs[1:]:
-                if i >= len(string) or string[i] != strs[0][i]:
-                    return strs[0][:i]
-        return strs[0]
+        while m > 0 and n > 0:
+            if nums1[m-1] >= nums2[n-1]:
+                nums1[m+n-1] = nums1[m-1]
+                m -= 1
+            else:
+                nums1[m+n-1] = nums2[n-1]
+                n -= 1
+        if n > 0:
+            nums1[:n] = nums2[:n]
 
-# Test cases
+# Test
 s = Solution()
-print(s.longestCommonPrefix(["flower","flow","flight"])) # "fl"
+print(s.addBinary('11', '1'))  # 100

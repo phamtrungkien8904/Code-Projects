@@ -17,7 +17,7 @@ except IndexError:
     width = 100
 
 # Read in the image, convert to greyscale.
-img = Image.open("girl-with-a-pearl-earring.png")
+img = Image.open("anh.png")
 img = img.convert('L')
 # Resize the image as required.
 orig_width, orig_height = img.size
