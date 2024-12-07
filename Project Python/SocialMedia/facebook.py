@@ -61,5 +61,6 @@ plt.text(0.2, 0.95, f'Total Messages: {total_messages}',
 # Add legend
 plt.legend()
 
+
 # Show the plot
 plt.show()
