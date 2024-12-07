@@ -5,7 +5,11 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 
 # Directory containing JSON files
+<<<<<<< Updated upstream:Project Python/SocialMedia/facebook.py
 directory = r"D:\Chat log\specific"
+=======
+directory = r"/home/kien/Desktop/test"
+>>>>>>> Stashed changes:facebook.py
 
 # Initialize a list to store all message timestamps
 timestamps = []
