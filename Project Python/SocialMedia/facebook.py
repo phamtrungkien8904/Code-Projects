@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 
 # Directory containing JSON files
-directory = r"D:\Chat log\specific"
+directory = r"/home/kien/Desktop/test"
 
 
 
