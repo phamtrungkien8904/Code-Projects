@@ -15,13 +15,14 @@ def show_notification():
 
     # Display notification
     notification.notify(
-        title="Days Left Reminder",
-        message=f"There are {days_left} days left until March 2, 2025.",
+        title="Loa Loa!!!",
+        message=f"Còn {days_left} ngày để hai em bé gặp nhau.",
+        app_name="Vietnam Coundown",
         timeout=10
     )
 
 # Schedule the notification at 6:00 PM every day
-schedule.every().day.at("18:00").do(show_notification)
+schedule.every().day.at("18:09").do(show_notification)
 
 print("Notification scheduler is running...")
 while True:
