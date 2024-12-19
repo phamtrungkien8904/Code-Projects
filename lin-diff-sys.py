@@ -9,7 +9,7 @@ A = 0.5 * np.array([[3, -1],
 eigenvalues, eigenvectors = np.linalg.eig(A)
 
 # Define the initial condition r(0)
-r0 = np.array([1, 3])  # Example initial condition
+r0 = np.array([1,3])  # Example initial condition
 
 # Time array for plotting
 t = np.linspace(0, 1, 500)
