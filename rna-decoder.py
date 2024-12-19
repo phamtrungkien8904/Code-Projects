@@ -47,5 +47,5 @@ def decode(rna):
 # Test the functions
 rna = 'GUGGCGAUGGCCAUGGCGCCCAGAACUGAGAUCAAUAGUACCCGUAUUAACGGGUGAUGCUGU'
 protein, applied_rna = decode(rna)
-print(f"Protein: {protein}")
-print(f"Applied RNA: {applied_rna}")
+print(f"Protein: " + protein)
+print(f"Applied RNA: " + applied_rna)
