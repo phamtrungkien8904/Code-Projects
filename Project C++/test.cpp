@@ -12,7 +12,7 @@ vector<double> squares(int n) {
 }
 
 int main() {
-    for (double d : squares(15)) {
+    for (double d : squares(12)) {
         cout << d << " ";
     }
     cout << endl;
