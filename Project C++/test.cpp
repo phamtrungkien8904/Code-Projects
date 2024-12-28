@@ -12,6 +12,16 @@ vector<double> squares(int n) {
     return result;
 }
 
+int factorial(int n){
+    if (n == 0) {
+        return 1;
+    }
+    return n * factorial(n - 1);
+    if (n<0){
+        cout << "Error: negative number" << endl;
+    }
+}
+
 
 
 int main() {
@@ -25,6 +35,7 @@ int main() {
         cout << i << " ";
     }
     cout << endl;
+    cout << factorial(5) << endl;
     return 0;
 }
 
