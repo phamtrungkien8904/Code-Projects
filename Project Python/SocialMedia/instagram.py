@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 
 # Directory containing JSON files
-directory = r"/home/kien/Desktop/test"
+directory = r"/home/kien/Desktop/embe-ig"
 
 
 # Initialize a list to store all message timestamps
@@ -38,6 +38,12 @@ message_counts = df["year_month"].value_counts().sort_index()
 # Calculate the total number of messages
 total_messages = message_counts.sum()
 print(f"Total number of messages: {total_messages}")
+# Convert the index and values of the message_counts to lists
+year_month_list = list(message_counts.index.astype(str))
+message_count_list = list(message_counts.values)
+
+print("Year-Months:", year_month_list)
+print("Message Counts:", message_count_list)
 
 # Plot a bar chart
 plt.figure(figsize=(12, 6))
