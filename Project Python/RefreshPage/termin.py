@@ -10,18 +10,18 @@ driver.get("https://stadt.muenchen.de/buergerservice/terminvereinbarung.html#/se
 
 while True:
     now = datetime.now().time()
-    if time(6, 55) <= now <= time(8, 0):
+    if time(6, 55) <= now <= time(23, 0):
         driver.refresh()
         try:
-            # Warte explizit auf den Button (max. 1 Sekunden)
+            # Wait explicitly (max. 1 sec) for the button that contains "Weiter zur Terminauswahl"
             button = WebDriverWait(driver, 1).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, 'button.button-next.m-button--primary'))
+                EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Weiter zur Terminauswahl')]"))
             )
             button.click()
-            print("Button geklickt um:", datetime.now())
-        except:
-            print("Button nicht gefunden.")
-        t.sleep(5)  # Warte 5 Sekunden
+            print("Button clicked at:", datetime.now())
+        except Exception as e:
+            print("Button not found or not clickable:", e)
+        t.sleep(5)  # Wait 5 seconds
     else:
         break
 
