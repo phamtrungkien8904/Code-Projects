@@ -4,7 +4,7 @@
 #include <cmath>
 #include <string>
 #include <sstream>
-#include <Eigen/Dense>  // Eigen-Bibliothek für lineare Algebra
+#include "Eigen/Dense"
 
 // Funktion zur Definition des Potentials (harmonischer Oszillator)
 double potential(double x, double k) {
