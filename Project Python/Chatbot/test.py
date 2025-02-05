@@ -10,7 +10,7 @@ def girlfriend_chatbot():
             "Hế nhô bé Ánh 💖 Em bé hôm nay thế nàooo?",
             "Hế nhô em bé Ánh của Kem 🌸"
         ],
-        (r'Nay em bé thế nào?|how r u',): [
+        (r'Nay em bé thế nào\?|how r u',): [
             "Nay em bé Kem mún dính Ánhhhh 💕",
             "Nay em bé Kem chỉ nhớ Ánh hoiiii 🌟",
             "Mún bám dính em bé cơ áaaa 😊"
@@ -20,20 +20,16 @@ def girlfriend_chatbot():
             "Nghiện em bé cáaaaa! 💘",
             "Thương em bé Ánh nhứtttt! 😍"
         ],
-        (r'Em bé Kem đang làm gì đấy?',): [
+        (r'Em bé Kem đang làm gì đấy\?',): [
             "Bé Kem đang nhớ bé Ánh! 💭",
             "Bé Kem đang ngắm ảnh Ánh! 💌",
             "Bé Kem đang tương tư Ánh! 🎉"
         ],
-        (r'Ai đây?',): [
-            "Áaaaa em bé của Ánh đây màaaaa",
-            "Định mệnh của Ánh đây màaaaa",
-            "Người thương Ánh nhất đây mòooo"
+        (r'Ai đây\?',): [
+            "Áaaaa em bé của Ánh đây màaaaa \n Định mệnh của Ánh đây màaaaa \n Người thương Ánh nhất đây mòooo"
         ],
         (r'T off đây',): [
-            "Áaaaaaaaaaa",
-            "Em bé saoooo",
-            "Em bé hem off, ở lại với Kem đê"
+            "Áaaaaaaaaaa \n Em bé saoooo \n Em bé hem off, ở lại với Kem đê"
         ]
     }
 
@@ -48,17 +44,17 @@ def girlfriend_chatbot():
     print("Kem: Hế nhô bé Ánhhhh! 💖 (Bấm 'quit' để kết thúc đoạn chat).")
     
     while True:
-        user_input = input("\nWoy: ").strip().lower()
+        user_input = input("\nWoy: ").strip()  # Removed .lower()
         
-        if user_input == 'quit':
+        if user_input.lower() == 'quit':  # Check lowercase for quit
             print("\nKem: Kem thương Ánh nhìuuuu! 💌 Lát dính Ánh nháaa!")
             break
         
         response_found = False
         
-        # Check response patterns
+        # Check response patterns with case-insensitive flag
         for patterns, responses in response_rules.items():
-            if any(re.search(pattern, user_input) for pattern in patterns):
+            if any(re.search(pattern, user_input, re.IGNORECASE) for pattern in patterns):
                 print(f"\nKem: {random.choice(responses)}")
                 response_found = True
                 break
