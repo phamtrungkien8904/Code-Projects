@@ -36,7 +36,7 @@ def babe_chatbot():
         (r'Hứ, tha cho Kem',): [
             "Híiii"
         ],
-        (r'T hiểu r',): [
+        (r'Tớ hiểu ròi',): [
             "Ánh luôn hiểu là Kem luôn thương Ánh nháaaa"
         ],
         (r'Kem ngủ ngon nháaaa, mơ Woy nháaaa',): [
@@ -52,7 +52,7 @@ def babe_chatbot():
         "Thương Ánhhhh 💕"
     ]
 
-    print("Kem: Hế nhô bé Ánhhhh! 💖 (Bấm 'quit' để kết thúc đoạn chat).")
+    print("Kem: Hế nhô bé Ánhhhh! 💖.")
 
     while True:
         user_input = input("\nWoy: ").strip()
