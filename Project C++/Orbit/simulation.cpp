@@ -41,7 +41,13 @@ int main() {
 
     const double GM = 1.0;
     const double dt = 0.01;
-    State asteroid = {0.5, 0.0, 0.0, 1.0};
+
+    // Create objects and initial parameters {x0, y0, vx0, vy0}
+    double R0 = 1;
+    double v0 = sqrt(0.5*GM/R0);
+    State asteroid = {R0, 0.0, 0.0, v0};
+    
+
 
     // Create planet (center object)
     sf::CircleShape planet(10);
@@ -54,6 +60,7 @@ int main() {
     asteroidShape.setFillColor(sf::Color::White);
     asteroidShape.setOrigin(3, 3);
 
+
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -65,8 +72,8 @@ int main() {
         verlet_step(asteroid, dt, GM);
 
         // Convert simulation coordinates to screen coordinates
-        sf::Vector2f screenPos = toScreenCoords(asteroid.x, asteroid.y);
-        asteroidShape.setPosition(screenPos);
+        sf::Vector2f screenPos1 = toScreenCoords(asteroid.x, asteroid.y);
+        asteroidShape.setPosition(screenPos1);
 
         // Draw frame
         window.clear();

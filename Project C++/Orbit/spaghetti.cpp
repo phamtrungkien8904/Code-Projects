@@ -76,7 +76,7 @@ int main() {
     
     // ----- Define the Black Hole -----
     sf::Vector2f blackHolePos(windowWidth / 2.0f, windowHeight / 2.0f);
-    float blackHoleMass = 15000.0f;  // Massive black hole for strong gravity
+    float blackHoleMass = 30000.0f;  // Massive black hole for strong gravity
 
     // ----- Define the Star with High-Eccentricity Elliptical Orbit -----
     // Place the star's center at a position far from the black hole (apastron)
@@ -95,7 +95,7 @@ int main() {
     // ----- Create Particles Representing the Star -----
     std::vector<Particle> particles;
     // Increase starRadius for a larger star
-    const float starRadius = 10.0f;
+    const float starRadius = 20.0f;
     const int numParticles = 1000;
 
     for (int i = 0; i < numParticles; i++) {
@@ -119,7 +119,7 @@ int main() {
     std::vector<sf::CircleShape> particleShapes(numParticles);
     for (int i = 0; i < numParticles; i++) {
         // Previously radius was 2, now set to 1 for smaller size
-        particleShapes[i].setRadius(0.2);
+        particleShapes[i].setRadius(0.8);
         particleShapes[i].setFillColor(sf::Color(255, 220, 200));
         particleShapes[i].setOrigin(1, 1); // Adjust origin accordingly
     }

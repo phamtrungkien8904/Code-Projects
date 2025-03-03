@@ -104,7 +104,7 @@ def simulate_orbit(initial_position_1, initial_velocity_1, initial_position_2, i
             # Update position and velocity for spaceship
             r_ship = np.array([x_ship[i-1], y_ship[i-1]])
             v_ship = np.array([vx_ship[i-1], vy_ship[i-1]])
-            a_ship = -GM * r_ship / np.linalg.norm(r_ship)**3 - GM * (r_ship - r2) / np.linalg.norm(r_ship - r2)**3
+            a_ship = -GM * r_ship / np.linalg.norm(r_ship)**3 - GM*1e-6 * (r_ship - r2) / np.linalg.norm(r_ship - r2)**3
             v_ship += a_ship * dt
             r_ship += v_ship * dt
             x_ship[i], y_ship[i] = r_ship
@@ -148,7 +148,7 @@ theta = np.pi /4  # Angle between Earth and Mars
 initial_position_2 = [1.524 * AU * np.cos(theta), 1.524 * AU * np.sin(theta)]  # 1.524 AU from the Sun (Mars)
 initial_velocity_2 = [-24007* np.sin(theta), 24007* np.cos(theta)]  # Approximate orbital speed of Mars in m/s
 initial_position_ship = [AU, 0]  # Initial position of the spaceship (same as Earth)
-initial_velocity_ship = [0, 100000]  # Initial velocity of the spaceship (same as Earth)
+initial_velocity_ship = [0, 10000]  # Initial velocity of the spaceship (same as Earth)
 dt =  60 * 60  # Time step in seconds (hrs)
 tmax = 0.3* 366 * 24 * 60 * 60  # 0.7 years in seconds
 GM = 1.32712440018e20  # Gravitational constant * mass of the Sun (m^3/s^2)
