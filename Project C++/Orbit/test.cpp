@@ -6,9 +6,12 @@
 #include <iomanip>
 
 // Global constants
-const int WINDOW_SIZE = 800;
+// Use the desktop mode for fullscreen
+const sf::VideoMode DESKTOP = sf::VideoMode::getDesktopMode();
+const int WINDOW_WIDTH = DESKTOP.width;
+const int WINDOW_HEIGHT = DESKTOP.height;
 const float AU = 150000000000;
-const float SCALE = 200.0f/AU;  // Reduced scale to fit outer objects
+const float SCALE = 250.0f/AU;  // Adjusted scale for fullscreen view
 const double GM = 6.67e-11 * 2e30; // Gravitational constant * mass of central star
 const double dt = 100; // Time interval for simulation
 const double EARTH_YEAR = 365.25 * 24 * 3600; // Earth year in seconds
@@ -25,8 +28,8 @@ public:
     // Convert simulation coordinates to screen coordinates
     sf::Vector2f toScreenCoords(double x, double y) {
         return sf::Vector2f(
-            WINDOW_SIZE/2 + x * SCALE,
-            WINDOW_SIZE/2 - y * SCALE
+            WINDOW_WIDTH/2 + x * SCALE,
+            WINDOW_HEIGHT/2 - y * SCALE
         );
     }
     
@@ -54,6 +57,7 @@ class Object {
 public:
     State state;
     sf::CircleShape shape;
+    std::string name;
     
     // Orbit tracking variables
     double initialX, initialY;    // Initial position
@@ -63,11 +67,12 @@ public:
     bool firstCross;              // Flag to skip first crossing (initial condition)
     int orbitsCompleted;          // Counter for completed orbits
 
-    Object(double x, double y, double vx, double vy, float radius, sf::Color color) {
+    Object(double x, double y, double vx, double vy, float radius, sf::Color color, const std::string& objectName = "") {
         state = { x, y, vx, vy };
         shape = sf::CircleShape(radius);
         shape.setFillColor(color);
         shape.setOrigin(radius, radius);
+        name = objectName;
         
         // Initialize orbit tracking
         initialX = x;
@@ -105,6 +110,16 @@ public:
             }
             timeSinceLastCross = 0.0;
         }
+    }
+    
+    // Calculate current distance to the sun
+    double getDistanceToSun() const {
+        return sqrt(state.x * state.x + state.y * state.y);
+    }
+    
+    // Calculate current velocity
+    double getVelocity() const {
+        return sqrt(state.vx * state.vx + state.vy * state.vy);
     }
     
     // Check if the object has completed an orbit
@@ -157,6 +172,18 @@ public:
         // If we haven't completed an orbit, return 0
         return 0.0;
     }
+
+    // Check if orbit is bound (elliptical) or unbound (parabolic/hyperbolic)
+    bool isClosedOrbit() const {
+        // Calculate specific orbital energy
+        double v_squared = state.vx * state.vx + state.vy * state.vy;
+        double r = sqrt(state.x * state.x + state.y * state.y);
+        double specificEnergy = 0.5 * v_squared - GM / r;
+        
+        // If energy < 0, orbit is elliptical (closed)
+        // If energy >= 0, orbit is parabolic or hyperbolic (open)
+        return specificEnergy < 0;
+    }
 };
 
 class SimulationEngine {
@@ -167,62 +194,84 @@ private:
     sf::CircleShape sun;
     sf::Font font;
     sf::Text timeText;
-    sf::Text periodText;  // New text for period display
+    sf::Text objectInfoText;  // Combined info text for all object data
     double elapsedTime;
 public:
-    SimulationEngine() : window(sf::VideoMode(WINDOW_SIZE, WINDOW_SIZE), "Complete Solar System Simulation"), elapsedTime(0) {
+    SimulationEngine() : 
+        window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Orbital Simulation", sf::Style::Fullscreen), 
+        elapsedTime(0) {
         window.setFramerateLimit(60 * 1000);
+        
+        // Calculate sun size proportional to screen size
+        float sunRadius = std::min(WINDOW_WIDTH, WINDOW_HEIGHT) * 0.02;
+        
         // Initialize the sun at the center
-        sun = sf::CircleShape(12);
+        sun = sf::CircleShape(sunRadius);
         sun.setFillColor(sf::Color::Yellow);
-        sun.setOrigin(12, 12);
-        sun.setPosition(WINDOW_SIZE/2, WINDOW_SIZE/2);
+        sun.setOrigin(sunRadius, sunRadius);
+        sun.setPosition(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
         
         // Load font for time display
-        if (!font.loadFromFile("arial.ttf")) {
-            // If Arial is not available, try a default system font
-            if (!font.loadFromFile("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf")) {
-                std::cerr << "Error loading font. Time won't be displayed." << std::endl;
-            }
+        if (!font.loadFromFile("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf")) {
         }
         
         // Set up time display text
         timeText.setFont(font);
-        timeText.setCharacterSize(14);
+        timeText.setCharacterSize(20);
         timeText.setFillColor(sf::Color::White);
-        timeText.setPosition(10, 10);
+        timeText.setPosition(20, 20);
         
-        // Set up period display text
-        periodText.setFont(font);
-        periodText.setCharacterSize(14);
-        periodText.setFillColor(sf::Color::White);
-        periodText.setPosition(10, 40);
+        // Set up combined object info display text
+        objectInfoText.setFont(font);
+        objectInfoText.setCharacterSize(18);
+        objectInfoText.setFillColor(sf::Color::White);
+        objectInfoText.setPosition(20, 60);
+    }
+    
+    ~SimulationEngine() {
+        // Make sure to close the window when done
+        if (window.isOpen()) {
+            window.close();
+        }
     }
     
     // Add an object by specifying its position, velocity, size, and color.
-    void addObject(double x, double y, double vx, double vy, float radius, sf::Color color) {
-        objects.emplace_back(x, y, vx, vy, radius, color);
+    void addObject(double x, double y, double vx, double vy, float radius, sf::Color color, const std::string& name = "") {
+        objects.emplace_back(x, y, vx, vy, radius, color, name);
     }
     
-    // Update the orbital period display
-    void updatePeriodDisplay() {
+    // Update the combined object information display (period, distance, velocity)
+    void updateObjectInfoDisplay() {
         std::stringstream ss;
-        ss << "Orbital Periods (Earth years):" << std::endl;
+        ss << "Object Information:" << std::endl;
         
         for (size_t i = 0; i < objects.size(); ++i) {
+            std::string name = objects[i].name.empty() ? "Object " + std::to_string(i + 1) : objects[i].name;
             double period = objects[i].getPeriod();
-            ss << "Object " << (i + 1) << ": ";
+            double distance = objects[i].getDistanceToSun() / AU;
+            double velocity = objects[i].getVelocity() / 1000; // Convert to km/s
             
-            if (period > 0.0) {
-                ss << std::fixed << std::setprecision(2) << period;
-                ss << " (orbits: " << objects[i].orbitsCompleted << ")";
+            // Display object name with its color
+            ss << "• " << name << ":" << std::endl;
+            
+            // Display period information
+            ss << "  Period: ";
+            if (!objects[i].isClosedOrbit()) {
+                ss << "infinity (open orbit)";
+            } else if (period > 0.0) {
+                ss << std::fixed << std::setprecision(2) << period << " years";
             } else {
                 ss << "measuring...";
             }
             ss << std::endl;
+            
+            // Display distance and velocity
+            ss << "  Distance: " << std::fixed << std::setprecision(3) << distance << " AU" << std::endl;
+            ss << "  Velocity: " << std::fixed << std::setprecision(2) << velocity << " km/s" << std::endl;
+            ss << std::endl;
         }
         
-        periodText.setString(ss.str());
+        objectInfoText.setString(ss.str());
     }
     
     // Run the simulation: update and render all objects.
@@ -230,8 +279,10 @@ public:
         while (window.isOpen()) {
             sf::Event event;
             while (window.pollEvent(event)) {
-                if (event.type == sf::Event::Closed)
+                if (event.type == sf::Event::Closed || 
+                    (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
                     window.close();
+                }
             }
             
             // Update all objects
@@ -250,8 +301,8 @@ public:
                << " years, " << std::fixed << std::setprecision(1) << days << " days";
             timeText.setString(ss.str());
             
-            // Update period display
-            updatePeriodDisplay();
+            // Update combined object information display
+            updateObjectInfoDisplay();
             
             // Draw frame
             window.clear(sf::Color(10, 10, 40)); // Dark blue background
@@ -260,7 +311,7 @@ public:
                 window.draw(object.shape);
             }
             window.draw(timeText);
-            window.draw(periodText);
+            window.draw(objectInfoText);
             window.display();
         }
     }
@@ -268,12 +319,24 @@ public:
 
 int main() {
     SimulationEngine engine;
+
+    // Add the Earth
+    engine.addObject(0.983 * AU, 0, 0, 29780, 5, sf::Color::Blue, "Earth");
+
+    // Add Mars
+    engine.addObject(1.381 * AU, 0, 0, 24100, 3, sf::Color::Red, "Mars");
+
+    // Add Mercury
+    engine.addObject(0.387 * AU, 0, 0, 47870, 2, sf::Color(192, 192, 192), "Mercury");
     
-    // Example object
-    double r1 = 1* AU;
-    double v1 = sqrt(0.2*GM / r1);
-    engine.addObject(r1, 0.0, 0.0, v1, 2, sf::Color(192, 192, 192)); // Gray
+    // Add Venus
+    engine.addObject(0.723 * AU, 0, 0, 35020, 4, sf::Color(255, 198, 73), "Venus");
     
+    // Add a hyperbolic orbit object (escape velocity is sqrt(2)*circular velocity)
+    double r_comet = 1.0 * AU;
+    double v_escape = sqrt(2.0 * GM / r_comet) * 1.1; // 10% more than escape velocity
+    engine.addObject(-r_comet, 0, 0, -v_escape, 2, sf::Color::Green, "Comet");
+
     engine.run(3*dt);
     return 0;
 }
