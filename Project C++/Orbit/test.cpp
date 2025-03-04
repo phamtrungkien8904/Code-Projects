@@ -25,11 +25,24 @@ struct State {
 
 class Simulation {
 public:
+    sf::RenderWindow* windowPtr;
+    
+    Simulation() : windowPtr(nullptr) {}
+    
     // Convert simulation coordinates to screen coordinates
     sf::Vector2f toScreenCoords(double x, double y) {
+        if (!windowPtr) {
+            // Fallback to constants if window pointer not set
+            return sf::Vector2f(
+                WINDOW_WIDTH/2 + x * SCALE,
+                WINDOW_HEIGHT/2 - y * SCALE
+            );
+        }
+        
+        // Use actual window dimensions
         return sf::Vector2f(
-            WINDOW_WIDTH/2 + x * SCALE,
-            WINDOW_HEIGHT/2 - y * SCALE
+            windowPtr->getSize().x/2 + x * SCALE,
+            windowPtr->getSize().y/2 - y * SCALE
         );
     }
     
@@ -197,22 +210,52 @@ private:
     sf::Text objectInfoText;  // Combined info text for all object data
     double elapsedTime;
 public:
-    SimulationEngine() : 
-        window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Orbital Simulation", sf::Style::Fullscreen), 
-        elapsedTime(0) {
+    SimulationEngine() : elapsedTime(0) {
+        // Get information about monitors
+        std::vector<sf::VideoMode> modes = sf::VideoMode::getFullscreenModes();
+        
+        // First create a non-fullscreen window so we can position it
+        window.create(sf::VideoMode(800, 600), "Orbital Simulation");
+        
+        // Check if there's more than one monitor (simplified approach)
+        sf::VideoMode secondScreenMode;
+        bool hasSecondScreen = false;
+        
+        // Try to detect second screen - this is a simple approach
+        // that assumes monitors are arranged horizontally
+        if (modes.size() > 1) {
+            // Assuming second screen is at position (primary_width, 0)
+            window.setPosition(sf::Vector2i(DESKTOP.width, 0));
+            
+            // Get the desktop mode (should be the second screen now)
+            secondScreenMode = sf::VideoMode::getDesktopMode();
+            hasSecondScreen = true;
+        }
+        
+        // Now recreate the window in fullscreen mode on the second screen if available
+        if (hasSecondScreen) {
+            window.close();
+            window.create(secondScreenMode, "Orbital Simulation", sf::Style::Fullscreen);
+        } else {
+            // Fallback to primary screen fullscreen
+            window.close();
+            window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Orbital Simulation", sf::Style::Fullscreen);
+        }
+        
         window.setFramerateLimit(60 * 1000);
         
         // Calculate sun size proportional to screen size
-        float sunRadius = std::min(WINDOW_WIDTH, WINDOW_HEIGHT) * 0.02;
+        float sunRadius = std::min(window.getSize().x, window.getSize().y) * 0.02;
         
-        // Initialize the sun at the center
+        // Initialize the sun at the center using the actual window size
         sun = sf::CircleShape(sunRadius);
         sun.setFillColor(sf::Color::Yellow);
         sun.setOrigin(sunRadius, sunRadius);
-        sun.setPosition(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
+        sun.setPosition(window.getSize().x/2, window.getSize().y/2);
         
         // Load font for time display
         if (!font.loadFromFile("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf")) {
+            std::cerr << "Failed to load font\n";
         }
         
         // Set up time display text
@@ -226,6 +269,9 @@ public:
         objectInfoText.setCharacterSize(18);
         objectInfoText.setFillColor(sf::Color::White);
         objectInfoText.setPosition(20, 60);
+
+        // Set the window pointer in the simulation
+        sim.windowPtr = &window;
     }
     
     ~SimulationEngine() {
