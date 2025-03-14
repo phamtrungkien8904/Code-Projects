@@ -15,7 +15,7 @@ const float SCALE = 250.0f/AU;  // Adjusted scale for fullscreen view
 const double GM = 6.67e-11 * 2e30; // Gravitational constant * mass of central star
 const double dt = 100; // Time interval for simulation
 const double EARTH_YEAR = 365.25 * 24 * 3600; // Earth year in seconds
-const double PI = 3.14159265358979323846;
+const double PI = 3.1415926535897932384;
 
 // State contains position and velocity
 struct State {
