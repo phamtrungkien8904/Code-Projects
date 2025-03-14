@@ -1,0 +1,3 @@
+/home/kien/Desktop/Github/Code-Projects/Project C++/Orbit/build/CMakeFiles/orbit.dir
+/home/kien/Desktop/Github/Code-Projects/Project C++/Orbit/build/CMakeFiles/edit_cache.dir
+/home/kien/Desktop/Github/Code-Projects/Project C++/Orbit/build/CMakeFiles/rebuild_cache.dir
