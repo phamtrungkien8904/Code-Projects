@@ -1,0 +1,3 @@
+/home/kien/Desktop/Github/Code-Projects/Project C++/Magnetic-Bottle/build/CMakeFiles/magneticbottle.dir
+/home/kien/Desktop/Github/Code-Projects/Project C++/Magnetic-Bottle/build/CMakeFiles/edit_cache.dir
+/home/kien/Desktop/Github/Code-Projects/Project C++/Magnetic-Bottle/build/CMakeFiles/rebuild_cache.dir
