@@ -33,7 +33,7 @@ int main()
                 // Adjust magnetic field strength
                 if (event.key.code == sf::Keyboard::Up)
                     simulation.adjustFieldStrength(0.1f);
-                if (event.key.code == sf::Keyboard::Down)
+                if (event.key.code == sf::Keyboard::Down)   
                     simulation.adjustFieldStrength(-0.1f);
             }
         }
