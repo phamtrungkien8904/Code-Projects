@@ -1,0 +1,3 @@
+/home/kien/Desktop/Github/Code-Projects/Project C++/Capacitor/build/CMakeFiles/plate_capacitor_sim.dir
+/home/kien/Desktop/Github/Code-Projects/Project C++/Capacitor/build/CMakeFiles/edit_cache.dir
+/home/kien/Desktop/Github/Code-Projects/Project C++/Capacitor/build/CMakeFiles/rebuild_cache.dir
