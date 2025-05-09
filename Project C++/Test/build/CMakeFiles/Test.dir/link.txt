@@ -1,1 +1,0 @@
-/usr/bin/c++ -Wall -Wextra -Werror CMakeFiles/Test.dir/math.cpp.o -o Test 

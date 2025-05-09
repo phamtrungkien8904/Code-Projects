@@ -2,15 +2,15 @@
 #define mymath
 
 #include <iostream>
+#include <vector>
+#include <cmath>
+using namespace std;
 
-class MyMath{
+class MyMath {
     public:
-    int Factorial(int n){
-        if(n == 0){
-            return 1;
-        }
-        return n * Factorial(n - 1);
-    }
-};
+    double sum(double a, double b) {
+        return a + b;
+    };
+
 
 #endif

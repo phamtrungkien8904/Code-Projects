@@ -1,3 +1,0 @@
-/home/kien/Desktop/Github/Code-Projects/Project C++/Test/build/CMakeFiles/Test.dir
-/home/kien/Desktop/Github/Code-Projects/Project C++/Test/build/CMakeFiles/edit_cache.dir
-/home/kien/Desktop/Github/Code-Projects/Project C++/Test/build/CMakeFiles/rebuild_cache.dir
