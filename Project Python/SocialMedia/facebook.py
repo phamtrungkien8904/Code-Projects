@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 
 # Directory containing JSON files
-directory = r"/home/kien/Desktop"
+directory = r"/home/kien/Desktop/embe-fb"
 
 
 

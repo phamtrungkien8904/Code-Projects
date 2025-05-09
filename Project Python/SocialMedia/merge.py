@@ -4,11 +4,11 @@ import numpy as np
 # Merge the two lists of year-months and message counts
 # Instagram data
 total_messages_1 = 69107 
-year_month_list_1 = ['2024-06', '2024-07', '2024-08', '2024-09', '2024-10', '2024-11', '2024-12', '2025-01']
-message_count_list_1 = [np.int64(1803), np.int64(13559), np.int64(14280), np.int64(19320), np.int64(18736), np.int64(635), np.int64(67), np.int64(707)]
+year_month_list_1 = ['2024-06', '2024-07', '2024-08', '2024-09', '2024-10', '2024-11', '2024-12', '2025-01', '2025-02', '2025-03', '2025-04', '2025-05']
+message_count_list_1 = [np.int64(1803), np.int64(13559), np.int64(14280), np.int64(19320), np.int64(18736), np.int64(635), np.int64(67), np.int64(707),0,0,0,0]
 # Facebook data
 total_messages_2 = 127427
-year_month_list_2 = ['2024-06', '2024-07', '2024-08', '2024-09', '2024-10', '2024-11', '2024-12', '2025-01']
+year_month_list_2 = ['2024-06', '2024-07', '2024-08', '2024-09', '2024-10', '2024-11', '2024-12', '2025-01', '2025-02', '2025-03', '2025-04', '2025-05']
 message_count_list_2 = [np.int64(300),np.int64(2426), np.int64(454), np.int64(1939), np.int64(17333), np.int64(44090), np.int64(27967), np.int64(33011)]
 
 # Merge the two lists of message counts
