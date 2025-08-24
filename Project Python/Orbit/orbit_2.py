@@ -122,3 +122,4 @@ tmax = 366 * 24 * 60 * 60  # One year in seconds
 GM = 1.32712440018e20  # Gravitational constant * mass of the Sun (m^3/s^2)
 
 simulate_orbit(initial_position_1, initial_velocity_1, initial_position_2, initial_velocity_2, dt, tmax, GM, R)
+

@@ -69,3 +69,4 @@ ani = FuncAnimation(fig, _update_animation,
                     frames=n_frames, blit=False, init_func=_init_animate)
 ani.save('oscillating_charge.gif',
          writer=animation.FFMpegWriter(fps=12), dpi=200)
+
