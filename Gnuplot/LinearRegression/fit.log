@@ -1,7 +1,7 @@
 
 
 *******************************************************************************
-Wed Aug 27 12:41:53 2025
+Wed Aug 27 13:10:46 2025
 
 
 FIT:    data read from 'data.csv' using 1:2:(X_ERR):(Y_ERR) xyerrors
@@ -35,12 +35,11 @@ b              -0.832  1.000
 
 
 *******************************************************************************
-Wed Aug 27 12:48:45 2025
+Wed Aug 27 13:11:36 2025
 
 
 FIT:    data read from 'data.csv' using 1:2:(X_ERR):(Y_ERR) xyerrors
         format = x:z:sx:s
-        x range restricted to [0.00000 : *]
         #datapoints = 7
 function used for fitting: f(x)
 	f(x) = a*x+b
@@ -69,12 +68,11 @@ b              -0.832  1.000
 
 
 *******************************************************************************
-Wed Aug 27 12:49:15 2025
+Wed Aug 27 13:12:37 2025
 
 
 FIT:    data read from 'data.csv' using 1:2:(X_ERR):(Y_ERR) xyerrors
         format = x:z:sx:s
-        x range restricted to [0.00000 : *]
         #datapoints = 7
 function used for fitting: f(x)
 	f(x) = a*x+b
@@ -103,12 +101,11 @@ b              -0.832  1.000
 
 
 *******************************************************************************
-Wed Aug 27 12:55:18 2025
+Wed Aug 27 13:16:36 2025
 
 
 FIT:    data read from 'data.csv' using 1:2:(X_ERR):(Y_ERR) xyerrors
         format = x:z:sx:s
-        x range restricted to [0.00000 : *]
         #datapoints = 7
 function used for fitting: f(x)
 	f(x) = a*x+b

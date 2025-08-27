@@ -5,9 +5,10 @@ reset
 set title 'Title'
 set xlabel 'x()'
 set ylabel 'y()'
-set grid
+# set grid
 set datafile separator ','
-set xrange [0:*]
+set xrange [*:*]
+set yrange [*:*]
 
 
 # ---------------- Measurement (instrument) uncertainties ----------------
@@ -60,18 +61,19 @@ plot \
 
 ###### Test value x ######
 x_test = 5
+dx_test = 0.1
 y_esti = f(x_test)
-dy_esti = a_err * x_test + b_err
+dy_esti = a_err * x_test + b_err + a*dx_test
 
 
 # Print Fit results
 print sprintf('============================ OUTPUT y = a*x + b =============================')
 print sprintf('Datafile:      %s', 'data.csv')
-print sprintf('Uncertainties: dx = %.3f (), dy = %.3f ()', X_ERR, Y_ERR)
+print sprintf('Uncertainties: dx = %.3f, dy = %.3f', X_ERR, Y_ERR)
 print sprintf('Fit results:   a = %.6f +- %.6f (%.2f%%)', a,a_err, (a!=0)? 100.0*a_err/abs(a) : 0/0 )
 print sprintf('               b = %.6f +- %.6f (%.2f%%)', b,b_err, (b!=0)? 100.0*b_err/abs(b) : 0/0 )
 print sprintf('Goodness:      R^2 = %.6f, r = %.6f,  N=%d', R2, r, Y_records)
 print sprintf('================================ Test value =================================')
-print sprintf('Test value:    x_test = %.6f', x_test)
+print sprintf('Test value:    x_test = %.6f +- %.6f', x_test, dx_test)
 print sprintf('Estimated:     y(%.6f) = %.6f +- %.6f (%.2f%%)', x_test, y_esti, dy_esti, (y_esti!=0)?100.0*dy_esti/abs(y_esti):0/0)
 print sprintf('==================================== END ====================================')
