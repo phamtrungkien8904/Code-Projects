@@ -1,0 +1,1103 @@
+
+
+*******************************************************************************
+Wed Aug 27 09:46:11 2025
+
+
+FIT:    data read from 'data.csv' using 1:2
+        format = x:z
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   1 1.4040244609e-02  -1.52e-05  1.61e-01    1.998372e+00   4.000063e+00   5.004891e-01  -2.360720e-03
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 0.0140402
+rel. change during last iteration : -1.51645e-10
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0109545
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.000120002
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 1.99837          +/- 0.005292     (0.2648%)
+w               = 4.00006          +/- 0.001766     (0.04415%)
+gamma           = 0.500489         +/- 0.001887     (0.377%)
+phi             = -0.00236072      +/- 0.002373     (100.5%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.156  1.000 
+gamma           0.743  0.110  1.000 
+phi            -0.230 -0.695 -0.165  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 09:48:48 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(XERR)
+        format = x:z:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   1 1.4040244609e+00  -1.58e-07  1.61e+00    1.998372e+00   4.000063e+00   5.004891e-01  -2.360720e-03
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 1.40402
+rel. change during last iteration : -1.57532e-12
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.109545
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0120002
+p-value of the Chisq distribution (FIT_P)              : 1
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 1.99837          +/- 0.005292     (0.2648%)
+w               = 4.00006          +/- 0.001766     (0.04415%)
+gamma           = 0.500489         +/- 0.001887     (0.377%)
+phi             = -0.00236072      +/- 0.002373     (100.5%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.156  1.000 
+gamma           0.743  0.110  1.000 
+phi            -0.230 -0.695 -0.165  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 09:53:02 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(XERR)
+        format = x:z:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   6 4.1293491531e+00   0.00e+00  1.61e+07    1.994495e+00   4.007464e+00   4.957904e-01  -1.516543e-02
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 4.12935
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.187866
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0352936
+p-value of the Chisq distribution (FIT_P)              : 1
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 1.99449          +/- 0.009051     (0.4538%)
+w               = 4.00746          +/- 0.002995     (0.07473%)
+gamma           = 0.49579          +/- 0.003204     (0.6462%)
+phi             = -0.0151654       +/- 0.00405      (26.7%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.152  1.000 
+gamma           0.743  0.107  1.000 
+phi            -0.225 -0.694 -0.161  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 09:53:29 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(XERR)
+        format = x:z:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   1 4.1293491531e+00   0.00e+00  1.63e+07    1.994495e+00   4.007464e+00   4.957904e-01  -1.516543e-02
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 4.12935
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.187866
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0352936
+p-value of the Chisq distribution (FIT_P)              : 1
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 1.99449          +/- 0.009051     (0.4538%)
+w               = 4.00746          +/- 0.002995     (0.07473%)
+gamma           = 0.49579          +/- 0.003204     (0.6462%)
+phi             = -0.0151654       +/- 0.00405      (26.7%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.152  1.000 
+gamma           0.743  0.107  1.000 
+phi            -0.225 -0.694 -0.161  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 09:54:41 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(XERR)
+        format = x:z:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   1 4.1293491531e+02   0.00e+00  1.63e+08    1.994495e+00   4.007464e+00   4.957904e-01  -1.516543e-02
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 412.935
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.87866
+variance of residuals (reduced chisquare) = WSSR/ndf   : 3.52936
+p-value of the Chisq distribution (FIT_P)              : 0
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 1.99449          +/- 0.009051     (0.4538%)
+w               = 4.00746          +/- 0.002995     (0.07473%)
+gamma           = 0.49579          +/- 0.003204     (0.6462%)
+phi             = -0.0151654       +/- 0.00405      (26.7%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.152  1.000 
+gamma           0.743  0.107  1.000 
+phi            -0.225 -0.694 -0.161  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 09:55:00 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(XERR)
+        format = x:z:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   1 4.1293491531e+02   0.00e+00  1.63e+08    1.994495e+00   4.007464e+00   4.957904e-01  -1.516543e-02
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 412.935
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.87866
+variance of residuals (reduced chisquare) = WSSR/ndf   : 3.52936
+p-value of the Chisq distribution (FIT_P)              : 0
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 1.99449          +/- 0.009051     (0.4538%)
+w               = 4.00746          +/- 0.002995     (0.07473%)
+gamma           = 0.49579          +/- 0.003204     (0.6462%)
+phi             = -0.0151654       +/- 0.00405      (26.7%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.152  1.000 
+gamma           0.743  0.107  1.000 
+phi            -0.225 -0.694 -0.161  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 09:55:35 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(XERR)
+        format = x:z:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   1 4.1293491531e+02   0.00e+00  1.63e+08    1.994495e+00   4.007464e+00   4.957904e-01  -1.516543e-02
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 412.935
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.87866
+variance of residuals (reduced chisquare) = WSSR/ndf   : 3.52936
+p-value of the Chisq distribution (FIT_P)              : 0
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 1.99449          +/- 0.009051     (0.4538%)
+w               = 4.00746          +/- 0.002995     (0.07473%)
+gamma           = 0.49579          +/- 0.003204     (0.6462%)
+phi             = -0.0151654       +/- 0.00405      (26.7%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.152  1.000 
+gamma           0.743  0.107  1.000 
+phi            -0.225 -0.694 -0.161  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 09:58:30 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(XERR) yerrors
+        format = x:z:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   1 4.1293491531e+02   0.00e+00  1.63e+08    1.994495e+00   4.007464e+00   4.957904e-01  -1.516543e-02
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 412.935
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.87866
+variance of residuals (reduced chisquare) = WSSR/ndf   : 3.52936
+p-value of the Chisq distribution (FIT_P)              : 0
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 1.99449          +/- 0.009051     (0.4538%)
+w               = 4.00746          +/- 0.002995     (0.07473%)
+gamma           = 0.49579          +/- 0.003204     (0.6462%)
+phi             = -0.0151654       +/- 0.00405      (26.7%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.152  1.000 
+gamma           0.743  0.107  1.000 
+phi            -0.225 -0.694 -0.161  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 09:59:32 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(XERR) yerrors
+        format = x:z:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   1 4.1293491531e+02   0.00e+00  1.63e+08    1.994495e+00   4.007464e+00   4.957904e-01  -1.516543e-02
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 412.935
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.87866
+variance of residuals (reduced chisquare) = WSSR/ndf   : 3.52936
+p-value of the Chisq distribution (FIT_P)              : 0
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 1.99449          +/- 0.009051     (0.4538%)
+w               = 4.00746          +/- 0.002995     (0.07473%)
+gamma           = 0.49579          +/- 0.003204     (0.6462%)
+phi             = -0.0151654       +/- 0.00405      (26.7%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.152  1.000 
+gamma           0.743  0.107  1.000 
+phi            -0.225 -0.694 -0.161  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 10:01:27 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(XERR) yerrors
+        format = x:z:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   1 4.1293491531e+02   0.00e+00  1.63e+08    1.994495e+00   4.007464e+00   4.957904e-01  -1.516543e-02
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 412.935
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.87866
+variance of residuals (reduced chisquare) = WSSR/ndf   : 3.52936
+p-value of the Chisq distribution (FIT_P)              : 0
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 1.99449          +/- 0.009051     (0.4538%)
+w               = 4.00746          +/- 0.002995     (0.07473%)
+gamma           = 0.49579          +/- 0.003204     (0.6462%)
+phi             = -0.0151654       +/- 0.00405      (26.7%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.152  1.000 
+gamma           0.743  0.107  1.000 
+phi            -0.225 -0.694 -0.161  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 10:05:30 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(X_ERR):(Y_ERR) xyerrors
+        format = x:z:sx:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   6 2.0371035811e+02   0.00e+00  9.15e+06    1.997286e+00   3.999700e+00   4.961493e-01  -3.267618e-03
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 203.71
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.31951
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.74111
+p-value of the Chisq distribution (FIT_P)              : 1.21608e-06
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 1.99729          +/- 0.0114       (0.5705%)
+w               = 3.9997           +/- 0.004734     (0.1184%)
+gamma           = 0.496149         +/- 0.003057     (0.6161%)
+phi             = -0.00326762      +/- 0.01191      (364.5%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.213  1.000 
+gamma           0.765  0.154  1.000 
+phi            -0.275 -0.819 -0.163  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 10:06:26 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(X_ERR):(Y_ERR) xyerrors
+        format = x:z:sx:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   1 2.0371035811e+02   0.00e+00  9.14e+06    1.997286e+00   3.999700e+00   4.961493e-01  -3.267618e-03
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 203.71
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.31951
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.74111
+p-value of the Chisq distribution (FIT_P)              : 1.21608e-06
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 1.99729          +/- 0.0114       (0.5705%)
+w               = 3.9997           +/- 0.004734     (0.1184%)
+gamma           = 0.496149         +/- 0.003057     (0.6161%)
+phi             = -0.00326762      +/- 0.01191      (364.5%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.213  1.000 
+gamma           0.765  0.154  1.000 
+phi            -0.275 -0.819 -0.163  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 10:09:27 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(X_ERR):(Y_ERR) xyerrors
+        format = x:z:sx:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   1 2.0371035811e+02   0.00e+00  9.14e+06    1.997286e+00   3.999700e+00   4.961493e-01  -3.267618e-03
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 203.71
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.31951
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.74111
+p-value of the Chisq distribution (FIT_P)              : 1.21608e-06
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 1.99729          +/- 0.0114       (0.5705%)
+w               = 3.9997           +/- 0.004734     (0.1184%)
+gamma           = 0.496149         +/- 0.003057     (0.6161%)
+phi             = -0.00326762      +/- 0.01191      (364.5%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.213  1.000 
+gamma           0.765  0.154  1.000 
+phi            -0.275 -0.819 -0.163  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 10:10:02 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(X_ERR):(Y_ERR) xyerrors
+        format = x:z:sx:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   1 2.0371035811e+02   0.00e+00  9.14e+06    1.997286e+00   3.999700e+00   4.961493e-01  -3.267618e-03
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 203.71
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.31951
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.74111
+p-value of the Chisq distribution (FIT_P)              : 1.21608e-06
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 1.99729          +/- 0.0114       (0.5705%)
+w               = 3.9997           +/- 0.004734     (0.1184%)
+gamma           = 0.496149         +/- 0.003057     (0.6161%)
+phi             = -0.00326762      +/- 0.01191      (364.5%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.213  1.000 
+gamma           0.765  0.154  1.000 
+phi            -0.275 -0.819 -0.163  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 10:10:25 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(X_ERR):(Y_ERR) xyerrors
+        format = x:z:sx:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   1 5.0927589527e-01   0.00e+00  4.57e+05    1.997286e+00   3.999700e+00   4.961493e-01  -3.267618e-03
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 0.509276
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0659756
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.00435279
+p-value of the Chisq distribution (FIT_P)              : 1
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 1.99729          +/- 0.0114       (0.5705%)
+w               = 3.9997           +/- 0.004734     (0.1184%)
+gamma           = 0.496149         +/- 0.003057     (0.6161%)
+phi             = -0.00326762      +/- 0.01191      (364.5%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.213  1.000 
+gamma           0.765  0.154  1.000 
+phi            -0.275 -0.819 -0.163  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 10:11:21 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(X_ERR):(Y_ERR) xyerrors
+        format = x:z:sx:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   4 2.9000953856e+00  -1.46e-01  4.57e-01    2.062833e+00   4.000019e+00   5.011750e-01  -3.205589e-03
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 2.9001
+rel. change during last iteration : -1.45788e-06
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.157439
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0247871
+p-value of the Chisq distribution (FIT_P)              : 1
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 2.06283          +/- 0.02768      (1.342%)
+w               = 4.00002          +/- 0.01125      (0.2812%)
+gamma           = 0.501175         +/- 0.00721      (1.439%)
+phi             = -0.00320559      +/- 0.02833      (883.9%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.217  1.000 
+gamma           0.765  0.157  1.000 
+phi            -0.281 -0.819 -0.165  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 10:35:51 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(X_ERR):(Y_ERR) xyerrors
+        format = x:z:sx:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   3 6.5165258052e+02   0.00e+00  8.23e+07    2.980487e+00   1.032092e+01   5.527979e+00  -4.364145e-01
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 651.653
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 2.36002
+variance of residuals (reduced chisquare) = WSSR/ndf   : 5.56968
+p-value of the Chisq distribution (FIT_P)              : 0
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 2.98049          +/- 4.727        (158.6%)
+w               = 10.3209          +/- 7.318        (70.91%)
+gamma           = 5.52798          +/- 5.648        (102.2%)
+phi             = -0.436415        +/- 2.639        (604.6%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.550  1.000 
+gamma           0.818  0.445  1.000 
+phi            -0.784 -0.803 -0.457  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 10:36:39 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(X_ERR):(Y_ERR) xyerrors
+        format = x:z:sx:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   1 6.5165258052e+02   0.00e+00  4.93e+08    2.980487e+00   1.032092e+01   5.527979e+00  -4.364145e-01
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 651.653
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 2.36002
+variance of residuals (reduced chisquare) = WSSR/ndf   : 5.56968
+p-value of the Chisq distribution (FIT_P)              : 0
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 2.98049          +/- 4.727        (158.6%)
+w               = 10.3209          +/- 7.318        (70.91%)
+gamma           = 5.52798          +/- 5.648        (102.2%)
+phi             = -0.436415        +/- 2.639        (604.6%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.550  1.000 
+gamma           0.818  0.445  1.000 
+phi            -0.784 -0.803 -0.457  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 10:36:57 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(X_ERR):(Y_ERR) xyerrors
+        format = x:z:sx:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   1 6.5165258052e+02   0.00e+00  4.93e+08    2.980487e+00   1.032092e+01   5.527979e+00  -4.364145e-01
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 651.653
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 2.36002
+variance of residuals (reduced chisquare) = WSSR/ndf   : 5.56968
+p-value of the Chisq distribution (FIT_P)              : 0
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 2.98049          +/- 4.727        (158.6%)
+w               = 10.3209          +/- 7.318        (70.91%)
+gamma           = 5.52798          +/- 5.648        (102.2%)
+phi             = -0.436415        +/- 2.639        (604.6%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.550  1.000 
+gamma           0.818  0.445  1.000 
+phi            -0.784 -0.803 -0.457  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 10:37:11 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(X_ERR):(Y_ERR) xyerrors
+        format = x:z:sx:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   1 6.5165258052e+02   0.00e+00  4.93e+08    2.980487e+00   1.032092e+01   5.527979e+00  -4.364145e-01
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 651.653
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 2.36002
+variance of residuals (reduced chisquare) = WSSR/ndf   : 5.56968
+p-value of the Chisq distribution (FIT_P)              : 0
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 2.98049          +/- 4.727        (158.6%)
+w               = 10.3209          +/- 7.318        (70.91%)
+gamma           = 5.52798          +/- 5.648        (102.2%)
+phi             = -0.436415        +/- 2.639        (604.6%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.550  1.000 
+gamma           0.818  0.445  1.000 
+phi            -0.784 -0.803 -0.457  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 10:37:18 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(X_ERR):(Y_ERR) xyerrors
+        format = x:z:sx:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   1 1.0426441288e+04   0.00e+00  1.97e+09    2.980487e+00   1.032092e+01   5.527979e+00  -4.364145e-01
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 10426.4
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 9.44007
+variance of residuals (reduced chisquare) = WSSR/ndf   : 89.1149
+p-value of the Chisq distribution (FIT_P)              : 0
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 2.98049          +/- 4.727        (158.6%)
+w               = 10.3209          +/- 7.318        (70.91%)
+gamma           = 5.52798          +/- 5.648        (102.2%)
+phi             = -0.436415        +/- 2.639        (604.6%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.550  1.000 
+gamma           0.818  0.445  1.000 
+phi            -0.784 -0.803 -0.457  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 10:38:13 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(X_ERR):(Y_ERR) xyerrors
+        format = x:z:sx:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   1 1.0426441288e+04   0.00e+00  1.97e+09    2.980487e+00   1.032092e+01   5.527979e+00  -4.364145e-01
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 10426.4
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 9.44007
+variance of residuals (reduced chisquare) = WSSR/ndf   : 89.1149
+p-value of the Chisq distribution (FIT_P)              : 0
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 2.98049          +/- 4.727        (158.6%)
+w               = 10.3209          +/- 7.318        (70.91%)
+gamma           = 5.52798          +/- 5.648        (102.2%)
+phi             = -0.436415        +/- 2.639        (604.6%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.550  1.000 
+gamma           0.818  0.445  1.000 
+phi            -0.784 -0.803 -0.457  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 10:40:21 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(X_ERR):(Y_ERR) xyerrors
+        format = x:z:sx:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   1 1.0426441288e+04   0.00e+00  1.97e+09    2.980487e+00   1.032092e+01   5.527979e+00  -4.364145e-01
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 10426.4
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 9.44007
+variance of residuals (reduced chisquare) = WSSR/ndf   : 89.1149
+p-value of the Chisq distribution (FIT_P)              : 0
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 2.98049          +/- 4.727        (158.6%)
+w               = 10.3209          +/- 7.318        (70.91%)
+gamma           = 5.52798          +/- 5.648        (102.2%)
+phi             = -0.436415        +/- 2.639        (604.6%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.550  1.000 
+gamma           0.818  0.445  1.000 
+phi            -0.784 -0.803 -0.457  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 10:41:48 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(X_ERR):(Y_ERR) xyerrors
+        format = x:z:sx:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   1 1.0426441288e+04   0.00e+00  1.97e+09    2.980487e+00   1.032092e+01   5.527979e+00  -4.364145e-01
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 10426.4
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 9.44007
+variance of residuals (reduced chisquare) = WSSR/ndf   : 89.1149
+p-value of the Chisq distribution (FIT_P)              : 0
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 2.98049          +/- 4.727        (158.6%)
+w               = 10.3209          +/- 7.318        (70.91%)
+gamma           = 5.52798          +/- 5.648        (102.2%)
+phi             = -0.436415        +/- 2.639        (604.6%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.550  1.000 
+gamma           0.818  0.445  1.000 
+phi            -0.784 -0.803 -0.457  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 10:53:08 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(X_ERR):(Y_ERR) xyerrors
+        format = x:z:sx:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   1 1.0426441288e+04   0.00e+00  1.97e+09    2.980487e+00   1.032092e+01   5.527979e+00  -4.364145e-01
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 10426.4
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 9.44007
+variance of residuals (reduced chisquare) = WSSR/ndf   : 89.1149
+p-value of the Chisq distribution (FIT_P)              : 0
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 2.98049          +/- 4.727        (158.6%)
+w               = 10.3209          +/- 7.318        (70.91%)
+gamma           = 5.52798          +/- 5.648        (102.2%)
+phi             = -0.436415        +/- 2.639        (604.6%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.550  1.000 
+gamma           0.818  0.445  1.000 
+phi            -0.784 -0.803 -0.457  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 10:55:08 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(Y_ERR) yerrors
+        format = x:z:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+  11 1.3982086667e+02  -1.51e-01  4.61e-04    2.000791e+00   4.001973e+00   4.930799e-01  -8.336863e-03
+
+After 11 iterations the fit converged.
+final sum of squares of residuals : 139.821
+rel. change during last iteration : -1.51217e-06
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.09318
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.19505
+p-value of the Chisq distribution (FIT_P)              : 0.0738764
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 2.00079          +/- 0.02623      (1.311%)
+w               = 4.00197          +/- 0.008633     (0.2157%)
+gamma           = 0.49308          +/- 0.009219     (1.87%)
+phi             = -0.00833686      +/- 0.01174      (140.8%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.153  1.000 
+gamma           0.743  0.108  1.000 
+phi            -0.226 -0.695 -0.162  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 10:55:22 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(X_ERR):(Y_ERR) xyerrors
+        format = x:z:sx:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   4 4.6218047341e+01  -1.69e-01  1.84e+00    2.063971e+00   4.001620e+00   5.014079e-01  -8.079490e-03
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 46.218
+rel. change during last iteration : -1.68711e-06
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.628511
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.395026
+p-value of the Chisq distribution (FIT_P)              : 1
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 2.06397          +/- 0.02769      (1.342%)
+w               = 4.00162          +/- 0.01123      (0.2806%)
+gamma           = 0.501408         +/- 0.007204     (1.437%)
+phi             = -0.00807949      +/- 0.02828      (350%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.217  1.000 
+gamma           0.765  0.156  1.000 
+phi            -0.280 -0.819 -0.165  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 10:55:28 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(X_ERR):(Y_ERR) xyerrors
+        format = x:z:sx:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   1 4.6218046171e+01  -2.53e-03  1.84e+01    2.063972e+00   4.001620e+00   5.014079e-01  -8.079467e-03
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 46.218
+rel. change during last iteration : -2.53166e-08
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.628511
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.395026
+p-value of the Chisq distribution (FIT_P)              : 1
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 2.06397          +/- 0.02769      (1.342%)
+w               = 4.00162          +/- 0.01123      (0.2806%)
+gamma           = 0.501408         +/- 0.007204     (1.437%)
+phi             = -0.00807947      +/- 0.02828      (350.1%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.217  1.000 
+gamma           0.765  0.156  1.000 
+phi            -0.280 -0.819 -0.165  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 10:56:31 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(X_ERR):(Y_ERR) xyerrors
+        format = x:z:sx:s
+        x range restricted to [0.00000 : 6.00000]
+        #datapoints = 121
+function used for fitting: f(x)
+	f(x) = A * sin(w*x + phi) * exp(-gamma*x)
+fitted parameters initialized with current variable values
+
+   3 1.0426441288e+04   0.00e+00  3.29e+08    2.980487e+00   1.032092e+01   5.527979e+00  -4.364145e-01
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 10426.4
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 117
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 9.44007
+variance of residuals (reduced chisquare) = WSSR/ndf   : 89.1149
+p-value of the Chisq distribution (FIT_P)              : 0
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 2.98049          +/- 4.727        (158.6%)
+w               = 10.3209          +/- 7.318        (70.91%)
+gamma           = 5.52798          +/- 5.648        (102.2%)
+phi             = -0.436415        +/- 2.639        (604.6%)
+
+correlation matrix of the fit parameters:
+                A      w      gamma  phi    
+A               1.000 
+w               0.550  1.000 
+gamma           0.818  0.445  1.000 
+phi            -0.784 -0.803 -0.457  1.000 
