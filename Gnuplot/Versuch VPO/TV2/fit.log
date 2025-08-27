@@ -371,3 +371,274 @@ correlation matrix of the fit parameters:
                 a      b      
 a               1.000 
 b              -0.931  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 18:22:59 2025
+
+
+FIT:    data read from 'data2-2.csv' using 1:(phase_from_time($1,$2))
+        format = x:z
+        #datapoints = 14
+        residuals are weighted equally (unit weight)
+
+function used for fitting: phase_model(x)
+	phase_model(x) = a - atan(x/b)
+fitted parameters initialized with current variable values
+
+  15 5.1297968879e+00  -9.51e-01  1.09e-01    1.856595e+00   2.195036e+03
+
+After 15 iterations the fit converged.
+final sum of squares of residuals : 5.1298
+rel. change during last iteration : -9.51264e-06
+
+degrees of freedom    (FIT_NDF)                        : 12
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.653822
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.427483
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 1.85659          +/- 0.4784       (25.77%)
+b               = 2195.04          +/- 2731         (124.4%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.931  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 18:23:06 2025
+
+
+FIT:    data read from 'data2-2.csv' using 1:(phase_from_time($1,$2))
+        format = x:z
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: phase_model(x)
+	phase_model(x) = a - atan(x/b)
+fitted parameters initialized with current variable values
+
+   6 2.6339807855e-02  -2.08e-01  1.08e-06    1.616776e+00   1.468962e+03
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 0.0263398
+rel. change during last iteration : -2.08423e-06
+
+degrees of freedom    (FIT_NDF)                        : 8
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0573801
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.00329248
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 1.61678          +/- 0.04869      (3.012%)
+b               = 1468.96          +/- 198.7        (13.53%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.928  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 18:23:31 2025
+
+
+FIT:    data read from 'data2-2.csv' using 1:(phase_from_time($1,$2))
+        format = x:z
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: phase_model(x)
+	phase_model(x) = a - atan(x/b)
+fitted parameters initialized with current variable values
+
+   6 2.6339807855e-02  -2.08e-01  1.08e-06    1.616776e+00   1.468962e+03
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 0.0263398
+rel. change during last iteration : -2.08423e-06
+
+degrees of freedom    (FIT_NDF)                        : 8
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0573801
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.00329248
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 1.61678          +/- 0.04869      (3.012%)
+b               = 1468.96          +/- 198.7        (13.53%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.928  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 18:24:56 2025
+
+
+FIT:    data read from 'data2-2.csv' using 1:(phase_from_time($1,$2))
+        format = x:z
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: phase_model(x)
+	phase_model(x) = a - atan(x/b)
+fitted parameters initialized with current variable values
+
+   6 2.6339807855e-02  -2.08e-01  1.08e-06    1.616776e+00   1.468962e+03
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 0.0263398
+rel. change during last iteration : -2.08423e-06
+
+degrees of freedom    (FIT_NDF)                        : 8
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0573801
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.00329248
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 1.61678          +/- 0.04869      (3.012%)
+b               = 1468.96          +/- 198.7        (13.53%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.928  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 18:25:28 2025
+
+
+FIT:    data read from 'data2-2.csv' using 1:(phase_from_time($1,$2))
+        format = x:z
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: phase_model(x)
+	phase_model(x) = a - atan(x/b)
+fitted parameters initialized with current variable values
+
+   6 2.6339807855e-02  -2.08e-01  1.08e-06    1.616776e+00   1.468962e+03
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 0.0263398
+rel. change during last iteration : -2.08423e-06
+
+degrees of freedom    (FIT_NDF)                        : 8
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0573801
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.00329248
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 1.61678          +/- 0.04869      (3.012%)
+b               = 1468.96          +/- 198.7        (13.53%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.928  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 18:29:20 2025
+
+
+FIT:    data read from 'data2-2.csv' using 1:(phase_from_time($1,$2))
+        format = x:z
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: phase_model(x)
+	phase_model(x) = a - atan(x/b)
+fitted parameters initialized with current variable values
+
+   6 2.6339807855e-02  -2.08e-01  1.08e-06    1.616776e+00   1.468962e+03
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 0.0263398
+rel. change during last iteration : -2.08423e-06
+
+degrees of freedom    (FIT_NDF)                        : 8
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0573801
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.00329248
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 1.61678          +/- 0.04869      (3.012%)
+b               = 1468.96          +/- 198.7        (13.53%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.928  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 18:34:19 2025
+
+
+FIT:    data read from 'data2-2.csv' using 1:(phase_from_time($1,$2))
+        format = x:z
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: phase_model(x)
+	phase_model(x) = a - atan(x/b)
+fitted parameters initialized with current variable values
+
+   6 2.6339807855e-02  -2.08e-01  1.08e-06    1.616776e+00   1.468962e+03
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 0.0263398
+rel. change during last iteration : -2.08423e-06
+
+degrees of freedom    (FIT_NDF)                        : 8
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0573801
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.00329248
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 1.61678          +/- 0.04869      (3.012%)
+b               = 1468.96          +/- 198.7        (13.53%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.928  1.000 
+
+
+*******************************************************************************
+Wed Aug 27 18:51:47 2025
+
+
+FIT:    data read from 'data2-1.csv' using 1:($2/U_IN):(Y_ERR_N) yerrors
+        format = x:z:s
+        #datapoints = 20
+function used for fitting: f(x)
+	f(x) = a/sqrt(1+(x/b)**2)
+fitted parameters initialized with current variable values
+
+  41 5.2827453819e+01  -1.82e-07  9.81e-01    9.311235e-01   1.566908e+03
+
+After 41 iterations the fit converged.
+final sum of squares of residuals : 52.8275
+rel. change during last iteration : -1.82238e-12
+
+degrees of freedom    (FIT_NDF)                        : 18
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.71314
+variance of residuals (reduced chisquare) = WSSR/ndf   : 2.93486
+p-value of the Chisq distribution (FIT_P)              : 2.78987e-05
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 0.931123         +/- 0.002229     (0.2393%)
+b               = 1566.91          +/- 7.721        (0.4928%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.793  1.000 
