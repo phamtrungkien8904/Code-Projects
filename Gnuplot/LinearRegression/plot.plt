@@ -7,30 +7,21 @@ set xlabel 'x()'
 set ylabel 'y()'
 # set grid
 set datafile separator ','
-set xrange [*:*]
-set yrange [*:*]
-
 
 # ---------------- Measurement (instrument) uncertainties ----------------
-# Constant timing uncertainty (s) and position uncertainty (m)
-X_ERR = 0.1 # dt
-Y_ERR  = 0.1   # dx (used as y error because data column 2 is position)
-
+X_ERR = 0.1 
+Y_ERR  = 0.1  
 
 # Linear Regression Fit
 f(x) = a*x+b
-
 
 set fit quiet
 fit f(x) 'data.csv' using 1:2:(X_ERR):(Y_ERR) xyerrors via a,b 
 # only 2 Error when linear fit
 
-# Define 1-sigma parameter offset band functions AFTER fit so a_err, b_err exist
-# Use parameter name 't' to avoid confusion with plotting dummy variable
+# Error Bandbound
 up(x)   = (a+a_err)*x + (b+b_err)
 down(x) = (a-a_err)*x + (b-b_err)
-
-
 
 # Compute R^2 and correlation r (unweighted)
 stats 'data.csv' using 2 name 'Y' nooutput
@@ -40,10 +31,6 @@ SSE = E_sumsq
 R2 = (SST > 0) ? (1.0 - SSE / SST) : 0/0
 R2 = (R2 > 1) ? 1 : ((R2 < 0) ? 0 : R2)
 r  = (R2 >= 0) ? sqrt(R2) : 0/0
-
-
-
-
 
 # Styling
 set style line 1 lt 1 lw 2 lc rgb '#d62728'
@@ -58,13 +45,11 @@ plot \
 	up(x) with lines ls 3 notitle, \
 	down(x) with lines ls 4 notitle
 
-
 ###### Test value x ######
 x_test = 5
 dx_test = 0.1
 y_esti = f(x_test)
 dy_esti = a_err * x_test + b_err + a*dx_test
-
 
 # Print Fit results
 print sprintf('============================ OUTPUT y = a*x + b =============================')
