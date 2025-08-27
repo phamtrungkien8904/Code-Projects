@@ -1,4 +1,5 @@
 ## RC alternating current frequency response (R in Ohm, C in F)
+reset
 
 set terminal epslatex color
 set out 'tv1-1.tex'
