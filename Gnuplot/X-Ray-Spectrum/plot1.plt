@@ -14,7 +14,7 @@ set samples 10000
 U1 = 45 # kV
 
 
-# Reference λ for highest voltage (arbitrary scaling): for U3 -> λ_min_ref
+
 HC_e_pm_factor = 1.239841984e3   # (hc/e) (pm*kV) expressed so that λ_min(pm) = 1.23984e3 / U(kV)
 lambda_min(U) = HC_e_pm_factor / U  # pm
 
