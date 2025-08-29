@@ -4,9 +4,9 @@ set encoding utf8
 
 set title 'Röntgenspektren der Molybdän-Anode für verschiedene Beschleunigungsspannungen'
 set xlabel 'Wellenlänge λ (pm)'
-set ylabel 'Intensität (norm.)'
+set ylabel 'Intensität R (1/s)'
 set yrange [0:10]
-set xrange [0:150]
+set xrange [0:200]
 
 set samples 10000
 
@@ -16,6 +16,9 @@ U1 = 17.7 # kV
 U2 = 23.5 # kV
 U3 = 29.3 # kV
 U4 = 35.0 # kV
+U5 = 40.0 # kV
+U6 = 45.0 # kV
+U7 = 50.0 # kV
 
 # Reference λ for highest voltage (arbitrary scaling): for U3 -> λ_min_ref
 HC_e_pm_factor = 1.239841984e3   # (hc/e) (pm*kV) expressed so that λ_min(pm) = 1.23984e3 / U(kV)
@@ -25,7 +28,7 @@ lambda_min(U) = HC_e_pm_factor / U  # pm
 
 # Bremsstrahlung continuum:
 # Use approximate shape I(λ) ∝ U**1.5 * (1 - λ_min/λ) / λ^2 for λ ≥ λ_min, else 0.
-scaleB = 3e2      # tuning factor; increase if still too low (≈0.00005–0.0001 range)
+scaleB = 1e2      # tuning factor; increase if still too low (≈0.00005–0.0001 range)
 Ibrems_raw(x,U) = scaleB * U**1.5 * (1 - lambda_min(U)/x) / x**2
 f(x,U) = (x>=lambda_min(U)) ? ( (Ibrems_raw(x,U) > 0) ? Ibrems_raw(x,U) : 0 ) : 0
 
@@ -34,11 +37,11 @@ lambda_Imax(U) = 3/2 * lambda_min(U)
 # Characteristic radiation spectrum (Gauss distributions)
 lambda_alpha = 71.08 # pm (Kα)
 lambda_beta  = 63.09 # pm (Kβ)
-sigma = 0.1  # standard deviation of both Gaussians
+sigma = 0.4  # standard deviation of both Gaussians
 
 # Lines only appear if accelerating voltage is high enough: lambda_min(U) < lambda_line.
-N1(U) = (lambda_min(U) < lambda_alpha ? 4e-3 * U**1.5 : 0)  # Kα intensity scaling
-N2(U) = (lambda_min(U) < lambda_beta  ? 1e-3 * U**1.5 : 0)  # Kβ intensity scaling (weaker)
+N1(U) = (lambda_min(U) < lambda_alpha ? 15e-3 * U**1.5 : 0)  # Kα intensity scaling
+N2(U) = (lambda_min(U) < lambda_beta  ? 3e-3 * U**1.5 : 0)  # Kβ intensity scaling (weaker)
 
 g(x,U) = N1(U)/sqrt(2*pi*sigma**2)*exp(-0.5*((x-lambda_alpha)/sigma)**2) \
 	+ N2(U)/sqrt(2*pi*sigma**2)*exp(-0.5*((x-lambda_beta )/sigma)**2)
@@ -66,4 +69,7 @@ plot \
 	total(x,U1) with lines lw 2 lc rgb '#1f77b4' title sprintf('U=%.0f kV (λ_{min}=%.2f pm)', U1, lambda_min(U1)), \
 	total(x,U2) with lines lw 2 lc rgb '#ff7f0e' title sprintf('U=%.0f kV (λ_{min}=%.2f pm)', U2, lambda_min(U2)), \
 	total(x,U3) with lines lw 2 lc rgb '#2ca02c' title sprintf('U=%.0f kV (λ_{min}=%.2f pm)', U3, lambda_min(U3)), \
-	total(x,U4) with lines lw 2 lc rgb '#9467bd' title sprintf('U=%.0f kV (λ_{min}=%.2f pm)', U4, lambda_min(U4))
+	total(x,U4) with lines lw 2 lc rgb '#9467bd' title sprintf('U=%.0f kV (λ_{min}=%.2f pm)', U4, lambda_min(U4)), \
+	total(x,U5) with lines lw 2 lc rgb '#8c564b' title sprintf('U=%.0f kV (λ_{min}=%.2f pm)', U5, lambda_min(U5)), \
+	total(x,U6) with lines lw 2 lc rgb '#e377c2' title sprintf('U=%.0f kV (λ_{min}=%.2f pm)', U6, lambda_min(U6)), \
+	total(x,U7) with lines lw 2 lc rgb '#7f7f7f' title sprintf('U=%.0f kV (λ_{min}=%.2f pm)', U7, lambda_min(U7))

@@ -1,5 +1,6 @@
 #### Clayperon-Clausius ###
 reset
+set encoding utf8 
 
 # ============================ Plot Settings ============================
 # set terminal epslatex color
@@ -9,6 +10,7 @@ set title 'Dampfdruckkurve'
 set xlabel 'T (Grad)'
 set ylabel 'p (bar)'
 set datafile separator ','
+set samples 10000
 
 # ---------------- Measurement (instrument) uncertainties ----------------
 X_ERR = 0.1          # °C uncertainty in temperature

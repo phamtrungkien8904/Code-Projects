@@ -1,4 +1,5 @@
 reset
+set encoding utf8 
 
 # ============================ Plot Settings ============================
 
@@ -7,6 +8,7 @@ set xlabel 'x()'
 set ylabel 'y()'
 # set grid
 set datafile separator ','
+set samples 10000
 
 # ---------------- Measurement (instrument) uncertainties ----------------
 X_ERR = 0.1 
