@@ -1,9 +1,5 @@
 % GNUPLOT: LaTeX picture with Postscript
 \begingroup
-  % Encoding inside the plot.  In the header of your document, this encoding
-  % should to defined, e.g., by using
-  % \usepackage[cp1252,<other encodings>]{inputenc}
-  \inputencoding{cp1252}%
   \makeatletter
   \providecommand\color[2][]{%
     \GenericError{(gnuplot) \space\space\space\@spaces}{%
@@ -87,35 +83,40 @@
 \begin{picture}(7200.00,5040.00)%
     \gplgaddtomacro\gplbacktext{%
       \csname LTb\endcsname%%
-      \put(814,704){\makebox(0,0)[r]{\strut{}$-20$}}%
-      \put(814,1229){\makebox(0,0)[r]{\strut{}$0$}}%
-      \put(814,1754){\makebox(0,0)[r]{\strut{}$20$}}%
-      \put(814,2279){\makebox(0,0)[r]{\strut{}$40$}}%
-      \put(814,2804){\makebox(0,0)[r]{\strut{}$60$}}%
-      \put(814,3329){\makebox(0,0)[r]{\strut{}$80$}}%
-      \put(814,3854){\makebox(0,0)[r]{\strut{}$100$}}%
-      \put(814,4379){\makebox(0,0)[r]{\strut{}$120$}}%
-      \put(946,484){\makebox(0,0){\strut{}$0$}}%
-      \put(1532,484){\makebox(0,0){\strut{}$2$}}%
-      \put(2117,484){\makebox(0,0){\strut{}$4$}}%
-      \put(2703,484){\makebox(0,0){\strut{}$6$}}%
-      \put(3289,484){\makebox(0,0){\strut{}$8$}}%
-      \put(3875,484){\makebox(0,0){\strut{}$10$}}%
-      \put(4460,484){\makebox(0,0){\strut{}$12$}}%
-      \put(5046,484){\makebox(0,0){\strut{}$14$}}%
-      \put(5632,484){\makebox(0,0){\strut{}$16$}}%
-      \put(6217,484){\makebox(0,0){\strut{}$18$}}%
-      \put(6803,484){\makebox(0,0){\strut{}$20$}}%
+      \put(682,704){\makebox(0,0)[r]{\strut{}$0$}}%
+      \put(682,1112){\makebox(0,0)[r]{\strut{}$10$}}%
+      \put(682,1521){\makebox(0,0)[r]{\strut{}$20$}}%
+      \put(682,1929){\makebox(0,0)[r]{\strut{}$30$}}%
+      \put(682,2337){\makebox(0,0)[r]{\strut{}$40$}}%
+      \put(682,2746){\makebox(0,0)[r]{\strut{}$50$}}%
+      \put(682,3154){\makebox(0,0)[r]{\strut{}$60$}}%
+      \put(682,3562){\makebox(0,0)[r]{\strut{}$70$}}%
+      \put(682,3971){\makebox(0,0)[r]{\strut{}$80$}}%
+      \put(682,4379){\makebox(0,0)[r]{\strut{}$90$}}%
+      \put(814,484){\makebox(0,0){\strut{}$0$}}%
+      \put(1479,484){\makebox(0,0){\strut{}$2$}}%
+      \put(2145,484){\makebox(0,0){\strut{}$4$}}%
+      \put(2810,484){\makebox(0,0){\strut{}$6$}}%
+      \put(3476,484){\makebox(0,0){\strut{}$8$}}%
+      \put(4141,484){\makebox(0,0){\strut{}$10$}}%
+      \put(4807,484){\makebox(0,0){\strut{}$12$}}%
+      \put(5472,484){\makebox(0,0){\strut{}$14$}}%
+      \put(6138,484){\makebox(0,0){\strut{}$16$}}%
+      \put(6803,484){\makebox(0,0){\strut{}$18$}}%
     }%
     \gplgaddtomacro\gplfronttext{%
       \csname LTb\endcsname%%
-      \put(5816,4206){\makebox(0,0)[r]{\strut{}Daten}}%
+      \put(5816,4206){\makebox(0,0)[r]{\strut{}Messdaten}}%
       \csname LTb\endcsname%%
       \put(5816,3986){\makebox(0,0)[r]{\strut{}Fitgerade}}%
       \csname LTb\endcsname%%
-      \put(209,2541){\rotatebox{-270.00}{\makebox(0,0){\strut{}Spannung $V_\text{out}$ (mV)}}}%
-      \put(3874,154){\makebox(0,0){\strut{}Gradient $dV/dt$ (mV/s)}}%
-      \put(3874,4709){\makebox(0,0){\strut{}Spannung auf Rohspule und Gradient}}%
+      \put(5816,3766){\makebox(0,0)[r]{\strut{}Obere Fehlergrenze}}%
+      \csname LTb\endcsname%%
+      \put(5816,3546){\makebox(0,0)[r]{\strut{}Untere Fehlergrenze}}%
+      \csname LTb\endcsname%%
+      \put(209,2541){\rotatebox{-270.00}{\makebox(0,0){\strut{}Induktionsspannung $V_\text{ind}$/mV}}}%
+      \put(3808,154){\makebox(0,0){\strut{}Gradient $s = \Delta V_\text{F}/\Delta t$}}%
+      \put(3808,4709){\makebox(0,0){\strut{}Linearität des Induktionsgesetz}}%
     }%
     \gplbacktext
     \put(0,0){\includegraphics[width={360.00bp},height={252.00bp}]{tv4}}%

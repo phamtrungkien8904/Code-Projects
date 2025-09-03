@@ -1,6 +1,7 @@
-# t(s), Delta_V(mV), V_out(mV), Gradient(mV/s)
-4.0, 10 , 10, 2.50
-3.0, 20, 32, 6.67
-2.3, 20, 50, 8.70
-2.9, 32, 58, 11.03
-2.5, 40, 80, 16.00
+# Berechnete Steigungen \(s=\Delta V_{\text{F}}/\Delta t\) und zugehörige Induktionsspannung \(V_{\text{ind}}\)/mV.
+# \Delta V_F/mV, s(mV/s) , \sigma(s) (mV/s) , V_ind/mV  
+ 20  , 2.222 , 0.224 , 12 
+ 58  , 6.444 , 0.233 , 32  
+ 80  , 8.889 , 0.243 , 46 
+ 104 , 11.556 , 0.257 , 60   
+ 142 , 15.778 , 0.283 , 82 
