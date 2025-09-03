@@ -2,6 +2,8 @@
 
 reset
 
+set encoding utf8 
+
 # ============================ Plot Settings ============================
 
 set terminal epslatex color
@@ -9,7 +11,7 @@ set out 'tv2.tex'
 
 set title 'Relation zwischen $\varphi$ und $\sin(\alpha)$'
 set xlabel '$\sin(\alpha)$'
-set ylabel '$\varphi$ (Grad)'
+set ylabel '$\varphi (^circ)$'
 set xrange [0:1]
 # set grid
 set datafile separator ','
