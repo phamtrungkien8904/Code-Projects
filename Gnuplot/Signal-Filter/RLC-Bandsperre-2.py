@@ -2,8 +2,7 @@ import numpy as np
 import csv
 
 """
-RLC Low-Pass Filter (2nd order) Data Generator
-tau_L*tau_C* d^2u_out/dt^2 + (tau_C)*du_out/dt + u_out = u_in
+RLC Bandpass Filter (2nd order) Data Generator
 """
 
 # Set the parameters for the filter
@@ -32,24 +31,26 @@ f = f0  # Frequency of the square wave
 # u_in = 1*np.sum([ ((-1)**n)/(n+1) * np.sin(2 * np.pi * (n+1) * f * t) for n in range(20)], axis=0)
 
 # Fourier series (random noising waves)
-u_in = 1*np.sin(2 * np.pi * f * t) + (1/5)*np.sin(2 * np.pi * 10 * f * t) + (1/5)*np.sin(2 * np.pi * 20 * f * t) + (1/5)*np.sin(2 * np.pi * 15 * f * t)
+u_in = 1*np.sin(2 * np.pi * f * t) + (1/5)*np.sin(2 * np.pi * 20 * f * t) + (1/5)*np.sin(2 * np.pi * 40 * f * t) + (1/5)*np.sin(2 * np.pi * 30 * f * t)
 
 # Apply the low-pass filter
 def low_pass_filter(u_in, tau_C, tau_L, dt):
     u_out = np.zeros_like(u_in)
     Du_out = np.zeros_like(u_in)  # First derivative of u_out
+    u_LC = np.zeros_like(u_in)  # Output across LC (bandpass output)
     for i in range(1, len(u_in)):
         Du_out[i] = Du_out[i-1]*(1 - dt/tau_L) + (u_in[i-1] - u_out[i-1])*(dt/(tau_L*tau_C))
         u_out[i] = u_out[i-1] + Du_out[i]*dt
-    return u_out
+        u_LC[i] = u_in[i] - Du_out[i]*tau_C
+    return u_LC
 
 u_out = low_pass_filter(u_in, tau_C, tau_L, dt)
 
 # Transfer function (Amplitude)
 def transfer_function(f, tau_C, tau_L):
     s = 1j * 2 * np.pi * f
-    H = 1/(1 + s * tau_C + s**2 * tau_L * tau_C)
-    return abs(H) 
+    H = (1 + s**2 * tau_L * tau_C)/(1 + s * tau_C + s**2 * tau_L * tau_C)
+    return abs(H)
 
 H_amp = transfer_function(f, tau_C, tau_L)
 

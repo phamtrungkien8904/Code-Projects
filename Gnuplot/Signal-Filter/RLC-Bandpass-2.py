@@ -2,17 +2,18 @@ import numpy as np
 import csv
 
 """
-RC Low-Pass Filter (1st order) Data Generator
+RLC Bandpass Filter (2nd order) Data Generator
 """
 
 # Set the parameters for the filter
-tau = 2.0  # Time constant
-dt = 0.05   # Time step (dt << tau)
+tau_C = 2.0  # Capacitor time constant
+tau_L = 0.5  # Inductance time constant
+dt = 0.05   # Time step
 t = np.arange(0, 40, dt)  # Time array
-f0 = 1/(2*np.pi*np.sqrt(tau))  # Limit frequency
 
 # Generate the input signal (square wave)
-f = f0 # Frequency of wave  
+f0 = 1/(2*np.pi*np.sqrt(tau_L*tau_C))  # Limit frequency
+f = f0  # Frequency of the square wave
 
 # Sine wave
 # u_in = np.sin(2 * np.pi *f* t)
@@ -27,28 +28,29 @@ f = f0 # Frequency of wave
 # u_in = (2*(t*f - np.floor(0.5 + t*f)))
 
 # Sawtooth wave Fourier series
-# u_in = 1/3*np.sum([ ((-1)**n)/(n+1) * np.sin(2 * np.pi * (n+1) * f * t) for n in range(20)], axis=0)
-
+# u_in = 1*np.sum([ ((-1)**n)/(n+1) * np.sin(2 * np.pi * (n+1) * f * t) for n in range(20)], axis=0)
 
 # Fourier series (random noising waves)
-u_in = 1*np.sin(2 * np.pi * f * t) + (1/5)*np.sin(2 * np.pi * 10 * f * t) + (1/5)*np.sin(2 * np.pi * 20 * f * t) + (1/5)*np.sin(2 * np.pi * 15 * f * t)
+u_in = 1*np.sin(2 * np.pi * f * t) + (1/5)*np.sin(2 * np.pi * 20 * f * t) + (1/5)*np.sin(2 * np.pi * 40 * f * t) + (1/5)*np.sin(2 * np.pi * 30 * f * t)
 
 # Apply the low-pass filter
-def low_pass_filter(u_in, tau, dt):
+def low_pass_filter(u_in, tau_C, tau_L, dt):
     u_out = np.zeros_like(u_in)
+    Du_out = np.zeros_like(u_in)  # First derivative of u_out
     for i in range(1, len(u_in)):
-        u_out[i] = (dt/tau)*u_in[i] + (1 - (dt/tau))*u_out[i - 1]
-    return u_out
+        Du_out[i] = Du_out[i-1]*(1 - dt/tau_L) + (u_in[i-1] - u_out[i-1])*(dt/(tau_L*tau_C))
+        u_out[i] = u_out[i-1] + Du_out[i]*dt
+    return Du_out*tau_C
 
-u_out = low_pass_filter(u_in, tau, dt)
+u_out = low_pass_filter(u_in, tau_C, tau_L, dt)
 
 # Transfer function (Amplitude)
-def transfer_function(f, tau):
+def transfer_function(f, tau_C, tau_L):
     s = 1j * 2 * np.pi * f
-    H = 1 / (1 + s * tau)
-    return abs(H) 
+    H = (s * tau_C)/(1 + s * tau_C + s**2 * tau_L * tau_C)
+    return abs(H)
 
-H_amp = transfer_function(f, tau)
+H_amp = transfer_function(f, tau_C, tau_L)
 
 # Save the input and output signals to a CSV file
 with open("data.csv", "w", newline="") as csvfile:
