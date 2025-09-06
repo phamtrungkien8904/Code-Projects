@@ -35,10 +35,10 @@ u_in = 1*np.sin(2 * np.pi * f * t) + (1/5)*np.sin(2 * np.pi * 10 * f * t) + (1/5
 
 # Apply the low-pass filter
 def low_pass_filter(u_in, tau, dt):
-    u_out = np.zeros_like(u_in)
+    u_C = np.zeros_like(u_in)
     for i in range(1, len(u_in)):
-        u_out[i] = (dt/tau)*u_in[i] + (1 - (dt/tau))*u_out[i - 1]
-    return u_out
+        u_C[i] = (dt/tau)*u_in[i] + (1 - (dt/tau))*u_C[i - 1]
+    return u_C
 
 u_out = low_pass_filter(u_in, tau, dt)
 
