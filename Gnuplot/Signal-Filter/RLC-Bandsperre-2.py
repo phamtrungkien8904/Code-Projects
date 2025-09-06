@@ -31,7 +31,7 @@ f = f0  # Frequency of the square wave
 # u_in = 1*np.sum([ ((-1)**n)/(n+1) * np.sin(2 * np.pi * (n+1) * f * t) for n in range(20)], axis=0)
 
 # Fourier series (random noising waves)
-u_in = 1*np.sin(2 * np.pi * f * t) + (1/5)*np.sin(2 * np.pi * 20 * f * t) + (1/5)*np.sin(2 * np.pi * 40 * f * t) + (1/5)*np.sin(2 * np.pi * 30 * f * t)
+u_in =2*np.sin(2 * np.pi * 0.5*f * t)+ 1*np.sin(2 * np.pi * f * t) + (1/5)*np.sin(2 * np.pi * 20 * f * t) + (1/5)*np.sin(2 * np.pi * 40 * f * t) + (1/5)*np.sin(2 * np.pi * 30 * f * t)
 
 # Apply the band-stop filter
 def band_stop_filter(u_in, tau_C, tau_L, dt):
