@@ -33,18 +33,18 @@ f = f0  # Frequency of the square wave
 # Fourier series (random noising waves)
 u_in = 1*np.sin(2 * np.pi * f * t) + (1/5)*np.sin(2 * np.pi * 20 * f * t) + (1/5)*np.sin(2 * np.pi * 40 * f * t) + (1/5)*np.sin(2 * np.pi * 30 * f * t)
 
-# Apply the low-pass filter
-def low_pass_filter(u_in, tau_C, tau_L, dt):
-    u_out = np.zeros_like(u_in)
-    Du_out = np.zeros_like(u_in)  # First derivative of u_out
+# Apply the band-stop filter
+def band_stop_filter(u_in, tau_C, tau_L, dt):
+    u_C = np.zeros_like(u_in)
+    Du_C = np.zeros_like(u_in)  # First derivative of u_C
     u_LC = np.zeros_like(u_in)  # Output across LC (bandpass output)
     for i in range(1, len(u_in)):
-        Du_out[i] = Du_out[i-1]*(1 - dt/tau_L) + (u_in[i-1] - u_out[i-1])*(dt/(tau_L*tau_C))
-        u_out[i] = u_out[i-1] + Du_out[i]*dt
-        u_LC[i] = u_in[i] - Du_out[i]*tau_C
+        Du_C[i] = Du_C[i-1]*(1 - dt/tau_L) + (u_in[i-1] - u_C[i-1])*(dt/(tau_L*tau_C))
+        u_C[i] = u_C[i-1] + Du_C[i]*dt
+        u_LC[i] = u_in[i] - Du_C[i]*tau_C
     return u_LC
 
-u_out = low_pass_filter(u_in, tau_C, tau_L, dt)
+u_out = band_stop_filter(u_in, tau_C, tau_L, dt)
 
 # Transfer function (Amplitude)
 def transfer_function(f, tau_C, tau_L):
