@@ -1,0 +1,64 @@
+reset
+set encoding utf8 
+
+# ============================ Plot Settings ============================
+
+set terminal epslatex color
+set out 'tv3.tex'
+
+set title 'Spannungsabfall eines Helipots'
+set ylabel 'Spannungsabfall'
+set xlabel 'Einstellung am Helipot (Stk.)'
+ # set grid
+
+set datafile separator ','
+set samples 10000
+
+
+
+# Linear Regression Fit
+f(x) = a*x+b
+
+set fit quiet
+a = 0.01
+b = 0.0
+fit f(x) 'data.csv' using 1:2:3 yerrors via a,b 
+# only 2 Error when linear fit
+
+
+
+# Compute R^2 on dependent variable (col 2 = U) and adjusted R^2; unweighted residuals
+stats 'data.csv' using 2 name 'DEP' nooutput
+SST = (DEP_records > 1) ? (DEP_records - 1) * DEP_stddev**2 : 0
+stats 'data.csv' using (f($1) - $2) name 'E' nooutput
+SSE = E_sumsq
+R2 = (SST > 0) ? (1.0 - SSE / SST) : 0/0
+R2 = (R2 > 1) ? 1 : ((R2 < 0) ? 0 : R2)
+# adjusted R^2 for linear model with intercept (p = 1 predictor)
+p = 1
+R2_adj = (DEP_records > p + 1) ? 1 - (1 - R2) * (DEP_records - 1) / (DEP_records - p - 1) : 0/0
+# signed correlation coefficient using slope sign
+sgn = (a >= 0) ? 1 : -1
+r  = (R2 >= 0) ? sgn * sqrt(R2) : 0/0
+
+# Styling
+set style line 1 lt 1 lw 2 lc rgb '#d62728'
+set style line 2 pt 7 ps 1 lc rgb '#111111'
+
+
+# Plot
+plot \
+	'data.csv' using 1:2:3 with yerrorbars ls 2 title 'Messdaten', \
+	f(x) with lines ls 1 title 'Fitgerade'
+
+
+# Print Fit results
+print sprintf('============================ OUTPUT y = a*x + b =============================')
+print sprintf('Datafile:      %s', 'data.csv')
+print sprintf('Fit results:   a = %.6f +- %.6f (%.2f%%)', a,a_err, (a!=0)? 100.0*a_err/abs(a) : 0/0 )
+print sprintf('               b = %.6f +- %.6f (%.2f%%)', b,b_err, (b!=0)? 100.0*b_err/abs(b) : 0/0 )
+print sprintf('Goodness:      R^2 = %.6f, adj R^2 = %.6f, r = %.6f,  N=%d', R2, R2_adj, r, DEP_records)
+print sprintf('==================================== END ====================================')
+
+
+set out

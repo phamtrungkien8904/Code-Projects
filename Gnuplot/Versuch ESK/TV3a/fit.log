@@ -1,0 +1,159 @@
+
+
+*******************************************************************************
+Mon Sep 08 11:00:34 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(0.1):3 xyerrors
+        format = x:z:sx:s
+        #datapoints = 5
+function used for fitting: f(x)
+	f(x) = a*x+b
+fitted parameters initialized with current variable values
+
+Warning: Initial value of parameter 'b' is zero.
+BREAK: Singular matrix in Invert_RtR
+
+*******************************************************************************
+Mon Sep 08 11:01:36 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(0.1):3 xyerrors
+        format = x:z:sx:s
+        #datapoints = 5
+function used for fitting: f(x)
+	f(x) = a*x+b
+fitted parameters initialized with current variable values
+
+BREAK: Singular matrix in Invert_RtR
+
+*******************************************************************************
+Mon Sep 08 11:02:09 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(0.1):3 xyerrors
+        format = x:z:sx:s
+        #datapoints = 5
+function used for fitting: f(x)
+	f(x) = a*x+b
+fitted parameters initialized with current variable values
+
+   5 2.0375123369e+00  -3.33e-02  1.83e-03    6.156889e-02  -1.245507e-02
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 2.03751
+rel. change during last iteration : -3.33461e-07
+
+degrees of freedom    (FIT_NDF)                        : 3
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.824118
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.679171
+p-value of the Chisq distribution (FIT_P)              : 0.564657
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 0.0615689        +/- 0.0005303    (0.8612%)
+b               = -0.0124551       +/- 0.01039      (83.42%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.888  1.000 
+
+
+*******************************************************************************
+Mon Sep 08 11:02:20 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(0.1):3 xyerrors
+        format = x:z:sx:s
+        #datapoints = 5
+function used for fitting: f(x)
+	f(x) = a*x+b
+fitted parameters initialized with current variable values
+
+   1 2.0375123368e+00  -2.38e-06  6.58e+00    6.156889e-02  -1.245507e-02
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 2.03751
+rel. change during last iteration : -2.37538e-11
+
+degrees of freedom    (FIT_NDF)                        : 3
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.824118
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.679171
+p-value of the Chisq distribution (FIT_P)              : 0.564657
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 0.0615689        +/- 0.0005303    (0.8612%)
+b               = -0.0124551       +/- 0.01039      (83.42%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.888  1.000 
+
+
+*******************************************************************************
+Mon Sep 08 11:02:22 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(0.1):3 xyerrors
+        format = x:z:sx:s
+        #datapoints = 5
+function used for fitting: f(x)
+	f(x) = a*x+b
+fitted parameters initialized with current variable values
+
+   1 2.0375123368e+00  -2.32e-07  6.58e+00    6.156889e-02  -1.245507e-02
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 2.03751
+rel. change during last iteration : -2.31644e-12
+
+degrees of freedom    (FIT_NDF)                        : 3
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.824118
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.679171
+p-value of the Chisq distribution (FIT_P)              : 0.564657
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 0.0615689        +/- 0.0005303    (0.8612%)
+b               = -0.0124551       +/- 0.01039      (83.42%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.888  1.000 
+
+
+*******************************************************************************
+Mon Sep 08 11:04:12 2025
+
+
+FIT:    data read from 'data.csv' using 1:2:(0.1):3 xyerrors
+        format = x:z:sx:s
+        #datapoints = 5
+function used for fitting: f(x)
+	f(x) = a*x+b
+fitted parameters initialized with current variable values
+
+   5 2.0375123369e+00  -3.33e-02  1.83e-03    6.156889e-02  -1.245507e-02
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 2.03751
+rel. change during last iteration : -3.33461e-07
+
+degrees of freedom    (FIT_NDF)                        : 3
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.824118
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.679171
+p-value of the Chisq distribution (FIT_P)              : 0.564657
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 0.0615689        +/- 0.0005303    (0.8612%)
+b               = -0.0124551       +/- 0.01039      (83.42%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.888  1.000 
