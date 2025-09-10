@@ -28,6 +28,6 @@ set style line 3 lt 1 lw 2 lc rgb 'black' dt 2
 # e(x) = 1 + mu*m(x)
 # s(x) = e(x)*c(x)
 
-plot 'data.csv' using 1:8 with lines ls 1 title 'Tuned Signal',\
+plot 'data.csv' using 1:(3*$7) with lines ls 1 title 'Tuned Signal',\
     'data.csv' using 1:4 with lines ls 2 title 'AM Signal'
 
