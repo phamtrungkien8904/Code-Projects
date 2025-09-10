@@ -6,7 +6,7 @@ set encoding utf8
 set title 'Waveform of AM Radio Signal'
 set xlabel 't/s'
 set ylabel 'U/V'
-set xrange [0:5]
+# set xrange [0:5]
 # set yrange [-2:2]
 set sample 10000
 # set grid
@@ -28,10 +28,6 @@ set style line 3 lt 1 lw 2 lc rgb 'black' dt 2
 # e(x) = 1 + mu*m(x)
 # s(x) = e(x)*c(x)
 
-plot 'data.csv' using 1:5 with lines ls 1 title 'Tuned Signal',\
+plot 'data.csv' using 1:6 with lines ls 1 title 'Tuned Signal',\
     'data.csv' using 1:4 with lines ls 2 title 'AM Signal'
-    #  'data.csv' using 1:2 with lines ls 3 title 'Message Signal', \
-    #  'data.csv' using 1:(-$2) with lines ls 3 notitle, \
-    #  'data.csv' using 1:3 with lines ls 2 title 'Carrier Signal'
-
 
