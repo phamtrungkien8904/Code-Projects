@@ -29,5 +29,5 @@ set style line 2 pt 7 ps 1 lc rgb '#111111'
 
 # Plot
 plot \
-	'data.csv' using ($1):($2) with points ls 2 title 'Data'
+	'data1.csv' using ($1):($2) with points ls 2 title 'Data'
 	# f(x) with lines ls 1 title 'Fit'
