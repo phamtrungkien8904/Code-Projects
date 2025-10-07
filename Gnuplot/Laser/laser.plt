@@ -24,14 +24,18 @@ set samples 10000
 
 # Styling
 # Use valid color syntax and distinct colors per dataset
-set style line 1 pt 7 ps 1 lc rgb 'black'
-set style line 2 pt 7 ps 1 lc rgb 'blue' 
-# set style line 3 pt 7 ps 1 lc rgb '#d62728'  # red
+set style line 1 pt 7 ps 0.5 lc rgb 'black'
+set style line 2 pt 7 ps 0.5 lc rgb 'blue' 
+set style line 3 pt 7 ps 0.5 lc rgb 'purple'
+set style line 4 pt 7 ps 0.5 lc rgb 'red'
+
 
 
 
 # Plot
 plot \
 	'data1.csv' using 1:2 with points ls 1 title 'Data 1',\
-    'data2.csv' using 1:2 with points ls 2 title 'Data 2'
-	# f(x) with lines ls 1 title 'Fit'
+    'data2.csv' using 1:2 with points ls 2 title 'Data 2',\
+	'data3.csv' using 1:2 with points ls 3 title 'Data 3',\
+	'data4.csv' using 1:2 with points ls 4 title 'Data 4'
+	# f(x) with lines ls 5 title 'Linear Fit'
