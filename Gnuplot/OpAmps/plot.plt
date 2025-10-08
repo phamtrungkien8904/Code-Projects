@@ -34,7 +34,13 @@ set style line 4 pt 7 ps 0.5 lc rgb 'red'
 
 # Plot
 plot \
-	'data1.csv' using 3:2 with points ls 1 title 'Data 1 1 Hz', \
-    'data2.csv' using 3:2 with points ls 2 title 'Data 2 10 Hz', \
-    'data3.csv' using 3:2 with points ls 3 title 'Data 3 10 Hz with R6',\
-    'data4.csv' using 3:2 with points ls 4 title 'Data 4 1 Hz with R6'
+    'data5.csv' using 3:2 with points ls 1 title '1 Hz LPF',\
+    'data6.csv' using 3:2 with points ls 2 title '3 Hz LPF',\
+    'data8.csv' using 3:2 with points ls 3 title '7 Hz LPF',\
+    'data9.csv' using 3:2 with points ls 4 title '10 Hz LPF',\
+    'data10.csv' using 3:2 with points ls 1 title '15 Hz LPF',\
+    'data11.csv' using 3:2 with points ls 2 title '20 Hz LPF'
+    # 'data1.csv' using 3:2 with points ls 1 title '1 Hz', \
+    # 'data2.csv' using 3:2 with points ls 2 title '10 Hz', \
+    # 'data3.csv' using 3:2 with points ls 3 title '10 Hz with R6',\
+    # 'data4.csv' using 3:2 with points ls 4 title '1 Hz with R6',\
