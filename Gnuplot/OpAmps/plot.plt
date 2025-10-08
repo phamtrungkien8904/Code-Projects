@@ -27,7 +27,7 @@ set samples 10000
 set style line 1 pt 7 ps 0.5 lc rgb 'black'
 set style line 2 pt 7 ps 0.5 lc rgb 'blue' 
 set style line 3 pt 7 ps 0.5 lc rgb 'purple'
-# set style line 4 pt 7 ps 0.5 lc rgb 'red'
+set style line 4 pt 7 ps 0.5 lc rgb 'red'
 
 
 
@@ -36,4 +36,5 @@ set style line 3 pt 7 ps 0.5 lc rgb 'purple'
 plot \
 	'data1.csv' using 3:2 with points ls 1 title 'Data 1 1 Hz', \
     'data2.csv' using 3:2 with points ls 2 title 'Data 2 10 Hz', \
-    'data3.csv' using 3:2 with points ls 3 title 'Data 3 10 Hz with R6'
+    'data3.csv' using 3:2 with points ls 3 title 'Data 3 10 Hz with R6',\
+    'data4.csv' using 3:2 with points ls 4 title 'Data 4 1 Hz with R6'
