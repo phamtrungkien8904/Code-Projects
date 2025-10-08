@@ -34,5 +34,5 @@ set style line 2 pt 7 ps 0.5 lc rgb 'blue'
 
 # Plot
 plot \
-	'data1.csv' using 3:2 with points ls 1 title 'Data 1 (1 Hz)',\ 
-    'data2.csv' using 3:2 with points ls 2 title 'Data 2 (10 Hz)'
+	'data1.csv' using 3:2 with points ls 1 title 'Data 1 1 Hz', \
+    'data2.csv' using 3:2 with points ls 2 title 'Data 2 10 Hz'
