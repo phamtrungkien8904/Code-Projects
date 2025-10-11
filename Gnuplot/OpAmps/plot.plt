@@ -4,8 +4,8 @@ set encoding utf8
 # ============================ Plot Settings ============================
 
 set title 'Characteristic Curve of Laser Diode'
-set xlabel 'Vout (V)'
-set ylabel 'Vin - Vref (mV)'
+set xlabel 't (s)'
+set ylabel 'V (V)'
 # set grid
 # set xrange [-50:50]
 # set yrange [-500:500]
@@ -34,10 +34,12 @@ set style line 4 pt 7 ps 0.5 lc rgb 'red'
 
 # Plot
 plot \
-    'data1.csv' using 3:2 with points ls 1 title '1 Hz', \
-    'data2.csv' using 3:2 with points ls 2 title '10 Hz', \
-    'data3.csv' using 3:2 with points ls 3 title '10 Hz with R6',\
-    'data4.csv' using 3:2 with points ls 4 title '1 Hz with R6'
+    'data4.csv' using 1:2 with points ls 4 title 'Output Signal',\
+    'data4.csv' using 1:($3/10) with points ls 3 title 'Test Input Signal',\
+    'data4.csv' using 1:($4/10) with points ls 2 title 'Reference Signal'
+    # 'data1.csv' using 3:2 with points ls 1 title '1 Hz', \
+    # 'data2.csv' using 3:2 with points ls 2 title '10 Hz', \
+    # 'data3.csv' using 3:2 with points ls 3 title '10 Hz with R6',\
     # 'data5.csv' using 3:2 with points ls 1 title '1 Hz LPF',\
     # 'data6.csv' using 3:2 with points ls 2 title '3 Hz LPF',\
     # 'data8.csv' using 3:2 with points ls 3 title '7 Hz LPF',\
