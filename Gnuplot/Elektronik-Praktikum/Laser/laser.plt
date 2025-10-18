@@ -1,9 +1,12 @@
 reset
 set encoding utf8 
 
+set terminal epslatex color
+set out 'day2.tex'
+
 # ============================ Plot Settings ============================
 
-set title 'Characteristic Curve of Laser Diode'
+set title 'Performance of Laser Diode'
 set xlabel 'Laser Diode Current (mA)'
 set ylabel 'Photo Diode Current (uA)'
 # set grid
@@ -34,8 +37,10 @@ set style line 4 pt 7 ps 0.5 lc rgb 'red'
 
 # Plot
 plot \
-	'data1.csv' using 1:2 with points ls 1 title 'Data 1',\
-    'data2.csv' using 1:2 with points ls 2 title 'Data 2',\
-	'data3.csv' using 1:2 with points ls 3 title 'Data 3',\
-	'data4.csv' using 1:2 with points ls 4 title 'Data 4'
+	'data1.csv' using 1:2 every 100 with points ls 1 title 'Data 1',\
+    'data2.csv' using 1:2 every 100 with points ls 2 title 'Data 2',\
+	'data3.csv' using 1:2 every 100 with points ls 3 title 'Data 3',\
+	'data4.csv' using 1:2 every 100 with points ls 4 title 'Data 4'
 	# f(x) with lines ls 5 title 'Linear Fit'
+
+set out
