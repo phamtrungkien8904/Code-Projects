@@ -2,13 +2,17 @@ reset
 set encoding utf8 
 
 set terminal epslatex color
-set out 'day33.tex'
+set out 'day34.tex'
 
 # ============================ Plot Settings ============================
 
-set title 'OpAmp Output vs. Input Difference Voltage in time'
-set ylabel '$V_{out}$(V), $V_\text{in}-V_\text{ref}$(10$\cdot$mV)'
-set xlabel '$t$ (s)'
+set title 'Response of OpAmp with Low-Pass Filters'
+set ylabel '$V_{out}$(V)'
+set xlabel '$V_\text{in} - V_\text{ref} (mV)$'
+
+# set title 'OpAmp Output vs. Input Difference Voltage in time'
+# set ylabel '$V_{out}$(V), $V_\text{in}-V_\text{ref}$(10$\cdot$mV)'
+# set xlabel '$t$ (s)'
 # set grid
 # set xrange [-50:50]
 # set yrange [-500:500]
@@ -37,8 +41,14 @@ set style line 4 pt 7 ps 0.5 lc rgb 'red'
 
 # Plot
 plot \
-    'data5.csv' using 1:($3/10) with points ls 3 title 'Test Input Signal - Vref',\
-    'data5.csv' using 1:2 with points ls 4 title 'Output Signal'
+    'data5.csv' using 3:2 every 2 with points ls 1 title '1 Hz LPF',\
+    'data9.csv' using 3:2 every 2 with points ls 4 title '10 Hz LPF',\
+    'data11.csv' using 3:2 every 2 with points ls 2 title '20 Hz LPF'
+    # 'data10.csv' using 3:2 with points ls 1 title '15 Hz LPF',\
+    # 'data6.csv' using 3:2 with points ls 2 title '3 Hz LPF',\
+    # 'data8.csv' using 3:2 with points ls 3 title '7 Hz LPF',\
+    # 'data5.csv' using 1:($3/10) with points ls 3 title 'Test Input Signal - Vref',\
+    # 'data5.csv' using 1:2 with points ls 4 title 'Output Signal'
     # 'data4.csv' using 1:($3/10) with points ls 3 title 'Test Input Signal - Vref',\
     # 'data4.csv' using 1:2 with points ls 4 title 'Output Signal',\
     # 'data4.csv' using 1:($4/10) with points ls 2 title 'Reference Signal'
@@ -49,11 +59,6 @@ plot \
 
 
     # 'data3.csv' using 3:2 with points ls 3 title '10 Hz with R6',\
-    # 'data5.csv' using 3:2 with points ls 1 title '1 Hz LPF',\
-    # 'data6.csv' using 3:2 with points ls 2 title '3 Hz LPF',\
-    # 'data8.csv' using 3:2 with points ls 3 title '7 Hz LPF',\
-    # 'data9.csv' using 3:2 with points ls 4 title '10 Hz LPF',\
-    # 'data10.csv' using 3:2 with points ls 1 title '15 Hz LPF',\
-    # 'data11.csv' using 3:2 with points ls 2 title '20 Hz LPF'
+
 
 set out
