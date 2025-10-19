@@ -13,12 +13,12 @@ import csv
 import matplotlib.pyplot as plt
 
 # Inputs
-alpha1 = 0.67632
-alpha2 = 0.4
+
+
 
 t_min = 0
 t_max = 20
-dt = 0.01
+dt = 0.0001
 N = int((t_max - t_min)/dt)
 t = zeros(N)
 x = zeros(N)
@@ -34,12 +34,14 @@ x[0] = 0
 y[0] = 0
 ux[0] = 0
 uy[0] = u0
+a0 = 1
+alpha = a0/sqrt(2*(1+u0/sqrt(v**2 + u0**2)))  # friction coefficient kN/m
 t[0] = 0
 # Derivative function
 for i in range(1, N):
     t[i] = t[i-1] + dt
-    ux[i] = ux[i-1] + (alpha1*(v-ux[i-1])/sqrt(v**2 + ux[i-1]**2 + uy[i-1]**2) - alpha2*ux[i-1]/sqrt(uy[i-1]**2 + ux[i-1]**2))*dt
-    uy[i] = uy[i-1] + (alpha1*(0-uy[i-1])/sqrt(v**2 + ux[i-1]**2 + uy[i-1]**2) - alpha2*uy[i-1]/sqrt(uy[i-1]**2 + ux[i-1]**2))*dt
+    ux[i] = ux[i-1] - alpha*((ux[i-1]-v)/sqrt((ux[i-1]-v)**2 + uy[i-1]**2) + ux[i-1]/sqrt(uy[i-1]**2 + ux[i-1]**2))*dt
+    uy[i] = uy[i-1] - alpha*uy[i-1]*(1/sqrt((ux[i-1]-v)**2 + uy[i-1]**2) + 1/sqrt(uy[i-1]**2 + ux[i-1]**2))*dt
     x[i] = x[i-1] + ux[i-1]*dt
     y[i] = y[i-1] + uy[i-1]*dt
 

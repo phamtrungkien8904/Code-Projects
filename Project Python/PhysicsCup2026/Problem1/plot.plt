@@ -6,7 +6,7 @@ set encoding utf8
 set title 'Trajectory of the Brick'
 set xlabel 'x (m)'
 set ylabel 'y (m)'
-set xrange [0:0.7]
+set xrange [0:1]
 set yrange [0:1]
 set sample 10000
 # set grid
