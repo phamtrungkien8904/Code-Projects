@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 
 t_min = 0
 t_max = 20
-dt = 0.0001
+dt = 0.001
 N = int((t_max - t_min)/dt)
 t = zeros(N)
 x = zeros(N)
@@ -34,7 +34,7 @@ x[0] = 0
 y[0] = 0
 ux[0] = 0
 uy[0] = u0
-a0 = 1
+a0 = 4
 alpha = a0/sqrt(2*(1+u0/sqrt(v**2 + u0**2)))  # friction coefficient kN/m
 t[0] = 0
 # Derivative function
@@ -52,7 +52,7 @@ u_inf = ux.max()
 print(f"Final x-velocity: {u_inf:.6f} m/s")
 
 # Persist the simulation output for further analysis.
-with open('data.csv', 'w', newline='') as csvfile:
+with open('data4.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(['t', 'x', 'y', 'ux', 'uy'])
     for i in range(N):
