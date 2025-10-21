@@ -1,9 +1,12 @@
 reset
 set encoding utf8 
 
+set terminal epslatex color
+set out 'plot1.tex'
+
 # ============================ Plot Settings ============================
 
-set title 'Trajectory of the Brick'
+set title 'Trajectory of the Brick with different initial accelerations'
 set xlabel '$x$ (m)'
 set ylabel '$y$ (m)'
 set xrange [0:1]
@@ -28,3 +31,4 @@ plot \
     'data3.csv' using 2:3 with lines linestyle 3 title '$a_0 = 3 m/s^2$',\
     'data4.csv' using 2:3 with lines linestyle 4 title '$a_0 = 4 m/s^2$'
 
+set out

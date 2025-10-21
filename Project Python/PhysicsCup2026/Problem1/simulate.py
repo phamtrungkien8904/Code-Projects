@@ -28,13 +28,13 @@ uy = zeros(N)
 # Initial conditions
 u0 = 1
 v = 1
+a0 = 1
 
 
 x[0] = 0
 y[0] = 0
 ux[0] = 0
 uy[0] = u0
-a0 = 4
 alpha = a0/sqrt(2*(1+u0/sqrt(v**2 + u0**2)))  # friction coefficient kN/m
 t[0] = 0
 # Derivative function
