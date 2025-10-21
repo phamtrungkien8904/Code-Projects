@@ -27,7 +27,7 @@ ux = zeros(N)
 uy = zeros(N)
 # Initial conditions
 u0 = 1
-v = 1
+v = 4
 a0 = 1
 
 
@@ -52,7 +52,7 @@ u_inf = ux.max()
 print(f"Final x-velocity: {u_inf:.6f} m/s")
 
 # Persist the simulation output for further analysis.
-with open('data4.csv', 'w', newline='') as csvfile:
+with open('data7.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(['t', 'x', 'y', 'ux', 'uy'])
     for i in range(N):
