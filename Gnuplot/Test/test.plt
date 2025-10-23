@@ -1,19 +1,19 @@
-set title 'RC-Glied: Frequenzgang'
-set xlabel 'Frequenz f (kHz)'
-set ylabel 'Spannung U (V)'
+set title 'RLC Bandpass Filter'
+set xlabel 'f (Hz)'
+set ylabel 'H(f)'
 set xrange [0:100]
-set yrange [0:1.1]
+set logscale x 10
+set yrange [0:1]
+# set logscale y 10
+set samples 10000
+
+R= 1
+L=1
+C=1/L/(2*pi*10)**2
+H(x) = 1/sqrt(1+ R**2/((2*pi*x*L - 1/(2*pi*x*C))**2))
 
 
 
-R = 10**3
-C = 10**(-8)
-U0 = 1.00
-p = 3.141592653589793
-
-f(x) = U0/(sqrt(1+1/(2*p*R*C*x*1000)**2))
-g(x) = U0/(sqrt(1+(2*p*R*C*x*1000)**2))
 
 plot \
-	f(x) title 'U_R' with lines lw 2 lc rgb '#1f77b4', \
-	g(x) title 'U_C' with lines lw 2 lc rgb '#d62728'
+	H(x) notitle with lines lw 2 lc rgb 'red'
