@@ -2,10 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Parameters
-L = 50  # grid size
-T_list = [1.0, 5.0, 10.0]  # list of temperatures for simulation
-n_steps = 100000  # number of Monte Carlo steps
-B_list = [0, 0.01, 0.1] # list of uniform magnetic fields for simulation
+L = 100  # grid size
+T_list = [0.1, 5.0]  # list of temperatures for simulation
+n_steps = 10000  # number of Monte Carlo steps
+B_list = [0.0, 0.1] # list of uniform magnetic fields for simulation
 
 '''
 
