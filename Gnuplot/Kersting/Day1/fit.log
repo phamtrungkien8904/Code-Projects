@@ -1017,6 +1017,7 @@ b              -0.943  1.000
 
 *******************************************************************************
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 Thu Oct 30 14:20:00 2025
 
 
@@ -1056,6 +1057,9 @@ Thu Oct 30 14:49:37 2025
 =======
 Thu Oct 30 11:53:48 2025
 >>>>>>> Stashed changes
+=======
+Thu Oct 30 11:53:48 2025
+>>>>>>> Stashed changes
 
 
 FIT:    data read from 'fft.csv' using ($1*1000):( ($2<=0 || $3<=0) ? NaN : 20*log10($3/$2) )
@@ -1073,7 +1077,11 @@ fitted parameters initialized with current variable values
 After 3 iterations the fit converged.
 final sum of squares of residuals : 42.9597
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 rel. change during last iteration : -6.67944e-09
+=======
+rel. change during last iteration : -6.68059e-09
+>>>>>>> Stashed changes
 =======
 rel. change during last iteration : -6.68059e-09
 >>>>>>> Stashed changes
