@@ -46,7 +46,7 @@ else \
 
 if (fc_fit==fc_fit) set arrow 1 lw 1 from fc_fit, graph 0 to fc_fit, graph 1 nohead lc rgb 'black' dt 2
 if (fc_fit==fc_fit) set arrow 2 lw 1 from graph 0, first -3 to graph 1, first -3 nohead lc rgb 'black' dt 2
-if (fc_fit==fc_fit) set label 1 sprintf('fc = %.1f Hz', fc_fit) at fc_fit, -3 offset 2,1
+if (fc_fit==fc_fit) set label 1 sprintf('$f_c = %.0f$ Hz', fc_fit) at fc_fit, -3 offset 2,1
 
 # Styling
 # Use valid color syntax and distinct colors per dataset
