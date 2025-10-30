@@ -6,40 +6,32 @@ set encoding utf8
 
 # ============================ Plot Settings ============================
 
-
-
-set title 'Test Signal'
-set ylabel 'Signal (V)'
-set xlabel 'Time (s)'
+set title 'Bode diagram'
+set ylabel 'Magnitude (dB)'
+set xlabel 'Frequency (Hz)'
 # set grid
-# set xrange [-180:200]
-# set yrange [-2:2]
+set xrange [0:2000]
+set logscale x 10
+# set yrange [-10:10]
 set datafile separator ','
-# set samples 10000
-
-# ---------------- Measurement (instrument) uncertainties ----------------
-  
-
-# Linear Regression Fit
-# f(x) = a*x+b
-
-# set fit quiet
-# fit f(x) 'data.csv' using 1:2 via a,b 
+set samples 10000
 
 
-# Styling
-# Use valid color syntax and distinct colors per dataset
-set style line 1 pt 7 ps 0.3 lc rgb 'black'
-set style line 2 pt 7 ps 0.3 lc rgb 'blue' 
-set style line 3 pt 7 ps 0.3 lc rgb 'purple'
-set style line 4 pt 7 ps 0.3 lc rgb 'red'
 
 
+set style line 1 pt 7 ps 0.3 lc rgb 'red'
+
+R = 220
+C = 2.2e-6
+fc = 1/(2*pi*R*C)
+print fc
+
+f(x) = 20*log10(1/sqrt(1+(x/fc)**2))
 
 
 # Plot
 plot \
-    'signal.csv' using 2:3 with points ls 2 title 'Signal'
+    f(x) with line ls 2 title 'Theoretical'
 
 
 

@@ -6,8 +6,6 @@ set encoding utf8
 
 # ============================ Plot Settings ============================
 
-
-
 set title 'Sweep Signal'
 set ylabel 'Signal (V)'
 set xlabel 'Time (ms)'
@@ -17,14 +15,6 @@ set yrange [-2:2]
 set datafile separator ','
 set samples 10000
 
-# ---------------- Measurement (instrument) uncertainties ----------------
-  
-
-# Linear Regression Fit
-# f(x) = a*x+b
-
-# set fit quiet
-# fit f(x) 'data.csv' using 1:2 via a,b 
 
 
 # Styling
