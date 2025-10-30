@@ -1,9 +1,9 @@
 import csv
 import numpy as np
 
-frequency_hz = 50.0
-sample_rate_hz = 10000
-duration_s = 1.0
+frequency_hz = 5.0
+sample_rate_hz = 20000
+duration_s = 0.5
 
 num_samples = int(sample_rate_hz * duration_s)
 time_step = 1.0 / sample_rate_hz
