@@ -2,15 +2,17 @@ reset
 set encoding utf8 
 
 # set terminal epslatex color
-# set out 'day34.tex' ################# n series RC low-pass filter bode plot
+# set out 'fft.tex' ################# n series RC low-pass filter bode plot
 
 # ============================ Plot Settings ============================
 
 
 
-set title 'Bode diagram'
-# set ylabel 'Amplitude (V)'
-set ylabel 'Magnitude $G$ (dB)'
+set title 'FFT of Sweep Signal'
+# set ylabel 'Signal (V)'
+# set xlabel 'Time (ms)'
+# set ylabel 'Amplitude $A$ (V)'
+set ylabel 'Gain $G$ (dB)'
 set xlabel 'Frequency $f$ (Hz)'
 # set grid
 set logscale x 10
@@ -62,7 +64,7 @@ set style line 4 lw 2 pt 7 ps 0.5 lc rgb 'red'
 # plot \
 #     'fft.csv' using ($1*1000):2 with line ls 2 title 'Input Signal',\
 #     'fft.csv' using ($1*1000):3 with line ls 4 title 'Output Signal'
-    
+
 
 plot \
     'fft.csv' using ($1*1000):( ($2<=0 || $3<=0) ? NaN : 20*log10($3/$2) ) with line ls 4 title 'Data points',\
