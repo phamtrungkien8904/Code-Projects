@@ -2,7 +2,7 @@ reset
 set encoding utf8 
 
 # set terminal epslatex color
-# set out 'day34.tex'
+# set out 'day34.tex' ################# n series RC low-pass filter bode plot
 
 # ============================ Plot Settings ============================
 
