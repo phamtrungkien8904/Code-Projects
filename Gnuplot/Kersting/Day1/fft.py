@@ -15,21 +15,33 @@ x = data[:, 0]
 y_in = data[:, 1]
 y_out = data[:, 2]
 
+
 yf_in = fft(y_in)
 yf_out = fft(y_out)
+
 # Only keep the positive frequency components for plotting/exporting
-xf = fftfreq(N, T)[: N // 2]
+half = N // 2
+xf = fftfreq(N, T)[:half]
+yf_in_half = yf_in[:half]
+yf_out_half = yf_out[:half]
+
+# Truncate output once frequencies exceed 2 kHz
+mask = xf <= 2.0
+xf = xf[mask]
+yf_in_half = yf_in_half[mask]
+yf_out_half = yf_out_half[mask]
+
 amplitude_scale = 2.0 / N
-amp_in = amplitude_scale * np.abs(yf_in[: N // 2])
-amp_out = amplitude_scale * np.abs(yf_out[: N // 2])
-phase_in = np.unwrap(np.angle(yf_in[: N // 2]))
-phase_out = np.unwrap(np.angle(yf_out[: N // 2]))
+amp_in = amplitude_scale * np.abs(yf_in_half)
+amp_out = amplitude_scale * np.abs(yf_out_half)
+phase_in = np.unwrap(np.angle(yf_in_half))
+phase_out = np.unwrap(np.angle(yf_out_half))
 
 np.savetxt(
 	"fft.csv",
 	np.column_stack((xf, amp_in, amp_out, phase_in, phase_out)),
 	delimiter=",",
-	header="frequency,input_amplitude,output_amplitude,input_phase,output_phase",
+	header="#frequency,input_amplitude,output_amplitude,input_phase,output_phase",
 	comments="",
 )
 

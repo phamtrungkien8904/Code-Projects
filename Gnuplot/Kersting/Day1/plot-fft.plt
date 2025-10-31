@@ -68,7 +68,7 @@ set style line 4 lw 2 pt 7 ps 0.5 lc rgb 'red'
 
 
 plot \
-    'fft.csv' using ($1*1000):(-abs($4 - $5)*180/pi) every 3 with line ls 1 title 'Phase Difference'
+    'fft.csv' using ($1*1000):(-abs($4 - $5)*180/pi) with line ls 1 title 'Phase Difference'
 
 # plot \
 #     'fft.csv' using ($1*1000):( ($2<=0 || $3<=0) ? NaN : 20*log10($3/$2) ) with line ls 4 title 'Data points',\
