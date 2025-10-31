@@ -18,7 +18,7 @@ set xlabel 'Frequency $f$ (Hz)'
 # set grid
 set logscale x 10
 set xrange [10:2000]
-set yrange [-5:5]
+set yrange [-90:0]
 set datafile separator ','
 set samples 10000
 
@@ -68,7 +68,7 @@ set style line 4 lw 2 pt 7 ps 0.5 lc rgb 'red'
 
 
 plot \
-    'fft.csv' using ($1*1000):(abs($4 - $5)) with line ls 1 title 'Phase Difference'
+    'fft.csv' using ($1*1000):(-abs($4 - $5)*180/pi) with line ls 1 title 'Phase Difference'
 
 # plot \
 #     'fft.csv' using ($1*1000):( ($2<=0 || $3<=0) ? NaN : 20*log10($3/$2) ) with line ls 4 title 'Data points',\
