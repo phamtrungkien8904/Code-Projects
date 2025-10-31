@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-data = np.loadtxt("day1.csv", delimiter=",", comments="#")
+data = np.loadtxt("data.csv", delimiter=",", comments="#")
 
 
 # Number of sample points
@@ -27,13 +27,13 @@ np.savetxt(
 	"fft.csv",
 	np.column_stack((xf, amp_in, amp_out)),
 	delimiter=",",
-	header="frequency,input_amplitude,output_amplitude",
+	header="# frequency,input_amplitude,output_amplitude",
 	comments="",
 )
 
 plt.plot(xf, amp_in, label="Input")
 plt.plot(xf, amp_out, label="Output")
-plt.xlim(0, 2)
+plt.xlim(10, 2000)
 plt.xlabel("Frequency (kHz)")
 plt.ylabel("Amplitude (V)")
 plt.grid()
