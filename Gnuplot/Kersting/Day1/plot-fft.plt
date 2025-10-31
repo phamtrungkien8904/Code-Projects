@@ -12,7 +12,6 @@ set title 'FFT of Sweep Signal'
 set ylabel 'Amplitude $A$ (a.u.)'
 set xlabel 'Frequency $f$ (Hz)'
 # set grid
-set logscale x 10
 set xrange [10:2000]
 set datafile separator ','
 set samples 10000
@@ -32,8 +31,8 @@ set style line 4 lw 2 pt 7 ps 0.5 lc rgb 'red'
 
 # Plot
 plot \
-    'fft.csv' using ($1*1000):2 with line ls 4 title 'Data points',\
-    h(x) with line ls 2 title 'Fitted Curve'
+    'fft.csv' using ($1*1000):2 with line ls 2 title 'Input Signal',\
+    'fft.csv' using ($1*1000):3 with line ls 4 title 'Output Signal'
 
 
 # set out

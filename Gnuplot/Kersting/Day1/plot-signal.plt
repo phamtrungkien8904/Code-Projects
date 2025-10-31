@@ -1,8 +1,8 @@
 reset
 set encoding utf8 
 
-set terminal epslatex color
-set out 'signal.tex'
+# set terminal epslatex color
+# set out 'signal.tex'
 
 # ============================ Plot Settings ============================
 
@@ -34,4 +34,4 @@ plot \
 
 
 
-set out
+# set out

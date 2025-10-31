@@ -2,7 +2,7 @@ reset
 set encoding utf8 
 
 # set terminal epslatex color
-# set out 'fft.tex' ################# n series RC low-pass filter bode plot
+# set out 'bodegain.tex' ################# n series RC low-pass filter bode plot
 
 # ============================ Plot Settings ============================
 

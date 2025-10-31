@@ -2,14 +2,14 @@ reset
 set encoding utf8 
 
 # set terminal epslatex color
-# set out 'fft.tex' ################# n series RC low-pass filter bode plot
+# set out 'bodephase.tex' ################# n series RC low-pass filter bode plot
 
 # ============================ Plot Settings ============================
 
 
 
 set title 'Bode diagram (Phase Difference)'
-set ylabel 'Phase Difference $\\Delta \\phi$ (degree)'
+set ylabel 'Phase Difference $\Delta \phi$ (degree)'
 set xlabel 'Frequency $f$ (Hz)'
 # set grid
 set logscale x 10
