@@ -22,12 +22,14 @@ xf = fftfreq(N, T)[: N // 2]
 amplitude_scale = 2.0 / N
 amp_in = amplitude_scale * np.abs(yf_in[: N // 2])
 amp_out = amplitude_scale * np.abs(yf_out[: N // 2])
+phase_in = np.angle(yf_in[: N // 2])
+phase_out = np.angle(yf_out[: N // 2])
 
 np.savetxt(
 	"fft.csv",
-	np.column_stack((xf, amp_in, amp_out)),
+	np.column_stack((xf, amp_in, amp_out, phase_in, phase_out)),
 	delimiter=",",
-	header="frequency,input_amplitude,output_amplitude",
+	header="frequency,input_amplitude,output_amplitude,input_phase,output_phase",
 	comments="",
 )
 
@@ -36,6 +38,15 @@ plt.plot(xf, amp_out, label="Output")
 plt.xlim(0, 2)
 plt.xlabel("Frequency (kHz)")
 plt.ylabel("Amplitude (V)")
+plt.grid()
+plt.legend()
+plt.show()
+
+plt.plot(xf, phase_in, label="Input")
+plt.plot(xf, phase_out, label="Output")
+plt.xlim(0, 2)
+plt.xlabel("Frequency (kHz)")
+plt.ylabel("Phase (radians)")
 plt.grid()
 plt.legend()
 plt.show()
