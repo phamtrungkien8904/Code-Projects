@@ -32,8 +32,8 @@ f(x) = 20*log10(1/sqrt(1+(x/fc)**2))
 
 # Fit
 # Tranmission function
-g(x) = 20*log10(a/sqrt(1+(x/b)**2))
-a = 1
+g(x) = 20*log10(1/sqrt(1+(x/b)**2))
+h(x) = 20*log10(1/sqrt(1+(x/fc)**2))
 
 
 
@@ -42,7 +42,7 @@ a = 1
 set fit quiet
 # Use absolute values for magnitudes so log10 never receives a negative argument.
 # Treat zero values as invalid (NaN) to avoid division-by-zero.
-fit g(x) 'fft.csv' using 1:( ($1>0 && $2!=0 && $3!=0) ? 20*log10(abs($3)/abs($2)) : NaN ) via a,b 
+fit g(x) 'fft.csv' using 1:(20*log10(abs($3)/abs($2))) via b 
 
 fc_fit_gain = b 
 
@@ -68,6 +68,7 @@ set style line 4 lw 2 pt 7 ps 0.5 lc rgb 'red'
 plot \
     'fft.csv' using 1:( ($2<=0 || $3<=0) ? NaN : 20*log10($3/$2) ) with line ls 4 title 'Data points',\
     g(x) with line ls 2 title 'Fitted Curve'
+    # h(x) with line ls 3 title 'Theoretical Curve'
 
 
     # f(x) with line ls 2 title 'Theoretical Curve'
