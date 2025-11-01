@@ -40,13 +40,12 @@ a = 1
 
 
 set fit quiet
-fit g(x) 'fft.csv' using 1:( ($2<=0 || $3<=0) ? NaN : 20*log10($3/$2) ) via a,b 
+# Use absolute values for magnitudes so log10 never receives a negative argument.
+# Treat zero values as invalid (NaN) to avoid division-by-zero.
+fit g(x) 'fft.csv' using 1:( ($1>0 && $2!=0 && $3!=0) ? 20*log10(abs($3)/abs($2)) : NaN ) via a,b 
 
+fc_fit_gain = b 
 
-if (a > 0) \
-    fc_fit_gain = b * sqrt(10**((3 + 20*log10(a))/10.0) - 1) \
-else \
-    fc_fit_gain = NaN
 
 if (fc_fit_gain==fc_fit_gain) set arrow 1 lw 1 from fc_fit_gain, graph 0 to fc_fit_gain, graph 1 nohead lc rgb 'black' dt 2
 if (fc_fit_gain==fc_fit_gain) set arrow 2 lw 1 from graph 0, first -3 to graph 1, first -3 nohead lc rgb 'black' dt 2
