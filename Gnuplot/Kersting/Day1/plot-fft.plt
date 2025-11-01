@@ -28,7 +28,6 @@ set style line 4 lw 2 pt 7 ps 0.5 lc rgb 'red'
 
 
 
-
 # Plot
 plot \
     'fft.csv' using ($1*1000):2 with line ls 2 title 'Input Signal',\

@@ -8,10 +8,7 @@ python fft.py
 
 REM === Run Gnuplot scripts ===
 echo Running Gnuplot scripts...
-gnuplot -p plot-signal.plt
-gnuplot -p plot-fft.plt
-gnuplot -p plot-bode-gain.plt
-gnuplot -p plot-bode-phase.plt
+gnuplot -p runall.plt
 
 echo All tasks completed.
 pause
