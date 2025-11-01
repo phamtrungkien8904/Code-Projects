@@ -19,17 +19,17 @@ set datafile separator ','
 set samples 10000
 
 # Theoretical RC Low-Pass Filter
-R = 220
-dR = 0.01*R
-C = 2.2e-6
-dC = 0.1*C
-fc = 1/(2*pi*R*C)
-dfc = fc*sqrt( (dR/R)**2 + (dC/C)**2 )
+# R = 220
+# dR = 0.01*R
+# C = 2.2e-6
+# dC = 0.1*C
+# fc = 1/(2*pi*R*C)
+# dfc = fc*sqrt( (dR/R)**2 + (dC/C)**2 )
 
-print fc 
-print dfc
+# print fc 
+# print dfc
 
-f(x) = 20*log10(1/sqrt(1+(x/fc)**2))
+
 
 # Fit
 # Tranmission function

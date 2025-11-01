@@ -74,14 +74,14 @@ np.savetxt(
 	comments="",
 )
 
-plt.plot(xf, amp_in, label="Input")
-plt.plot(xf, amp_out, label="Output")
-plt.xlim(0, 2)
-plt.xlabel("Frequency (kHz)")
-plt.ylabel("Amplitude (V)")
-plt.grid()
-plt.legend()
-plt.show()
+# plt.plot(xf, amp_in, label="Input")
+# plt.plot(xf, amp_out, label="Output")
+# plt.xlim(0, 2)
+# plt.xlabel("Frequency (kHz)")
+# plt.ylabel("Amplitude (V)")
+# plt.grid()
+# plt.legend()
+# plt.show()
 
 # plt.plot(xf, phase_in, label="Input")
 # plt.plot(xf, phase_out, label="Output")

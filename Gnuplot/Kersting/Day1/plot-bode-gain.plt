@@ -26,8 +26,7 @@ dC = 0.1*C
 fc = 1/(2*pi*R*C)
 dfc = fc*sqrt( (dR/R)**2 + (dC/C)**2 )
 
-print fc 
-print dfc
+print sprintf('Cutoff Frequency (theoretical): (%.2f +- %.2f) Hz', fc, dfc)
 
 f(x) = 20*log10(1/sqrt(1+(x/fc)**2))
 
