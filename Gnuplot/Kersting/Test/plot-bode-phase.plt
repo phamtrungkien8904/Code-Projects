@@ -37,7 +37,7 @@ h(x) = -c*atan(x/d)
 c = 180/pi
 
 set fit quiet
-fit h(x) 'fft.csv' using ($1*1000):7 via c,d
+fit h(x) 'fft.csv' using 1:7 via c,d
 
 fc_fit_phase = d
 
@@ -58,7 +58,7 @@ set style line 4 lw 2 pt 7 ps 0.5 lc rgb 'red'
 
 # Plot
 plot \
-    'fft.csv' using ($1*1000):7 with line ls 4 title 'Data points',\
+    'fft.csv' using 1:7 with line ls 4 title 'Data points',\
     h(x) with line ls 2 title 'Fitted Curve'
 
 

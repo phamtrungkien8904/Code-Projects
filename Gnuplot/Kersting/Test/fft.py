@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-data = np.loadtxt("day1.csv", delimiter=",", comments="#")
+data = np.loadtxt("data.csv", delimiter=",", comments="#")
 
 
 # Number of sample points
@@ -26,7 +26,7 @@ yf_in_half = yf_in[:half]
 yf_out_half = yf_out[:half]
 
 # Truncate output once frequencies exceed 2 kHz
-mask = xf <= 2.0
+mask = xf <= 2000
 xf = xf[mask]
 yf_in_half = yf_in_half[mask]
 yf_out_half = yf_out_half[mask]

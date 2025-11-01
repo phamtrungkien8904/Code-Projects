@@ -9,7 +9,7 @@ RC Low-Pass Filter (1st order) Data Generator
 R = 220
 C = 2.2e-6
 tau = R*C  # Time constant
-dt = 0.00001   # Time step (dt << tau)
+dt = 0.01*tau   # Time step (dt << tau)
 t = np.arange(0, 0.2, dt)  # Time array
 f0 = 1/(2*np.pi*np.sqrt(tau))  # Limit frequency
 

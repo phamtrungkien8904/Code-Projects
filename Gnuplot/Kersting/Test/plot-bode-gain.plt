@@ -40,7 +40,7 @@ a = 1
 
 
 set fit quiet
-fit g(x) 'fft.csv' using ($1*1000):( ($2<=0 || $3<=0) ? NaN : 20*log10($3/$2) ) via a,b 
+fit g(x) 'fft.csv' using 1:( ($2<=0 || $3<=0) ? NaN : 20*log10($3/$2) ) via a,b 
 
 
 if (a > 0) \
@@ -67,7 +67,7 @@ set style line 4 lw 2 pt 7 ps 0.5 lc rgb 'red'
 
 # Plot
 plot \
-    'fft.csv' using ($1*1000):( ($2<=0 || $3<=0) ? NaN : 20*log10($3/$2) ) with line ls 4 title 'Data points',\
+    'fft.csv' using 1:( ($2<=0 || $3<=0) ? NaN : 20*log10($3/$2) ) with line ls 4 title 'Data points',\
     g(x) with line ls 2 title 'Fitted Curve'
 
 
