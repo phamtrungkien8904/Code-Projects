@@ -18,7 +18,7 @@ set format x "%.0s%c"
 set yrange [-90:90]
 set datafile separator ','
 set samples 10000
-#Kien
+
 
 # Theoretical RC Low-Pass Filter
 R = 100
