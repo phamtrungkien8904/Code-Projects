@@ -39,25 +39,26 @@ u_in = sum(a * np.sin(2 * np.pi * x* f * t) for a, x in zip(amplitudes, frequenc
 def band_pass_filter(u_in, tau_C, tau_L, dt):
     u_C = np.zeros_like(u_in)
     Du_C = np.zeros_like(u_in)  # First derivative of u_C
-    u_LC = np.zeros_like(u_in)  # Output across LC (bandpass output)
+    u_R = np.zeros_like(u_in)  # Output across R (low-pass output)
     for i in range(1, len(u_in)):
         Du_C[i] = Du_C[i-1]*(1 - dt/tau_L) + (u_in[i-1] - u_C[i-1])*(dt/(tau_L*tau_C))
         u_C[i] = u_C[i-1] + Du_C[i]*dt
-    return Du_C*tau_C
+        u_R[i] = Du_C[i]*tau_C
+    return u_R
 
 u_out = band_pass_filter(u_in, tau_C, tau_L, dt)
 
 # Transfer function (Amplitude)
-def transfer_function(f, tau_C, tau_L):
-    s = 1j * 2 * np.pi * f
-    H = (s * tau_C)/(1 + s * tau_C + s**2 * tau_L * tau_C)
-    return abs(H)
+# def transfer_function(f, tau_C, tau_L):
+#     s = 1j * 2 * np.pi * f
+#     H = (s * tau_C)/(1 + s * tau_C + s**2 * tau_L * tau_C)
+#     return abs(H)
 
-H_amp = transfer_function(f, tau_C, tau_L)
+# H_amp = transfer_function(f, tau_C, tau_L)
 
 # Save the input and output signals to a CSV file
 with open("data.csv", "w", newline="") as csvfile:
     csvwriter = csv.writer(csvfile)
-    csvwriter.writerow(["# Time", "Input", "Output", "Transfer Function (Amplitude)"])
+    csvwriter.writerow(["# Time", "Input", "Output"])
     for i in range(len(t)):
-        csvwriter.writerow([t[i], u_in[i], u_out[i], H_amp])  
+        csvwriter.writerow([t[i], u_in[i], u_out[i]])  
