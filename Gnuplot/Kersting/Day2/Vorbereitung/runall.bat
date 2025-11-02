@@ -1,6 +1,6 @@
 @echo off
 REM === Change to your project directory ===
-cd /d "C:\Users\lugwi\Desktop\Github\Code-Projects\Gnuplot\Kersting\Test"
+cd /d "C:\Users\lugwi\Desktop\Github\Code-Projects\Gnuplot\Kersting\Day2\Vorbereitung"
 
 REM === Run the Python script ===
 echo Running FFT Python script...

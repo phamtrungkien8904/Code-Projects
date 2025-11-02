@@ -6,13 +6,17 @@ RLC Bandpass Filter (2nd order) Data Generator
 """
 
 # Set the parameters for the filter
-tau_C = 2.0  # Capacitor time constant
-tau_L = 0.5  # Inductance time constant
-dt = 0.05   # Time step
-t = np.arange(0, 40, dt)  # Time array
+R=100
+C=100e-9
+L=0.03
+tau_C = R*C  # Capacitor time constant
+tau_L = L/R  # Inductance time constant
+tau = np.sqrt(tau_L*tau_C) 
+dt = 0.000001   # Time step
+t = np.arange(0, 0.05, dt)  # Time array
 
 # Generate the input signal (square wave)
-f0 = 1/(2*np.pi*np.sqrt(tau_L*tau_C))  # Limit frequency
+f0 = 1/(2*np.pi*tau)  # Limit frequency
 f = f0  # Frequency of the square wave
 
 # Sine wave
@@ -31,9 +35,15 @@ f = f0  # Frequency of the square wave
 # u_in = 1*np.sum([ ((-1)**n)/(n+1) * np.sin(2 * np.pi * (n+1) * f * t) for n in range(20)], axis=0)
 
 # Fourier series (random noising waves)
-amplitudes = [1,0.2,0.2]
-frequencies = [1,10,20]
-u_in = sum(a * np.sin(2 * np.pi * x* f * t) for a, x in zip(amplitudes, frequencies))
+# amplitudes = [1,0.2,0.2]
+# frequencies = [1,10,20]
+# u_in = sum(a * np.sin(2 * np.pi * x* f * t) for a, x in zip(amplitudes, frequencies))
+
+# AC sweep
+f_start = 100
+f_end = 10000
+df = 100/0.002
+u_in = np.sin(2 * np.pi * (f_start + df*t) * t) 
 
 # Apply the band-pass filter
 def band_pass_filter(u_in, tau_C, tau_L, dt):

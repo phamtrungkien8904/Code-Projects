@@ -13,27 +13,30 @@ set ylabel 'Gain $G$ (dB)'
 set xlabel 'Frequency $f$ (Hz)'
 # set grid
 set logscale x 10
-set xrange [10:2000]
+set xrange [100:10000]
 set yrange [-20:20]
 set datafile separator ','
 set samples 10000
 
 # Theoretical RC Low-Pass Filter
-R = 220
+R = 100
 dR = 0.01*R
-C = 2.2e-6
+C = 100e-9
 dC = 0.1*C
-fc = 1/(2*pi*R*C)
-dfc = fc*sqrt( (dR/R)**2 + (dC/C)**2 )
+L = 0.03
+dL = 0.01*L
+fc = 1/(2*pi*sqrt(L*C))
+dfc = fc*sqrt( (dR/R)**2 + (dC/C)**2 + (dL/L)**2 )
+Q = 1/R*sqrt(L/C)
+dQ = Q*sqrt( (dR/R)**2 + (dC/C)**2 + (dL/L)**2 )
 
 print sprintf('Cutoff Frequency (theoretical): (%.2f +- %.2f) Hz', fc, dfc)
-
-
+print sprintf('Quality Factor (theoretical): (%.2f +- %.2f)', Q, dQ)
 
 # Fit
 # Tranmission function
 h(x) = 20*log10(1/sqrt(1+(x/b)**2))
-h_theo(x) = 20*log10(1/sqrt(1+(x/fc)**2))
+h_theo(x) = 20*log10()
 
 
 
