@@ -32,7 +32,6 @@ Q = sqrt(L/C)/R
 dQ = Q*sqrt( (dR/R)**2 + (dC/C)**2 + (dL/L)**2 )
 delta_f = fc/Q
 ddelta_f = delta_f*sqrt( (dfc/fc)**2 + (dQ/Q)**2 )
-sigma = 1/(2*Q)
 f_lower = fc*(1/(2*Q) + sqrt( (1/(2*Q))**2 +1 ))
 f_upper = fc*( -1/(2*Q) + sqrt( (1/(2*Q))**2 +1 ))
 
@@ -42,14 +41,18 @@ print sprintf('Bandwidth (theoretical): (%.2f +- %.2f) Hz', delta_f, ddelta_f)
 
 # Fit
 # Tranmission function
-h(x) = 20*log10(1/sqrt(1+Q**2 * (x/b - b/x)**2))
+h(x) = 20*log10(1/sqrt(1+ q**2 * (x/b - b/x)**2))
 h_theo(x) = 20*log10(1/sqrt(1+Q**2 * (x/fc - fc/x)**2))
 
 
 
 
-
 set fit quiet
+set fit errorvariables
+# Provide sensible initial guesses for fit parameters so the nonlinear fit can converge
+# Start b near the theoretical cutoff fc and q near the theoretical Q
+b = fc
+q = Q
 # Use absolute values for magnitudes so log10 never receives a negative argument.
 # Treat zero values as invalid (NaN) to avoid division-by-zero.
 fit h(x) 'fft.csv' using 1:(20*log10(abs($3)/abs($2))) via b,q

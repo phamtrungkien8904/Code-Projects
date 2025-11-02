@@ -46,6 +46,9 @@ p(x) = -180/pi*atan(Q*(x/d - d/x))
 p_theo(x) = -180/pi*atan(Q*(x/fc - fc/x))
 
 set fit quiet
+set fit errorvariables
+# Initialize fit parameter to the theoretical cutoff frequency so fit starts near the correct region
+d = fc
 fit p(x) 'fft.csv' using 1:7 via d
 
 fc_fit_phase = d
