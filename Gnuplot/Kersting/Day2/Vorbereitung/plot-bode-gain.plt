@@ -42,8 +42,8 @@ print sprintf('Bandwidth (theoretical): (%.2f +- %.2f) Hz', delta_f, ddelta_f)
 
 # Fit
 # Tranmission function
-h(x) = 20*log10(1/sqrt(1+ ((1-(x/b)**2)/(2*sigma*x/b))**2))
-h_theo(x) = 20*log10(1/sqrt(1+ ((1-(x/fc)**2)/(2*sigma*x/fc))**2))
+h(x) = 20*log10(1/sqrt(1+Q**2 * (x/b - b/x)**2))
+h_theo(x) = 20*log10(1/sqrt(1+Q**2 * (x/fc - fc/x)**2))
 
 
 
