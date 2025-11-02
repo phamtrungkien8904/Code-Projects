@@ -52,20 +52,22 @@ h_theo(x) = 20*log10(1/sqrt(1+Q**2 * (x/fc - fc/x)**2))
 set fit quiet
 # Use absolute values for magnitudes so log10 never receives a negative argument.
 # Treat zero values as invalid (NaN) to avoid division-by-zero.
-fit h(x) 'fft.csv' using 1:(20*log10(abs($3)/abs($2))) via b
+fit h(x) 'fft.csv' using 1:(20*log10(abs($3)/abs($2))) via b,q
 
 fc_fit_gain = b 
-
+f_lower_fit = fc_fit_gain*(1/(2*q) + sqrt( (1/(2*q))**2 +1 ))
+f_upper_fit = fc_fit_gain*( -1/(2*q) + sqrt( (1/(2*q))**2 +1 ))
+delta_f_fit = abs(fc_fit_gain/q)
 
 if (fc_fit_gain==fc_fit_gain) set arrow 1 lw 1 from fc_fit_gain, graph 0 to fc_fit_gain, graph 0.94 nohead lc rgb 'black' dt 2
 if (fc_fit_gain==fc_fit_gain) set arrow 2 lw 1 from graph 0, first -3 to graph 1, first -3 nohead lc rgb 'black' dt 2
 if (fc_fit_gain==fc_fit_gain) set label 1 sprintf('$f_c = %.0f$ Hz', fc_fit_gain) at fc_fit_gain, -3 offset 2,1
 
-set arrow 3 lw 1 dt 2 from f_lower, graph 0 to f_lower, graph 0.94 nohead lc rgb 'black'
-set arrow 4 lw 1 dt 2 from f_upper, graph 0 to f_upper, graph 0.94 nohead lc rgb 'black'
-set arrow 5 lw 0.7 dt 1 heads from f_lower, graph 0.92 to f_upper, graph 0.92 lc rgb 'black'
-set label 2 sprintf('$\\Delta f = %.0f$ Hz', delta_f) at (f_lower+f_upper)/2.0, graph 0.97 center
-set obj 1 rect from f_lower, graph 0 to f_upper, graph 1 fc rgb 'gray' fs transparent solid 0.3 noborder
+set arrow 3 lw 1 dt 2 from f_lower_fit, graph 0 to f_lower_fit, graph 0.94 nohead lc rgb 'black'
+set arrow 4 lw 1 dt 2 from f_upper_fit, graph 0 to f_upper_fit, graph 0.94 nohead lc rgb 'black'
+set arrow 5 lw 0.7 dt 1 heads from f_lower_fit, graph 0.92 to f_upper_fit, graph 0.92 lc rgb 'black'
+set label 2 sprintf('$\\Delta f = %.0f$ Hz', delta_f_fit) at (f_lower_fit+f_upper_fit)/2.0, graph 0.97 center
+set obj 1 rect from f_lower_fit, graph 0 to f_upper_fit, graph 1 fc rgb 'gray' fs transparent solid 0.3 noborder
 
 
 

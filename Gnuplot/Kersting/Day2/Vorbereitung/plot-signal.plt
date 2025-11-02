@@ -8,7 +8,7 @@ set encoding utf8
 
 set title 'Sweep Signal'
 set ylabel 'Signal (V)'
-set xlabel 'Time (ms)'
+set xlabel 'Time (s)'
 # set grid
 set xrange [0:0.05]
 set yrange [-2:2]

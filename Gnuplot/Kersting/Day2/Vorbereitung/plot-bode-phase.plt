@@ -21,7 +21,7 @@ set samples 10000
 
 
 # Theoretical RC Low-Pass Filter
-R = 100
+R = 2000
 dR = 0.01*R
 C = 100e-9
 dC = 0.1*C
@@ -29,11 +29,13 @@ L = 0.03
 dL = 0.01*L
 fc = 1/(2*pi*sqrt(L*C))
 dfc = fc*sqrt( (dR/R)**2 + (dC/C)**2 + (dL/L)**2 )
-Q = sqrt(L/C)/R
+Q = R*sqrt(C/L)
 dQ = Q*sqrt( (dR/R)**2 + (dC/C)**2 + (dL/L)**2 )
 delta_f = fc/Q
 ddelta_f = delta_f*sqrt( (dfc/fc)**2 + (dQ/Q)**2 )
-sigma = 1/(2*Q)
+f_lower = fc*(1/(2*Q) + sqrt( (1/(2*Q))**2 +1 ))
+f_upper = fc*( -1/(2*Q) + sqrt( (1/(2*Q))**2 +1 ))
+
 
 # print fc 
 # print dfc

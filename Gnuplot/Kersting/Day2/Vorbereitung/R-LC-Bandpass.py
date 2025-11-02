@@ -6,7 +6,7 @@ RLC Bandpass Filter (2nd order) Data Generator
 """
 
 # Set the parameters for the filter
-R=100
+R=2000
 C=100e-9
 L=0.03
 tau_C = R*C  # Capacitor time constant
@@ -45,18 +45,18 @@ f_end = 10000
 df = 100/0.001
 u_in = np.sin(2 * np.pi * (f_start + df*t) * t) 
 
-# Apply the band-pass filter
+# Apply the band-pass filter R-(L||C)
 def band_pass_filter(u_in, tau_C, tau_L, dt):
     u_C = np.zeros_like(u_in)
     Du_C = np.zeros_like(u_in)  # First derivative of u_C
-    u_R = np.zeros_like(u_in)  # Output across R (low-pass output)
+    Du_in = np.zeros_like(u_in)  # First derivative of u_in
     for i in range(1, len(u_in)):
-        Du_C[i] = Du_C[i-1]*(1 - dt/tau_L) + (u_in[i-1] - u_C[i-1])*(dt/(tau_L*tau_C))
+        Du_in[i] = (u_in[i] - u_in[i-1]) / dt
+        Du_C[i] = Du_C[i-1] + dt*(-u_C[i-1]/(tau_L*tau_C) + 1/tau_C*(Du_in[i-1] - Du_C[i-1]))
         u_C[i] = u_C[i-1] + Du_C[i]*dt
-        u_R[i] = Du_C[i]*tau_C
-    return u_R
+    return u_C
 
-u_out = band_pass_filter(u_in, tau_C, tau_L, dt)
+u_out = band_pass_filter(u_in, tau_C,tau_L , dt)
 
 # Transfer function (Amplitude)
 # def transfer_function(f, tau_C, tau_L):

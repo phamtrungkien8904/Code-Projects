@@ -26,7 +26,7 @@ yf_in_half = yf_in[:half]
 yf_out_half = yf_out[:half]
 
 # Truncate output once frequencies exceed 11 kHz
-mask = xf <= 11000
+mask = xf <= 10000
 xf = xf[mask]
 yf_in_half = yf_in_half[mask]
 yf_out_half = yf_out_half[mask]
