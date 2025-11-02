@@ -14,3 +14,5 @@ load 'plot-bode-gain.plt'
 set term wxt 3 position 600,487 size 600,400 title "Bode Phase"
 load 'plot-bode-phase.plt'
 
+pause -1 "Hit Enter to close all plots"
+

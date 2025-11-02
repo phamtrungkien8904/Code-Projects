@@ -8,7 +8,9 @@ python fft.py
 
 REM === Run Gnuplot scripts ===
 echo Running Gnuplot scripts...
-gnuplot -p runall.plt
+gnuplot runall.plt 
+
 
 echo All tasks completed.
-pause
+
+
