@@ -35,7 +35,6 @@ dfc = fc*sqrt( (dR/R)**2 + (dC/C)**2 )
 # Tranmission function
 p(x) = -180/pi*atan(x/d)
 p_theo(x) = -180/pi*atan(x/fc)
- 
 
 set fit quiet
 fit p(x) 'fft.csv' using 1:7 via d

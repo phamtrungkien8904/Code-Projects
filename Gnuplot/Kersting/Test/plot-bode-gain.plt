@@ -66,7 +66,7 @@ set style line 4 lw 2 pt 7 ps 0.5 lc rgb 'red'
 
 # Plot
 plot \
-    'fft.csv' using 1:( ($2<=0 || $3<=0) ? NaN : 20*log10($3/$2) ) with line ls 4 title 'Data points',\
+    'fft.csv' using 1:(20*log10($3/$2)) with line ls 4 title 'Data points',\
     h(x) with line ls 2 title 'Fitted Curve',\
     h_theo(x) with line ls 3 title 'Theoretical Curve'
 

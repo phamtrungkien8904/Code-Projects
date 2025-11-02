@@ -2,7 +2,7 @@ import numpy as np
 import csv
 
 """
-RC Low-Pass Filter (1st order) Data Generator
+RC High-Pass Filter (1st order) Data Generator
 """
 
 # Set the parameters for the filter
@@ -44,9 +44,11 @@ u_in = np.sin(2 * np.pi * (f_start + df*t*1000 ) * t)
 # Apply the low-pass filter
 def low_pass_filter(u_in, tau, dt):
     u_C = np.zeros_like(u_in)
+    u_R = np.zeros_like(u_in)
     for i in range(1, len(u_in)):
         u_C[i] = (dt/tau)*u_in[i] + (1 - (dt/tau))*u_C[i - 1]
-    return u_C
+        u_R[i] = u_in[i] - u_C[i]
+    return u_R
 
 u_out = low_pass_filter(u_in, tau, dt)
 
