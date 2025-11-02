@@ -33,11 +33,11 @@ set samples 10000
 
 # Fit
 # Tranmission function
-h(x) = -c*atan(x/d)
-c = 180/pi
+h(x) = -180/pi*atan(x/d)
+
 
 set fit quiet
-fit h(x) 'fft.csv' using ($1*1000):7 via c,d
+fit h(x) 'fft.csv' using ($1*1000):7 via d
 
 fc_fit_phase = d
 

@@ -28,12 +28,12 @@ dfc = fc*sqrt( (dR/R)**2 + (dC/C)**2 )
 
 print sprintf('Cutoff Frequency (theoretical): (%.2f +- %.2f) Hz', fc, dfc)
 
-f(x) = 20*log10(1/sqrt(1+(x/fc)**2))
+
 
 # Fit
 # Tranmission function
-g(x) = 20*log10(1/sqrt(1+(x/b)**2))
-h(x) = 20*log10(1/sqrt(1+(x/fc)**2))
+h(x) = 20*log10(1/sqrt(1+(x/b)**2))
+h_theo(x) = 20*log10(1/sqrt(1+(x/fc)**2))
 
 
 
@@ -42,7 +42,7 @@ h(x) = 20*log10(1/sqrt(1+(x/fc)**2))
 set fit quiet
 # Use absolute values for magnitudes so log10 never receives a negative argument.
 # Treat zero values as invalid (NaN) to avoid division-by-zero.
-fit g(x) 'fft.csv' using 1:(20*log10(abs($3)/abs($2))) via b 
+fit h(x) 'fft.csv' using 1:(20*log10(abs($3)/abs($2))) via b
 
 fc_fit_gain = b 
 
@@ -58,7 +58,7 @@ if (fc_fit_gain==fc_fit_gain) set label 1 sprintf('$f_c = %.0f$ Hz', fc_fit_gain
 # Use valid color syntax and distinct colors per dataset
 set style line 1 lw 2 pt 7 ps 0.5 lc rgb 'black'
 set style line 2 lw 2 pt 7 ps 0.5 lc rgb 'blue' 
-set style line 3 lw 2 pt 7 ps 0.5 lc rgb 'purple'
+set style line 3 lw 2 pt 7 ps 0.5 lc rgb 'green'
 set style line 4 lw 2 pt 7 ps 0.5 lc rgb 'red'
 
 
@@ -67,8 +67,8 @@ set style line 4 lw 2 pt 7 ps 0.5 lc rgb 'red'
 # Plot
 plot \
     'fft.csv' using 1:( ($2<=0 || $3<=0) ? NaN : 20*log10($3/$2) ) with line ls 4 title 'Data points',\
-    g(x) with line ls 2 title 'Fitted Curve'
-    # h(x) with line ls 3 title 'Theoretical Curve'
+    h(x) with line ls 2 title 'Fitted Curve',\
+    h_theo(x) with line ls 3 title 'Theoretical Curve'
 
 
     # f(x) with line ls 2 title 'Theoretical Curve'
