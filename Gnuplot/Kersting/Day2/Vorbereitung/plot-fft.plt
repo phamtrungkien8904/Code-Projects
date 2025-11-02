@@ -12,7 +12,8 @@ set title 'FFT of Sweep Signal'
 set ylabel 'Amplitude $A$ (a.u.)'
 set xlabel 'Frequency $f$ (Hz)'
 # set grid
-set xrange [100:10000]
+set xrange [1000:10000]
+set format x "%.0s%c"
 set datafile separator ','
 set samples 10000
 

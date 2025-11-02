@@ -12,8 +12,8 @@ L=0.03
 tau_C = R*C  # Capacitor time constant
 tau_L = L/R  # Inductance time constant
 tau = np.sqrt(tau_L*tau_C) 
-dt = 0.000001   # Time step
-t = np.arange(0, 0.05, dt)  # Time array
+dt = 0.01*tau   # Time step
+t = np.arange(0, 0.2, dt)  # Always double the time range for better FFT resolution
 
 # Generate the input signal (square wave)
 f0 = 1/(2*np.pi*tau)  # Limit frequency
@@ -40,9 +40,9 @@ f = f0  # Frequency of the square wave
 # u_in = sum(a * np.sin(2 * np.pi * x* f * t) for a, x in zip(amplitudes, frequencies))
 
 # AC sweep
-f_start = 100
+f_start = 1000
 f_end = 10000
-df = 100/0.002
+df = 100/0.001
 u_in = np.sin(2 * np.pi * (f_start + df*t) * t) 
 
 # Apply the band-pass filter

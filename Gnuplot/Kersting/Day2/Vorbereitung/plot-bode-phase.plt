@@ -8,12 +8,13 @@ set encoding utf8
 
 
 
-set title 'Bode diagram (Phase Difference)'
-set ylabel 'Phase Difference $\Delta \phi$ (degree)'
+set title 'Bode diagram (Phase Shift)'
+set ylabel 'Phase Shift $\Delta \phi$ (degree)'
 set xlabel 'Frequency $f$ (Hz)'
 # set grid
 set logscale x 10
-set xrange [100:10000]
+set xrange [1000:10000]
+set format x "%.0s%c"
 set yrange [-90:90]
 set datafile separator ','
 set samples 10000
@@ -27,7 +28,7 @@ L = 0.03
 dL = 0.01*L
 fc = 1/(2*pi*sqrt(L*C))
 dfc = fc*sqrt( (dR/R)**2 + (dC/C)**2 + (dL/L)**2 )
-Q = 1/R*sqrt(L/C)
+Q = sqrt(L/C)/R
 dQ = Q*sqrt( (dR/R)**2 + (dC/C)**2 + (dL/L)**2 )
 delta_f = fc/Q
 ddelta_f = delta_f*sqrt( (dfc/fc)**2 + (dQ/Q)**2 )
@@ -40,8 +41,8 @@ sigma = 1/(2*Q)
 
 # Fit
 # Tranmission function
-p(x) = -180/pi*atan(Q*(f/d - d/f))
-p_theo(x) = -180/pi*atan(Q*(f/fc - fc/f))
+p(x) = -180/pi*atan(Q*(x/d - d/x))
+p_theo(x) = -180/pi*atan(Q*(x/fc - fc/x))
 
 set fit quiet
 fit p(x) 'fft.csv' using 1:7 via d

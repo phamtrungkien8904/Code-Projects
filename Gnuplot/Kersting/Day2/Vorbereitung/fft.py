@@ -25,8 +25,8 @@ xf = fftfreq(N, T)[:half]
 yf_in_half = yf_in[:half]
 yf_out_half = yf_out[:half]
 
-# Truncate output once frequencies exceed 10 kHz
-mask = xf <= 10000
+# Truncate output once frequencies exceed 11 kHz
+mask = xf <= 11000
 xf = xf[mask]
 yf_in_half = yf_in_half[mask]
 yf_out_half = yf_out_half[mask]
