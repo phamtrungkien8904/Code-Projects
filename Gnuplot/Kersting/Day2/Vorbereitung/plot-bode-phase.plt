@@ -27,6 +27,11 @@ L = 0.03
 dL = 0.01*L
 fc = 1/(2*pi*sqrt(L*C))
 dfc = fc*sqrt( (dR/R)**2 + (dC/C)**2 + (dL/L)**2 )
+Q = 1/R*sqrt(L/C)
+dQ = Q*sqrt( (dR/R)**2 + (dC/C)**2 + (dL/L)**2 )
+delta_f = fc/Q
+ddelta_f = delta_f*sqrt( (dfc/fc)**2 + (dQ/Q)**2 )
+sigma = 1/(2*Q)
 
 # print fc 
 # print dfc
@@ -35,8 +40,8 @@ dfc = fc*sqrt( (dR/R)**2 + (dC/C)**2 + (dL/L)**2 )
 
 # Fit
 # Tranmission function
-p(x) = -180/pi*atan(x/d)
-p_theo(x) = -180/pi*atan(x/fc)
+p(x) = -180/pi*atan(Q*(f/d - d/f))
+p_theo(x) = -180/pi*atan(Q*(f/fc - fc/f))
 
 set fit quiet
 fit p(x) 'fft.csv' using 1:7 via d

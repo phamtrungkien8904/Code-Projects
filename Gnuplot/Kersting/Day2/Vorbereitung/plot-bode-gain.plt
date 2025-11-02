@@ -29,14 +29,18 @@ fc = 1/(2*pi*sqrt(L*C))
 dfc = fc*sqrt( (dR/R)**2 + (dC/C)**2 + (dL/L)**2 )
 Q = 1/R*sqrt(L/C)
 dQ = Q*sqrt( (dR/R)**2 + (dC/C)**2 + (dL/L)**2 )
+delta_f = fc/Q
+ddelta_f = delta_f*sqrt( (dfc/fc)**2 + (dQ/Q)**2 )
+sigma = 1/(2*Q)
 
 print sprintf('Cutoff Frequency (theoretical): (%.2f +- %.2f) Hz', fc, dfc)
 print sprintf('Quality Factor (theoretical): (%.2f +- %.2f)', Q, dQ)
+print sprintf('Bandwidth (theoretical): (%.2f +- %.2f) Hz', delta_f, ddelta_f)
 
 # Fit
 # Tranmission function
-h(x) = 20*log10(1/sqrt(1+(x/b)**2))
-h_theo(x) = 20*log10()
+h(x) = 20*log10(1/sqrt(1+ ((1-(x/b)**2)/(2*sigma*x/b))**2))
+h_theo(x) = 20*log10(1/sqrt(1+ ((1-(x/fc)**2)/(2*sigma*x/fc))**2))
 
 
 
