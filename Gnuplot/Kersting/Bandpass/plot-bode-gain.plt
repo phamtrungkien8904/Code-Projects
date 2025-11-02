@@ -32,8 +32,8 @@ Q = sqrt(L/C)/R
 dQ = Q*sqrt( (dR/R)**2 + (dC/C)**2 + (dL/L)**2 )
 delta_f = fc/Q
 ddelta_f = delta_f*sqrt( (dfc/fc)**2 + (dQ/Q)**2 )
-f_lower = fc*(1/(2*Q) + sqrt( (1/(2*Q))**2 +1 ))
-f_upper = fc*( -1/(2*Q) + sqrt( (1/(2*Q))**2 +1 ))
+f_lower = fc*(1/(2*Q) + sqrt((1/(2*Q))**2 +1))
+f_upper = fc*(-1/(2*Q) + sqrt((1/(2*Q))**2 +1))
 
 print sprintf('Cutoff Frequency (theoretical): (%.2f +- %.2f) Hz', fc, dfc)
 print sprintf('Quality Factor (theoretical): (%.2f +- %.2f)', Q, dQ)
@@ -58,8 +58,8 @@ q = Q
 fit h(x) 'fft.csv' using 1:(20*log10(abs($3)/abs($2))) via b,q
 
 fc_fit_gain = b 
-f_lower_fit = fc_fit_gain*(1/(2*q) + sqrt( (1/(2*q))**2 +1 ))
-f_upper_fit = fc_fit_gain*( -1/(2*q) + sqrt( (1/(2*q))**2 +1 ))
+f_lower_fit = fc_fit_gain*(1/(2*q) + sqrt((1/(2*q))**2 +1 ))
+f_upper_fit = fc_fit_gain*(-1/(2*q) + sqrt((1/(2*q))**2 +1 ))
 delta_f_fit = abs(fc_fit_gain/q)
 
 if (fc_fit_gain==fc_fit_gain) set arrow 1 lw 1 from fc_fit_gain, graph 0 to fc_fit_gain, graph 0.94 nohead lc rgb 'black' dt 2
