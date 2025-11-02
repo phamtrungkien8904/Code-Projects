@@ -61,6 +61,7 @@ fc_fit_gain = b
 f_lower_fit = fc_fit_gain*(1/(2*q) + sqrt((1/(2*q))**2 +1 ))
 f_upper_fit = fc_fit_gain*(-1/(2*q) + sqrt((1/(2*q))**2 +1 ))
 delta_f_fit = abs(fc_fit_gain/q)
+# delta_f_gain = f_upper_fit - f_lower_fit
 
 if (fc_fit_gain==fc_fit_gain) set arrow 1 lw 1 from fc_fit_gain, graph 0 to fc_fit_gain, graph 0.94 nohead lc rgb 'black' dt 2
 if (fc_fit_gain==fc_fit_gain) set arrow 2 lw 1 from graph 0, first -3 to graph 1, first -3 nohead lc rgb 'black' dt 2
