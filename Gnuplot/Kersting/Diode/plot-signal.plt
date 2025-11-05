@@ -1,41 +1,22 @@
 reset
-set encoding utf8 
+set encoding utf8
 
-# set terminal epslatex color
-# set out 'signal.tex'
+# set terminal pngcairo size 1200,600
+# set output 'signal.png'
 
-# ============================ Plot Settings ============================
-
-set title 'Characteristic of Diode'
-set ylabel 'I (A)'
-set xlabel 'U (V)'
-# set grid
-set xrange [0:0.5]
-set yrange [0:1000]
-# set logscale y 10
+set title 'Diode Response'
+set xlabel 'Time (s)'
+set ylabel 'Voltage (V)'
+set grid
 set datafile separator ','
-set samples 10000
 
+# Keep consistent styling for input vs. output traces
+set style line 1 lw 2 lc rgb 'black'
+set style line 4 lw 2 lc rgb 'red'
 
-
-# Styling
-# Use valid color syntax and distinct colors per dataset
-set style line 1 pt 7 ps 0.3 lc rgb 'black'
-set style line 2 pt 7 ps 0.3 lc rgb 'blue' 
-set style line 3 pt 7 ps 0.3 lc rgb 'purple'
-set style line 4 pt 7 ps 0.3 lc rgb 'red'
-
-IS = 0.000001
-e = 1.602e-19
-k = 1.381e-23
-T = 300
-
-I_forward(x) = IS*(exp(e*x/(k*T)) - 1) 
-I_reverse(x) = -IS*(exp(-e*x/(k*T)) - 1)
-
-# Plot
+# Plot column 2 (input) and column 3 (output)
 plot \
-    I_forward(x) ls 4 notitle, \
-    I_reverse(x) ls 2 notitle
+    'diode_response.csv' using 1:2 with lines ls 1 title 'Input', \
+    '' using 1:3 with lines ls 4 title 'Output'
 
-# set out
+# set output
