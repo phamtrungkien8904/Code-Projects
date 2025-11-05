@@ -6,14 +6,14 @@ RLC Bandpass Filter (2nd order) Data Generator
 """
 
 # Set the parameters for the filter
-R=2000
-C=100e-9
-L=0.03
+R=51
+C=1e-6
+L=10e-6
 tau_C = R*C  # Capacitor time constant
 tau_L = L/R  # Inductance time constant
 tau = np.sqrt(tau_L*tau_C) 
-dt = 0.01*tau   # Time step
-t = np.arange(0, 0.2, dt)  # Always double the time range for better FFT resolution
+dt = 0.001*tau   # Time step
+t = np.arange(0, 0.01, dt)  # Always double the time range for better FFT resolution
 
 # Generate the input signal (square wave)
 f0 = 1/(2*np.pi*tau)  # Limit frequency
@@ -41,8 +41,8 @@ f = f0  # Frequency of the square wave
 
 # AC sweep
 f_start = 1000
-f_end = 10000
-df = 100/0.001
+f_end = 100000
+df = 1000/0.00001
 u_in = np.sin(2 * np.pi * (f_start + df*t) * t) 
 
 # Apply the band-pass filter R-(L||C)

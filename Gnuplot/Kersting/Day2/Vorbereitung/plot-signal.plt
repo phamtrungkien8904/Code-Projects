@@ -10,7 +10,7 @@ set title 'Sweep Signal'
 set ylabel 'Signal (V)'
 set xlabel 'Time (s)'
 # set grid
-set xrange [0:0.05]
+set xrange [0:0.001]
 set yrange [-2:2]
 set datafile separator ','
 set samples 10000

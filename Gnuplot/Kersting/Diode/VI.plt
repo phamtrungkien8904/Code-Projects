@@ -8,7 +8,7 @@ set title 'Characteristic Diode Response'
 set xlabel 'Voltage (V)'
 set ylabel 'Current (A)'
 set xrange [-1:2]
-set yrange [-0.01:0.01]
+set yrange [-0.0005:0.001]
 set grid
 set datafile separator ','
 
@@ -19,6 +19,6 @@ set style line 4 lw 2 lc rgb 'red'
 
 # Plot column 2 (input) and column 3 (output)
 plot \
-    'data.csv' using ($2 - $3):($3/100) with lines ls 1 notitle
+    'data.csv' using ($2 - $3):($3/1000) with lines ls 1 notitle
 
 # set output

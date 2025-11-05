@@ -5,6 +5,9 @@ import matplotlib.pyplot as plt
 
 data = np.loadtxt("data.csv", delimiter=",", comments="#")
 
+# Scales for graph
+f_max = 100000
+f_min = 1000
 
 # Number of sample points
 N = data.shape[0]
@@ -26,7 +29,7 @@ yf_in_half = yf_in[:half]
 yf_out_half = yf_out[:half]
 
 # Truncate output once frequencies exceed 11 kHz
-mask = xf <= 10000
+mask = xf <= f_max
 xf = xf[mask]
 yf_in_half = yf_in_half[mask]
 yf_out_half = yf_out_half[mask]
@@ -76,7 +79,7 @@ np.savetxt(
 
 # plt.plot(xf, amp_in, label="Input")
 # plt.plot(xf, amp_out, label="Output")
-# plt.xlim(0, 2)
+# plt.xlim(f_min, f_max)
 # plt.xlabel("Frequency (kHz)")
 # plt.ylabel("Amplitude (V)")
 # plt.grid()
@@ -85,7 +88,7 @@ np.savetxt(
 
 # plt.plot(xf, phase_in, label="Input")
 # plt.plot(xf, phase_out, label="Output")
-# plt.xlim(0, 2)
+# plt.xlim(f_min, f_max)
 # plt.xlabel("Frequency (kHz)")
 # plt.ylabel("Phase (radians)")
 # plt.grid()

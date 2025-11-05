@@ -13,18 +13,18 @@ set ylabel 'Gain $G$ (dB)'
 set xlabel 'Frequency $f$ (Hz)'
 # set grid
 set logscale x 10
-set xrange [1000:10000]
+set xrange [10000:100000]
 set format x "%.0s%c"
 set yrange [-40:20]
 set datafile separator ','
 set samples 10000
 
 # Theoretical RC Low-Pass Filter
-R = 2000
+R = 51
 dR = 0.01*R
-C = 100e-9
+C = 1e-6
 dC = 0.1*C
-L = 0.03
+L = 10e-6
 dL = 0.01*L
 fc = 1/(2*pi*sqrt(L*C))
 dfc = fc*sqrt( (dR/R)**2 + (dC/C)**2 + (dL/L)**2 )
@@ -46,9 +46,13 @@ h_theo(x) = 20*log10(1/sqrt(1+Q**2 * (x/fc - fc/x)**2))
 
 
 
-
-
 set fit quiet
+set fit errorvariables
+# Provide sensible initial guesses for fit parameters so the nonlinear fit can converge
+# Start b near the theoretical cutoff fc and q near the theoretical Q
+b = fc
+q = Q
+
 # Use absolute values for magnitudes so log10 never receives a negative argument.
 # Treat zero values as invalid (NaN) to avoid division-by-zero.
 fit h(x) 'fft.csv' using 1:(20*log10(abs($3)/abs($2))) via b,q
@@ -87,8 +91,6 @@ plot \
     h(x) with line ls 2 title 'Fitted Curve',\
     h_theo(x) with line ls 3 title 'Theoretical Curve'
 
-
-    # f(x) with line ls 2 title 'Theoretical Curve'
 
 
 # set out

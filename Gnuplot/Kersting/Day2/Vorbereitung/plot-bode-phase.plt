@@ -13,7 +13,7 @@ set ylabel 'Phase Shift $\Delta \phi$ (degree)'
 set xlabel 'Frequency $f$ (Hz)'
 # set grid
 set logscale x 10
-set xrange [1000:10000]
+set xrange [10000:100000]
 set format x "%.0s%c"
 set yrange [-90:90]
 set datafile separator ','
@@ -21,11 +21,11 @@ set samples 10000
 
 
 # Theoretical RC Low-Pass Filter
-R = 2000
+R = 51
 dR = 0.01*R
-C = 100e-9
+C = 1e-6
 dC = 0.1*C
-L = 0.03
+L = 10e-6
 dL = 0.01*L
 fc = 1/(2*pi*sqrt(L*C))
 dfc = fc*sqrt( (dR/R)**2 + (dC/C)**2 + (dL/L)**2 )
@@ -48,6 +48,11 @@ p(x) = -180/pi*atan(Q*(x/d - d/x))
 p_theo(x) = -180/pi*atan(Q*(x/fc - fc/x))
 
 set fit quiet
+set fit errorvariables
+# Provide sensible initial guesses for fit parameters so the nonlinear fit can converge
+# Start b near the theoretical cutoff fc and q near the theoretical Q
+b = fc
+q = Q
 fit p(x) 'fft.csv' using 1:7 via d
 
 fc_fit_phase = d

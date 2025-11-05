@@ -4,11 +4,11 @@ set encoding utf8
 # set terminal pngcairo size 1200,600
 # set output 'signal.png'
 
-set title 'Characteristic Diode Response'
-set xlabel 'Output Voltage (V)'
-set ylabel 'Input Voltage (V)'
-set xrange [0:2]
-set yrange [-3:3]
+set title 'Signal Input and Output'
+set xlabel 'Input Voltage (V)'
+set ylabel 'Output Voltage (V)'
+set xrange [-3:3]
+set yrange [-2:2]
 set grid
 set datafile separator ','
 
