@@ -21,6 +21,10 @@ set fit quiet
 f(x) = a*x + b
 fit[1:2] f(x) 'data.csv' using 2:3 via a,b
 
+
+print sprintf("Diode 1N4148")
+print sprintf("Forward Voltage: %.4f (V)", -b/a)
+
 # Keep consistent styling for input vs. output traces
 set style line 1 lw 2 lc rgb 'black'
 set style line 4 lw 2 lc rgb 'red'
