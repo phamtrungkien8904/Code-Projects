@@ -11,8 +11,8 @@ set ylabel 'I (A)'
 set xlabel 'U (V)'
 # set grid
 set xrange [0:0.5]
-set yrange [10e-4:10e5]
-set logscale y 10
+set yrange [0:1000]
+# set logscale y 10
 set datafile separator ','
 set samples 10000
 
@@ -25,7 +25,7 @@ set style line 2 pt 7 ps 0.3 lc rgb 'blue'
 set style line 3 pt 7 ps 0.3 lc rgb 'purple'
 set style line 4 pt 7 ps 0.3 lc rgb 'red'
 
-IS = 0.1
+IS = 0.000001
 e = 1.602e-19
 k = 1.381e-23
 T = 300
