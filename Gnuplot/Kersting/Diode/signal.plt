@@ -5,8 +5,8 @@ set encoding utf8
 # set output 'signal.png'
 
 set title 'Signal Input and Output'
-set xlabel 'Input Voltage (V)'
-set ylabel 'Output Voltage (V)'
+set xlabel 'Time (ms)'
+set ylabel 'Voltage (V)'
 set xrange [-3:3]
 set yrange [-2:2]
 set grid

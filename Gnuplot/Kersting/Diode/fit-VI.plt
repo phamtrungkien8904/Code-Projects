@@ -7,8 +7,8 @@ set encoding utf8
 set title 'Characteristic Diode Fit'
 set xlabel 'V'
 set ylabel 'ln(I)'
-# set xrange [0:2]
-# set yrange [0:0.01]
+set xrange [0:0.7]
+set yrange [-10:-6]
 set grid
 set datafile separator ','
 
