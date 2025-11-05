@@ -41,7 +41,7 @@ print sprintf('Bandwidth (theoretical): (%.2f +- %.2f) Hz', delta_f, ddelta_f)
 
 # Fit
 # Tranmission function
-h(x) = 20*log10(1/sqrt(1+q**2 * (x/b - b/x)**2))
+h(x) = 20*log10(c/sqrt(1+q**2 * (x/b - b/x)**2))
 h_theo(x) = 20*log10(1/sqrt(1+Q**2 * (x/fc - fc/x)**2))
 
 
@@ -55,7 +55,7 @@ q = Q
 
 # Use absolute values for magnitudes so log10 never receives a negative argument.
 # Treat zero values as invalid (NaN) to avoid division-by-zero.
-fit h(x) 'fft.csv' using 1:(20*log10(abs($3)/abs($2))) via b,q
+fit h(x) 'fft.csv' using 1:(20*log10(abs($3)/abs($2))) via b,q,c
 
 fc_fit_gain = b 
 f_lower_fit = fc_fit_gain*(1/(2*q) + sqrt( (1/(2*q))**2 +1 ))
