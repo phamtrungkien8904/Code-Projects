@@ -1,112 +1,62 @@
-import math
 import numpy as np
+import csv
+import matplotlib.pyplot as plt
+from scipy import signal
 
-BOLTZMANN = 1.380649e-23
-ELEMENTARY_CHARGE = 1.602176634e-19
+"""
+Diode
+"""
+# Set the parameters for the diode
+V_T = 0.05  # Thermal voltage (V)
+I_S = 1e-10  # Saturation current (A)
+R = 100  # Load resistance (Ohm)
 
-
-def thermal_voltage(temperature_kelvin: float) -> float:
-    """Return the thermal voltage kT/q for the supplied temperature."""
-    return (BOLTZMANN * temperature_kelvin) / ELEMENTARY_CHARGE
-
-
-def diode_series_current(
-    v_source: float,
-    v_stage: float,
-    r_source: float,
-    saturation_current: float,
-    thermal_volt: float,
-    max_iterations: int = 25,
-    tolerance: float = 1e-12,
-) -> float:
-    """Solve the series resistor + diode current using the Shockley equation."""
-    if v_source <= v_stage:
-        return 0.0
-
-    available_drop = v_source - v_stage
-    diode_voltage = min(available_drop, 0.7)
-
-    for _ in range(max_iterations):
-        exp_term = math.exp(diode_voltage / thermal_volt)
-        diode_current = saturation_current * (exp_term - 1.0)
-        resistor_current = (available_drop - diode_voltage) / r_source
-        residual = diode_current - resistor_current
-
-        if abs(residual) < tolerance:
-            break
-
-        derivative = saturation_current * exp_term / thermal_volt + 1.0 / r_source
-        diode_voltage -= residual / derivative
-
-        if diode_voltage < 0.0:
-            diode_voltage = 0.0
-        elif diode_voltage > available_drop:
-            diode_voltage = available_drop
-
-    return max((available_drop - diode_voltage) / r_source, 0.0)
-
-def sawtooth_wave(time_vector: np.ndarray, period: float, v_min: float, v_max: float) -> np.ndarray:
-    phase = (time_vector / period) % 1.0
-    return v_min + (v_max - v_min) * phase
+dt = 0.001
+t = np.arange(0, 2, dt)
+# Input signal (sawtooth wave)
+u_in = 2*signal.sawtooth(2 * np.pi * 1 * t)
 
 
-def simulate_four_pole_diode_network(
-    duration: float = 0.01,
-    sample_rate: float = 500_000.0,
-    source_frequency: float = 1_000.0,
-    v_min: float = 0.0,
-    v_max: float = 5.0,
-    r_source: float = 500.0,
-    r_stage: float = 1_000.0,
-    c_stage: float = 1e-6,
-    r_load: float = 10_000.0,
-    diode_is: float = 4.352e-9,
-    temperature: float = 300.0,
-    n_stages: int = 4,
-) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
-    n_steps = int(duration * sample_rate) + 1
-    time_vector = np.arange(n_steps) / sample_rate
-    vin = sawtooth_wave(time_vector, 1.0 / source_frequency, v_min, v_max)
+def diode(u_in):
+    """Return load voltage for each input sample using Shockley equation."""
+    u_out = np.zeros_like(u_in)
+    for idx, v_in in enumerate(u_in):
+        v_diode = float(np.clip(v_in, -0.5, 0.9))
+        for _ in range(50):
+            exp_term = np.exp(v_diode / V_T)
+            i_diode = I_S * (exp_term - 1.0)
+            residual = v_diode + i_diode * R - v_in
+            if abs(residual) < 1e-12:
+                break
+            derivative = 1.0 + (I_S * exp_term * R / V_T)
+            v_diode -= residual / derivative
+        i_diode = I_S * (np.exp(v_diode / V_T) - 1.0)
+        u_out[idx] = i_diode * R
+    return u_out
 
-    stage_voltages = np.zeros((n_stages, n_steps))
-    dt = 1.0 / sample_rate
-    vt = thermal_voltage(temperature)
-
-    for k in range(1, n_steps):
-        previous = stage_voltages[:, k - 1].copy()
-        updated = previous.copy()
-
-        input_current = diode_series_current(
-            v_source=vin[k],
-            v_stage=previous[0],
-            r_source=r_source,
-            saturation_current=diode_is,
-            thermal_volt=vt,
-        )
-
-        if n_stages == 1:
-            load_current = previous[0] / r_load
-            updated[0] = previous[0] + dt * (input_current - load_current) / c_stage
-        else:
-            current_to_next = (previous[0] - previous[1]) / r_stage
-            updated[0] = previous[0] + dt * (input_current - current_to_next) / c_stage
-
-            for idx in range(1, n_stages - 1):
-                current_from_prev = (previous[idx - 1] - previous[idx]) / r_stage
-                current_to_next = (previous[idx] - previous[idx + 1]) / r_stage
-                updated[idx] = previous[idx] + dt * (current_from_prev - current_to_next) / c_stage
-
-            current_from_prev = (previous[-2] - previous[-1]) / r_stage
-            load_current = previous[-1] / r_load
-            updated[-1] = previous[-1] + dt * (current_from_prev - load_current) / c_stage
-
-        stage_voltages[:, k] = updated
-
-    outputs = np.column_stack((time_vector, vin, stage_voltages[-1]))
-    header = "time,input_v,output_v"
-    np.savetxt("diode_response.csv", outputs, delimiter=",", header=header, comments="")
-    return time_vector, vin, stage_voltages[-1]
+u_out = diode(u_in)
 
 
-if __name__ == "__main__":
-    simulate_four_pole_diode_network()
+# Save the input and output signals to a CSV file
+with open("data.csv", "w", newline="") as csvfile:
+    csvwriter = csv.writer(csvfile)
+    csvwriter.writerow(["# Time", "Input", "Output"])
+    for i in range(len(t)):
+        csvwriter.writerow([t[i], u_in[i], u_out[i]])  
+
+
+plt.plot(t, u_in, label="Input")
+plt.plot(t, u_out, label="Output")
+plt.xlabel("Time (s)")
+plt.ylabel("Amplitude")
+plt.xlim(0, 2)
+plt.ylim(-3, 3)
+plt.title("Diode Response")
+plt.legend()
+plt.grid()
+plt.show()
+
+plt.scatter(u_in, u_out)
+plt.xlabel("Input Voltage (V)")
+plt.ylabel("Output Voltage (V)")
+plt.show()
