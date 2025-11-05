@@ -52,7 +52,8 @@ set fit errorvariables
 # Provide sensible initial guesses for fit parameters so the nonlinear fit can converge
 # Start b near the theoretical cutoff fc and q near the theoretical Q
 b = fc
-q = Q
+
+
 fit p(x) 'fft.csv' using 1:7 via d
 
 fc_fit_phase = d
