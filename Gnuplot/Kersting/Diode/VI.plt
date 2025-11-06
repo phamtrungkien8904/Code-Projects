@@ -13,9 +13,9 @@ set grid
 set datafile separator ','
 
 
-# set fit quiet
-# I(x) = a*(exp(b*x)-1)
-# fit I(x) 'data.csv' using ($2 - $3):($3/1000) every 100 via a,b
+set fit quiet
+I(x) = a*(exp(b*x)-1)
+fit[0:] I(x) 'data.csv' using ($2 - $3):($3/1000) every 100 via a,b
 
 
 # Keep consistent styling for input vs. output traces
@@ -24,7 +24,7 @@ set style line 4 lw 2 lc rgb 'red'
 
 # Plot column 2 (input) and column 3 (output)
 plot \
-    'data.csv' using ($2 - $3):($3/1000) every 100 with lines ls 1 notitle
-    # I(x) with lines ls 4 title sprintf('Fit: I_S = %.2e (A)', a)
+    'data.csv' using ($2 - $3):($3/1000) every 100 with lines ls 1 notitle,\
+    I(x) with lines ls 4 title sprintf('Fit: I_S = %.2f (nA)', a*1e9)
 
 # set output
