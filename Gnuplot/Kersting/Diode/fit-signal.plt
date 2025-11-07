@@ -32,6 +32,6 @@ set style line 4 lw 2 lc rgb 'red'
 
 
 plot\
-    'data.csv' using ($2>=-2 && $2<=2 ? $2 : 1/0):3 with lines ls 4 title 'Data',\
-    f(x) with lines lc rgb 'blue' lw 2 title sprintf('Fit: V_F = %.2f', -b/a)
+    'data.csv' using ($2>=-2 && $2<=2 ? $2 : 1/0):3 every 2000 with points ls 1 title 'Data',\
+    f(x) with lines lc rgb 'red' lw 2 title sprintf('Fit: V_F = %.2f', -b/a)
 # set output

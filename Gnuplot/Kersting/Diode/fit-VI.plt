@@ -22,6 +22,6 @@ set style line 4 lw 2 lc rgb 'red'
 
 # Plot column 2 (input) and column 3 (output)
 plot \
-    [0.5:]'data.csv' using ($2 - $3):(log(abs($3/1000))) with points ls 4 title 'Data Points',\
+    [0.5:]'data.csv' using ($2 - $3):(log(abs($3/1000))) with points ls 1 title 'Data Points',\
     f(x) with lines lc rgb 'blue' lw 2 title sprintf('Fit: I_S = %.2e (A)', exp(b))
 # set output
