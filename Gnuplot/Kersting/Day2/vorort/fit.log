@@ -2983,3 +2983,1302 @@ FIT:    data read from 'fft.csv' using 1:(20*log10(abs($3)/abs($2)))
 function used for fitting: h(x)
 fitted parameters initialized with current variable values
 
+
+
+*******************************************************************************
+Sun Nov 09 00:11:24 2025
+
+
+FIT:    data read from 'fft.csv' using 1:7
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: p(x)
+	p(x) = -180/pi*atan(Q*(x/d - d/x))
+fitted parameters initialized with current variable values
+
+  61 1.2439733400e+05  -5.86e-01  1.05e-20    5.419260e+04
+
+After 61 iterations the fit converged.
+final sum of squares of residuals : 124397
+rel. change during last iteration : -5.86027e-06
+
+degrees of freedom    (FIT_NDF)                        : 840
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 12.1693
+variance of residuals (reduced chisquare) = WSSR/ndf   : 148.092
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+d               = 54192.6          +/- 69.41        (0.1281%)
+
+
+*******************************************************************************
+Sun Nov 09 00:11:44 2025
+
+
+FIT:    data read from 'fft.csv' using 1:7
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: p(x)
+	p(x) = -180/pi*atan(Q*(x/d - d/x))
+fitted parameters initialized with current variable values
+
+  61 1.2439733400e+05  -5.86e-01  1.05e-20    5.419260e+04
+
+After 61 iterations the fit converged.
+final sum of squares of residuals : 124397
+rel. change during last iteration : -5.86027e-06
+
+degrees of freedom    (FIT_NDF)                        : 840
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 12.1693
+variance of residuals (reduced chisquare) = WSSR/ndf   : 148.092
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+d               = 54192.6          +/- 69.41        (0.1281%)
+
+
+*******************************************************************************
+Sun Nov 09 00:12:28 2025
+
+
+FIT:    data read from 'fft.csv' using 1:7
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: p(x)
+	p(x) = -180/pi*atan(Q*(x/d - d/x))
+fitted parameters initialized with current variable values
+
+  61 1.2439733400e+05  -5.86e-01  1.05e-20    5.419260e+04
+
+After 61 iterations the fit converged.
+final sum of squares of residuals : 124397
+rel. change during last iteration : -5.86027e-06
+
+degrees of freedom    (FIT_NDF)                        : 840
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 12.1693
+variance of residuals (reduced chisquare) = WSSR/ndf   : 148.092
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+d               = 54192.6          +/- 69.41        (0.1281%)
+
+
+*******************************************************************************
+Sun Nov 09 00:13:03 2025
+
+
+FIT:    data read from 'fft.csv' using 1:7
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: p(x)
+	p(x) = -180/pi*atan(Q*(x/d - d/x))
+fitted parameters initialized with current variable values
+
+  61 1.2439733400e+05  -5.86e-01  1.05e-20    5.419260e+04
+
+After 61 iterations the fit converged.
+final sum of squares of residuals : 124397
+rel. change during last iteration : -5.86027e-06
+
+degrees of freedom    (FIT_NDF)                        : 840
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 12.1693
+variance of residuals (reduced chisquare) = WSSR/ndf   : 148.092
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+d               = 54192.6          +/- 69.41        (0.1281%)
+
+
+*******************************************************************************
+Sun Nov 09 00:13:59 2025
+
+
+FIT:    data read from 'fft.csv' using 1:7
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: p(x)
+	p(x) = -180/pi*atan(Q*(x/d - d/x))
+fitted parameters initialized with current variable values
+
+  61 1.2439733400e+05  -5.86e-01  1.05e-20    5.419260e+04
+
+After 61 iterations the fit converged.
+final sum of squares of residuals : 124397
+rel. change during last iteration : -5.86027e-06
+
+degrees of freedom    (FIT_NDF)                        : 840
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 12.1693
+variance of residuals (reduced chisquare) = WSSR/ndf   : 148.092
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+d               = 54192.6          +/- 69.41        (0.1281%)
+
+
+*******************************************************************************
+Sun Nov 09 00:14:41 2025
+
+
+FIT:    data read from 'fft.csv' using 1:7
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: p(x)
+	p(x) = -180/pi*atan(Q*(x/d - d/x))
+fitted parameters initialized with current variable values
+
+  61 1.2439733400e+05  -5.86e-01  1.05e-20    5.419260e+04
+
+After 61 iterations the fit converged.
+final sum of squares of residuals : 124397
+rel. change during last iteration : -5.86027e-06
+
+degrees of freedom    (FIT_NDF)                        : 840
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 12.1693
+variance of residuals (reduced chisquare) = WSSR/ndf   : 148.092
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+d               = 54192.6          +/- 69.41        (0.1281%)
+
+
+*******************************************************************************
+Sun Nov 09 00:15:03 2025
+
+
+FIT:    data read from 'fft.csv' using 1:7
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: p(x)
+	p(x) = -180/pi*atan(Q*(x/d - d/x))
+fitted parameters initialized with current variable values
+
+  61 1.2439733400e+05  -5.86e-01  1.05e-20    5.419260e+04
+
+After 61 iterations the fit converged.
+final sum of squares of residuals : 124397
+rel. change during last iteration : -5.86027e-06
+
+degrees of freedom    (FIT_NDF)                        : 840
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 12.1693
+variance of residuals (reduced chisquare) = WSSR/ndf   : 148.092
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+d               = 54192.6          +/- 69.41        (0.1281%)
+
+
+*******************************************************************************
+Sun Nov 09 00:22:45 2025
+
+
+FIT:    data read from 'fft.csv' using 1:(20*log10($3/$2))
+        format = x:z
+        x range restricted to [100.000 : 100000.]
+        #datapoints = 925
+        residuals are weighted equally (unit weight)
+
+function used for fitting: G_fit(x)
+	G_fit(x) = 20*log10(1/sqrt((1 + q*qL/(qL**2 + (x/c)**2))**2 + (q*x/c)**2 *(1-1/(qL**2 + (x/c)**2))**2))
+fitted parameters initialized with current variable values
+
+   4 6.0366197461e+03  -3.74e-01  1.87e-03    1.340951e+01   1.186890e-01   5.482894e+04
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 6036.62
+rel. change during last iteration : -3.74342e-06
+
+degrees of freedom    (FIT_NDF)                        : 922
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 2.55877
+variance of residuals (reduced chisquare) = WSSR/ndf   : 6.54731
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+q               = 13.4095          +/- 0.1388       (1.035%)
+qL              = 0.118689         +/- 0.004394     (3.702%)
+c               = 54828.9          +/- 187.5        (0.342%)
+
+correlation matrix of the fit parameters:
+                q      qL     c      
+q               1.000 
+qL              0.048  1.000 
+c               0.108  0.080  1.000 
+
+
+*******************************************************************************
+Sun Nov 09 00:22:45 2025
+
+
+FIT:    data read from 'fft.csv' using 1:7
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: p(x)
+	p(x) = -180/pi*atan(Q*(x/d - d/x))
+fitted parameters initialized with current variable values
+
+  61 1.2439733400e+05  -5.86e-01  1.05e-20    5.419260e+04
+
+After 61 iterations the fit converged.
+final sum of squares of residuals : 124397
+rel. change during last iteration : -5.86027e-06
+
+degrees of freedom    (FIT_NDF)                        : 840
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 12.1693
+variance of residuals (reduced chisquare) = WSSR/ndf   : 148.092
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+d               = 54192.6          +/- 69.41        (0.1281%)
+
+
+*******************************************************************************
+Sun Nov 09 00:23:43 2025
+
+
+FIT:    data read from 'fft.csv' using 1:(20*log10($3/$2))
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: G_fit(x)
+	G_fit(x) = 20*log10(1/sqrt((1 + q*qL/(qL**2 + (x/c)**2))**2 + (q*x/c)**2 *(1-1/(qL**2 + (x/c)**2))**2))
+fitted parameters initialized with current variable values
+
+   4 3.1208416760e+02   0.00e+00  1.95e+07    1.353169e+01   8.250158e-02   5.463918e+04
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 312.084
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 838
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.610259
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.372415
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+q               = 13.5317          +/- 0.03657      (0.2703%)
+qL              = 0.0825016        +/- 0.001443     (1.749%)
+c               = 54639.2          +/- 39.61        (0.07249%)
+
+correlation matrix of the fit parameters:
+                q      qL     c      
+q               1.000 
+qL             -0.276  1.000 
+c               0.109  0.005  1.000 
+
+
+*******************************************************************************
+Sun Nov 09 00:23:43 2025
+
+
+FIT:    data read from 'fft.csv' using 1:7
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: p(x)
+	p(x) = -180/pi*atan(Q*(x/d - d/x))
+fitted parameters initialized with current variable values
+
+  61 1.2439733400e+05  -5.86e-01  1.05e-20    5.419260e+04
+
+After 61 iterations the fit converged.
+final sum of squares of residuals : 124397
+rel. change during last iteration : -5.86027e-06
+
+degrees of freedom    (FIT_NDF)                        : 840
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 12.1693
+variance of residuals (reduced chisquare) = WSSR/ndf   : 148.092
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+d               = 54192.6          +/- 69.41        (0.1281%)
+
+
+*******************************************************************************
+Sun Nov 09 00:24:20 2025
+
+
+FIT:    data read from 'fft.csv' using 1:(20*log10($3/$2))
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: G_fit(x)
+	G_fit(x) = 20*log10(1/sqrt((1 + q*qL/(qL**2 + (x/c)**2))**2 + (q*x/c)**2 *(1-1/(qL**2 + (x/c)**2))**2))
+fitted parameters initialized with current variable values
+
+   4 3.1208416760e+02   0.00e+00  1.95e+07    1.353169e+01   8.250158e-02   5.463918e+04
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 312.084
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 838
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.610259
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.372415
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+q               = 13.5317          +/- 0.03657      (0.2703%)
+qL              = 0.0825016        +/- 0.001443     (1.749%)
+c               = 54639.2          +/- 39.61        (0.07249%)
+
+correlation matrix of the fit parameters:
+                q      qL     c      
+q               1.000 
+qL             -0.276  1.000 
+c               0.109  0.005  1.000 
+
+
+*******************************************************************************
+Sun Nov 09 00:24:20 2025
+
+
+FIT:    data read from 'fft.csv' using 1:7
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: p(x)
+	p(x) = -180/pi*atan(Q*(x/d - d/x))
+fitted parameters initialized with current variable values
+
+  61 1.2439733400e+05  -5.86e-01  1.05e-20    5.419260e+04
+
+After 61 iterations the fit converged.
+final sum of squares of residuals : 124397
+rel. change during last iteration : -5.86027e-06
+
+degrees of freedom    (FIT_NDF)                        : 840
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 12.1693
+variance of residuals (reduced chisquare) = WSSR/ndf   : 148.092
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+d               = 54192.6          +/- 69.41        (0.1281%)
+
+
+*******************************************************************************
+Sun Nov 09 00:25:32 2025
+
+
+FIT:    data read from 'fft.csv' using 1:(20*log10($3/$2))
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: G_fit(x)
+	G_fit(x) = 20*log10(1/sqrt((1 + q*qL/(qL**2 + (x/c)**2))**2 + (q*x/c)**2 *(1-1/(qL**2 + (x/c)**2))**2))
+fitted parameters initialized with current variable values
+
+   4 3.1208416760e+02   0.00e+00  1.95e+07    1.353169e+01   8.250158e-02   5.463918e+04
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 312.084
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 838
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.610259
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.372415
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+q               = 13.5317          +/- 0.03657      (0.2703%)
+qL              = 0.0825016        +/- 0.001443     (1.749%)
+c               = 54639.2          +/- 39.61        (0.07249%)
+
+correlation matrix of the fit parameters:
+                q      qL     c      
+q               1.000 
+qL             -0.276  1.000 
+c               0.109  0.005  1.000 
+
+
+*******************************************************************************
+Sun Nov 09 00:26:43 2025
+
+
+FIT:    data read from 'fft.csv' using 1:(20*log10($3/$2))
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: G_fit(x)
+	G_fit(x) = 20*log10(1/sqrt((1 + q*qL/(qL**2 + (x/c)**2))**2 + (q*x/c)**2 *(1-1/(qL**2 + (x/c)**2))**2))
+fitted parameters initialized with current variable values
+
+   4 3.1208417633e+02   0.00e+00  1.88e+07    1.353139e+01   8.253519e-02   5.463924e+04
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 312.084
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 838
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.610259
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.372415
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+q               = 13.5314          +/- 0.03657      (0.2703%)
+qL              = 0.0825352        +/- 0.001443     (1.749%)
+c               = 54639.2          +/- 39.61        (0.0725%)
+
+correlation matrix of the fit parameters:
+                q      qL     c      
+q               1.000 
+qL             -0.276  1.000 
+c               0.109  0.005  1.000 
+
+
+*******************************************************************************
+Sun Nov 09 00:26:55 2025
+
+
+FIT:    data read from 'fft.csv' using 1:(20*log10($3/$2))
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: G_fit(x)
+	G_fit(x) = 20*log10(1/sqrt((1 + q*qL/(qL**2 + (x/c)**2))**2 + (q*x/c)**2 *(1-1/(qL**2 + (x/c)**2))**2))
+fitted parameters initialized with current variable values
+
+   4 3.1208429992e+02  -2.94e-03  1.83e-03    1.353160e+01   8.251381e-02   5.463954e+04
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 312.084
+rel. change during last iteration : -2.93953e-08
+
+degrees of freedom    (FIT_NDF)                        : 838
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.610259
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.372416
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+q               = 13.5316          +/- 0.03657      (0.2703%)
+qL              = 0.0825138        +/- 0.001443     (1.749%)
+c               = 54639.5          +/- 39.61        (0.07249%)
+
+correlation matrix of the fit parameters:
+                q      qL     c      
+q               1.000 
+qL             -0.276  1.000 
+c               0.109  0.005  1.000 
+
+
+*******************************************************************************
+Sun Nov 09 00:27:15 2025
+
+
+FIT:    data read from 'fft.csv' using 1:(20*log10($3/$2))
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: G_fit(x)
+	G_fit(x) = 20*log10(1/sqrt((1 + q*qL/(qL**2 + (x/c)**2))**2 + (q*x/c)**2 *(1-1/(qL**2 + (x/c)**2))**2))
+fitted parameters initialized with current variable values
+
+   4 3.1208431532e+02  -7.03e-02  1.73e-03    1.353161e+01   8.251286e-02   5.463956e+04
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 312.084
+rel. change during last iteration : -7.02946e-07
+
+degrees of freedom    (FIT_NDF)                        : 838
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.610259
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.372416
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+q               = 13.5316          +/- 0.03657      (0.2703%)
+qL              = 0.0825129        +/- 0.001443     (1.749%)
+c               = 54639.6          +/- 39.61        (0.07249%)
+
+correlation matrix of the fit parameters:
+                q      qL     c      
+q               1.000 
+qL             -0.276  1.000 
+c               0.109  0.005  1.000 
+
+
+*******************************************************************************
+Sun Nov 09 00:27:39 2025
+
+
+FIT:    data read from 'fft.csv' using 1:(20*log10($3/$2))
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: G_fit(x)
+	G_fit(x) = 20*log10(1/sqrt((1 + q*qL/(qL**2 + (x/c)**2))**2 + (q*x/c)**2 *(1-1/(qL**2 + (x/c)**2))**2))
+fitted parameters initialized with current variable values
+
+   4 3.1208416760e+02   0.00e+00  1.95e+07    1.353169e+01   8.250158e-02   5.463918e+04
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 312.084
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 838
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.610259
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.372415
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+q               = 13.5317          +/- 0.03657      (0.2703%)
+qL              = 0.0825016        +/- 0.001443     (1.749%)
+c               = 54639.2          +/- 39.61        (0.07249%)
+
+correlation matrix of the fit parameters:
+                q      qL     c      
+q               1.000 
+qL             -0.276  1.000 
+c               0.109  0.005  1.000 
+
+
+*******************************************************************************
+Sun Nov 09 00:27:58 2025
+
+
+FIT:    data read from 'fft.csv' using 1:(20*log10($3/$2))
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: G_fit(x)
+	G_fit(x) = 20*log10(1/sqrt((1 + q*qL/(qL**2 + (x/c)**2))**2 + (q*x/c)**2 *(1-1/(qL**2 + (x/c)**2))**2))
+fitted parameters initialized with current variable values
+
+   4 3.1208420525e+02   0.00e+00  1.98e+07    1.353164e+01   8.250794e-02   5.463934e+04
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 312.084
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 838
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.610259
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.372416
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+q               = 13.5316          +/- 0.03657      (0.2703%)
+qL              = 0.0825079        +/- 0.001443     (1.749%)
+c               = 54639.3          +/- 39.61        (0.07249%)
+
+correlation matrix of the fit parameters:
+                q      qL     c      
+q               1.000 
+qL             -0.276  1.000 
+c               0.109  0.005  1.000 
+
+
+*******************************************************************************
+Sun Nov 09 00:28:12 2025
+
+
+FIT:    data read from 'fft.csv' using 1:(20*log10($3/$2))
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: G_fit(x)
+	G_fit(x) = 20*log10(1/sqrt((1 + q*qL/(qL**2 + (x/c)**2))**2 + (q*x/c)**2 *(1-1/(qL**2 + (x/c)**2))**2))
+fitted parameters initialized with current variable values
+
+   5 3.1208429043e+02  -2.82e-02  2.09e-04    1.353158e+01   8.251620e-02   5.463954e+04
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 312.084
+rel. change during last iteration : -2.82272e-07
+
+degrees of freedom    (FIT_NDF)                        : 838
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.610259
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.372416
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+q               = 13.5316          +/- 0.03657      (0.2703%)
+qL              = 0.0825162        +/- 0.001443     (1.749%)
+c               = 54639.5          +/- 39.61        (0.07249%)
+
+correlation matrix of the fit parameters:
+                q      qL     c      
+q               1.000 
+qL             -0.276  1.000 
+c               0.109  0.005  1.000 
+
+
+*******************************************************************************
+Sun Nov 09 00:28:22 2025
+
+
+FIT:    data read from 'fft.csv' using 1:(20*log10($3/$2))
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: G_fit(x)
+	G_fit(x) = 20*log10(1/sqrt((1 + q*qL/(qL**2 + (x/c)**2))**2 + (q*x/c)**2 *(1-1/(qL**2 + (x/c)**2))**2))
+fitted parameters initialized with current variable values
+
+   4 3.1208417138e+02   0.00e+00  1.94e+08    1.353171e+01   8.249942e-02   5.463915e+04
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 312.084
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 838
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.610259
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.372415
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+q               = 13.5317          +/- 0.03657      (0.2703%)
+qL              = 0.0824994        +/- 0.001443     (1.749%)
+c               = 54639.2          +/- 39.61        (0.07249%)
+
+correlation matrix of the fit parameters:
+                q      qL     c      
+q               1.000 
+qL             -0.276  1.000 
+c               0.109  0.005  1.000 
+
+
+*******************************************************************************
+Sun Nov 09 00:28:31 2025
+
+
+FIT:    data read from 'fft.csv' using 1:(20*log10($3/$2))
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: G_fit(x)
+	G_fit(x) = 20*log10(1/sqrt((1 + q*qL/(qL**2 + (x/c)**2))**2 + (q*x/c)**2 *(1-1/(qL**2 + (x/c)**2))**2))
+fitted parameters initialized with current variable values
+
+   4 3.1208424488e+02  -2.75e-02  1.84e-03    1.353155e+01   8.251907e-02   5.463946e+04
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 312.084
+rel. change during last iteration : -2.75168e-07
+
+degrees of freedom    (FIT_NDF)                        : 838
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.610259
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.372416
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+q               = 13.5316          +/- 0.03657      (0.2703%)
+qL              = 0.0825191        +/- 0.001443     (1.749%)
+c               = 54639.5          +/- 39.61        (0.07249%)
+
+correlation matrix of the fit parameters:
+                q      qL     c      
+q               1.000 
+qL             -0.276  1.000 
+c               0.109  0.005  1.000 
+
+
+*******************************************************************************
+Sun Nov 09 00:28:41 2025
+
+
+FIT:    data read from 'fft.csv' using 1:(20*log10($3/$2))
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: G_fit(x)
+	G_fit(x) = 20*log10(1/sqrt((1 + q*qL/(qL**2 + (x/c)**2))**2 + (q*x/c)**2 *(1-1/(qL**2 + (x/c)**2))**2))
+fitted parameters initialized with current variable values
+
+   4 3.1208424425e+02  -2.03e-03  1.89e-03    1.353156e+01   8.251865e-02   5.463946e+04
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 312.084
+rel. change during last iteration : -2.0274e-08
+
+degrees of freedom    (FIT_NDF)                        : 838
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.610259
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.372416
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+q               = 13.5316          +/- 0.03657      (0.2703%)
+qL              = 0.0825186        +/- 0.001443     (1.749%)
+c               = 54639.5          +/- 39.61        (0.07249%)
+
+correlation matrix of the fit parameters:
+                q      qL     c      
+q               1.000 
+qL             -0.276  1.000 
+c               0.109  0.005  1.000 
+
+
+*******************************************************************************
+Sun Nov 09 00:28:54 2025
+
+
+FIT:    data read from 'fft.csv' using 1:(20*log10($3/$2))
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: G_fit(x)
+	G_fit(x) = 20*log10(1/sqrt((1 + q*qL/(qL**2 + (x/c)**2))**2 + (q*x/c)**2 *(1-1/(qL**2 + (x/c)**2))**2))
+fitted parameters initialized with current variable values
+
+   4 3.1208424425e+02  -2.03e-03  1.89e-03    1.353156e+01   8.251865e-02   5.463946e+04
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 312.084
+rel. change during last iteration : -2.0274e-08
+
+degrees of freedom    (FIT_NDF)                        : 838
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.610259
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.372416
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+q               = 13.5316          +/- 0.03657      (0.2703%)
+qL              = 0.0825186        +/- 0.001443     (1.749%)
+c               = 54639.5          +/- 39.61        (0.07249%)
+
+correlation matrix of the fit parameters:
+                q      qL     c      
+q               1.000 
+qL             -0.276  1.000 
+c               0.109  0.005  1.000 
+
+
+*******************************************************************************
+Sun Nov 09 00:28:54 2025
+
+
+FIT:    data read from 'fft.csv' using 1:7
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: p(x)
+	p(x) = -180/pi*atan(Q*(x/d - d/x))
+fitted parameters initialized with current variable values
+
+  61 1.2439733400e+05  -5.86e-01  1.05e-20    5.419260e+04
+
+After 61 iterations the fit converged.
+final sum of squares of residuals : 124397
+rel. change during last iteration : -5.86027e-06
+
+degrees of freedom    (FIT_NDF)                        : 840
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 12.1693
+variance of residuals (reduced chisquare) = WSSR/ndf   : 148.092
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+d               = 54192.6          +/- 69.41        (0.1281%)
+
+
+*******************************************************************************
+Sun Nov 09 00:29:43 2025
+
+
+FIT:    data read from 'fft.csv' using 1:(20*log10($3/$2))
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: G_fit(x)
+	G_fit(x) = 20*log10(1/sqrt((1 + q*qL/(qL**2 + (x/c)**2))**2 + (q*x/c)**2 *(1-1/(qL**2 + (x/c)**2))**2))
+fitted parameters initialized with current variable values
+
+   4 3.1208416760e+02   0.00e+00  1.95e+07    1.353169e+01   8.250158e-02   5.463918e+04
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 312.084
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 838
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.610259
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.372415
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+q               = 13.5317          +/- 0.03657      (0.2703%)
+qL              = 0.0825016        +/- 0.001443     (1.749%)
+c               = 54639.2          +/- 39.61        (0.07249%)
+
+correlation matrix of the fit parameters:
+                q      qL     c      
+q               1.000 
+qL             -0.276  1.000 
+c               0.109  0.005  1.000 
+
+
+*******************************************************************************
+Sun Nov 09 00:29:43 2025
+
+
+FIT:    data read from 'fft.csv' using 1:7
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: p(x)
+	p(x) = -180/pi*atan(Q*(x/d - d/x))
+fitted parameters initialized with current variable values
+
+  61 1.2439733400e+05  -5.86e-01  1.05e-20    5.419260e+04
+
+After 61 iterations the fit converged.
+final sum of squares of residuals : 124397
+rel. change during last iteration : -5.86027e-06
+
+degrees of freedom    (FIT_NDF)                        : 840
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 12.1693
+variance of residuals (reduced chisquare) = WSSR/ndf   : 148.092
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+d               = 54192.6          +/- 69.41        (0.1281%)
+
+
+*******************************************************************************
+Sun Nov 09 00:30:11 2025
+
+
+FIT:    data read from 'fft.csv' using 1:(20*log10($3/$2))
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: G_fit(x)
+	G_fit(x) = 20*log10(1/sqrt((1 + q*qL/(qL**2 + (x/c)**2))**2 + (q*x/c)**2 *(1-1/(qL**2 + (x/c)**2))**2))
+fitted parameters initialized with current variable values
+
+   4 3.1208416760e+02   0.00e+00  1.95e+07    1.353169e+01   8.250158e-02   5.463918e+04
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 312.084
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 838
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.610259
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.372415
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+q               = 13.5317          +/- 0.03657      (0.2703%)
+qL              = 0.0825016        +/- 0.001443     (1.749%)
+c               = 54639.2          +/- 39.61        (0.07249%)
+
+correlation matrix of the fit parameters:
+                q      qL     c      
+q               1.000 
+qL             -0.276  1.000 
+c               0.109  0.005  1.000 
+
+
+*******************************************************************************
+Sun Nov 09 00:30:11 2025
+
+
+FIT:    data read from 'fft.csv' using 1:7
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: p(x)
+	p(x) = -180/pi*atan(Q*(x/d - d/x))
+fitted parameters initialized with current variable values
+
+  61 1.2439733400e+05  -5.86e-01  1.05e-20    5.419260e+04
+
+After 61 iterations the fit converged.
+final sum of squares of residuals : 124397
+rel. change during last iteration : -5.86027e-06
+
+degrees of freedom    (FIT_NDF)                        : 840
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 12.1693
+variance of residuals (reduced chisquare) = WSSR/ndf   : 148.092
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+d               = 54192.6          +/- 69.41        (0.1281%)
+
+
+*******************************************************************************
+Sun Nov 09 00:30:29 2025
+
+
+FIT:    data read from 'fft.csv' using 1:(20*log10($3/$2))
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: G_fit(x)
+	G_fit(x) = 20*log10(1/sqrt((1 + q*qL/(qL**2 + (x/c)**2))**2 + (q*x/c)**2 *(1-1/(qL**2 + (x/c)**2))**2))
+fitted parameters initialized with current variable values
+
+   4 3.1208416760e+02   0.00e+00  1.95e+07    1.353169e+01   8.250158e-02   5.463918e+04
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 312.084
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 838
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.610259
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.372415
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+q               = 13.5317          +/- 0.03657      (0.2703%)
+qL              = 0.0825016        +/- 0.001443     (1.749%)
+c               = 54639.2          +/- 39.61        (0.07249%)
+
+correlation matrix of the fit parameters:
+                q      qL     c      
+q               1.000 
+qL             -0.276  1.000 
+c               0.109  0.005  1.000 
+
+
+*******************************************************************************
+Sun Nov 09 00:30:29 2025
+
+
+FIT:    data read from 'fft.csv' using 1:7
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: p(x)
+	p(x) = -180/pi*atan(Q*(x/d - d/x))
+fitted parameters initialized with current variable values
+
+  61 1.2439733400e+05  -5.86e-01  1.05e-20    5.419260e+04
+
+After 61 iterations the fit converged.
+final sum of squares of residuals : 124397
+rel. change during last iteration : -5.86027e-06
+
+degrees of freedom    (FIT_NDF)                        : 840
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 12.1693
+variance of residuals (reduced chisquare) = WSSR/ndf   : 148.092
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+d               = 54192.6          +/- 69.41        (0.1281%)
+
+
+*******************************************************************************
+Sun Nov 09 00:31:38 2025
+
+
+FIT:    data read from 'fft.csv' using 1:(20*log10($3/$2))
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: G_fit(x)
+	G_fit(x) = 20*log10(1/sqrt((1 + q*qL/(qL**2 + (x/c)**2))**2 + (q*x/c)**2 *(1-1/(qL**2 + (x/c)**2))**2))
+fitted parameters initialized with current variable values
+
+   4 3.1208416760e+02   0.00e+00  1.95e+07    1.353169e+01   8.250158e-02   5.463918e+04
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 312.084
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 838
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.610259
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.372415
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+q               = 13.5317          +/- 0.03657      (0.2703%)
+qL              = 0.0825016        +/- 0.001443     (1.749%)
+c               = 54639.2          +/- 39.61        (0.07249%)
+
+correlation matrix of the fit parameters:
+                q      qL     c      
+q               1.000 
+qL             -0.276  1.000 
+c               0.109  0.005  1.000 
+
+
+*******************************************************************************
+Sun Nov 09 00:31:38 2025
+
+
+FIT:    data read from 'fft.csv' using 1:7
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: p(x)
+	p(x) = -180/pi*atan(Q*(x/d - d/x))
+fitted parameters initialized with current variable values
+
+  61 1.2439733400e+05  -5.86e-01  1.05e-20    5.419260e+04
+
+After 61 iterations the fit converged.
+final sum of squares of residuals : 124397
+rel. change during last iteration : -5.86027e-06
+
+degrees of freedom    (FIT_NDF)                        : 840
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 12.1693
+variance of residuals (reduced chisquare) = WSSR/ndf   : 148.092
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+d               = 54192.6          +/- 69.41        (0.1281%)
+
+
+*******************************************************************************
+Sun Nov 09 00:31:54 2025
+
+
+FIT:    data read from 'fft.csv' using 1:(20*log10($3/$2))
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: G_fit(x)
+	G_fit(x) = 20*log10(1/sqrt((1 + q*qL/(qL**2 + (x/c)**2))**2 + (q*x/c)**2 *(1-1/(qL**2 + (x/c)**2))**2))
+fitted parameters initialized with current variable values
+
+   5 3.1208426681e+02  -9.70e-02  1.91e-04    1.353155e+01   8.251926e-02   5.463950e+04
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 312.084
+rel. change during last iteration : -9.70364e-07
+
+degrees of freedom    (FIT_NDF)                        : 838
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.610259
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.372416
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+q               = 13.5316          +/- 0.03657      (0.2703%)
+qL              = 0.0825193        +/- 0.001443     (1.749%)
+c               = 54639.5          +/- 39.61        (0.07249%)
+
+correlation matrix of the fit parameters:
+                q      qL     c      
+q               1.000 
+qL             -0.276  1.000 
+c               0.109  0.005  1.000 
+
+
+*******************************************************************************
+Sun Nov 09 00:31:54 2025
+
+
+FIT:    data read from 'fft.csv' using 1:7
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: p(x)
+	p(x) = -180/pi*atan(Q*(x/d - d/x))
+fitted parameters initialized with current variable values
+
+  61 1.2439733400e+05  -5.86e-01  1.05e-20    5.419260e+04
+
+After 61 iterations the fit converged.
+final sum of squares of residuals : 124397
+rel. change during last iteration : -5.86027e-06
+
+degrees of freedom    (FIT_NDF)                        : 840
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 12.1693
+variance of residuals (reduced chisquare) = WSSR/ndf   : 148.092
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+d               = 54192.6          +/- 69.41        (0.1281%)
+
+
+*******************************************************************************
+Sun Nov 09 00:32:08 2025
+
+
+FIT:    data read from 'fft.csv' using 1:(20*log10($3/$2))
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: G_fit(x)
+	G_fit(x) = 20*log10(1/sqrt((1 + q*qL/(qL**2 + (x/c)**2))**2 + (q*x/c)**2 *(1-1/(qL**2 + (x/c)**2))**2))
+fitted parameters initialized with current variable values
+
+   4 3.1208393835e+02  -1.82e-11  1.94e+07    1.353154e+01   8.251529e-02   5.463864e+04
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 312.084
+rel. change during last iteration : -1.82141e-16
+
+degrees of freedom    (FIT_NDF)                        : 838
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.610258
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.372415
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+q               = 13.5315          +/- 0.03657      (0.2703%)
+qL              = 0.0825153        +/- 0.001443     (1.749%)
+c               = 54638.6          +/- 39.61        (0.07249%)
+
+correlation matrix of the fit parameters:
+                q      qL     c      
+q               1.000 
+qL             -0.276  1.000 
+c               0.109  0.005  1.000 
+
+
+*******************************************************************************
+Sun Nov 09 00:32:09 2025
+
+
+FIT:    data read from 'fft.csv' using 1:7
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: p(x)
+	p(x) = -180/pi*atan(Q*(x/d - d/x))
+fitted parameters initialized with current variable values
+
+  61 1.2439733400e+05  -5.86e-01  1.05e-20    5.419260e+04
+
+After 61 iterations the fit converged.
+final sum of squares of residuals : 124397
+rel. change during last iteration : -5.86027e-06
+
+degrees of freedom    (FIT_NDF)                        : 840
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 12.1693
+variance of residuals (reduced chisquare) = WSSR/ndf   : 148.092
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+d               = 54192.6          +/- 69.41        (0.1281%)
+
+
+*******************************************************************************
+Sun Nov 09 00:40:30 2025
+
+
+FIT:    data read from 'fft.csv' using 1:(20*log10($3/$2))
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: G_fit(x)
+	G_fit(x) = 20*log10(1/sqrt((1 + q*qL/(qL**2 + (x/c)**2))**2 + (q*x/c)**2 *(1-1/(qL**2 + (x/c)**2))**2))
+fitted parameters initialized with current variable values
+
+   4 3.1208393835e+02  -1.82e-11  1.94e+07    1.353154e+01   8.251529e-02   5.463864e+04
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 312.084
+rel. change during last iteration : -1.82141e-16
+
+degrees of freedom    (FIT_NDF)                        : 838
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.610258
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.372415
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+q               = 13.5315          +/- 0.03657      (0.2703%)
+qL              = 0.0825153        +/- 0.001443     (1.749%)
+c               = 54638.6          +/- 39.61        (0.07249%)
+
+correlation matrix of the fit parameters:
+                q      qL     c      
+q               1.000 
+qL             -0.276  1.000 
+c               0.109  0.005  1.000 
+
+
+*******************************************************************************
+Sun Nov 09 00:40:30 2025
+
+
+FIT:    data read from 'fft.csv' using 1:7
+        format = x:z
+        x range restricted to [10000.0 : 100000.]
+        #datapoints = 841
+        residuals are weighted equally (unit weight)
+
+function used for fitting: p(x)
+	p(x) = -180/pi*atan(Q*(x/d - d/x))
+fitted parameters initialized with current variable values
+
+  61 1.2439733400e+05  -5.86e-01  1.05e-20    5.419260e+04
+
+After 61 iterations the fit converged.
+final sum of squares of residuals : 124397
+rel. change during last iteration : -5.86027e-06
+
+degrees of freedom    (FIT_NDF)                        : 840
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 12.1693
+variance of residuals (reduced chisquare) = WSSR/ndf   : 148.092
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+d               = 54192.6          +/- 69.41        (0.1281%)

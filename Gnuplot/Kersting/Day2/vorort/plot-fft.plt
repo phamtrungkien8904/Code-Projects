@@ -13,6 +13,7 @@ set ylabel 'Amplitude $A$ (V)'
 set xlabel 'Frequency $f$ (Hz)'
 # set grid
 set xrange [10000:100000]
+# set logscale x 10
 set format x "%.0s%c"
 set datafile separator ','
 set samples 1e6

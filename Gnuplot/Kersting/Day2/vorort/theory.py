@@ -5,12 +5,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Component values
-R = 51.0               # ohm
-L = 8.7e-6              # henry (8.7 uH)
-C = 1e-6               # farad (1 uF)
+R = 51
+dR = 0.01*R
+C = 1e-6
+dC = 0.2*C
+L = 10e-6
+dL = 0.2*L
 
 # Frequency axis (Hz)
-f = np.logspace(3, 5, 1000)   # 1 kHz .. 100 kHz
+f = np.logspace(3, 5, 10000)   # 1 kHz .. 100 kHz
 w = 2 * np.pi * f
 
 # Impedances
@@ -88,16 +91,16 @@ np.savetxt(
 	"theory.csv",
 	theory_data,
 	delimiter=",",
-	header="f,H_in,H_out,G_ideal,G_theo,phi_ideal,phi_theo",
+	header="# f,H_in,H_out,G_ideal,G_theo,phi_ideal,phi_theo",
 	comments="",
 )
 
 bandwidth_data = np.array([[f_res, f_lower, f_upper, bandwidth]])
 np.savetxt(
-	"theory_bandwidth.csv",
+	"theory_output.csv",
 	bandwidth_data,
 	delimiter=",",
-	header="f_res,f_lower,f_upper,bandwidth",
+	header="# f_res,f_lower,f_upper,bandwidth",
 	comments="",
 )
 
