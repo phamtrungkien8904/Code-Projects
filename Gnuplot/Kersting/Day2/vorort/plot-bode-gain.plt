@@ -41,8 +41,8 @@ f_upper = fc*( -1/(2*Q) + sqrt( (1/(2*Q))**2 +1 ))
 file_exists = system(sprintf('if exist "%s" ( exit 0 ) else ( exit 1 )','theory_output.csv'))
 
 
-stats 'theory_output.csv' using 4 name 'bandwidth' nooutput
-bw = bandwidth_mean
+stats 'theory_output.csv' using 4 nooutput
+bw = STATS_min
 
 
 
