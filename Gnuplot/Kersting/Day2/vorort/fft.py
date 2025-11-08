@@ -38,6 +38,14 @@ amplitude_scale = 2.0 / N
 amp_in = amplitude_scale * np.abs(yf_in_half)
 amp_out = amplitude_scale * np.abs(yf_out_half)
 
+# Match the FFT amplitude scale to the peak amplitude observed in the time domain.
+max_input_signal = np.max(np.abs(y_in))
+max_fft_amplitude = np.max(amp_in) if amp_in.size else 0.0
+if max_fft_amplitude > 0.0:
+	amplitude_match_scale = max_input_signal / max_fft_amplitude
+	amp_in *= amplitude_match_scale
+	amp_out *= amplitude_match_scale
+
 eps = np.finfo(float).eps
 valid = (amp_in > eps) & (amp_out > eps)
 

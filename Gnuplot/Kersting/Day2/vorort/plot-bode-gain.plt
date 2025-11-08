@@ -24,7 +24,7 @@ R = 51
 dR = 0.01*R
 C = 1e-6
 dC = 0.1*C
-L = 10e-6
+L = 8.7e-6
 dL = 0.01*L
 fc = 1/(2*pi*sqrt(L*C))
 dfc = fc*sqrt( (dR/R)**2 + (dC/C)**2 + (dL/L)**2 )
@@ -39,51 +39,52 @@ print sprintf('Cutoff Frequency (theoretical): (%.2f +- %.2f) Hz', fc, dfc)
 print sprintf('Quality Factor (theoretical): (%.2f +- %.2f)', Q, dQ)
 print sprintf('Bandwidth (theoretical): (%.2f +- %.2f) Hz', delta_f, ddelta_f)
 
+# Numerical resonance and bandwidth imported from theory.py
+stats 'theory_bandwidth.csv' using 1 name 'resStats' nooutput
+stats 'theory_bandwidth.csv' using 2 name 'lowStats' nooutput
+stats 'theory_bandwidth.csv' using 3 name 'highStats' nooutput
+stats 'theory_bandwidth.csv' using 4 name 'bwStats' nooutput
+f_res_num = resStats_max
+f_lower_num = lowStats_max
+f_upper_num = highStats_max
+delta_f_num = bwStats_max
+
 # Include the signal source's internal resistance when comparing gain.
 Rs_theory = 50.0
-Rs_fit = 50.0
-print sprintf('Source Resistance (assumed): %.2f Ohm', Rs_theory)
 
-# Fit
+
+
 # Tranmission function
-h(x) = 20*log10( (R/(R+Rs_fit)) / sqrt(1+q**2 * (x/b - b/x)**2) )
-h_theo(x) = 20*log10( (R/(R+Rs_theory)) / sqrt(1+Q**2 * (x/fc - fc/x)**2) )
 
 
 
-set fit quiet
-set fit errorvariables
-# Provide sensible initial guesses for fit parameters so the nonlinear fit can converge
-# Start b near the theoretical cutoff fc and q near the theoretical Q
-b = fc
-q = Q
 
-# Use absolute values for magnitudes so log10 never receives a negative argument.
-# Treat zero values as invalid (NaN) to avoid division-by-zero.
-fit h(x) 'fft.csv' using 1:(20*log10(abs($3)/abs($2))) via b,q,Rs_fit
-
-Rs_fit_gain = Rs_fit
-if (Rs_fit_gain==Rs_fit_gain) {
-    c_fit = R/(R+Rs_fit_gain)
-    dRs_fit = exists("Rs_fit_err") ? Rs_fit_err : 0
-    print sprintf('Source Resistance (fitted): (%.2f +- %.2f) Ohm', Rs_fit_gain, dRs_fit)
-    print sprintf('Low-frequency gain due to divider: %.3f (-%.2f dB)', c_fit, -20*log10(c_fit))
+if (f_lower_num==f_lower_num && f_upper_num==f_upper_num) {
+    set arrow 6 lw 1 dt 4 lc rgb '#555555' from f_lower_num, graph 0 to f_lower_num, graph 0.9 nohead
+    set arrow 7 lw 1 dt 4 lc rgb '#555555' from f_upper_num, graph 0 to f_upper_num, graph 0.9 nohead
+    set arrow 8 lw 0.7 dt 4 heads lc rgb '#555555' from f_lower_num, graph 0.88 to f_upper_num, graph 0.88
 }
 
-fc_fit_gain = b 
-f_lower_fit = fc_fit_gain*(1/(2*q) + sqrt( (1/(2*q))**2 +1 ))
-f_upper_fit = fc_fit_gain*( -1/(2*q) + sqrt( (1/(2*q))**2 +1 ))
-delta_f_fit = abs(fc_fit_gain/q)
+if (f_res_num==f_res_num) {
+    set arrow 9 lw 1 dt 4 lc rgb '#555555' from f_res_num, graph 0 to f_res_num, graph 0.9 nohead
+}
 
-if (fc_fit_gain==fc_fit_gain) set arrow 1 lw 1 from fc_fit_gain, graph 0 to fc_fit_gain, graph 0.94 nohead lc rgb 'black' dt 2
-if (fc_fit_gain==fc_fit_gain) set arrow 2 lw 1 from graph 0, first -3 to graph 1, first -3 nohead lc rgb 'black' dt 2
-if (fc_fit_gain==fc_fit_gain) set label 1 sprintf('$f_c = %.0f$ Hz', fc_fit_gain) at fc_fit_gain, -3 offset 2,1
-
-set arrow 3 lw 1 dt 2 from f_lower_fit, graph 0 to f_lower_fit, graph 0.94 nohead lc rgb 'black'
-set arrow 4 lw 1 dt 2 from f_upper_fit, graph 0 to f_upper_fit, graph 0.94 nohead lc rgb 'black'
-set arrow 5 lw 0.7 dt 1 heads from f_lower_fit, graph 0.92 to f_upper_fit, graph 0.92 lc rgb 'black'
-set label 2 sprintf('$\\Delta f = %.0f$ Hz', delta_f_fit) at (f_lower_fit+f_upper_fit)/2.0, graph 0.97 center
-set obj 1 rect from f_lower_fit, graph 0 to f_upper_fit, graph 1 fc rgb 'gray' fs transparent solid 0.3 noborder
+label_y = 0.88
+if (f_res_num==f_res_num) {
+    set label 20 sprintf('Numerical f_res = %.0f Hz', f_res_num) at graph 0.02, graph label_y left tc rgb '#555555'
+    label_y = label_y - 0.06
+}
+if (f_lower_num==f_lower_num) {
+    set label 21 sprintf('Numerical f_lower = %.0f Hz', f_lower_num) at graph 0.02, graph label_y left tc rgb '#555555'
+    label_y = label_y - 0.06
+}
+if (f_upper_num==f_upper_num) {
+    set label 22 sprintf('Numerical f_upper = %.0f Hz', f_upper_num) at graph 0.02, graph label_y left tc rgb '#555555'
+    label_y = label_y - 0.06
+}
+if (delta_f_num==delta_f_num) {
+    set label 23 sprintf('Numerical bandwidth = %.0f Hz', delta_f_num) at graph 0.02, graph label_y left tc rgb '#555555'
+}
 
 
 
@@ -101,8 +102,8 @@ set style line 4 lw 2 pt 7 ps 0.5 lc rgb 'red'
 # Plot
 plot \
     'fft.csv' using 1:(20*log10($3/$2)) with line ls 4 title 'Data points',\
-    h(x) with line ls 2 title 'Fitted Curve',\
-    h_theo(x) with line ls 3 title 'Theoretical Curve'
+    'theory.csv' using 1:5 with line ls 3 title 'Theoretical Curve'
+    # h_theo(x) with line ls 3 title 'Theoretical Curve'
 
 
 
