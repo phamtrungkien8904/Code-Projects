@@ -39,10 +39,15 @@ print sprintf('Cutoff Frequency (theoretical): (%.2f +- %.2f) Hz', fc, dfc)
 print sprintf('Quality Factor (theoretical): (%.2f +- %.2f)', Q, dQ)
 print sprintf('Bandwidth (theoretical): (%.2f +- %.2f) Hz', delta_f, ddelta_f)
 
+# Include the signal source's internal resistance when comparing gain.
+Rs_theory = 50.0
+Rs_fit = 50.0
+print sprintf('Source Resistance (assumed): %.2f Ohm', Rs_theory)
+
 # Fit
 # Tranmission function
-h(x) = 20*log10(c/sqrt(1+q**2 * (x/b - b/x)**2))
-h_theo(x) = 20*log10(1/sqrt(1+Q**2 * (x/fc - fc/x)**2))
+h(x) = 20*log10( (R/(R+Rs_fit)) / sqrt(1+q**2 * (x/b - b/x)**2) )
+h_theo(x) = 20*log10( (R/(R+Rs_theory)) / sqrt(1+Q**2 * (x/fc - fc/x)**2) )
 
 
 
@@ -55,7 +60,15 @@ q = Q
 
 # Use absolute values for magnitudes so log10 never receives a negative argument.
 # Treat zero values as invalid (NaN) to avoid division-by-zero.
-fit h(x) 'fft.csv' using 1:(20*log10(abs($3)/abs($2))) via b,q,c
+fit h(x) 'fft.csv' using 1:(20*log10(abs($3)/abs($2))) via b,q,Rs_fit
+
+Rs_fit_gain = Rs_fit
+if (Rs_fit_gain==Rs_fit_gain) {
+    c_fit = R/(R+Rs_fit_gain)
+    dRs_fit = exists("Rs_fit_err") ? Rs_fit_err : 0
+    print sprintf('Source Resistance (fitted): (%.2f +- %.2f) Ohm', Rs_fit_gain, dRs_fit)
+    print sprintf('Low-frequency gain due to divider: %.3f (-%.2f dB)', c_fit, -20*log10(c_fit))
+}
 
 fc_fit_gain = b 
 f_lower_fit = fc_fit_gain*(1/(2*q) + sqrt( (1/(2*q))**2 +1 ))
