@@ -37,6 +37,7 @@ yf_out_half = yf_out_half[mask]
 amplitude_scale = 2.0 / N
 amp_in = amplitude_scale * np.abs(yf_in_half)
 amp_out = amplitude_scale * np.abs(yf_out_half)
+gain = 20.0 * np.log10(amp_out / amp_in)
 
 # Match the FFT amplitude scale to the peak amplitude observed in the time domain.
 max_input_signal = np.max(np.abs(y_in))
@@ -79,9 +80,9 @@ if np.any(valid):
 
 np.savetxt(
 	"fft.csv",
-	np.column_stack((xf, amp_in, amp_out, phase_in, phase_out, phase_diff_rad, phase_diff_deg)),
+	np.column_stack((xf, amp_in, amp_out, phase_in, phase_out, phase_diff_rad, phase_diff_deg, gain)),
 	delimiter=",",
-	header="# frequency,input_amplitude,output_amplitude,input_phase,output_phase,phase_diff_rad,phase_diff_deg",
+	header="# frequency,input_amplitude,output_amplitude,input_phase,output_phase,phase_diff_rad,phase_diff_deg, gain",
 	comments="",
 )
 

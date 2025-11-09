@@ -33,8 +33,8 @@ f_upper = fc*( -1/(2*Q) + sqrt( (1/(2*Q))**2 +1 ))
 
 
 set datafile separator ','
-# stats 'theory_output.csv' using 4 name 'bw' nooutput
-# print sprintf("Theoritical bandwidth = %.2f Hz", bw_min)
+stats 'theory_output.csv' using 4 name 'bw' nooutput
+print sprintf("Theoritical bandwidth = %.2f Hz", bw_min)
 
 
 # print sprintf('Cutoff Frequency (theoretical): (%.2f +- %.2f) Hz', fc, dfc)
@@ -63,23 +63,29 @@ G_drop_fit = 20*log10(1/sqrt(1+ (q*qL)**2 + 2*q*qL/(1+qL**2)))
 G_0_fit = 20*log10(1/(1 + q/qL))
 G_inf_fit(x) = 20*log10(1/(q*x/c))
 
-fit[10000:100000] G_fit(x) 'fft.csv' using 1:(20*log10($3/$2)) via q, qL, c
+fit[10000:100000] G_fit(x) 'fft.csv' using 1:8 via q, qL, c
 
 
 # Find resonance frequency (peak) and -3dB frequencies from the fitted curve
 fc_fit = c
-G_peak_fit = G_fit(fc_fit)
+
+stats 'fft.csv' using 8 name 'G' nooutput
+G_peak_fit = G_max 
 G_3dB_level = G_peak_fit - 3.0
 
+stats 'fft.csv' using 1:( ( $8 >= G_3dB_level) ? $8 : 1/0 ) name 'Gbw' nooutput
+f_lower_fit = Gbw_min_x
+f_upper_fit = Gbw_max_x
+bandwidth_fit = f_upper_fit - f_lower_fit
 
 
 
 
-# print sprintf('Fitted resonance frequency: %.2f Hz', fc_fit)
-# print sprintf('Fitted G_peak: %.2f dB', G_peak_fit)
-# print sprintf('Fitted f_lower: %.2f Hz', f_lower_fit)
-# print sprintf('Fitted f_upper: %.2f Hz', f_upper_fit)
-# print sprintf('Fitted bandwidth: %.2f Hz', bandwidth_fit)
+print sprintf('Fitted resonance frequency: %.2f Hz', fc_fit)
+print sprintf('Fitted G_peak: %.2f dB', G_peak_fit)
+print sprintf('Fitted f_lower: %.2f Hz', f_lower_fit)
+print sprintf('Fitted f_upper: %.2f Hz', f_upper_fit)
+print sprintf('Fitted bandwidth: %.2f Hz', bandwidth_fit)
 
 # Read theoretical and fitted gain at specific frequencies if needed
 
@@ -96,6 +102,13 @@ set style line 4 lw 2 pt 7 ps 0.5 lc rgb 'red'
 
 
 
+set obj 1 rect from f_lower_fit, graph 0 to f_upper_fit, graph 1 fc rgb 'gray' fs transparent solid 0.3 noborder
+
+set arrow from fc_fit, graph 0 to fc_fit, graph 1 lw 1 dt 2 nohead lc rgb 'black'
+set arrow from f_lower_fit, graph 0 to f_lower_fit, graph 1 lw 1 dt 2 nohead lc rgb 'black'
+set arrow from f_upper_fit, graph 0 to f_upper_fit, graph 1 lw 1 dt 2 nohead lc rgb 'black'
+
+set arrow from graph 0, first G_0_fit to graph 0.3, first G_0_fit nohead lc rgb 'black'
 
 # Plot
 set title 'Bode diagram (Gain)'
@@ -109,9 +122,12 @@ set yrange [-50:0]
 set datafile separator ','
 set samples 10000
 plot \
-    'fft.csv' using 1:( ($1>=10000 && $1<=100000) ? 20*log10($3/$2) : 1/0 ) with line ls 4 title 'Data points',\
+    'fft.csv' using 1:8 with line ls 4 title 'Data points',\
     G_fit(x) with line ls 2 title 'Fit',\
+    G_inf_fit(x) with line ls 3 title 'Asymptotic curve',\
     G_theo(x) with line ls 1 title 'Theoretical curve'
+
+
 
 
 
