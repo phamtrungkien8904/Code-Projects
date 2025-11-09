@@ -7,7 +7,7 @@ data = np.loadtxt("data.csv", delimiter=",", comments="#")
 
 # Scales for graph
 f_max = 100000
-f_min = 1000
+f_min = 10000
 
 # Number of sample points
 N = data.shape[0]
@@ -81,7 +81,7 @@ np.savetxt(
 	"fft.csv",
 	np.column_stack((xf, amp_in, amp_out, phase_in, phase_out, phase_diff_rad, phase_diff_deg)),
 	delimiter=",",
-	header="frequency,input_amplitude,output_amplitude,input_phase,output_phase,phase_diff_rad,phase_diff_deg",
+	header="# frequency,input_amplitude,output_amplitude,input_phase,output_phase,phase_diff_rad,phase_diff_deg",
 	comments="",
 )
 
