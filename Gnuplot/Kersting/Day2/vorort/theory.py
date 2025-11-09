@@ -9,7 +9,7 @@ R = 51
 dR = 0.01*R
 C = 1e-6
 dC = 0.2*C
-L = 10e-6
+L = 8.7e-6
 dL = 0.2*L
 
 # Frequency axis (Hz)

@@ -24,7 +24,7 @@ R = 51
 dR = 0.01*R
 C = 1e-6
 dC = 0.2*C
-L = 10e-6
+L = 8.7e-6
 dL = 0.2*L
 RS = 50  # Source resistance
 RL = 0.2 # Inductor resistance
@@ -40,14 +40,12 @@ f_upper = fc*( -1/(2*Q) + sqrt( (1/(2*Q))**2 +1 ))
 
 
 
-stats 'theory_output.csv' using 4 name 'bandwidth' nooutput
-bw = bandwidth_min      
 
 
 
 
-print sprintf('Cutoff Frequency (theoretical): (%.2f +- %.2f) Hz', fc, dfc)
-print sprintf('Bandwidth (theoretical): %.2f Hz', bw)
+# print sprintf('Cutoff Frequency (theoretical): (%.2f +- %.2f) Hz', fc, dfc)
+# print sprintf('Bandwidth (theoretical): %.2f Hz', bw)
 
 
 
@@ -56,6 +54,9 @@ print sprintf('Bandwidth (theoretical): %.2f Hz', bw)
 # Tranmission function
 G_theo(x) = 20*log10(1/sqrt((1 + Q*QL/(QL**2 + (x/fc)**2))**2 + (Q*x/fc)**2 *(1-1/(QL**2 + (x/fc)**2))**2))
 G_fit(x) = 20*log10(1/sqrt((1 + q*qL/(qL**2 + (x/c)**2))**2 + (q*x/c)**2 *(1-1/(qL**2 + (x/c)**2))**2))
+G_drop = 20*log10(1/sqrt(1+ (Q*QL)**2 + 2*Q*QL/(1+QL**2)))
+G_0 = 20*log10(1/(1 + Q/QL))
+G_inf(x) = 20*log10(1/(Q*x/fc)) 
 
 
 set fit quiet

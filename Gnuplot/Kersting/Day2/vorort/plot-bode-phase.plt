@@ -13,7 +13,7 @@ set ylabel 'Phase Shift $\Delta \phi$ (degree)'
 set xlabel 'Frequency $f$ (Hz)'
 # set grid
 set logscale x 10
-set xrange [10000:100000]
+set xrange [100:1000000]
 set format x "%.0s%c"
 set yrange [-90:90]
 set datafile separator ','
@@ -24,9 +24,9 @@ set samples 10000
 R = 51
 dR = 0.01*R
 C = 1e-6
-dC = 0.1*C
+dC = 0.2*C
 L = 8.7e-6
-dL = 0.01*L
+dL = 0.2*L
 fc = 1/(2*pi*sqrt(L*C))
 dfc = fc*sqrt( (dR/R)**2 + (dC/C)**2 + (dL/L)**2 )
 Q = R*sqrt(C/L)
@@ -44,23 +44,24 @@ f_upper = fc*( -1/(2*Q) + sqrt( (1/(2*Q))**2 +1 ))
 
 # Fit
 # Tranmission function
-p(x) = -180/pi*atan(Q*(x/d - d/x))
-p_theo(x) = -180/pi*atan(Q*(x/fc - fc/x))
+p(x) = -180/pi*atan((q*x/c*((x/c)**2 + qL**2 -1))/((x/c)**2 + qL**2 + q*qL))
+p_theo(x) = -180/pi*atan((Q*x/fc*((x/fc)**2 + QL**2 -1))/((x/fc)**2 + QL**2 + Q*QL))
 
 set fit quiet
 set fit errorvariables
 # Provide sensible initial guesses for fit parameters so the nonlinear fit can converge
 # Start b near the theoretical cutoff fc and q near the theoretical Q
-b = fc
+q = Q
+qL = QL
+c = fc
 
+fit[10000:100000] p(x) 'fft.csv' using 1:7 via q, qL, c
 
-fit p(x) 'fft.csv' using 1:7 via d
+# fc_fit_phase = d
 
-fc_fit_phase = d
-
-if (fc_fit_phase==fc_fit_phase) set arrow 1 lw 1 dt 2 from fc_fit_phase, graph 0 to fc_fit_phase, graph 1 nohead lc rgb 'black'
-if (fc_fit_phase==fc_fit_phase) set arrow 2 lw 1 dt 2 from graph 0, first p(fc_fit_phase) to graph 1, first p(fc_fit_phase) nohead lc rgb 'black'
-if (fc_fit_phase==fc_fit_phase) set label 1 sprintf('$f_c = %.0f$ Hz', fc_fit_phase) at fc_fit_phase, p(fc_fit_phase) offset 2,1
+# if (fc_fit_phase==fc_fit_phase) set arrow 1 lw 1 dt 2 from fc_fit_phase, graph 0 to fc_fit_phase, graph 1 nohead lc rgb 'black'
+# if (fc_fit_phase==fc_fit_phase) set arrow 2 lw 1 dt 2 from graph 0, first p(fc_fit_phase) to graph 1, first p(fc_fit_phase) nohead lc rgb 'black'
+# if (fc_fit_phase==fc_fit_phase) set label 1 sprintf('$f_c = %.0f$ Hz', fc_fit_phase) at fc_fit_phase, p(fc_fit_phase) offset 2,1
 
 
 
