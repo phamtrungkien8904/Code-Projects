@@ -14,7 +14,7 @@ set xlabel 'Frequency $f$ (Hz)'
 # set grid
 set logscale x 10
 set xrange [1000:1000000]
-set format x "%.0s%c"
+set format x "10^%.0T"
 set yrange [-90:90]
 set datafile separator ','
 set samples 10000
@@ -74,14 +74,18 @@ set style line 1 lw 2 pt 7 ps 0.5 lc rgb 'black'
 set style line 2 lw 2 pt 7 ps 0.5 lc rgb 'blue' 
 set style line 3 lw 2 pt 7 ps 0.5 lc rgb 'green'
 set style line 4 lw 2 pt 7 ps 0.5 lc rgb 'red'
+set style line 5 lc rgb 'black' lw 1.1 dt 2
 
-
+# Draw dashed line at fc where phase crosses zero
+set arrow from c, graph 0 to c, graph 1 nohead ls 5
+# Draw horizontal dashed line at 0 degrees
+set arrow from graph 0, first 0 to graph 1, first 0 nohead ls 5
 
 # Plot
 plot \
     'fft.csv' using 1:(($1>=10000 && $1<=100000) ? $7 : 1/0 ) with line ls 4 title 'Data points',\
-    p(x) with line ls 2 title 'Fitted Curve',\
-    p_theo(x) with line ls 3 title 'Theoretical Curve'
+    p(x) with line ls 2 title 'Fit'
+    # p_theo(x) with line ls 3 title 'Theoretical Curve'
 
 
 # set out

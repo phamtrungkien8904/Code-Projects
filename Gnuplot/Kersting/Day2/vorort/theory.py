@@ -13,7 +13,7 @@ L = 8.7e-6
 dL = 0.2*L
 
 # Frequency axis (Hz)
-f = np.logspace(3, 5, 10000)   # 1 kHz .. 100 kHz
+f = np.logspace(2, 6, 100000)   # 1 kHz .. 100 kHz
 w = 2 * np.pi * f
 
 # Impedances
@@ -95,26 +95,26 @@ np.savetxt(
 	comments="",
 )
 
-bandwidth_data = np.array([[f_res, f_lower, f_upper, bandwidth]])
+bandwidth_data = np.array([[f_res, f_lower, f_upper, bandwidth, G_res]])
 np.savetxt(
 	"theory_output.csv",
 	bandwidth_data,
 	delimiter=",",
-	header="# f_res,f_lower,f_upper,bandwidth",
+	header="# f_res,f_lower,f_upper,bandwidth, G_res",
 	comments="",
 )
 
 # Plot
-# plt.plot(f, G_ideal, label="Ideal (no R_L)")
-# plt.plot(f, G_theo, label="Including R_L")
-# plt.xlim(1e3, 1e5)
-# plt.xscale("log")
-# plt.ylim(-40, 0)
-# plt.xlabel("Frequency (Hz)")
-# plt.ylabel("Amplitude (V)")
-# plt.grid()
-# plt.legend()
-# plt.show()
+plt.plot(f, G_ideal, label="Ideal (no R_L)")
+plt.plot(f, G_theo, label="Including R_L")
+plt.xlim(1e3, 1e5)
+plt.xscale("log")
+plt.ylim(-40, 0)
+plt.xlabel("Frequency (Hz)")
+plt.ylabel("Amplitude (V)")
+plt.grid()
+plt.legend()
+plt.show()
 
 
 # plt.plot(f, H_in, label="Input")

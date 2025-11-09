@@ -2,7 +2,7 @@ reset
 set encoding utf8 
 
 # set terminal epslatex color
-# set out 'bodegain.tex' ################# n series RC low-pass filter bode plot
+# set out 'bodegain.tex' #################
 
 # ============================ Plot Settings ============================
 
@@ -59,11 +59,14 @@ qL = QL
 c = fc
 
 G_fit(x) = 20*log10(1/sqrt((1 + q*qL/(qL**2 + (x/c)**2))**2 + (q*x/c)**2 *(1-1/(qL**2 + (x/c)**2))**2))
+fit[10000:100000] G_fit(x) 'fft.csv' using 1:8 via q, qL, c
+
 G_drop_fit = 20*log10(1/sqrt(1+ (q*qL)**2 + 2*q*qL/(1+qL**2)))
 G_0_fit = 20*log10(1/(1 + q/qL))
+# G_0_fit = 20*log10(1/(1 + q/qL))
 G_inf_fit(x) = 20*log10(1/(q*x/c))
 
-fit[10000:100000] G_fit(x) 'fft.csv' using 1:8 via q, qL, c
+
 
 
 # Find resonance frequency (peak) and -3dB frequencies from the fitted curve
@@ -83,6 +86,7 @@ bandwidth_fit = f_upper_fit - f_lower_fit
 
 print sprintf('Fitted resonance frequency: %.2f Hz', fc_fit)
 print sprintf('Fitted G_peak: %.2f dB', G_peak_fit)
+print sprintf('Fitted G_0: %.2f dB', G_0_fit)
 print sprintf('Fitted f_lower: %.2f Hz', f_lower_fit)
 print sprintf('Fitted f_upper: %.2f Hz', f_upper_fit)
 print sprintf('Fitted bandwidth: %.2f Hz', bandwidth_fit)
@@ -95,20 +99,32 @@ print sprintf('Fitted bandwidth: %.2f Hz', bandwidth_fit)
 # Styling
 # Use valid color syntax and distinct colors per dataset
 set style line 1 lw 2 pt 7 ps 0.5 lc rgb 'black'
-set style line 2 lw 2 pt 7 ps 0.5 lc rgb 'blue' 
+set style line 2 lw 1.5 pt 7 ps 0.5 lc rgb 'blue' 
 set style line 3 lw 2 pt 7 ps 0.5 lc rgb 'green'
 set style line 4 lw 2 pt 7 ps 0.5 lc rgb 'red'
+set style line 5 lc rgb 'black' lw 1.1 dt 2
 
 
 
+set obj rect from f_lower_fit, graph 0.12 to f_upper_fit, graph 1 fc rgb 'gray' fs transparent solid 0.3 noborder
 
-set obj 1 rect from f_lower_fit, graph 0 to f_upper_fit, graph 1 fc rgb 'gray' fs transparent solid 0.3 noborder
+set arrow from fc_fit, graph 0.12 to fc_fit, graph 1 nohead ls 5
+set arrow from f_lower_fit, graph 0.12 to f_lower_fit, graph 1 nohead ls 5
+set arrow from f_upper_fit, graph 0.12 to f_upper_fit, graph 1 nohead ls 5
 
-set arrow from fc_fit, graph 0 to fc_fit, graph 1 lw 1 dt 2 nohead lc rgb 'black'
-set arrow from f_lower_fit, graph 0 to f_lower_fit, graph 1 lw 1 dt 2 nohead lc rgb 'black'
-set arrow from f_upper_fit, graph 0 to f_upper_fit, graph 1 lw 1 dt 2 nohead lc rgb 'black'
+set arrow from graph 0, first G_0_fit to graph 0.5, first G_0_fit nohead ls 5
+set arrow from graph 0, first G_peak_fit to graph 1, first G_peak_fit nohead ls 5
+set arrow from graph 0, first G_3dB_level to graph 1, first G_3dB_level nohead ls 5
 
-set arrow from graph 0, first G_0_fit to graph 0.3, first G_0_fit nohead lc rgb 'black'
+# Two-way arrow showing -3 dB difference
+set arrow from graph 0.05, first G_peak_fit to graph 0.05, first G_3dB_level heads lc rgb 'black' lw 1.5
+
+# Labels
+set label 1 sprintf('$f_c$ = %.0f Hz', fc_fit) at sqrt(f_lower_fit*f_upper_fit), graph 0.09 center tc rgb 'black' font ',10'
+set label 2 sprintf('$\Delta f$ = %.0f Hz', bandwidth_fit) at sqrt(f_lower_fit*f_upper_fit), graph 0.05 center tc rgb 'black' font ',10'
+set label 3 sprintf('$G_0$ = %.2f dB', G_0_fit) at graph 0.45, first G_0_fit - 1 right tc rgb 'black' font ',10'
+set label 4 '$\Delta G_\infty$/dec = -20' at 200000, G_inf_fit(200000)-2 center tc rgb 'black' font ',10' rotate by -45
+set label 5 '-3 dB' at graph 0.07, first ((G_peak_fit + G_3dB_level)/2) left tc rgb 'black' font ',10'
 
 # Plot
 set title 'Bode diagram (Gain)'
@@ -117,15 +133,15 @@ set xlabel 'Frequency $f$ (Hz)'
 # set grid
 set logscale x 10
 set xrange [100:1000000]
-set format x "%.0s%c"
+set format x "10^%.0T"
 set yrange [-50:0] 
 set datafile separator ','
 set samples 10000
 plot \
     'fft.csv' using 1:8 with line ls 4 title 'Data points',\
     G_fit(x) with line ls 2 title 'Fit',\
-    G_inf_fit(x) with line ls 3 title 'Asymptotic curve',\
-    G_theo(x) with line ls 1 title 'Theoretical curve'
+    [70000:*]G_inf_fit(x) with line lc rgb 'black' lw 1 dt 2 notitle
+    # G_theo(x) with line ls 1 title 'Theoretical curve'
 
 
 
