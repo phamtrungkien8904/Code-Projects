@@ -38,16 +38,16 @@ ddelta_f = delta_f*sqrt( (dfc/fc)**2 + (dQ/Q)**2 )
 f_lower = fc*(1/(2*Q) + sqrt( (1/(2*Q))**2 +1 ))
 f_upper = fc*( -1/(2*Q) + sqrt( (1/(2*Q))**2 +1 ))
 
-file_exists = system(sprintf('if exist "%s" ( exit 0 ) else ( exit 1 )','theory_output.csv'))
 
 
-stats 'theory_output.csv' using 4 nooutput
-bw = STATS_min
+stats 'theory_output.csv' using 4 name 'bandwidth' nooutput
+bw = bandwidth_min      
+
 
 
 
 print sprintf('Cutoff Frequency (theoretical): (%.2f +- %.2f) Hz', fc, dfc)
-print sprintf('Bandwidth (theoretical): (%.2f +- %.2f) Hz', bw)
+print sprintf('Bandwidth (theoretical): %.2f Hz', bw)
 
 
 
