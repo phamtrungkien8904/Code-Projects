@@ -140,7 +140,7 @@ set samples 10000
 plot \
     'fft.csv' using 1:8 with line ls 4 title 'Data points',\
     G_fit(x) with line ls 2 title 'Fit',\
-    [70000:*]G_inf_fit(x) with line lc rgb 'black' lw 1 dt 2 notitle
+    [70000:1000000]G_inf_fit(x) with line lc rgb 'black' lw 1 dt 2 notitle
     # G_theo(x) with line ls 1 title 'Theoretical curve'
 
 

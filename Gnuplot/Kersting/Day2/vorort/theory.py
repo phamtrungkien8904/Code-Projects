@@ -105,16 +105,16 @@ np.savetxt(
 )
 
 # Plot
-plt.plot(f, G_ideal, label="Ideal (no R_L)")
-plt.plot(f, G_theo, label="Including R_L")
-plt.xlim(1e3, 1e5)
-plt.xscale("log")
-plt.ylim(-40, 0)
-plt.xlabel("Frequency (Hz)")
-plt.ylabel("Amplitude (V)")
-plt.grid()
-plt.legend()
-plt.show()
+# plt.plot(f, G_ideal, label="Ideal (no R_L)")
+# plt.plot(f, G_theo, label="Including R_L")
+# plt.xlim(1e3, 1e5)
+# plt.xscale("log")
+# plt.ylim(-40, 0)
+# plt.xlabel("Frequency (Hz)")
+# plt.ylabel("Amplitude (V)")
+# plt.grid()
+# plt.legend()
+# plt.show()
 
 
 # plt.plot(f, H_in, label="Input")
