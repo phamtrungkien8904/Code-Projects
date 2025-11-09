@@ -56,7 +56,8 @@ set arrow from f_upper, graph 0.12 to f_upper, graph 1 nohead ls 5
 set arrow from graph 0, first G_0 to graph 0.5, first G_0 nohead ls 5
 set arrow from graph 0, first G_peak to graph 1, first G_peak nohead ls 5
 set arrow from graph 0, first G_3dB_level to graph 1, first G_3dB_level nohead ls 5
-
+set arrow from graph 0.05, first G_peak to graph 0.05, first 0 heads lc rgb 'black' lw 1.5
+    
 # Two-way arrow showing -3 dB difference
 set arrow from graph 0.05, first G_peak to graph 0.05, first G_3dB_level heads lc rgb 'black' lw 1.5
 # Labels
@@ -65,7 +66,7 @@ set label 2 sprintf('$\Delta f$ = %.0f Hz', bandwidth) at sqrt(f_lower*f_upper),
 set label 3 sprintf('$G_0$ = %.2f dB', G_0) at graph 0.45, first G_0 - 1 right tc rgb 'black' font ',10'
 set label 4 '$\Delta G_\infty$/dec = -20' at 200000, G_inf(200000)-2 center tc rgb 'black' font ',10' rotate by -40
 set label 5 '-3 dB' at graph 0.07, first ((G_peak + G_3dB_level)/2) left tc rgb 'black' font ',10'
-
+set label 6 sprintf('%.2f dB', G_peak) at graph 0.07, first ((G_peak + 0)/2) left tc rgb 'black' font ',10'
 # Plot
 set title 'Theoritical Bode diagram (Gain)'
 set ylabel 'Gain $G$ (dB)'

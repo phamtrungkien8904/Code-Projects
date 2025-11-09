@@ -119,12 +119,16 @@ set arrow from graph 0, first G_3dB_level to graph 1, first G_3dB_level nohead l
 # Two-way arrow showing -3 dB difference
 set arrow from graph 0.05, first G_peak_fit to graph 0.05, first G_3dB_level heads lc rgb 'black' lw 1.5
 
+# Two-way arrow showing G_peak_fit to 0 dB
+set arrow from graph 0.05, first G_peak_fit to graph 0.05, first 0 heads lc rgb 'black' lw 1.5
+
 # Labels
 set label 1 sprintf('$f_c$ = %.0f Hz', fc_fit) at sqrt(f_lower_fit*f_upper_fit), graph 0.09 center tc rgb 'black' font ',10'
 set label 2 sprintf('$\Delta f$ = %.0f Hz', bandwidth_fit) at sqrt(f_lower_fit*f_upper_fit), graph 0.05 center tc rgb 'black' font ',10'
 set label 3 sprintf('$G_0$ = %.2f dB', G_0_fit) at graph 0.45, first G_0_fit - 1 right tc rgb 'black' font ',10'
 set label 4 '$\Delta G_\infty$/dec = -20' at 200000, G_inf_fit(200000)-2 center tc rgb 'black' font ',10' rotate by -45
 set label 5 '-3 dB' at graph 0.07, first ((G_peak_fit + G_3dB_level)/2) left tc rgb 'black' font ',10'
+set label 6 sprintf('%.2f dB', G_peak_fit) at graph 0.07, first ((G_peak_fit + 0)/2) left tc rgb 'black' font ',10'
 
 # Plot
 set title 'Bode diagram (Gain)'
