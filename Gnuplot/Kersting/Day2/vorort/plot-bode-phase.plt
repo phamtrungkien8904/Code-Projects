@@ -13,7 +13,7 @@ set ylabel 'Phase Shift $\Delta \phi$ (degree)'
 set xlabel 'Frequency $f$ (Hz)'
 # set grid
 set logscale x 10
-set xrange [100:1000000]
+set xrange [1000:1000000]
 set format x "%.0s%c"
 set yrange [-90:90]
 set datafile separator ','
@@ -76,7 +76,7 @@ set style line 4 lw 2 pt 7 ps 0.5 lc rgb 'red'
 
 # Plot
 plot \
-    'fft.csv' using 1:7 with line ls 4 title 'Data points',\
+    'fft.csv' using 1:(($1>=10000 && $1<=100000) ? $7 : 1/0 ) with line ls 4 title 'Data points',\
     p(x) with line ls 2 title 'Fitted Curve',\
     p_theo(x) with line ls 3 title 'Theoretical Curve'
 
