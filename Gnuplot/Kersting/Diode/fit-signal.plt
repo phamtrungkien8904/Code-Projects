@@ -2,7 +2,7 @@ reset
 set encoding utf8
 
 # set terminal epslatex color
-# set output 'signal.png'
+# set output 'inout.tex'
 
 set title 'Input vs Output'
 set xlabel 'Output Voltage (V)'

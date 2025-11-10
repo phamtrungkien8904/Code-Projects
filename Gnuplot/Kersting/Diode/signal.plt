@@ -2,7 +2,7 @@ reset
 set encoding utf8
 
 # set terminal epslatex color
-# set output 'signal-diode.png'
+# set output 'signal-diode.tex'
 
 set title 'Signals over time'
 set xlabel 'Time (ms)'

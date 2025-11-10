@@ -2,7 +2,7 @@ reset
 set encoding utf8
 
 # set terminal epslatex color
-# set output 'signal.png'
+# set output 'vi-diode.tex'
 
 set title 'Characteristic Diode Response'
 set xlabel 'Voltage (V)'
