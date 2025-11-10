@@ -5,8 +5,8 @@ set encoding utf8
 # set output 'inout.tex'
 
 set title 'Input vs Output'
-set xlabel 'Output Voltage (V)'
-set ylabel 'Input Voltage (V)'
+set xlabel 'Input Voltage (V)'
+set ylabel 'Output Voltage (V)'
 set xrange [-3:3]
 set yrange [-2:2]
 set grid
