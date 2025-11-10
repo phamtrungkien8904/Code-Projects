@@ -1,10 +1,10 @@
 reset
 set encoding utf8
 
-# set terminal pngcairo size 1200,600
-# set output 'signal.png'
+# set terminal epslatex color
+# set output 'signal-diode.png'
 
-set title 'Signal Input and Output'
+set title 'Signals over time'
 set xlabel 'Time (ms)'
 set ylabel 'Voltage (V)'
 set xrange [-3:3]

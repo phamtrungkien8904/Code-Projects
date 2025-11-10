@@ -1,7 +1,7 @@
 reset
 set encoding utf8
 
-# set terminal pngcairo size 1200,600
+# set terminal epslatex color
 # set output 'signal.png'
 
 set title 'Characteristic Diode Fit'
