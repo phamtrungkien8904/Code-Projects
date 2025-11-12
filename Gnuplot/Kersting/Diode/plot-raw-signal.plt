@@ -2,7 +2,7 @@ reset
 set encoding utf8
 
 # set terminal epslatex color
-# set output 'signal-diode-1k.tex'
+# set output 'signal-diode-1k.tex'#
 
 # set title 'Signals over time (R = 100)'
 set title 'Signals over time (R = 1k)'
