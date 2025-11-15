@@ -1,14 +1,18 @@
+from scipy.fft import fft, fftfreq, ifft
 import numpy as np
 import csv
+import matplotlib.pyplot as plt
 
 """
 RC Low-Pass Filter (1st order) Data Generator
 """
 
 # Set the parameters for the filter
-dt = 0.00001   # Time step (dt << tau)
+# sample points
+N = 100000
+dt = 1 / N   # Time step (dt << tau)
 t = np.arange(0, 1, dt)  # Time array
-f = 1
+f =4
 
 # Generate the input signal (square wave)
 
@@ -39,18 +43,50 @@ u_in = np.sign(np.sin(2 * np.pi *f* t))
 
 
 
+tau = 1/(2 * np.pi * 5)  
+# Transfer function (complex, not just amplitude)
+def transfer_function(f, tau):
+    s = 1j * 2 * np.pi * f
+    H = 1 / (1 + s * tau)
+    return H  # Return complex transfer function, not just magnitude
 
-# # Transfer function (Amplitude)
-# def transfer_function(f, tau):
-#     s = 1j * 2 * np.pi * f
-#     H = 1 / (1 + s * tau)
-#     return abs(H) 
 
-# H_amp = transfer_function(f, tau)
+yf = fft(u_in)
+xf = fftfreq(N, dt)
+yf_out = yf * transfer_function(xf, tau)
+
+# R = 220 # Resistance in ohms
+# Z_R = R
+# C = 220e-6 # Capacitance in farads
+# Z_C = 1/(1j * 2 * np.pi * xf * C)
+# H = Z_C / (Z_R + Z_C)  # Transfer function
+# yf_out = yf * np.abs(H)
 
 # Save the input and output signals to a CSV file
-with open("data.csv", "w", newline="") as csvfile:
-    csvwriter = csv.writer(csvfile)
-    csvwriter.writerow(["# Time", "Input"])
-    for i in range(len(t)):
-        csvwriter.writerow([t[i], u_in[i]])  
+# with open("data.csv", "w", newline="") as csvfile:
+#     csvwriter = csv.writer(csvfile)
+#     csvwriter.writerow(["# Time", "Input"])
+#     for i in range(len(t)):
+#         csvwriter.writerow([t[i], u_in[i]])  
+yinv = ifft(yf_out)
+
+    
+
+plt.plot(xf[:N//2], 2.0/N * np.abs(yf[:N//2]))
+plt.plot(xf[:N//2], 2.0/N * np.abs(yf_out[:N//2]))
+plt.xlim(0, 100)
+plt.xlabel("Frequency (Hz)")
+plt.ylabel("Amplitude (V)")
+plt.title("FFT of Input Signal")
+plt.grid()
+plt.show()
+
+
+plt.plot(t, u_in, label="Input Signal")
+plt.plot(t, yinv.real, label="Output Signal")
+plt.xlabel("Time (s)")
+plt.ylabel("Amplitude (V)")
+plt.title("Time-Domain Signal through RC Low-Pass Filter")
+plt.grid()
+plt.legend()
+plt.show()

@@ -24,7 +24,7 @@ y_in = data[:, 1]
 yf_in = fft(y_in)
 
 # Only keep the positive frequency components for plotting/exporting
-xf = fftfreq(N, T)
+xf = fftfreq(N, T)[:N//2]
 
 # Create interpolated frequency array with specified step
 xf = np.arange(f_min, f_max + f_step, f_step)
