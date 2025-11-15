@@ -29,7 +29,7 @@ u_in = np.sign(np.sin(2 * np.pi *f* t))
 # u_in = (2*(t*f - np.floor(0.5 + t*f)))
 
 # Sawtooth wave Fourier series
-# u_in = 1/3*np.sum([ ((-1)**n)/(n+1) * np.sin(2 * np.pi * (n+1) * f * t) for n in range(20)], axis=0)
+# u_in = 1/3*np.sum([ ((-1)**n)/(n+1) * np.sin(2 * np.pi * (n+1) * f * t) for n in range(50)], axis=0)
 
 
 # Fourier series (random noising waves)
@@ -42,25 +42,33 @@ u_in = np.sign(np.sin(2 * np.pi *f* t))
 # u_in = np.sin(2 * np.pi * (f_start + df*t*1000 ) * t) 
 
 
-
-tau = 1/(2 * np.pi * 5)  
+R = 144
+C = 220e-6
+L = 10e-1
 # Transfer function (complex, not just amplitude)
-def transfer_function(f, tau):
+def transfer_function(f):
     s = 1j * 2 * np.pi * f
-    H = 1 / (1 + s * tau)
+    Z_R = R
+    Z_C = 1 / (s * C)
+    Z_L = s * L
+    H = Z_R / (Z_R + Z_C)
     return H  # Return complex transfer function, not just magnitude
+
+
 
 
 yf = fft(u_in)
 xf = fftfreq(N, dt)
-yf_out = yf * transfer_function(xf, tau)
 
-# R = 220 # Resistance in ohms
-# Z_R = R
-# C = 220e-6 # Capacitance in farads
-# Z_C = 1/(1j * 2 * np.pi * xf * C)
-# H = Z_C / (Z_R + Z_C)  # Transfer function
-# yf_out = yf * np.abs(H)
+
+
+# Apply transfer function, but ignore f = 0.0 (DC component)
+mask = xf != 0
+H = np.ones_like(xf, dtype=complex)
+H[mask] = transfer_function(xf[mask])
+
+yf_out = yf * H
+
 
 # Save the input and output signals to a CSV file
 # with open("data.csv", "w", newline="") as csvfile:
@@ -83,7 +91,7 @@ plt.show()
 
 
 plt.plot(t, u_in, label="Input Signal")
-plt.plot(t, yinv.real, label="Output Signal")
+plt.plot(t, np.abs(yinv), label="Output Signal")
 plt.xlabel("Time (s)")
 plt.ylabel("Amplitude (V)")
 plt.title("Time-Domain Signal through RC Low-Pass Filter")
