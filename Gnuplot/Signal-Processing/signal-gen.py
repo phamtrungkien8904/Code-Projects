@@ -12,7 +12,7 @@ RC Low-Pass Filter (1st order) Data Generator
 N = 100000
 dt = 1 / N   # Time step (dt << tau)
 t = np.arange(0, 1, dt)  # Time array
-f =4
+f =1
 
 # Generate the input signal (square wave)
 
@@ -50,8 +50,7 @@ def transfer_function(f):
     s = 1j * 2 * np.pi * f
     Z_R = R
     Z_C = 1 / (s * C)
-    Z_L = s * L
-    H = Z_R / (Z_R + Z_C)
+    H = Z_C / (Z_R + Z_C)
     return H  # Return complex transfer function, not just magnitude
 
 
@@ -80,8 +79,8 @@ yinv = ifft(yf_out)
 
     
 
-plt.plot(xf[:N//2], 2.0/N * np.abs(yf[:N//2]))
-plt.plot(xf[:N//2], 2.0/N * np.abs(yf_out[:N//2]))
+plt.plot(xf, 2.0/N * np.abs(yf))
+plt.plot(xf, 2.0/N * np.abs(yf_out))
 plt.xlim(0, 100)
 plt.xlabel("Frequency (Hz)")
 plt.ylabel("Amplitude (V)")
