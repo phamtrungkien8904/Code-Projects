@@ -13,10 +13,10 @@ dx = 0.01
 x_max = 10
 Nx = int(x_max / dx)
 
-c = 1  # wave speed
+c = 1  # wave speed (group velocity)
 w = 1 # angular frequency
 k = 10  # wave number
-#k = w/c # dispersion relation
+#k = w/c # dispersion relation, group velocity = phase velocity = c
 A = 1
 
 t = np.linspace(0, t_max, Nt)
