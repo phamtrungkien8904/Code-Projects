@@ -28,10 +28,8 @@ vG = hbar * k / m  # group velocity
 alpha = 1  # packet width
 beta = hbar/(2*m) # dispersion coefficient
 
-
 t = np.linspace(t_min, t_max, Nt)
 x = np.linspace(x_min, x_max, Nx)
-psi = np.zeros((Nx, Nt), dtype=complex)
 
 
 # Define wave function (General solution)
@@ -49,18 +47,34 @@ def wave_2():
     global t,x
     N = 10  # number of energy levels to sum over
     Psi = np.zeros((Nx, Nt), dtype=complex)
-    psi = np.zeros((N, Nx), dtype=complex)
+    psi = np.zeros((Nx, N), dtype=complex)
     for i in range(0, Nx):
-        Psi[i][0] = np.exp(1j*k*x[i]) * np.exp(-(x[i] - x_min - 5)**2/(2*alpha**2))
-        A = np.sqrt(np.sum(np.abs(Psi[i][0])**2 *dx))  # Normalization constant
-        Psi[i][0] = Psi[i][0]/A
-        for n in range(1,N):
-            psi[n][i] = np.sqrt(2/(x_max - x_min)) * np.sin(n*np.pi*(x[i] - x_min))
-            En = (hbar**2 * (n*np.pi/(x_max - x_min))**2)/(2*m)
-            cn = np.sum(np.conj(psi[n][i]) * Psi[i][0]*dx)
-            Psi[i][:] += cn * psi[n][i] * np.exp(-1j*En*t[:]/hbar)
+        Psi[i][0] = np.exp(1j*k*x[i]) * np.exp(-(x[i]-x_max/2)**2/(2*alpha**2))  # Initial wave packet at t=0
+    # Normalize initial wave function
+    C = np.sqrt(np.sum(np.abs(Psi[:,0])**2)*dx)
+    Psi[:,0] /= C
+    # Expand initial wave function in terms of energy eigenstates
+    for n in range(1, N+1):
+        E_n = (n**2 * np.pi**2 * hbar**2) / (2 * m * x_max**2)
+        for i in range(0, Nx):
+            psi[i][n-1] = np.sqrt(2/x_max) * np.sin(n * np.pi * x[i] / x_max)
+        c_n = np.sum(np.conj(psi[:,n-1]) * Psi[:,0]) * dx  # Expansion coefficient
+        for j in range(0, Nt):
+            for i in range(0, Nx):
+                Psi[i][j] += c_n * psi[i][n-1] * np.exp(-1j * E_n * t[j] / hbar)
     return Psi  # shape (Nx, Nt)
-Psi = wave_2()  # shape (Nx, Nt)
+Psi = wave_1()  # shape (Nx, Nt)
+
+
+# PLot test
+# plt.plot(x, np.abs(Psi[:,0])**2)
+# plt.xlabel('Position')  
+# plt.ylabel('Probability Density')
+# plt.xlim(x_min, x_max)
+# plt.ylim(-1.5, 1.5)
+# plt.title('Initial Probability Density of Free Particle Wave Packet')
+# plt.show()
+
 
 
 fig, ax = plt.subplots()
