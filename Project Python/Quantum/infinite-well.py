@@ -26,7 +26,7 @@ w = hbar * k**2 / (2 * m)  # angular frequency
 vG = hbar * k / m  # group velocity
 alpha = 1  # packet width
 beta = hbar/(2*m) # dispersion coefficient
-
+L = x_max  # well width
 
 t = np.linspace(t_min, t_max, Nt)
 x = np.linspace(x_min, x_max, Nx)
@@ -37,13 +37,14 @@ psi = np.zeros((Nx, Nt), dtype=complex)
 def well(n):
     global t, x
     psi = np.zeros((Nx, Nt), dtype=complex)
+    E = (n**2 * np.pi**2 * hbar**2) / (2 * m * L**2)
     for i in range(0, Nx):
         for j in range(0, Nt):
-            psi[i][j] = np.sqrt(2/x_max) * np.sin(n * np.pi * x[i] / x_max) * np.exp(-1j * w * t[j])
+            psi[i][j] = np.sqrt(2/L) * np.sin(n * np.pi * x[i] / L) * np.exp(-1j * E * t[j] / hbar)
     return psi  # shape (Nx, Nt)
 
 psi = well(3)
-# shape (Nx, Nt)}
+# shape (Nx, Nt)
 
 
 fig, ax = plt.subplots()
