@@ -26,7 +26,7 @@ w = hbar * k**2 / (2 * m)  # angular frequency
 vG = hbar * k / m  # group velocity
 alpha = 1  # packet width
 beta = hbar/(2*m) # dispersion coefficient
-L = x_max  # well width
+
 
 t = np.linspace(t_min, t_max, Nt)
 x = np.linspace(x_min, x_max, Nx)
@@ -34,22 +34,16 @@ psi = np.zeros((Nx, Nt), dtype=complex)
 
 
 
-def well():
+def well(n):
     global t, x
-    N= 10
-    psi_n = np.zeros((N,Nx, Nt), dtype=complex)
-    Psi = np.zeros((Nx, Nt), dtype=complex)
-    for n in range(1,N):
-        E_n = (n**2 * np.pi**2 * hbar**2) / (2 * m * L**2)
-        for i in range(0, Nx):
-            for j in range(0, Nt):
-                psi_n[n][i][j] = np.sqrt(2/L) * np.sin(n * np.pi * x[i] / L) * np.exp(-1j * E_n * t[j] / hbar)
-        c_n = np.sqrt(2/L) * np.sum(np.sin(n * np.pi * x / L) * np.exp(-(x - L/2)**2) * dx)  # Expansion coefficient
-    Psi = np.sum(c_n * psi_n[n] for n in range(1,N))
-    return Psi
+    psi = np.zeros((Nx, Nt), dtype=complex)
+    for i in range(0, Nx):
+        for j in range(0, Nt):
+            psi[i][j] = np.sqrt(2/x_max) * np.sin(n * np.pi * x[i] / x_max) * np.exp(-1j * w * t[j])
+    return psi  # shape (Nx, Nt)
 
-Psi = well()
-# shape (Nx, Nt)
+psi = well(3)
+# shape (Nx, Nt)}
 
 
 fig, ax = plt.subplots()
@@ -62,9 +56,9 @@ ax.set_xlabel('Position')
 ax.set_ylabel('Amplitude')
 
 def animate(i):
-    line1.set_data(x, np.real(Psi[:, i]))
-    line2.set_data(x, np.imag(Psi[:, i]))
-    line3.set_data(x, np.abs(Psi[:, i])**2)
+    line1.set_data(x, np.real(psi[:, i]))
+    line2.set_data(x, np.imag(psi[:, i]))
+    line3.set_data(x, np.abs(psi[:, i])**2)
     return line1, line2, line3
 
 interval =  1000*dt 
