@@ -17,7 +17,7 @@ c = 1  # wave speed (group velocity)
 w = 1 # angular frequency
 k = 10  # wave number
 #k = w/c # dispersion relation, group velocity = phase velocity = c
-A = 1
+
 
 t = np.linspace(0, t_max, Nt)
 x = np.linspace(0, x_max, Nx)
@@ -28,7 +28,8 @@ def wave():
     psi = np.zeros((Nx, Nt), dtype=complex)
     for i in range(0, Nx):
         for j in range(0, Nt):
-            psi[i][j] = A * np.exp(-(x[i] - c*t[j])**2 + 1j * (k * x[i] - w * t[j]))
+            A = 1*np.exp(-(x[i] - c*t[j])**2) # Gaussian envelope
+            psi[i][j] = A * np.exp(1j * (k * x[i] - w * t[j]))
     return psi  # shape (Nx, Nt)
 
 psi = wave()  # shape (Nx, Nt)

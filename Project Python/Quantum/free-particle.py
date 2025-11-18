@@ -33,16 +33,34 @@ t = np.linspace(t_min, t_max, Nt)
 x = np.linspace(x_min, x_max, Nx)
 psi = np.zeros((Nx, Nt), dtype=complex)
 
-def wave():
+
+# Define wave function (General solution)
+def wave_1():
     global t, x
-    psi = np.zeros((Nx, Nt), dtype=complex)
+    Psi = np.zeros((Nx, Nt), dtype=complex)
     for i in range(0, Nx):
         for j in range(0, Nt):
-            psi[i][j] = np.exp(1j*(k*x[i] - w*t[j]))/np.sqrt(alpha + 1j*beta*t[j]) * np.exp(-(x[i] - vG*t[j])**2/(4*(alpha + 1j*beta*t[j])))
-    C = np.sqrt(np.sum(np.abs(psi[:,0])**2)*dx)  # Normalization constant
-    return psi/C  # shape (Nx, Nt)
+            Psi[i][j] = np.exp(1j*(k*x[i] - w*t[j]))/np.sqrt(alpha + 1j*beta*t[j]) * np.exp(-(x[i] - vG*t[j])**2/(4*(alpha + 1j*beta*t[j])))
+    C = np.sqrt(np.sum(np.abs(Psi[:,0])**2)*dx)  # Normalization constant
+    return Psi/C  # shape (Nx, Nt)
 
-psi = wave()  # shape (Nx, Nt)
+
+def wave_2():
+    global t,x
+    N = 10  # number of energy levels to sum over
+    Psi = np.zeros((Nx, Nt), dtype=complex)
+    psi = np.zeros((N, Nx), dtype=complex)
+    for i in range(0, Nx):
+        Psi[i][0] = np.exp(1j*k*x[i]) * np.exp(-(x[i] - x_min - 5)**2/(2*alpha**2))
+        A = np.sqrt(np.sum(np.abs(Psi[i][0])**2 *dx))  # Normalization constant
+        Psi[i][0] = Psi[i][0]/A
+        for n in range(1,N):
+            psi[n][i] = np.sqrt(2/(x_max - x_min)) * np.sin(n*np.pi*(x[i] - x_min))
+            En = (hbar**2 * (n*np.pi/(x_max - x_min))**2)/(2*m)
+            cn = np.sum(np.conj(psi[n][i]) * Psi[i][0]*dx)
+            Psi[i][:] += cn * psi[n][i] * np.exp(-1j*En*t[:]/hbar)
+    return Psi  # shape (Nx, Nt)
+Psi = wave_2()  # shape (Nx, Nt)
 
 
 fig, ax = plt.subplots()
@@ -55,9 +73,9 @@ ax.set_xlabel('Position')
 ax.set_ylabel('Amplitude')
 
 def animate(i):
-    line1.set_data(x, np.real(psi[:, i]))
-    line2.set_data(x, np.imag(psi[:, i]))
-    line3.set_data(x, np.abs(psi[:, i])**2)
+    line1.set_data(x, np.real(Psi[:, i]))
+    line2.set_data(x, np.imag(Psi[:, i]))
+    line3.set_data(x, np.abs(Psi[:, i])**2)
     return line1, line2, line3
 
 interval =  1000*dt 
