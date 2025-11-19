@@ -16,7 +16,7 @@ t_min = 0
 t_max = 50
 Nt = int((t_max - t_min) / dt)
 dx = 0.1
-x_min = 0
+x_min = -25
 x_max = 50
 Nx = int((x_max - x_min) / dx)
 
