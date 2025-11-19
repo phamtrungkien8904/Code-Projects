@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-
+from scipy.integrate import quad
 # Free quantum wave gaussian packet: psi(x,0) = exp(-a(x-x0)^2)
 
 # Constant
@@ -37,7 +37,8 @@ def integrate(func, x_start, x_end, Nx):
 
     return integral 
 
-
+C = quad(lambda x: x**2, -10,10)[0]
+print(C)
 
 # Define wave function (General solution)
 
@@ -77,18 +78,25 @@ def wave_gauss_numeric():
 
 def wave_square_analytic():
     global t, x
-    k_min = -50
-    k_max = 50
-    dk = 0.1
-    Nk = int((k_max - k_min) / dk)
-    k_vals = np.linspace(k_min, k_max, Nk, endpoint=False)
+    k_min = -10
+    k_max = 10
     Psi = np.zeros((Nx, Nt), dtype=complex)
+    
+    def integrand_real(k, x_val, t_val):
+        return np.real(np.exp(1j*(k*x_val - hbar*k**2*t_val/(2*m)))*np.sinc(k*1/np.pi))
+        
+    def integrand_imag(k, x_val, t_val):
+        return np.imag(np.exp(1j*(k*x_val - hbar*k**2*t_val/(2*m)))*np.sinc(k*1/np.pi))
+
     for i in range(0, Nx):
         for j in range(0, Nt):
-            Psi[i][j] = integrate(func=lambda k: np.exp(1j*(k*x[i] - hbar*k**2*t[j]/(2*m)))/(2*np.pi) * (2*np.sinc(k*1/np.pi)), x_start=k_min, x_end=k_max, Nx=Nk)
+            real_part = quad(integrand_real, k_min, k_max, args=(x[i], t[j]))[0]
+            imag_part = quad(integrand_imag, k_min, k_max, args=(x[i], t[j]))[0]
+            Psi[i][j] = real_part + 1j * imag_part
+            
     C = np.sqrt(np.sum(np.abs(Psi[:,0])**2)*dx)  # Normalization constant
     return Psi/C  
-   
+
 
 def wave_square_numeric():
     global t, x
@@ -136,7 +144,7 @@ def wave_random():
 ## To avoid this, increase k_max (decrease dx) and Nk (increase Nx) accordingly. (increase compile time ofc)
 ## However, for short time t, the numerical method works well.
 
-Psi = wave_gauss_numeric()  
+Psi = wave_square_analytic()  
 
 
 

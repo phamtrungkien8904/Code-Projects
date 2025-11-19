@@ -16,3 +16,5 @@ def func(x,t):
 C = func(1,2)
 
 print(C)
+
+print(np.sinc(0))
