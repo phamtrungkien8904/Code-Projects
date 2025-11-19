@@ -33,7 +33,7 @@ x = np.linspace(x_min, x_max, Nx)
 
 
 # Define wave function (General solution)
-def wave_1():
+def wave():
     global t, x
     Psi = np.zeros((Nx, Nt), dtype=complex)
     for i in range(0, Nx):
@@ -43,27 +43,7 @@ def wave_1():
     return Psi/C  # shape (Nx, Nt)
 
 
-def wave_2():
-    global t,x
-    N = 10  # number of energy levels to sum over
-    Psi = np.zeros((Nx, Nt), dtype=complex)
-    psi = np.zeros((Nx, N), dtype=complex)
-    for i in range(0, Nx):
-        Psi[i][0] = np.exp(1j*k*x[i]) * np.exp(-(x[i]-x_max/2)**2/(2*alpha**2))  # Initial wave packet at t=0
-    # Normalize initial wave function
-    C = np.sqrt(np.sum(np.abs(Psi[:,0])**2)*dx)
-    Psi[:,0] /= C
-    # Expand initial wave function in terms of energy eigenstates
-    for n in range(1, N+1):
-        E_n = (n**2 * np.pi**2 * hbar**2) / (2 * m * x_max**2)
-        for i in range(0, Nx):
-            psi[i][n-1] = np.sqrt(2/x_max) * np.sin(n * np.pi * x[i] / x_max)
-        c_n = np.sum(np.conj(psi[:,n-1]) * Psi[:,0]) * dx  # Expansion coefficient
-        for j in range(0, Nt):
-            for i in range(0, Nx):
-                Psi[i][j] += c_n * psi[i][n-1] * np.exp(-1j * E_n * t[j] / hbar)
-    return Psi  # shape (Nx, Nt)
-Psi = wave_1()  # shape (Nx, Nt)
+Psi = wave()  # shape (Nx, Nt)
 
 
 # PLot test

@@ -22,7 +22,7 @@ Nx = int((x_max - x_min) / dx)
 
 # Parameters
 
-k = 1  # wave number
+
 a = 1
 
 t = np.linspace(t_min, t_max, Nt, endpoint=False)
@@ -78,13 +78,11 @@ line3, = ax.plot([], [], lw=2, color='green')
 ax.set_xlim(x_min, x_max)
 ax.set_ylim(-1.5, 1.5)
 ax.set_xlabel('Position')
-ax.set_ylabel('Amplitude')
+ax.set_ylabel('Probability Density')
 
 def animate(i):
-    line1.set_data(x, np.real(Psi[:, i]))
-    line2.set_data(x, np.imag(Psi[:, i]))
     line3.set_data(x, np.abs(Psi[:, i])**2)
-    return line1, line2, line3
+    return line3,
 
 interval =  1000*dt 
 nframes = int(Nt)
