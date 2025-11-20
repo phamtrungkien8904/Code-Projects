@@ -15,6 +15,8 @@ def func(x,t):
     return C[x][t]
 C = func(1,2)
 
-print(C)
 
-print(np.sinc(0))
+H = 2*np.diag(np.ones(m),0) + np.diag(np.ones(m-1),1)
+E, V = np.linalg.eigh(H)
+
+print(H)
