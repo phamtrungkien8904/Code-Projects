@@ -7,14 +7,14 @@ import matplotlib.animation as animation
 
 # Constant
 hbar = 1.0  # Reduced Planck's constant
-m = 1.0    # Particle mass
+m = 10.0    # Particle mass
 
 
 
 # Time steps
 dt = 0.1
 t_min = 0
-t_max = 50
+t_max = 35
 Nt = int((t_max - t_min) / dt) 
 dx = 0.1
 x_min = -25
@@ -23,9 +23,9 @@ Nx = int((x_max - x_min) / dx)
 
 # Parameters
 
-k = 5  # wave number
+k = 10  # wave number
 # w = hbar * k**2 / (2 * m)  # angular frequency
-alpha = 1  # packet width
+alpha = 0.5  # packet width
 p = hbar * k  # momentum
 V0 = p**2/(2*m)  # Kinetic energy
 x0 = -10  # Initial position
@@ -37,8 +37,8 @@ x = np.linspace(x_min, x_max, Nx + 1)
 # Potential function
 V = np.zeros(Nx-1)
 for i in range(Nx-1):
-    if x[i]>-5 and x[i]<5:
-        V[i] = 5*V0
+    if x[i]>-2 and x[i]<2:
+        V[i] = 6*V0
 
 
 
@@ -82,19 +82,19 @@ for j in range(Nt):
         Psi[:, j] += c[n] * psi[n, :] * np.exp(-1j * E[n] * t[j] / hbar)  # Time evolution
 
 
-plt.plot(x[1:-1], np.abs(Psi[:,int(Nt/100)])**2)
-plt.plot(x[1:-1], np.abs(Psi[:,int(2*Nt/100)])**2)
-plt.plot(x[1:-1], np.abs(Psi[:,int(3*Nt/100)])**2)
-plt.plot(x[1:-1], np.abs(Psi[:,int(4*Nt/100)])**2)
-plt.plot(x[1:-1], np.abs(Psi[:,int(5*Nt/100)])**2)
-plt.plot(x[1:-1], np.abs(Psi[:,int(6*Nt/100)])**2)
-# plt.plot(x[1:-1], V)
-plt.fill_between(x[1:-1], 0, 1, where=V > 0, color='gray', alpha=0.3, transform=plt.gca().get_xaxis_transform(), label='Potential')
-plt.xlabel('Position')
-plt.ylabel('Probability Density')
-plt.xlim(x_min, x_max)
-plt.ylim(0, 1)
-plt.show()
+# plt.plot(x[1:-1], np.abs(Psi[:,int(Nt/100)])**2)
+# plt.plot(x[1:-1], np.abs(Psi[:,int(2*Nt/100)])**2)
+# plt.plot(x[1:-1], np.abs(Psi[:,int(3*Nt/100)])**2)
+# plt.plot(x[1:-1], np.abs(Psi[:,int(4*Nt/100)])**2)
+# plt.plot(x[1:-1], np.abs(Psi[:,int(5*Nt/100)])**2)
+# plt.plot(x[1:-1], np.abs(Psi[:,int(6*Nt/100)])**2)
+# # plt.plot(x[1:-1], V)
+# plt.fill_between(x[1:-1], 0, 1, where=V > 0, color='gray', alpha=0.3, transform=plt.gca().get_xaxis_transform(), label='Potential')
+# plt.xlabel('Position')
+# plt.ylabel('Probability Density')
+# plt.xlim(x_min, x_max)
+# plt.ylim(0, 1)
+# plt.show()
 
 
 
@@ -130,22 +130,24 @@ fig, ax = plt.subplots()
 line1, = ax.plot([], [], lw=2, color='red')
 line2, = ax.plot([], [], lw=2, color='blue')
 line3, = ax.plot([], [], lw=2, color='green')
+ax.legend(['Real', 'Imaginary', 'Magnitude'])
 ax.set_xlim(x_min, x_max)
 ax.set_ylim(-1.5, 1.5)
 ax.set_xlabel('Position')
 ax.set_ylabel('Amplitude')
 
 def animate(i):
-    # line1.set_data(x[1:-1], np.real(Psi[:, i]))
-    # line2.set_data(x[1:-1], np.imag(Psi[:, i]))
-    line3.set_data(x[1:-1], np.abs(Psi[:, i])**2)
-    return line3
+    line1.set_data(x[1:-1], np.real(Psi[:, i]))
+    line2.set_data(x[1:-1], np.imag(Psi[:, i]))
+    line3.set_data(x[1:-1], np.abs(Psi[:, i]))
+    return line1, line2, line3
 
-interval =  1000*dt 
+
 nframes = int(Nt)
+interval =  150*dt
 ani = animation.FuncAnimation(fig, animate, frames=nframes, repeat=False, interval=interval, blit=True)
-# ani.save('wave.gif', writer='pillow', fps=30)
-# plt.fill_between(x[1:-1], 0, 1, where=V > 0, color='gray', alpha=0.3, transform=plt.gca().get_xaxis_transform(), label='Potential')
+plt.fill_between(x[1:-1], 0, 1, where=V > 0, color='gray', alpha=0.3, transform=plt.gca().get_xaxis_transform(), label='Potential')
 plt.show()
 
 
+ani.save('tunnel.gif', writer='pillow', fps=30, dpi=600) # Size  
