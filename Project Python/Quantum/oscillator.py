@@ -23,7 +23,7 @@ Nx = int((x_max - x_min) / dx)
 
 # Parameters
 
-k = 10  # wave number
+k = 0  # wave number at center of packet
 # w = hbar * k**2 / (2 * m)  # angular frequency
 alpha = 0.5  # packet width
 p = hbar * k  # momentum
@@ -98,6 +98,7 @@ ax.set_xlim(x_min, x_max)
 ax.set_ylim(-1.5, 1.5)
 ax.set_xlabel('Position')
 ax.set_ylabel('Amplitude')
+time_text = ax.text(0.02, 0.95, '', transform=ax.transAxes)
 
 def animate(i):
     line1.set_data(x[1:-1], np.real(Psi[:, i]))
@@ -109,7 +110,8 @@ def animate(i):
     peak_x = x[1:-1][idx]
     line4.set_data([peak_x, peak_x], [-1.5, 1.5])
     
-    return line1, line2, line3, line4
+    time_text.set_text(f't={t[i]:.1f}s')
+    return line1, line2, line3, line4, time_text
 
 nframes = int(Nt)
 interval =  100*dt
@@ -121,4 +123,4 @@ plt.title('Quantum Harmonic Oscillator')
 plt.show()
 
 
-# ani.save('oscillator.gif', writer='pillow', fps=20) # Size  
+# ani.save('oscillator.gif', writer='pillow', fps=20, dpi = 200) # Size  

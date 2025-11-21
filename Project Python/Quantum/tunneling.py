@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-# Free quantum wave packet
+# Free quantum wave packet with potential barrier (Tunneling effect)
 
 # Constant
 hbar = 1.0  # Reduced Planck's constant
@@ -97,6 +97,7 @@ ax.set_xlim(x_min, x_max)
 ax.set_ylim(-1.5, 1.5)
 ax.set_xlabel('Position')
 ax.set_ylabel('Amplitude')
+time_text = ax.text(0.02, 0.95, '', transform=ax.transAxes)
 
 def animate(i):
     line1.set_data(x[1:-1], np.real(Psi[:, i]))
@@ -108,8 +109,8 @@ def animate(i):
     peak_x = x[1:-1][idx]
     line4.set_data([peak_x, peak_x], [-1.5, 1.5])
     
-    return line1, line2, line3, line4
-
+    time_text.set_text(f't={t[i]:.1f}s')
+    return line1, line2, line3, line4, time_text
 
 nframes = int(Nt)
 interval =  100*dt
@@ -119,4 +120,4 @@ plt.title('Quantum Tunneling')
 plt.show()
 
 
-# ani.save('tunnel.gif', writer='pillow', fps=30) # Size  
+# ani.save('tunnel.gif', writer='pillow', fps=30, dpi = 200) # Size  
