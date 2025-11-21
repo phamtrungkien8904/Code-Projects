@@ -16,7 +16,13 @@ def func(x,t):
 C = func(1,2)
 
 
-H = 2*np.diag(np.ones(m),0) + np.diag(np.ones(m-1),1)
+H = 2*np.diag(np.ones(4),0) + np.diag(np.ones(4-1),1) + np.diag(np.ones(4-1),-1)
+H[2][0] = 1
 E, V = np.linalg.eigh(H)
 
-print(H)
+x = np.zeros(4)
+for i in range(4):
+    x[i] = i
+print(x[1:-1])
+
+

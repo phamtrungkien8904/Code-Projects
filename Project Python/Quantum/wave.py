@@ -8,10 +8,10 @@ import matplotlib.animation as animation
 # Time steps
 dt = 0.01
 t_max = 10
-Nt = int(t_max / dt)
+Nt = int(t_max / dt) + 1
 dx = 0.01
 x_max = 10
-Nx = int(x_max / dx)
+Nx = int(x_max / dx) + 1
 
 c = 1  # wave speed (group velocity)
 w = 1 # angular frequency
