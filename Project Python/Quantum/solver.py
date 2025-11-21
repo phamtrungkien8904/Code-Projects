@@ -30,15 +30,15 @@ p = hbar * k  # momentum
 V0 = p**2/(2*m)  # Kinetic energy
 x0 = -10  # Initial position
 
-t = np.linspace(t_min, t_max, Nt)
-x = np.linspace(x_min, x_max, Nx)
+t = np.linspace(t_min, t_max, Nt + 1)
+x = np.linspace(x_min, x_max, Nx + 1)
 
 
 # Potential function
-V = np.zeros(Nx-2)
-for i in range(Nx-2):
-    if x[i]>-1 and x[i]<1:
-        V[i] = 2*V0
+V = np.zeros(Nx-1)
+for i in range(Nx-1):
+    if x[i]>-5 and x[i]<5:
+        V[i] = 5*V0
 
 
 
@@ -53,7 +53,7 @@ for i in range(Nx-2):
 
 # Initial wave function
 
-Psi0 = np.exp(1j*k*(x[1:-1]-x0))/np.sqrt(np.sqrt(np.pi)*alpha) * np.exp(-(x[1:-1]-x0)**2/(2*alpha**2))
+Psi0 = np.exp(1j*k*(x[1:-1]-x0)) * np.exp(-(x[1:-1]-x0)**2/(2*alpha**2))
 C0 = np.sqrt(np.sum(np.abs(Psi0[:])**2*dx))  # Normalization constant
 Psi0 = Psi0/C0
 # plt.plot(x, np.abs(Psi0)**2)
@@ -66,22 +66,30 @@ Psi0 = Psi0/C0
 
 # Halmiltonian matrix
 lamb = hbar**2/(2*m*dx**2)
-H =lamb*(2*np.diag(np.ones(Nx-2),0) + np.diag(np.ones(Nx-3),1) + np.diag(np.ones(Nx-3),-1))
+H =lamb*(2*np.diag(np.ones(Nx-1),0) + (-1)*np.diag(np.ones(Nx-2),1) + (-1)*np.diag(np.ones(Nx-2),-1))
 for i in range(Nx-2):
     H[i][i] += V[i]/lamb
 E,psi = np.linalg.eigh(H)  # Eigenvalue decomposition
 psi = psi.T  
 
-c = np.zeros(Nx-2, dtype=complex)
-Psi = np.zeros((Nx-2, Nt-2), dtype=complex)
+c = np.zeros(Nx-1, dtype=complex)
+for n in range(Nx-1):
+    c[n] = np.sum(np.conj(psi[n,:]) * Psi0[:])  # Expansion coefficients
 
-for j in range(len(c)):
-    for n in range(len(c)):
-        c[n] = np.sum(np.conj(psi[n,:]) * Psi0[:]*dx)  # Expansion coefficients
+Psi = np.zeros((Nx-1, Nt), dtype=complex)
+for j in range(Nt):
+    for n in range(Nx-1):
         Psi[:, j] += c[n] * psi[n, :] * np.exp(-1j * E[n] * t[j] / hbar)  # Time evolution
 
 
-plt.plot(x[1:-1], np.abs(Psi[:,0])**2)
+plt.plot(x[1:-1], np.abs(Psi[:,int(Nt/100)])**2)
+plt.plot(x[1:-1], np.abs(Psi[:,int(2*Nt/100)])**2)
+plt.plot(x[1:-1], np.abs(Psi[:,int(3*Nt/100)])**2)
+plt.plot(x[1:-1], np.abs(Psi[:,int(4*Nt/100)])**2)
+plt.plot(x[1:-1], np.abs(Psi[:,int(5*Nt/100)])**2)
+plt.plot(x[1:-1], np.abs(Psi[:,int(6*Nt/100)])**2)
+# plt.plot(x[1:-1], V)
+plt.fill_between(x[1:-1], 0, 1, where=V > 0, color='gray', alpha=0.3, transform=plt.gca().get_xaxis_transform(), label='Potential')
 plt.xlabel('Position')
 plt.ylabel('Probability Density')
 plt.xlim(x_min, x_max)
@@ -118,25 +126,26 @@ plt.show()
 
 
 
-# fig, ax = plt.subplots()
-# line1, = ax.plot([], [], lw=2, color='red')
-# line2, = ax.plot([], [], lw=2, color='blue')
-# line3, = ax.plot([], [], lw=2, color='green')
-# ax.set_xlim(x_min, x_max)
-# ax.set_ylim(-1.5, 1.5)
-# ax.set_xlabel('Position')
-# ax.set_ylabel('Amplitude')
+fig, ax = plt.subplots()
+line1, = ax.plot([], [], lw=2, color='red')
+line2, = ax.plot([], [], lw=2, color='blue')
+line3, = ax.plot([], [], lw=2, color='green')
+ax.set_xlim(x_min, x_max)
+ax.set_ylim(-1.5, 1.5)
+ax.set_xlabel('Position')
+ax.set_ylabel('Amplitude')
 
-# def animate(i):
-#     line1.set_data(x, np.real(Psi[:, i]))
-#     line2.set_data(x, np.imag(Psi[:, i]))
-#     line3.set_data(x, np.abs(Psi[:, i])**2)
-#     return line1, line2, line3
+def animate(i):
+    # line1.set_data(x[1:-1], np.real(Psi[:, i]))
+    # line2.set_data(x[1:-1], np.imag(Psi[:, i]))
+    line3.set_data(x[1:-1], np.abs(Psi[:, i])**2)
+    return line3
 
-# interval =  1000*dt 
-# nframes = int(Nt)
-# ani = animation.FuncAnimation(fig, animate, frames=nframes, repeat=False, interval=interval, blit=True)
-# # ani.save('wave.gif', writer='pillow', fps=30)
-# plt.show()
+interval =  1000*dt 
+nframes = int(Nt)
+ani = animation.FuncAnimation(fig, animate, frames=nframes, repeat=False, interval=interval, blit=True)
+# ani.save('wave.gif', writer='pillow', fps=30)
+# plt.fill_between(x[1:-1], 0, 1, where=V > 0, color='gray', alpha=0.3, transform=plt.gca().get_xaxis_transform(), label='Potential')
+plt.show()
 
 
