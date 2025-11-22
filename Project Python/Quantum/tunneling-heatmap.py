@@ -23,7 +23,7 @@ Nx = int((x_max - x_min) / dx)
 
 # Parameters
 
-k = 10  # wave number
+k = 20  # wave number
 # w = hbar * k**2 / (2 * m)  # angular frequency
 alpha = 0.5  # packet width
 p = hbar * k  # momentum
@@ -38,7 +38,7 @@ x = np.linspace(x_min, x_max, Nx + 1)
 V = np.zeros(Nx-1)
 for i in range(Nx-1):
     if x[i]>-1 and x[i]<1:
-        V[i] = 5*V0
+        V[i] = 2*V0
 
 
 # Solve engine
@@ -102,45 +102,25 @@ plt.show()
 
 # Probability heat map
 fig, ax = plt.subplots()
-line1, = ax.plot([], [], lw=2, color='red')
-line2, = ax.plot([], [], lw=2, color='blue')
-line3, = ax.plot([], [], lw=2, color='green')
-line4, = ax.plot([], [], lw=1, color='black', linestyle='--')
 
-
-ax.legend(['Real', 'Imaginary', 'Magnitude'])
 ax.set_xlim(x_min, x_max)
 ax.set_ylim(-1.5, 1.5)
 ax.set_xlabel('Position')
 ax.set_ylabel('Amplitude')
-time_text = ax.text(0.02, 0.95, '', transform=ax.transAxes)
-
-def animate(i):
-    line1.set_data(x[1:-1], np.real(Psi[:, i]))
-    line2.set_data(x[1:-1], np.imag(Psi[:, i]))
-    line3.set_data(x[1:-1], np.abs(Psi[:, i]))
-    
-    # Find peak magnitude
-    idx = np.argmax(np.abs(Psi[:, i]))
-    peak_x = x[1:-1][idx]
-    line4.set_data([peak_x, peak_x], [-1.5, 1.5])
-    
-    time_text.set_text(f't={t[i]:.1f}s')
-    return line1, line2, line3, line4, time_text, 
 
 
-# # Probability heat map
-# Prob = ax.imshow([np.abs(Psi[:,0])**2], extent=[x[1], x[-1], -1.5, 1.5], aspect='auto', cmap='hot', alpha=1, vmin=0)
-# fig.colorbar(Prob, ax=ax, label='Probability Density')
 
-# def animate_heatmap(i):
-#     Prob.set_data([np.abs(Psi[:, i])**2])
-#     return Prob,
+# Probability heat map
+Prob = ax.imshow([np.abs(Psi[:,0])**2], extent=[x[1], x[-1], -1.5, 1.5], aspect='auto', cmap='hot', alpha=1, vmin=0)
+fig.colorbar(Prob, ax=ax, label='Probability Density')
+
+def animate_heatmap(i):
+    Prob.set_data([np.abs(Psi[:, i])**2])
+    return Prob,
 
 nframes = int(Nt)
 interval =  100*dt
-ani = animation.FuncAnimation(fig, animate, frames=nframes, repeat=False, interval=interval, blit=True)
-# ani_heatmap = animation.FuncAnimation(fig, animate_heatmap, frames=nframes, repeat=False, interval=interval, blit=True)
+ani_heatmap = animation.FuncAnimation(fig, animate_heatmap, frames=nframes, repeat=False, interval=interval, blit=True)
 plt.fill_between(x[1:-1], 0, 1, where=V > 0, color='gray', alpha=0.3, transform=plt.gca().get_xaxis_transform(), label='Potential')
 
 plt.title('Quantum Tunneling')
