@@ -150,9 +150,6 @@ def animate(i):
 nframes = int(Nt)
 interval =  100*dt
 ani = animation.FuncAnimation(fig, animate, frames=nframes, repeat=False, interval=interval, blit=True)
-# ani_heatmap = animation.FuncAnimation(fig, animate_heatmap, frames=nframes, repeat=False, interval=interval, blit=True)
-
-
 plt.show()
 
 
