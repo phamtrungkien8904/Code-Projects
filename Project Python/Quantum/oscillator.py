@@ -16,7 +16,7 @@ dt = 0.1
 t_min = 0
 t_max = 40
 Nt = int((t_max - t_min) / dt) 
-dx = 0.1
+dx = 0.05
 x_min = -25
 x_max = 25
 Nx = int((x_max - x_min) / dx) 
@@ -78,13 +78,6 @@ def solve():
 
 Psi = solve() 
 
-# Transmission and Reflection Coefficients
-transmittion = np.sum(np.abs(Psi[int(Nx/2):, -1])**2*dx)
-reflection = np.sum(np.abs(Psi[:int(Nx/2), -1])**2*dx)
-print(f'Transmission Coefficient: {transmittion:.4f}')
-print(f'Reflection Coefficient: {reflection:.4f}')
-
-
 
 
 
@@ -98,7 +91,6 @@ plt.xlabel('Position')
 plt.ylabel('Amplitude')
 plt.xlim(x_min, x_max)
 plt.ylim(-1.5, 1.5)
-plt.fill_between(x[1:-1], 0, 1, where=V > 0, color='gray', alpha=0.5, transform=plt.gca().get_xaxis_transform(), label='Potential')
 plt.title('Initial Wave Function')
 plt.show()
 
@@ -116,11 +108,11 @@ line1, = ax_wave.plot([], [], lw=2, color='red')
 line2, = ax_wave.plot([], [], lw=2, color='blue')
 line3, = ax_wave.plot([], [], lw=2, color='green')
 line4, = ax_wave.plot([], [], lw=1, color='black', linestyle='--')
-ax_wave.fill_between(x[1:-1], 0, 1, where=V > 0, color='gray', alpha=0.5, transform=ax_wave.get_xaxis_transform(), label='Potential')
-ax_wave.set_title('Quantum Tunneling')
+ax_wave.set_title('Harmonic Oscillator')
 # Visualize potential as grayscale background
-# V_map = ax_wave.imshow([V], extent=[x_min, x_max, -1.5, 1.5], cmap='Greys', aspect='auto', alpha=0.7)
-# fig.colorbar(V_map, ax=ax_wave, label='Potential Intensity', pad=0.05, fraction=0.05, shrink=0.45, anchor=(0.0, 0.0))
+V_map = ax_wave.imshow([V], extent=[x_min, x_max, -1.5, 1.5], cmap='Greys', aspect='auto', alpha=0.7)
+cbar_pot = fig.colorbar(V_map, ax=ax_wave, label='Potential Intensity', pad=0.02)
+
 
 
 ax_wave.legend(["Real", "Imaginary", "Magnitude"])
@@ -132,7 +124,7 @@ time_text = ax_wave.text(0.02, 0.95,  "", transform=ax_wave.transAxes)
 
 # Probability heat map
 Prob = ax_heat.imshow([np.abs(Psi[:,0])**2], extent=[x[1], x[-1], -1.5, 1.5], aspect='auto', cmap='hot', alpha=1, vmin=0)
-cbar = fig.colorbar(Prob, ax=[ax_wave, ax_heat], label='Probability Density', pad=0.02, fraction=0.05, shrink=0.45, anchor=(0.0, 0.0))
+cbar_prob = fig.colorbar(Prob, ax=ax_heat, label='Probability Density', pad=0.02)
 ax_heat.fill_between(x[1:-1], 0, 1, where=V > 0, color='gray', alpha=0.5, transform=ax_heat.get_xaxis_transform(), label='Potential')
 
 def animate(i):
