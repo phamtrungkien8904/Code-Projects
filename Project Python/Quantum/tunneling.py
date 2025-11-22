@@ -79,15 +79,11 @@ print(f'Transmission Coefficient: {transmittion:.4f}')
 print(f'Reflection Coefficient: {reflection:.4f}')
 
 
-fig, ax = plt.subplots()
-line1, = ax.plot([], [], lw=2, color='red')
-line2, = ax.plot([], [], lw=2, color='blue')
-line3, = ax.plot([], [], lw=2, color='green')
-line4, = ax.plot([], [], lw=1, color='black', linestyle='--')
+
+
 
 # Plot test
-Prob = ax.imshow([np.abs(Psi[:,0])**2], extent=[x_min, x_max, -1.5, 1.5], aspect='auto', cmap='bwr', alpha=0.5, vmin=0.06, vmax=0.1)
-fig.colorbar(Prob, ax=ax, label='Probability Density')
+
 plt.plot(x[1:-1], np.real(Psi[:,0]), lw=2, color='red')
 plt.plot(x[1:-1], np.imag(Psi[:,0]), lw=2, color='blue')
 plt.plot(x[1:-1], np.abs(Psi[:,0]), lw=2, color='green')
@@ -104,39 +100,46 @@ plt.show()
 
 
 
-# # Probability heat map
+# Probability heat map
+fig, ax = plt.subplots()
+line1, = ax.plot([], [], lw=2, color='red')
+line2, = ax.plot([], [], lw=2, color='blue')
+line3, = ax.plot([], [], lw=2, color='green')
+line4, = ax.plot([], [], lw=1, color='black', linestyle='--')
 
-# ax.legend(['Real', 'Imaginary', 'Magnitude'])
-# ax.set_xlim(x_min, x_max)
-# ax.set_ylim(-1.5, 1.5)
-# ax.set_xlabel('Position')
-# ax.set_ylabel('Amplitude')
-# time_text = ax.text(0.02, 0.95, '', transform=ax.transAxes)
+# Probability heat map
+Prob = ax.imshow([np.abs(Psi[:,0])**2], extent=[x[1], x[-1], -1.5, 1.5], aspect='auto', cmap='inferno', alpha=1, vmin=0)
+fig.colorbar(Prob, ax=ax, label='Probability Density')
 
-# def animate(i):
-#     line1.set_data(x[1:-1], np.real(Psi[:, i]))
-#     line2.set_data(x[1:-1], np.imag(Psi[:, i]))
-#     line3.set_data(x[1:-1], np.abs(Psi[:, i]))
-#     density = np.abs(Psi[:, i])**2
-#     prob.set_data(density[:, i].T)
+ax.legend(['Real', 'Imaginary', 'Magnitude'])
+ax.set_xlim(x_min, x_max)
+ax.set_ylim(-1.5, 1.5)
+ax.set_xlabel('Position')
+ax.set_ylabel('Amplitude')
+time_text = ax.text(0.02, 0.95, '', transform=ax.transAxes)
 
+def animate(i):
+    line1.set_data(x[1:-1], np.real(Psi[:, i]))
+    line2.set_data(x[1:-1], np.imag(Psi[:, i]))
+    line3.set_data(x[1:-1], np.abs(Psi[:, i]))
+    Prob.set_data([np.abs(Psi[:, i])**2])
 
     
-#     # Find peak magnitude
-#     idx = np.argmax(np.abs(Psi[:, i]))
-#     peak_x = x[1:-1][idx]
-#     line4.set_data([peak_x, peak_x], [-1.5, 1.5])
+    # Find peak magnitude
+    idx = np.argmax(np.abs(Psi[:, i]))
+    peak_x = x[1:-1][idx]
+    line4.set_data([peak_x, peak_x], [-1.5, 1.5])
     
-#     time_text.set_text(f't={t[i]:.1f}s')
-#     return line1, line2, line3, line4, time_text, prob
+    time_text.set_text(f't={t[i]:.1f}s')
+    return line1, line2, line3, line4, time_text, Prob
 
-# nframes = int(Nt)
-# interval =  100*dt
-# ani = animation.FuncAnimation(fig, animate, frames=nframes, repeat=False, interval=interval, blit=True)
-# plt.fill_between(x[1:-1], 0, 1, where=V > 0, color='gray', alpha=0.3, transform=plt.gca().get_xaxis_transform(), label='Potential')
+nframes = int(Nt)
+interval =  100*dt
+ani = animation.FuncAnimation(fig, animate, frames=nframes, repeat=False, interval=interval, blit=True)
+plt.fill_between(x[1:-1], 0, 1, where=V > 0, color='gray', alpha=0.3, transform=plt.gca().get_xaxis_transform(), label='Potential')
 
-# plt.title('Quantum Tunneling')
-# plt.show()
+plt.title('Quantum Tunneling')
+plt.show()
 
 
 # ani.save('tunnel.gif', writer='pillow', fps=30, dpi = 200) # Size  
