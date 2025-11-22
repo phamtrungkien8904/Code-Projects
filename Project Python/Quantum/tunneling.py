@@ -16,18 +16,19 @@ dt = 0.1
 t_min = 0
 t_max = 50
 Nt = int((t_max - t_min) / dt) 
-dx = 0.1
+dx = 0.05
 x_min = -25
 x_max = 25
 Nx = int((x_max - x_min) / dx) 
 
 # Parameters
 
-k = 10  # wave number
+k = 20  # wave number -> classic with larger k
+wavelength = 2 * np.pi / k
 # w = hbar * k**2 / (2 * m)  # angular frequency
 alpha = 0.5  # packet width
 p = hbar * k  # momentum
-V0 = p**2/(2*m)  # Kinetic energy
+KE = p**2/(2*m)  # Kinetic energy
 x0 = -10  # Initial position
 
 t = np.linspace(t_min, t_max, Nt + 1)
@@ -36,9 +37,15 @@ x = np.linspace(x_min, x_max, Nx + 1)
 
 # Potential function
 V = np.zeros(Nx-1)
+ratio = 18
 for i in range(Nx-1):
     if x[i]>-1 and x[i]<1:
-        V[i] = 5*V0
+        V[i] = ratio*KE
+
+# Configuration print 
+print(f'Wave number (at center): {k}')
+print(f'Packet width: {alpha}')
+print(f'Barrier Potential/KE: {ratio}')
 
 
 # Solve engine

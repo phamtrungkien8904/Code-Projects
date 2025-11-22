@@ -14,9 +14,9 @@ m = 10.0    # Particle mass
 # Time steps
 dt = 0.1
 t_min = 0
-t_max = 50
+t_max = 30
 Nt = int((t_max - t_min) / dt) 
-dx = 0.1
+dx = 0.05
 x_min = -25
 x_max = 25
 Nx = int((x_max - x_min) / dx) 
@@ -27,7 +27,7 @@ k = 20  # wave number
 # w = hbar * k**2 / (2 * m)  # angular frequency
 alpha = 0.5  # packet width
 p = hbar * k  # momentum
-V0 = p**2/(2*m)  # Kinetic energy
+KE = p**2/(2*m)  # Kinetic energy
 x0 = -10  # Initial position
 
 t = np.linspace(t_min, t_max, Nt + 1)
@@ -36,9 +36,15 @@ x = np.linspace(x_min, x_max, Nx + 1)
 
 # Potential function
 V = np.zeros(Nx-1)
+ratio = 18
 for i in range(Nx-1):
     if x[i]>-1 and x[i]<1:
-        V[i] = 2*V0
+        V[i] = ratio*KE
+
+# Configuration print 
+print(f'Wave number (at center): {k}')
+print(f'Packet width: {alpha}')
+print(f'Barrier Potential/KE: {ratio}')
 
 
 # Solve engine
@@ -75,8 +81,8 @@ Psi = solve()
 # Transmission and Reflection Coefficients
 transmittion = np.sum(np.abs(Psi[int(Nx/2):, -1])**2*dx)
 reflection = np.sum(np.abs(Psi[:int(Nx/2), -1])**2*dx)
-print(f'Transmission Coefficient: {transmittion:.4f}')
-print(f'Reflection Coefficient: {reflection:.4f}')
+print(f'Transmission: {transmittion:.4f}')
+print(f'Reflection: {reflection:.4f}')
 
 
 
@@ -107,24 +113,27 @@ ax.set_xlim(x_min, x_max)
 ax.set_ylim(-1.5, 1.5)
 ax.set_xlabel('Position')
 ax.set_ylabel('Amplitude')
+time_text = ax.text(0.02, 0.95, '', color='white', transform=ax.transAxes)
 
 
 
 # Probability heat map
 Prob = ax.imshow([np.abs(Psi[:,0])**2], extent=[x[1], x[-1], -1.5, 1.5], aspect='auto', cmap='hot', alpha=1, vmin=0)
 fig.colorbar(Prob, ax=ax, label='Probability Density')
+plt.fill_between(x[1:-1], 0, 1, where=V > 0, color='gray', alpha=0.5, transform=plt.gca().get_xaxis_transform(), label='Potential')
+
 
 def animate_heatmap(i):
     Prob.set_data([np.abs(Psi[:, i])**2])
-    return Prob,
+    time_text.set_text(f't={t[i]:.1f}s')
+    return Prob, time_text
 
 nframes = int(Nt)
 interval =  100*dt
 ani_heatmap = animation.FuncAnimation(fig, animate_heatmap, frames=nframes, repeat=False, interval=interval, blit=True)
-plt.fill_between(x[1:-1], 0, 1, where=V > 0, color='gray', alpha=0.3, transform=plt.gca().get_xaxis_transform(), label='Potential')
 
 plt.title('Quantum Tunneling')
 plt.show()
 
 
-# ani.save('tunnel.gif', writer='pillow', fps=30, dpi = 200) # Size  
+ani_heatmap.save('tunnel_heatmap.gif', writer='pillow', fps=30, dpi = 200) # Size  
