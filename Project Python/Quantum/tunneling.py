@@ -14,15 +14,12 @@ m = 10.0    # Particle mass
 # Time steps
 dt = 0.1
 t_min = 0
-t_max = 50
+t_max = 30
 Nt = int((t_max - t_min) / dt) 
 dx = 0.05
 x_min = -25
 x_max = 25
-Nx = int((x_max - x_min) / dx) 
-
-# Parameters
-
+Nx = int((x_max - x_min) / dx)
 k = 20  # wave number -> classic with larger k
 wavelength = 2 * np.pi / k
 # w = hbar * k**2 / (2 * m)  # angular frequency
@@ -59,7 +56,7 @@ def solve():
     # Halmiltonian matrix
     lamb = hbar**2/(2*m*dx**2)
     H =lamb*(2*np.diag(np.ones(Nx-1),0) + (-1)*np.diag(np.ones(Nx-2),1) + (-1)*np.diag(np.ones(Nx-2),-1))
-    for i in range(Nx-2):
+    for i in range(Nx-1):
         H[i][i] += V[i]/lamb
     E,psi = np.linalg.eigh(H)  # Eigenvalue decomposition
     psi = psi.T  
@@ -106,51 +103,56 @@ plt.show()
 
 
 
+fig, (ax_wave, ax_heat) = plt.subplots(
+    2,
+    1,
+    figsize=(10, 8),
+    sharex=True,
+    gridspec_kw={"height_ratios": [1, 1]},
+)
+line1, = ax_wave.plot([], [], lw=2, color='red')
+line2, = ax_wave.plot([], [], lw=2, color='blue')
+line3, = ax_wave.plot([], [], lw=2, color='green')
+line4, = ax_wave.plot([], [], lw=1, color='black', linestyle='--')
+ax_wave.fill_between(x[1:-1], 0, 1, where=V > 0, color='gray', alpha=0.5, transform=ax_wave.get_xaxis_transform(), label='Potential')
+ax_wave.set_title('Quantum Tunneling')
+
+
+
+ax_wave.legend(["Real", "Imaginary", "Magnitude"])
+ax_wave.set_xlim(x_min, x_max)
+ax_wave.set_ylim(-1.5, 1.5)
+ax_wave.set_ylabel("Amplitude")
+ax_heat.set_xlabel("Position")
+time_text = ax_wave.text(0.02, 0.95,  "", transform=ax_wave.transAxes)
 
 # Probability heat map
-fig, ax = plt.subplots()
-line1, = ax.plot([], [], lw=2, color='red')
-line2, = ax.plot([], [], lw=2, color='blue')
-line3, = ax.plot([], [], lw=2, color='green')
-line4, = ax.plot([], [], lw=1, color='black', linestyle='--')
-
-
-ax.legend(['Real', 'Imaginary', 'Magnitude'])
-ax.set_xlim(x_min, x_max)
-ax.set_ylim(-1.5, 1.5)
-ax.set_xlabel('Position')
-ax.set_ylabel('Amplitude')
-time_text = ax.text(0.02, 0.95, '', transform=ax.transAxes)
+Prob = ax_heat.imshow([np.abs(Psi[:,0])**2], extent=[x[1], x[-1], -1.5, 1.5], aspect='auto', cmap='hot', alpha=1, vmin=0)
+cbar = fig.colorbar(Prob, ax=[ax_wave, ax_heat], label='Probability Density', pad=0.02, fraction=0.05, shrink=0.45, anchor=(0.0, 0.0))
+ax_heat.fill_between(x[1:-1], 0, 1, where=V > 0, color='gray', alpha=0.5, transform=ax_heat.get_xaxis_transform(), label='Potential')
 
 def animate(i):
     line1.set_data(x[1:-1], np.real(Psi[:, i]))
     line2.set_data(x[1:-1], np.imag(Psi[:, i]))
     line3.set_data(x[1:-1], np.abs(Psi[:, i]))
-    
-    # Find peak magnitude
+    Prob.set_data([np.abs(Psi[:, i])**2])
+
+
     idx = np.argmax(np.abs(Psi[:, i]))
     peak_x = x[1:-1][idx]
     line4.set_data([peak_x, peak_x], [-1.5, 1.5])
-    
     time_text.set_text(f't={t[i]:.1f}s')
-    return line1, line2, line3, line4, time_text, 
+    return line1, line2, line3, line4, time_text, Prob
 
-
-# # Probability heat map
-# Prob = ax.imshow([np.abs(Psi[:,0])**2], extent=[x[1], x[-1], -1.5, 1.5], aspect='auto', cmap='hot', alpha=1, vmin=0)
-# fig.colorbar(Prob, ax=ax, label='Probability Density')
-
-# def animate_heatmap(i):
-#     Prob.set_data([np.abs(Psi[:, i])**2])
-#     return Prob,
+###########
+###########
 
 nframes = int(Nt)
 interval =  100*dt
 ani = animation.FuncAnimation(fig, animate, frames=nframes, repeat=False, interval=interval, blit=True)
 # ani_heatmap = animation.FuncAnimation(fig, animate_heatmap, frames=nframes, repeat=False, interval=interval, blit=True)
-plt.fill_between(x[1:-1], 0, 1, where=V > 0, color='gray', alpha=0.3, transform=plt.gca().get_xaxis_transform(), label='Potential')
 
-plt.title('Quantum Tunneling')
+
 plt.show()
 
 
