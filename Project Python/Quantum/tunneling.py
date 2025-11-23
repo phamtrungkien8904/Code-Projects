@@ -34,7 +34,7 @@ x = np.linspace(x_min, x_max, Nx + 1)
 
 # Potential function
 V = np.zeros(Nx-1)
-ratio = 18
+ratio = 0.9
 for i in range(Nx-1):
     if x[i]>-1 and x[i]<1:
         V[i] = ratio*KE

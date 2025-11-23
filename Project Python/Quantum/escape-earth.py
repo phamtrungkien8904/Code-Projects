@@ -56,9 +56,7 @@ def solve():
 
     # Halmiltonian matrix
     lamb = hbar**2/(2*m*dx**2)
-    H =lamb*(2*np.diag(np.ones(Nx-1),0) + (-1)*np.diag(np.ones(Nx-2),1) + (-1)*np.diag(np.ones(Nx-2),-1))
-    for i in range(Nx-2):
-        H[i][i] += V[i]/lamb
+    H =lamb*(np.diag(2*np.ones(Nx-1) + V/lamb,0) + (-1)*np.diag(np.ones(Nx-2),1) + (-1)*np.diag(np.ones(Nx-2),-1))
     E,psi = np.linalg.eigh(H)  # Eigenvalue decomposition
     psi = psi.T  
 

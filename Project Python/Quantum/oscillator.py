@@ -7,7 +7,7 @@ import matplotlib.animation as animation
 
 # Constant
 hbar = 1.0  # Reduced Planck's constant
-m = 2.0    # Particle mass
+m = 5.0    # Particle mass
 
 
 
@@ -29,7 +29,7 @@ alpha = 0.5  # packet width
 p = hbar * k  # momentum
 V0 = p**2/(2*m)  # Kinetic energy
 x0 = -10  # Initial position
-K = 10  # Spring constant
+K = 1  # Spring constant
 
 t = np.linspace(t_min, t_max, Nt + 1)
 x = np.linspace(x_min, x_max, Nx + 1)
@@ -57,9 +57,7 @@ def solve():
 
     # Halmiltonian matrix
     lamb = hbar**2/(2*m*dx**2)
-    H =lamb*(2*np.diag(np.ones(Nx-1),0) + (-1)*np.diag(np.ones(Nx-2),1) + (-1)*np.diag(np.ones(Nx-2),-1))
-    for i in range(Nx-1):
-        H[i][i] += V[i]/lamb
+    H =lamb*(np.diag(2*np.ones(Nx-1) + V/lamb,0) + (-1)*np.diag(np.ones(Nx-2),1) + (-1)*np.diag(np.ones(Nx-2),-1))
     E,psi = np.linalg.eigh(H)  # Eigenvalue decomposition
     psi = psi.T  
 
