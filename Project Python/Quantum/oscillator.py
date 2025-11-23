@@ -128,7 +128,6 @@ time_text = ax_wave.text(0.02, 0.95,  "", transform=ax_wave.transAxes)
 # Probability heat map
 Prob = ax_heat.imshow([np.abs(Psi[:,0])**2], extent=[x[1], x[-1], -1.5, 1.5], aspect='auto', cmap='hot', alpha=1, vmin=0)
 cbar_prob = fig.colorbar(Prob, ax=ax_heat, label='Probability Density', pad=0.02)
-ax_heat.fill_between(x[1:-1], 0, 1, where=V > 0, color='gray', alpha=0.5, transform=ax_heat.get_xaxis_transform(), label='Potential')
 
 def animate(i):
     line1.set_data(x[1:-1], np.real(Psi[:, i]))
@@ -152,4 +151,4 @@ ani = animation.FuncAnimation(fig, animate, frames=nframes, repeat=False, interv
 plt.show()
 
 
-ani.save('gifs/oscillator.gif', writer='pillow', fps=20, dpi = 200) # Size  
+# ani.save('gifs/oscillator.gif', writer='pillow', fps=20, dpi = 200) # Size  

@@ -151,4 +151,4 @@ ani = animation.FuncAnimation(fig, animate, frames=nframes, repeat=False, interv
 plt.show()
 
 
-ani.save('gifs/tunnel.gif', writer='pillow', fps=30, dpi = 200) # Size  
+# ani.save('gifs/tunnel.gif', writer='pillow', fps=30, dpi = 200) # Size  
