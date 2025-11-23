@@ -152,4 +152,4 @@ ani = animation.FuncAnimation(fig, animate, frames=nframes, repeat=False, interv
 plt.show()
 
 
-# ani.save('oscillator.gif', writer='pillow', fps=20, dpi = 200) # Size  
+ani.save('gifs/oscillator.gif', writer='pillow', fps=20, dpi = 200) # Size  

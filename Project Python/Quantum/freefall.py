@@ -7,7 +7,7 @@ import matplotlib.animation as animation
 
 # Constant
 hbar = 1.0  # Reduced Planck's constant
-m = 5.0    # Particle mass
+m = 1.0    # Particle mass
 
 
 
@@ -147,4 +147,4 @@ ani = animation.FuncAnimation(fig, animate, frames=nframes, repeat=False, interv
 plt.show()
 
 
-# ani.save('freefall.gif', writer='pillow', fps=20, dpi = 200) # Size  
+# ani.save('gifs/freefall.gif', writer='pillow', fps=20, dpi = 200) # Size  

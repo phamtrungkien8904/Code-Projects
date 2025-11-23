@@ -34,7 +34,7 @@ x = np.linspace(x_min, x_max, Nx + 1)
 
 # Potential function
 V = np.zeros(Nx-1)
-ratio = 0.9
+ratio = 1
 for i in range(Nx-1):
     if x[i]>-1 and x[i]<1:
         V[i] = ratio*KE
@@ -151,4 +151,4 @@ ani = animation.FuncAnimation(fig, animate, frames=nframes, repeat=False, interv
 plt.show()
 
 
-# ani.save('tunnel.gif', writer='pillow', fps=30, dpi = 200) # Size  
+ani.save('gifs/tunnel.gif', writer='pillow', fps=30, dpi = 200) # Size  
