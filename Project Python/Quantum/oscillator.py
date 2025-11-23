@@ -60,6 +60,11 @@ def solve():
     H =lamb*(np.diag(2*np.ones(Nx-1) + V/lamb,0) + (-1)*np.diag(np.ones(Nx-2),1) + (-1)*np.diag(np.ones(Nx-2),-1))
     E,psi = np.linalg.eigh(H)  # Eigenvalue decomposition
     psi = psi.T  
+    # # Plot Eigenstates
+    # plt.plot(x[1:-1], np.real(psi[200,:]), lw=2, label=f'n={200}, E={E[200]:.2f}')
+    # plt.title('First Four Eigenstates')
+    # plt.legend()
+    # plt.show()
 
     c = np.zeros(Nx-1, dtype=complex)
     for n in range(Nx-1):

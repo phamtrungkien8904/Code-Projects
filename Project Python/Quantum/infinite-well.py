@@ -39,8 +39,6 @@ x = np.linspace(x_min, x_max, Nx + 1)
 V = np.zeros(Nx-1)
 
 
-
-
 # Configuration print 
 print(f'Wave number (at center): {k}')
 print(f'Packet width: {alpha}')
@@ -59,6 +57,13 @@ def solve():
     H =lamb*(np.diag(2*np.ones(Nx-1) + V/lamb,0) + (-1)*np.diag(np.ones(Nx-2),1) + (-1)*np.diag(np.ones(Nx-2),-1))
     E,psi = np.linalg.eigh(H)  # Eigenvalue decomposition
     psi = psi.T  
+
+    # # Plot Eigenstates
+    # for n in range(4):
+    #     plt.plot(x[1:-1], np.real(psi[n,:]), lw=2, label=f'n={n}, E={E[n]:.2f}')
+    # plt.title('First Four Eigenstates')
+    # plt.legend()
+    # plt.show()
 
     c = np.zeros(Nx-1, dtype=complex)
     for n in range(Nx-1):

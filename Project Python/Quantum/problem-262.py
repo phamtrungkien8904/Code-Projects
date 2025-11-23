@@ -3,37 +3,32 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-# Quantum wave packet escape from Earth gravity
+# Free quantum wave packet in harmonic oscillator potential
 
 # Constant
-hbar = 1  # Reduced Planck's constant
-m = 20.0    # Particle mass
+hbar = 1.0  # Reduced Planck's constant
+m = 5.0    # Particle mass
 
 
 
 # Time steps
 dt = 0.1
 t_min = 0
-t_max = 100
+t_max = 40
 Nt = int((t_max - t_min) / dt) 
-dx = 0.1
-x_min = 10
-x_max = 150
+dx = 0.05
+x_min = -25
+x_max = 25
 Nx = int((x_max - x_min) / dx) 
 
 # Parameters
-GM = 100  # Gravitational constant times Earth mass
-x0 = 50  # Initial position
-x_turn = 100  # Turning point (K = 0)
 
-k = 28
-
-# k = m/hbar * np.sqrt(2*GM * (1/x0 - 1/x_turn))  # wave number at center of packet (Escape velocity)
+k = 5  # wave number at center of packet
 # w = hbar * k**2 / (2 * m)  # angular frequency
-alpha = 1  # packet width
+alpha = 0.5  # packet width
 p = hbar * k  # momentum
 V0 = p**2/(2*m)  # Kinetic energy
-
+x0 = -10  # Initial position
 
 t = np.linspace(t_min, t_max, Nt + 1)
 x = np.linspace(x_min, x_max, Nx + 1)
@@ -41,9 +36,15 @@ x = np.linspace(x_min, x_max, Nx + 1)
 
 # Potential function
 V = np.zeros(Nx-1)
+a = 5
 for i in range(Nx-1):
-    V[i] = -GM * m / x[i]  # Gravitational potential
+    V[i] = 500*(hbar**2/(2*m*a**2)) * np.sin(np.pi*x[i]/a)
 
+
+
+# Configuration print 
+print(f'Wave number (at center): {k}')
+print(f'Packet width: {alpha}')
 
 
 # Solve engine
@@ -76,7 +77,10 @@ def solve():
 Psi = solve() 
 
 
-# PLot test
+
+
+# Plot test
+
 plt.plot(x[1:-1], np.real(Psi[:,0]), lw=2, color='red')
 plt.plot(x[1:-1], np.imag(Psi[:,0]), lw=2, color='blue')
 plt.plot(x[1:-1], np.abs(Psi[:,0]), lw=2, color='green')
@@ -90,39 +94,57 @@ plt.show()
 
 
 
-fig, ax = plt.subplots()
-line1, = ax.plot([], [], lw=2, color='red')
-line2, = ax.plot([], [], lw=2, color='blue')
-line3, = ax.plot([], [], lw=2, color='green')
-line4, = ax.plot([], [], lw=1, color='black', linestyle='--')
-ax.legend(['Real', 'Imaginary', 'Magnitude'])
-ax.set_xlim(x_min, x_max)
-ax.set_ylim(-1.5, 1.5)
-ax.set_xlabel('Position')
-ax.set_ylabel('Amplitude')
-time_text = ax.text(0.02, 0.95, '', transform=ax.transAxes)
+
+fig, (ax_wave, ax_heat) = plt.subplots(
+    2,
+    1,
+    figsize=(10, 8),
+    sharex=True,
+    gridspec_kw={"height_ratios": [1, 1]},
+)
+line1, = ax_wave.plot([], [], lw=2, color='red')
+line2, = ax_wave.plot([], [], lw=2, color='blue')
+line3, = ax_wave.plot([], [], lw=2, color='green')
+line4, = ax_wave.plot([], [], lw=1, color='black', linestyle='--')
+ax_wave.set_title('Random')
+# Visualize potential as grayscale background
+V_map = ax_wave.imshow([V], extent=[x_min, x_max, -1.5, 1.5], cmap='Greys', aspect='auto', alpha=0.7)
+cbar_pot = fig.colorbar(V_map, ax=ax_wave, label='Potential Intensity', pad=0.02)
+
+
+
+ax_wave.legend(["Real", "Imaginary", "Magnitude"])
+ax_wave.set_xlim(x_min, x_max)
+ax_wave.set_ylim(-1.5, 1.5)
+ax_wave.set_ylabel("Amplitude")
+ax_heat.set_xlabel("Position")
+time_text = ax_wave.text(0.02, 0.95,  "", transform=ax_wave.transAxes)
+
+# Probability heat map
+Prob = ax_heat.imshow([np.abs(Psi[:,0])**2], extent=[x[1], x[-1], -1.5, 1.5], aspect='auto', cmap='hot', alpha=1, vmin=0)
+cbar_prob = fig.colorbar(Prob, ax=ax_heat, label='Probability Density', pad=0.02)
+ax_heat.fill_between(x[1:-1], 0, 1, where=V > 0, color='gray', alpha=0.5, transform=ax_heat.get_xaxis_transform(), label='Potential')
 
 def animate(i):
     line1.set_data(x[1:-1], np.real(Psi[:, i]))
     line2.set_data(x[1:-1], np.imag(Psi[:, i]))
     line3.set_data(x[1:-1], np.abs(Psi[:, i]))
-    
-    # Find peak magnitude
+    Prob.set_data([np.abs(Psi[:, i])**2])
+
+
     idx = np.argmax(np.abs(Psi[:, i]))
     peak_x = x[1:-1][idx]
     line4.set_data([peak_x, peak_x], [-1.5, 1.5])
-    
     time_text.set_text(f't={t[i]:.1f}s')
-    return line1, line2, line3, line4, time_text
+    return line1, line2, line3, line4, time_text, Prob
+
+###########
+###########
 
 nframes = int(Nt)
 interval =  100*dt
-ani = animation.FuncAnimation(fig, animate, frames=nframes, repeat=True, interval=interval, blit=True)
-# Visualize potential as grayscale background
-V_map = ax.imshow([V], extent=[x_min, x_max, -1.5, 1.5], cmap='Greys', aspect='auto', alpha=0.7)
-fig.colorbar(V_map, ax=ax, label='Potential Intensity')
-plt.title('Quantum Escape from Earth Gravity')
+ani = animation.FuncAnimation(fig, animate, frames=nframes, repeat=False, interval=interval, blit=True)
 plt.show()
 
 
-# ani.save('escape.gif', writer='pillow', fps=20, dpi = 200) # Size  
+# ani.save('oscillator.gif', writer='pillow', fps=20, dpi = 200) # Size  
