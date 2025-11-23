@@ -13,15 +13,15 @@ def func(x,t):
             C[i][k] = i + 1j*k 
     return C[x][t]
 C = func(1,2)
-
-
-H = 2*np.diag(np.ones(4),0) + np.diag(np.ones(4-1),1) + np.diag(np.ones(4-1),-1)
-H[2][0] = 1
-E, V = np.linalg.eigh(H)
-
-x = np.zeros(4)
+V = np.zeros(4)
 for i in range(4):
-    x[i] = i
-print(x[1:-1])
+    V[i] = i**2
+
+H = 2*np.diag(np.ones(4) + V,0) + np.diag(np.ones(4-1),1) + np.diag(np.ones(4-1),-1)
+H[2][0] = 1
+
+
+print(V)
+print(H)
 
 
