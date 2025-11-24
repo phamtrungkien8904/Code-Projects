@@ -126,7 +126,7 @@ ax_heat.set_xlabel("Position")
 time_text = ax_wave.text(0.02, 0.95,  "", transform=ax_wave.transAxes)
 
 # Probability heat map
-Prob = ax_heat.imshow([np.abs(Psi[:,0])**2], extent=[x[1], x[-1], -1.5, 1.5], aspect='auto', cmap='hot', alpha=1, vmin=0)
+Prob = ax_heat.imshow([np.abs(Psi[:,0])**2], extent=[x[1], x[-1], -1.5, 1.5], aspect='auto', cmap='hot', alpha=1, vmin=0, interpolation='bilinear')
 cbar_prob = fig.colorbar(Prob, ax=ax_heat, label='Probability Density', pad=0.02)
 
 def animate(i):
