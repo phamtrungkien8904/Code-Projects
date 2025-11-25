@@ -34,7 +34,7 @@ x = np.linspace(x_min, x_max, Nx + 1)
 
 # Potential function
 V = np.zeros(Nx-1)
-ratio = 1
+ratio = 50
 for i in range(Nx-1):
     if x[i]>-1 and x[i]<1:
         V[i] = ratio*KE
@@ -58,6 +58,13 @@ def solve():
     H =lamb*(np.diag(2*np.ones(Nx-1) + V/lamb,0) + (-1)*np.diag(np.ones(Nx-2),1) + (-1)*np.diag(np.ones(Nx-2),-1))
     E,psi = np.linalg.eigh(H)  # Eigenvalue decomposition
     psi = psi.T  
+
+    # Eigenstate 
+    for i in range(5):
+        plt.plot(x[1:-1], np.real(psi[i,:]), lw=2, label=f'n={i}, E={E[i]:.2f}')
+    plt.title('Eigenstates')
+    plt.legend()
+    plt.show()
 
     c = np.zeros(Nx-1, dtype=complex)
     for n in range(Nx-1):
