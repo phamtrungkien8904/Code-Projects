@@ -1,8 +1,8 @@
 reset
-set encoding utf8`
+set encoding utf8
 
-# set terminal epslatex color
-# set output 'rlc_circuit.tex'
+set terminal epslatex color
+set output 'Qlarge.tex'
 
 
 set datafile separator ","
@@ -32,4 +32,4 @@ plot U_C(x) title 'U_C(t)' with lines linestyle 1, \
      U_R(x) title 'U_R(t)' with lines linestyle 2,\
      U_L(x) title 'U_L(t)' with lines linestyle 3
 
-# set output
+set output

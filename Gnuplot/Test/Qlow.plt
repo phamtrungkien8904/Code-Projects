@@ -1,8 +1,8 @@
 reset
-set encoding utf8`
+set encoding utf8
 
 # set terminal epslatex color
-# set output 'rlc_circuit.tex'
+# set output 'Qlow.tex'
 
 
 set datafile separator ","
