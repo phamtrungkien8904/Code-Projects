@@ -8,7 +8,7 @@ set output 'Qlarge.tex'
 set datafile separator ","
 set title "RLC Circuit"
 set xlabel "Time"
-set ylabel "Voltage"
+set ylabel "Voltage/$U_0$"
 set xrange [0:2]
 set yrange [-1:2]
 set samples 10000
@@ -22,14 +22,13 @@ w0 = 10
 Q = 2
 w = w0*sqrt(1 - 1/(4*Q**2))
 r0 = w0/(2*Q)
-U_0 = 1
 
-U_C(x) = U_0 *(1 - exp(-r0*x)*(cos(w*x)+ (r0/w)*sin(w*x))) 
-U_R(x) = U_0 *1/sqrt(Q**2 - 1/4) * exp(-r0*x)*sin(w*x)
-U_L(x) = U_0 *exp(-r0*x)*(cos(w*x) - 1/sqrt(4*Q**2 -1)*sin(w*x))
-`
-plot U_C(x) title 'U_C(t)' with lines linestyle 1, \
-     U_R(x) title 'U_R(t)' with lines linestyle 2,\
-     U_L(x) title 'U_L(t)' with lines linestyle 3
+U_C(x) = 1 *(1 - exp(-r0*x)*(cos(w*x)+ (r0/w)*sin(w*x))) 
+U_R(x) = 1 *1/sqrt(Q**2 - 1/4) * exp(-r0*x)*sin(w*x)
+U_L(x) = 1 *exp(-r0*x)*(cos(w*x) - 1/sqrt(4*Q**2 -1)*sin(w*x))
+
+plot U_C(x) title '$U_C(t)$' with lines linestyle 1, \
+     U_R(x) title '$U_R(t)$' with lines linestyle 2,\
+     U_L(x) title '$U_L(t)$' with lines linestyle 3
 
 set output
