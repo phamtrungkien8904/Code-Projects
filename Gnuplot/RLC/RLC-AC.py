@@ -6,13 +6,16 @@ RLC Bandpass Filter (2nd order) Data Generator
 """
 
 # Set the parameters for the filter
-tau_C = 2.0  # Capacitor time constant
-tau_L = 0.5  # Inductance time constant
+R = 1    # Resistance in ohms
+L = 1.0      # Inductance in henrys
+C = 0.1     # Capacitance in farads
+w0 = 1/np.sqrt(L*C)  # Resonant angular frequency
+Q = w0*L/R        # Quality factor
 dt = 0.05   # Time step
-t = np.arange(0, 40, dt)  # Time array
+t = np.arange(0, 10, dt)  # Time array
 
 # Generate the input signal (square wave)
-f0 = 1/(2*np.pi*np.sqrt(tau_L*tau_C))  # Limit frequency
+f0 = w0/(2*np.pi)  # Limit frequency
 f = f0  # Frequency of the square wave
 
 # Sine wave
@@ -36,28 +39,24 @@ u_in = np.sin(2 * np.pi *0.5*f* t)
 # u_in = sum(a * np.sin(2 * np.pi * x* f * t) for a, x in zip(amplitudes, frequencies))
 
 # Apply the band-pass filter
-def band_pass_filter(u_in, tau_C, tau_L, dt):
-    u_C = np.zeros_like(u_in)
-    Du_C = np.zeros_like(u_in)  # First derivative of u_C
-    u_LC = np.zeros_like(u_in)  # Output across LC (bandpass output)
-    for i in range(1, len(u_in)):
-        Du_C[i] = Du_C[i-1]*(1 - dt/tau_L) + (u_in[i-1] - u_C[i-1])*(dt/(tau_L*tau_C))
-        u_C[i] = u_C[i-1] + Du_C[i]*dt
-    return Du_C*tau_C
+def band_pass_filter():
+    D2q_dt2 = np.zeros_like(u_in)
+    Dq_dt = np.zeros_like(u_in)
+    q = np.zeros_like(u_in)
+    u_out = np.zeros_like(u_in)
+    for i in range(2, len(t)):
+        D2q_dt2[i] = (u_in[i] - R * Dq_dt[i-1] - q[i-1]/C - L * D2q_dt2[i-1]) / L
+        Dq_dt[i] = Dq_dt[i-1] + D2q_dt2[i] * dt
+        q[i] = q[i-1] + Dq_dt[i] * dt
+        u_out[i] = R* Dq_dt[i] 
+    return u_out
 
-u_out = band_pass_filter(u_in, tau_C, tau_L, dt)
+u_out = band_pass_filter()
 
-# Transfer function (Amplitude)
-def transfer_function(f, tau_C, tau_L):
-    s = 1j * 2 * np.pi * f
-    H = (s * tau_C)/(1 + s * tau_C + s**2 * tau_L * tau_C)
-    return abs(H)
-
-H_amp = transfer_function(f, tau_C, tau_L)
 
 # Save the input and output signals to a CSV file
 with open("data.csv", "w", newline="") as csvfile:
     csvwriter = csv.writer(csvfile)
-    csvwriter.writerow(["# Time", "Input", "Output", "Transfer Function (Amplitude)"])
+    csvwriter.writerow(["# Time", "Input", "Output"])
     for i in range(len(t)):
-        csvwriter.writerow([t[i], u_in[i], u_out[i], H_amp])  
+        csvwriter.writerow([t[i], u_in[i], u_out[i]])  
