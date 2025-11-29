@@ -6,7 +6,7 @@ set encoding utf8
 set title 'Signal Filter'
 set xlabel 't/s'
 set ylabel 'U/V'
-set xrange [0:0.2]
+set xrange [0:40]
 set yrange [-2:2]
 set sample 10000
 # set grid

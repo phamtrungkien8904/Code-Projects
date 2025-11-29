@@ -16,7 +16,7 @@ f0 = 1/(2*np.pi*np.sqrt(tau_L*tau_C))  # Limit frequency
 f = f0  # Frequency of the square wave
 
 # Sine wave
-# u_in = np.sin(2 * np.pi *f* t)
+u_in = np.sin(2 * np.pi *0.5*f* t)
 
 # Square wave
 # u_in = np.sign(np.sin(2 * np.pi *f* t))
@@ -31,9 +31,9 @@ f = f0  # Frequency of the square wave
 # u_in = 1*np.sum([ ((-1)**n)/(n+1) * np.sin(2 * np.pi * (n+1) * f * t) for n in range(20)], axis=0)
 
 # Fourier series (random noising waves)
-amplitudes = [1,0.2,0.2]
-frequencies = [1,10,20]
-u_in = sum(a * np.sin(2 * np.pi * x* f * t) for a, x in zip(amplitudes, frequencies))
+# amplitudes = [1,0.2,0.2]
+# frequencies = [1,10,20]
+# u_in = sum(a * np.sin(2 * np.pi * x* f * t) for a, x in zip(amplitudes, frequencies))
 
 # Apply the band-pass filter
 def band_pass_filter(u_in, tau_C, tau_L, dt):
