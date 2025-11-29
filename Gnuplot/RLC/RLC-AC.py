@@ -6,20 +6,19 @@ RLC Bandpass Filter (2nd order) Data Generator
 """
 
 # Set the parameters for the filter
-R = 1    # Resistance in ohms
-L = 1.0      # Inductance in henrys
-C = 0.1     # Capacitance in farads
-w0 = 1/np.sqrt(L*C)  # Resonant angular frequency
-Q = w0*L/R        # Quality factor
-dt = 0.05   # Time step
-t = np.arange(0, 10, dt)  # Time array
+# R = 1    # Resistance in ohms
+# L = 1.0      # Inductance in henrys
+# C = 0.1     # Capacitance in farads
+w0 = 5  # Resonant angular frequency
+Q = 10     # Quality factor
+dt = 0.001   # Time step
+t = np.arange(0, 40, dt)  # Time array
 
 # Generate the input signal (square wave)
 f0 = w0/(2*np.pi)  # Limit frequency
-f = f0  # Frequency of the square wave
 
 # Sine wave
-u_in = np.sin(2 * np.pi *0.5*f* t)
+u_in = np.sin(2 * np.pi *0.1*f0* t + np.pi/2)
 
 # Square wave
 # u_in = np.sign(np.sin(2 * np.pi *f* t))
@@ -40,16 +39,13 @@ u_in = np.sin(2 * np.pi *0.5*f* t)
 
 # Apply the band-pass filter
 def band_pass_filter():
-    D2q_dt2 = np.zeros_like(u_in)
-    Dq_dt = np.zeros_like(u_in)
-    q = np.zeros_like(u_in)
-    u_out = np.zeros_like(u_in)
-    for i in range(2, len(t)):
-        D2q_dt2[i] = (u_in[i] - R * Dq_dt[i-1] - q[i-1]/C - L * D2q_dt2[i-1]) / L
-        Dq_dt[i] = Dq_dt[i-1] + D2q_dt2[i] * dt
-        q[i] = q[i-1] + Dq_dt[i] * dt
-        u_out[i] = R* Dq_dt[i] 
-    return u_out
+    u_R = np.zeros_like(u_in)
+    u_C = np.zeros_like(u_in)
+    for i in range(1, len(t)-1):
+        u_C[i+1] = 2*u_C[i] - u_C[i-1] + (dt**2)*(w0**2)*(u_in[i] - u_C[i]) - (dt*w0/Q)*(u_C[i] - u_C[i-1])
+    for i in range(1, len(t)):
+        u_R[i] = 1/(Q*w0)*(u_C[i] - u_C[i-1])/dt
+    return u_R*10
 
 u_out = band_pass_filter()
 

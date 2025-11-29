@@ -9,7 +9,7 @@ set datafile separator ","
 set title "RLC Circuit"
 set xlabel "Time"
 set ylabel "Voltage"
-set xrange [0:10]
+set xrange [0:40]
 set yrange [-2:2]
 set samples 10000
 
