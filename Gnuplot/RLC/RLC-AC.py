@@ -10,7 +10,7 @@ RLC Bandpass Filter (2nd order) Data Generator
 # L = 1.0      # Inductance in henrys
 # C = 0.1     # Capacitance in farads
 w0 = 5  # Resonant angular frequency
-Q = 10     # Quality factor
+Q = 10    # Quality factor
 dt = 0.001   # Time step
 t = np.arange(0, 40, dt)  # Time array
 
@@ -20,8 +20,8 @@ f0 = w0/(2*np.pi)  # Limit frequency
 # Sine wave
 u_in = np.sin(2 * np.pi *0.1*f0* t + np.pi/2)
 
-# Square wave
-# u_in = np.sign(np.sin(2 * np.pi *f* t))
+# # Square wave
+# u_in = np.sign(np.sin(2 * np.pi *0.1*f0* t))
 
 # Fourier series approximation of square wave
 # u_in = np.sum([ (4/(np.pi*(2*n+1))) * np.sin(2 * np.pi * (2*n+1) * f * t) for n in range(3)], axis=0)
