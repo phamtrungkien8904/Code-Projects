@@ -9,7 +9,7 @@ set datafile separator ","
 set title "RLC Circuit ($Q=10,\ \omega = 0.1 \omega_0$)"
 set xlabel "Time"
 set ylabel "Voltage"
-set xrange [0:40]
+set xrange [0:20]
 set yrange [-2:2]
 set samples 10000
 

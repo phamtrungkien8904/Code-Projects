@@ -9,16 +9,16 @@ RLC Bandpass Filter (2nd order) Data Generator
 # R = 1    # Resistance in ohms
 # L = 1.0      # Inductance in henrys
 # C = 0.1     # Capacitance in farads
-w0 = 5  # Resonant angular frequency
+w0 = 10  # Resonant angular frequency
 Q = 10    # Quality factor
 dt = 0.001   # Time step
-t = np.arange(0, 40, dt)  # Time array
+t = np.arange(0, 20, dt)  # Time array
 
 # Generate the input signal (square wave)
 f0 = w0/(2*np.pi)  # Limit frequency
 
 # Sine wave
-u_in = np.sin(2 * np.pi *0.1*f0* t + np.pi/2)
+u_in = 1+np.sin(2 * np.pi *1.1*f0* t + np.pi/2)
 
 # # Square wave
 # u_in = np.sign(np.sin(2 * np.pi *0.1*f0* t))
@@ -45,7 +45,7 @@ def band_pass_filter():
         u_C[i+1] = 2*u_C[i] - u_C[i-1] + (dt**2)*(w0**2)*(u_in[i] - u_C[i]) - (dt*w0/Q)*(u_C[i] - u_C[i-1])
     for i in range(1, len(t)):
         u_R[i] = 1/(Q*w0)*(u_C[i] - u_C[i-1])/dt
-    return u_R*10
+    return u_R
 
 u_out = band_pass_filter()
 
