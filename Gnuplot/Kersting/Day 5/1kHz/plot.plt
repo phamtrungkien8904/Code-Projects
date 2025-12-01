@@ -6,7 +6,7 @@ set encoding utf8
 
 
 set datafile separator ","
-set title "Op-Amp Single Supply"
+set title "Op-Amp Single Supply (1 kHz)"
 set xlabel "Time (ms)"
 set ylabel "Voltage (V)"
 set xrange [-2:2]
