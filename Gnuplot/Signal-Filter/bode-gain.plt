@@ -32,13 +32,12 @@ H2(x) = 1/sqrt((1 - x**2)**2 + (3*x)**2)
 G2(x) = 20*log10(H2(x))
 fc = 0.374239*fc
 
-N = 10
 i = sqrt(-1)
 r1(x) = 1 + 0.5*i*x + sqrt(i*x - 0.25*x**2)
 r2(x) = 1 + 0.5*i*x - sqrt(i*x - 0.25*x**2)
-D(x) = (((1+i*x) - r2(x))*r1(x)**N - ((1+i*x) - r1(x))*r2(x)**N)/(r1(x) - r2(x))
-H(x) = 1/abs(D(x))
-G(x) = 20*log10(H(x))
+D(x,N) = (((1+i*x) - r2(x))*r1(x)**N - ((1+i*x) - r1(x))*r2(x)**N)/(r1(x) - r2(x))
+H(x,N) = 1/abs(D(x,N))
+G(x,N) = 20*log10(H(x,N))
 
 
 
@@ -47,6 +46,7 @@ set arrow from fc, graph 0 to fc, graph 1 nohead dt 2 lc rgb 'black'
 
 plot G1(x) title 'n = 1' with lines linestyle 1,\
      G2(x) title 'n = 2' with lines linestyle 2,\
-     G(x) title sprintf('n = %d', N) with lines linestyle 3,\
+     G(x,2) title sprintf('n = %d', 2) with lines linestyle 3,\
+     G(x,6) title sprintf('n = %d', 6) with lines linestyle 3,\
      -3 with lines linestyle 4 notitle
 
