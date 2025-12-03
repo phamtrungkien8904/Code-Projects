@@ -1,8 +1,8 @@
 reset
 set encoding utf8
 
-# set terminal epslatex color
-# set output '1kHz.tex'
+set terminal epslatex color
+set output '1kHz-sawtooth.tex'
 
 
 set datafile separator ","
@@ -26,4 +26,6 @@ set style line 3 lc rgb 'green' lw 2 pt 8 ps 1
 
 plot 'sawtooth.csv' using 1:2 every 100 with lines linestyle 1 title 'Input',\
     'sawtooth.csv' using 1:3 every 100 with lines linestyle 2 title 'Output'
-# set output
+
+
+set output
