@@ -8,7 +8,7 @@ set xlabel 'X=log(w/w0)'
 set ylabel 'G (dB)'
 set xrange [10e-5:10e5]
 set logscale x 10
-set format x '10^{%L}'
+set format x '{%L}'
 set yrange [-80:20]
 set sample 10000
 # set grid
@@ -33,11 +33,9 @@ G2(x) = 20*log10(H2(x))
 fc = 0.374239*fc
 
 i = sqrt(-1)
-r1(x) = 1 + 0.5*i*x + sqrt(i*x - 0.25*x**2)
-r2(x) = 1 + 0.5*i*x - sqrt(i*x - 0.25*x**2)
-D(x,N) = (((1+i*x) - r2(x))*r1(x)**N - ((1+i*x) - r1(x))*r2(x)**N)/(r1(x) - r2(x))
-H(x,N) = 1/abs(D(x,N))
-G(x,N) = 20*log10(H(x,N))
+lamb(x) = acosh(1 + i*x/2)
+H(x,N) = cosh(lamb(x)*0.5)/cosh(lamb(x)*(N + 0.5)) 
+G(x,N) = 20*log10(abs(H(x,N)))
 
 
 
