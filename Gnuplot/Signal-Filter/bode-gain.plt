@@ -2,8 +2,8 @@ reset
 set encoding utf8 
 
 
-set terminal epslatex color
-set out 'bode3-gain.tex' 
+# set terminal epslatex color
+# set out 'bode3-gain.tex' 
 # ============================ Plot Settings ============================
 
 set title 'Bode Diagram (Gain)'
@@ -57,4 +57,4 @@ plot G(x,1) title sprintf('$Q=%d$', 1) with lines linestyle 1,\
      G(x,0.1) title sprintf('$Q=%.1f$', 0.1) with lines linestyle 3,\
      -3 notitle with lines linestyle 4
 
-set out
+# set out

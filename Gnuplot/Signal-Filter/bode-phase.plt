@@ -2,8 +2,8 @@ reset
 set encoding utf8 
 
 
-set terminal epslatex color
-set out 'bode3-phase.tex' 
+# set terminal epslatex color
+# set out 'bode3-phase.tex' 
 # ============================ Plot Settings ============================
 
 set title 'Bode Diagram (Phase)'
@@ -56,4 +56,4 @@ plot phi(x,1) title sprintf('$Q=%d$', 1) with lines linestyle 1,\
      phi(x,10) title sprintf('$Q=%d$', 10) with lines linestyle 2,\
      phi(x,0.1) title sprintf('$Q=%.1f$', 0.1) with lines linestyle 3
 
-set out
+# set out
