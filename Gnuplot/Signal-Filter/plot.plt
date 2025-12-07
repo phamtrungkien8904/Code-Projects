@@ -2,13 +2,13 @@ reset
 set encoding utf8 
 
 set terminal epslatex color
-set out 'lowpass-sweep.tex' 
+set out 'bandpass-sweep.tex' 
 
 # ============================ Plot Settings ============================
 
-set title 'Signal Filter (Passive Low-Pass)'
-set xlabel 't/ms'
-set ylabel 'U/V'
+set title 'Signal Filter (RLC Bandpass)'
+set xlabel '$t$/ms'
+set ylabel '$U$/V'
 set xrange [0:40]
 set yrange [-2:2]
 set sample 10000

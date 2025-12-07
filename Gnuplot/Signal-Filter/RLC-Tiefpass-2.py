@@ -7,15 +7,18 @@ tau_L*tau_C* d^2u_out/dt^2 + (tau_C)*du_out/dt + u_out = u_in
 """
 
 # Set the parameters for the filter
-tau_C = 2.0  # Capacitor time constant
-tau_L = 0.5  # Inductance time constant
-dt = 0.05   # Time step
-t = np.arange(0, 40, dt)  # Time array
+R = 50
+C = 2.2e-6
+L = 10e-3
+
+tau_C = R*C  # Capacitor time constant
+tau_L = L/R  # Inductance time constant
+dt = 0.00001   # Time step (dt << tau)
+t = np.arange(0, 0.04, dt)  # Time array
+f0 = 1/(2*np.pi*np.sqrt(tau_L*tau_C))  # Limit frequency
 
 # Generate the input signal (square wave)
-f0 = 1/(2*np.pi*np.sqrt(tau_L*tau_C))  # Limit frequency
-f = f0  # Frequency of the square wave
-
+f = f0 # Frequency of wave  
 # Sine wave
 # u_in = np.sin(2 * np.pi *f* t)
 
@@ -32,7 +35,13 @@ f = f0  # Frequency of the square wave
 # u_in = 1*np.sum([ ((-1)**n)/(n+1) * np.sin(2 * np.pi * (n+1) * f * t) for n in range(20)], axis=0)
 
 # Fourier series (random noising waves)
-u_in = 1*np.sin(2 * np.pi * f * t) + (1/5)*np.sin(2 * np.pi * 10 * f * t) + (1/5)*np.sin(2 * np.pi * 20 * f * t) + (1/5)*np.sin(2 * np.pi * 15 * f * t)
+# u_in = 1*np.sin(2 * np.pi * f * t) + (1/5)*np.sin(2 * np.pi * 10 * f * t) + (1/5)*np.sin(2 * np.pi * 20 * f * t) + (1/5)*np.sin(2 * np.pi * 15 * f * t)
+
+# AC sweep
+f_start = 10
+f_end = 1000
+df = (f_end - f_start)/len(t)
+u_in = np.sin(2 * np.pi * (f_start + df*t*100000) * t) 
 
 # Apply the low-pass filter
 def low_pass_filter(u_in, tau_C, tau_L, dt):
@@ -45,17 +54,17 @@ def low_pass_filter(u_in, tau_C, tau_L, dt):
 
 u_out = low_pass_filter(u_in, tau_C, tau_L, dt)
 
-# Transfer function (Amplitude)
-def transfer_function(f, tau_C, tau_L):
-    s = 1j * 2 * np.pi * f
-    H = 1/(1 + s * tau_C + s**2 * tau_L * tau_C)
-    return abs(H) 
+# # Transfer function (Amplitude)
+# def transfer_function(f, tau_C, tau_L):
+#     s = 1j * 2 * np.pi * f
+#     H = 1/(1 + s * tau_C + s**2 * tau_L * tau_C)
+#     return abs(H) 
 
-H_amp = transfer_function(f, tau_C, tau_L)
+# H_amp = transfer_function(f, tau_C, tau_L)
 
 # Save the input and output signals to a CSV file
 with open("data.csv", "w", newline="") as csvfile:
     csvwriter = csv.writer(csvfile)
-    csvwriter.writerow(["# Time", "Input", "Output", "Transfer Function (Amplitude)"])
+    csvwriter.writerow(["# Time", "Input", "Output"])
     for i in range(len(t)):
-        csvwriter.writerow([t[i], u_in[i], u_out[i], H_amp])  
+        csvwriter.writerow([t[i], u_in[i], u_out[i]])  
