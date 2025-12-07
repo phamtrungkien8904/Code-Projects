@@ -1,10 +1,13 @@
 reset
 set encoding utf8 
 
+set terminal epslatex color
+set out 'lowpass-sweep.tex' 
+
 # ============================ Plot Settings ============================
 
-set title 'Signal Filter'
-set xlabel 't/s'
+set title 'Signal Filter (Passive Low-Pass)'
+set xlabel 't/ms'
 set ylabel 'U/V'
 set xrange [0:40]
 set yrange [-2:2]
@@ -24,8 +27,7 @@ f = f0
 f(x) = 1*sin(2*pi*f*x)
 
 
-plot 'data.csv' using 1:3 with lines linestyle 1 title 'Output Signal', \
-     'data.csv' using 1:2 with lines linestyle 2 title 'Input Signal', \
-     'data.csv' using 1:4 with lines linestyle 3 title 'Transfer Function (Amplitude)', \
-     'data.csv' using 1:(-$4) with lines linestyle 3 notitle
+plot 'data.csv' using ($1*1000):3 with lines linestyle 1 title 'Output Signal', \
+     'data.csv' using ($1*1000):2 with lines linestyle 2 title 'Input Signal'
 
+set out

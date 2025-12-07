@@ -10,8 +10,8 @@ R = 220
 C = 2.2e-6
 tau = R*C  # Time constant
 dt = 0.00001   # Time step (dt << tau)
-t = np.arange(0, 0.2, dt)  # Time array
-f0 = 1/(2*np.pi*np.sqrt(tau))  # Limit frequency
+t = np.arange(0, 0.04, dt)  # Time array
+f0 = 1/(2*np.pi*tau)  # Limit frequency
 
 # Generate the input signal (square wave)
 f = f0 # Frequency of wave  
@@ -20,12 +20,12 @@ f = f0 # Frequency of wave
 # u_in = np.sin(2 * np.pi *f* t)
 
 # Square wave
-# u_in = np.sign(np.sin(2 * np.pi *f* t))
+# u_in = np.sign(np.sin(2 * np.pi *2*f* t))
 
 # Fourier series approximation of square wave
 # u_in = np.sum([ (4/(np.pi*(2*n+1))) * np.sin(2 * np.pi * (2*n+1) * f * t) for n in range(3)], axis=0)
 
-# Sawtooth wave
+# # Sawtooth wave
 # u_in = (2*(t*f - np.floor(0.5 + t*f)))
 
 # Sawtooth wave Fourier series
@@ -37,9 +37,9 @@ f = f0 # Frequency of wave
 
 # AC sweep
 f_start = 10
-f_end = 2000
-df = 5
-u_in = np.sin(2 * np.pi * (f_start + df*t*1000 ) * t) 
+f_end = 1000
+df = (f_end - f_start)/len(t)
+u_in = np.sin(2 * np.pi * (f_start + df*t*100000) * t) 
 
 # Apply the low-pass filter
 def low_pass_filter(u_in, tau, dt):
@@ -49,18 +49,19 @@ def low_pass_filter(u_in, tau, dt):
     return u_C
 
 u_out = low_pass_filter(u_in, tau, dt)
+print(f0)
 
-# Transfer function (Amplitude)
-def transfer_function(f, tau):
-    s = 1j * 2 * np.pi * f
-    H = 1 / (1 + s * tau)
-    return abs(H) 
+# # Transfer function (Amplitude)
+# def transfer_function(f, tau):
+#     s = 1j * 2 * np.pi * f
+#     H = 1 / (1 + s * tau)
+#     return abs(H) 
 
-H_amp = transfer_function(f, tau)
+# H_amp = transfer_function(f, tau)
 
 # Save the input and output signals to a CSV file
 with open("data.csv", "w", newline="") as csvfile:
     csvwriter = csv.writer(csvfile)
-    csvwriter.writerow(["# Time", "Input", "Output", "Transfer Function (Amplitude)"])
+    csvwriter.writerow(["# Time", "Input", "Output"])
     for i in range(len(t)):
-        csvwriter.writerow([t[i], u_in[i], u_out[i], H_amp])  
+        csvwriter.writerow([t[i], u_in[i], u_out[i]])  
