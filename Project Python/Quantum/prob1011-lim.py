@@ -7,7 +7,7 @@ import matplotlib.animation as animation
 
 # Constant
 hbar = 1.0  # Reduced Planck's constant
-m = 5.0    # Particle mass
+m = 1.0    # Particle mass
 
 
 
@@ -23,7 +23,7 @@ Nx = int((x_max - x_min) / dx)
 
 # Parameters
 a = x_max - x_min  # Well width
-
+k = 1
 
 
 
@@ -41,7 +41,7 @@ V = np.zeros(Nx-1)
 def solve():
     # Initial wave function
     global t, x, dt, dx
-    Psi0 = np.sqrt(8/(5*a))*(1 + np.cos(np.pi*x[1:-1]/a)) * np.sin(np.pi*x[1:-1]/a)  # Initial wave function
+    Psi0 = np.sqrt(8/(5*a))*(1 + np.cos(np.pi*x[1:-1]/a)) * np.sin(np.pi*x[1:-1]/a) * np.exp(1j*k*x[1:-1])  # Initial wave function
     C0 = np.sqrt(np.sum(np.abs(Psi0[:])**2*dx))  # Normalization constant
     Psi0 = Psi0/C0
 
