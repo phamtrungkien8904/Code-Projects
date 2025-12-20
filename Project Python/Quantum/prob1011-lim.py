@@ -17,19 +17,15 @@ t_min = 0
 t_max = 50
 Nt = int((t_max - t_min) / dt) 
 dx = 0.05
-x_min = -25
-x_max = 25
+x_min = 0
+x_max = 50
 Nx = int((x_max - x_min) / dx) 
 
 # Parameters
+a = x_max - x_min  # Well width
 
-k = 20  # wave number at center of packet
-# w = hbar * k**2 / (2 * m)  # angular frequency
-alpha = 0.5  # packet width
-p = hbar * k  # momentum
-V0 = p**2/(2*m)  # Kinetic energy
-x0 = -10  # Initial position
-K = 10  # Spring constant
+
+
 
 t = np.linspace(t_min, t_max, Nt + 1)
 x = np.linspace(x_min, x_max, Nx + 1)
@@ -39,16 +35,13 @@ x = np.linspace(x_min, x_max, Nx + 1)
 V = np.zeros(Nx-1)
 
 
-# Configuration print 
-print(f'Wave number (at center): {k}')
-print(f'Packet width: {alpha}')
 
 
 # Solve engine
 def solve():
     # Initial wave function
     global t, x, dt, dx
-    Psi0 = np.exp(1j*k*(x[1:-1]-x0)) * np.exp(-(x[1:-1]-x0)**2/(2*alpha**2))
+    Psi0 = np.sqrt(8/(5*a))*(1 + np.cos(np.pi*x[1:-1]/a)) * np.sin(np.pi*x[1:-1]/a)  # Initial wave function
     C0 = np.sqrt(np.sum(np.abs(Psi0[:])**2*dx))  # Normalization constant
     Psi0 = Psi0/C0
 
