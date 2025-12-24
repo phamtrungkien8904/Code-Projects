@@ -24,7 +24,7 @@ g = 9.81  # m/s^2 (magnitude)
 R = 0.1  # radius of ball
 mu = 0.2  # kinetic friction coefficient with table
 
-def engine(r0,v0, w0):
+def motion(r0,v0, w0):
     r = np.zeros((len(t), 3))
     v = np.zeros((len(t), 3))
     w = np.zeros((len(t), 3))
@@ -69,7 +69,12 @@ def engine(r0,v0, w0):
     
 
 
-x, y, tau = engine(r0=[3,5,0], v0=[1,1,0], w0=[2,0,0])
+r0 = [3, 5, 0]
+v0 = [2, 2, 0]
+w0 = [0, 0, 10]
+
+x, y, tau = motion(r0=r0, v0=v0, w0=w0)
+
 
 print(tau)
 
@@ -86,6 +91,9 @@ circle = plt.Circle((0, 0),R, color='red')  # Projectile circle
 ax.add_patch(circle)   
 ax.set_title('Projectile Motion')
 
+# Dashed line in the direction of v0 passing through r0 (in x-y plane)
+aim_line, = ax.plot([], [], linestyle='--', color='black', lw=1, label='v0 direction')
+
 
 ax.set_xlim(x_min, x_max)
 ax.set_ylim(y_min, y_max)
@@ -95,7 +103,38 @@ ax.set_xlabel("Position x")
 time_text = ax.text(0.02, 0.95,  "", transform=ax.transAxes)
 
 # Track length
-N = 50  # Number of points to show in the track
+N = 1000  # Number of points to show in the track
+
+def _set_aim_line():
+    x0, y0 = float(r0[0]), float(r0[1])
+    vx, vy = float(v0[0]), float(v0[1])
+    eps = 1e-12
+    if abs(vx) < eps and abs(vy) < eps:
+        aim_line.set_data([], [])
+        return
+
+    candidates = []  # list of (s, x, y)
+    if abs(vx) >= eps:
+        for xb in (x_min, x_max):
+            s = (xb - x0) / vx
+            yb = y0 + s * vy
+            if y_min - 1e-9 <= yb <= y_max + 1e-9:
+                candidates.append((s, xb, yb))
+    if abs(vy) >= eps:
+        for yb in (y_min, y_max):
+            s = (yb - y0) / vy
+            xb = x0 + s * vx
+            if x_min - 1e-9 <= xb <= x_max + 1e-9:
+                candidates.append((s, xb, yb))
+
+    if len(candidates) < 2:
+        aim_line.set_data([], [])
+        return
+
+    candidates.sort(key=lambda item: item[0])
+    _, x1, y1 = candidates[0]
+    _, x2, y2 = candidates[-1]
+    aim_line.set_data([x1, x2], [y1, y2])
 
 def animate(i):
     # Show only the last N points of the trajectory
@@ -103,8 +142,11 @@ def animate(i):
     line1.set_data(x[start_idx:i], y[start_idx:i])  # Draw trajectory track up to current position
     circle.set_center((x[i], y[i]))  # Update projectile position
 
+    if i == 1:
+        _set_aim_line()
+
     time_text.set_text(f't={t[i]:.1f}s')
-    return line1, circle, time_text
+    return line1, aim_line, circle, time_text
 
 ###########
 ###########
