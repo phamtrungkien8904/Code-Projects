@@ -9,7 +9,7 @@ import matplotlib.animation as animation
 # Time steps
 dt = 0.01
 t_min = 0
-t_max = 5
+t_max = 10
 Nt = int((t_max - t_min) / dt) 
 
 
@@ -22,9 +22,36 @@ y_min = 0
 y_max = 1.67
 R = 57.15/1000  # radius of sphere
 
+# Pockets (6 holes): 4 corners + 2 side pockets (middle of long rails)
+pocket_radius = 2.2 * R
+x_mid = 0.5 * (x_min + x_max)
+pocket_centers = np.array(
+    [
+        [x_min, y_min],
+        [x_mid, y_min],
+        [x_max, y_min],
+        [x_min, y_max],
+        [x_mid, y_max],
+        [x_max, y_max],
+    ],
+    dtype=float,
+)
+
 
 # Collision of N spheres
-def engine(positions, velocities, omegas, num_balls, *, mu=0.2, g=9.81, e=1.0, eps=1e-12):
+def engine(
+    positions,
+    velocities,
+    omegas,
+    num_balls,
+    *,
+    mu=0.2,
+    g=9.81,
+    e=1.0,
+    eps=1e-12,
+    pocket_centers=None,
+    pocket_radius=None,
+):
     """
     positions: array of shape (num_balls, 2) with [x, y] for each ball
     velocities: array of shape (num_balls, 2) with [vx, vy] for each ball
@@ -83,6 +110,7 @@ def engine(positions, velocities, omegas, num_balls, *, mu=0.2, g=9.81, e=1.0, e
     x_all = np.zeros((num_balls, len(t)))
     y_all = np.zeros((num_balls, len(t)))
     w_all = np.zeros((num_balls, 3, len(t)))
+    pocketed_step = np.full(num_balls, -1, dtype=int)
     
     # Set initial positions
     x_all[:, 0] = positions[:, 0]
@@ -92,8 +120,31 @@ def engine(positions, velocities, omegas, num_balls, *, mu=0.2, g=9.81, e=1.0, e
     # Current velocities (mutable)
     v = velocities.copy()
     w = omegas.copy()
+    active = np.ones(num_balls, dtype=bool)
+
+    if pocket_centers is None:
+        pocket_centers = np.empty((0, 2), dtype=float)
+    if pocket_radius is None:
+        pocket_radius = 0.0
+
+    def _maybe_pocket_balls(i):
+        if pocket_centers.shape[0] == 0 or pocket_radius <= 0.0:
+            return
+
+        for j in range(num_balls):
+            if not active[j]:
+                continue
+            dx = pocket_centers[:, 0] - x_all[j, i]
+            dy = pocket_centers[:, 1] - y_all[j, i]
+            if np.any(dx * dx + dy * dy <= pocket_radius * pocket_radius):
+                active[j] = False
+                pocketed_step[j] = i
+                v[j, :] = 0.0
+                w[j, :] = 0.0
 
     def _apply_pair_collision(j, k, i):
+        if (not active[j]) or (not active[k]):
+            return
         dx = x_all[k, i] - x_all[j, i]
         dy = y_all[k, i] - y_all[j, i]
         dist2 = dx * dx + dy * dy
@@ -127,6 +178,8 @@ def engine(positions, velocities, omegas, num_balls, *, mu=0.2, g=9.81, e=1.0, e
 
     def _apply_wall_bounce_no_friction(j, which):
         # Friction at cushions is neglected: purely reflect the normal component with restitution.
+        if not active[j]:
+            return
         if which == "left" or which == "right":
             v[j, 0] = -e * v[j, 0]
         elif which == "bottom" or which == "top":
@@ -141,15 +194,37 @@ def engine(positions, velocities, omegas, num_balls, *, mu=0.2, g=9.81, e=1.0, e
                 tau = (2.0 / (7.0 * mu * g)) * vC0_speed
                 print(f"Ball {j+1}: slipping time tau = {tau:.4f} s (|vC0|={vC0_speed:.4f})")
     
+    # Optional air drag (linear damping). This makes even rolling balls stop over time.
+    air_gamma_v = 0.8   # 1/s translational damping rate
+    air_gamma_w = 0.8   # 1/s angular damping rate (optional, set 0 to disable)
+    v_stop = 1e-3       # m/s snap-to-zero threshold
+    w_stop = 1e-2       # rad/s snap-to-zero threshold
+
+    def _apply_air_drag_full_dt():
+        nonlocal v, w
+        if air_gamma_v > 0.0:
+            v *= np.exp(-air_gamma_v * dt)
+            v[np.abs(v) < v_stop] = 0.0
+        if air_gamma_w > 0.0:
+            w *= np.exp(-air_gamma_w * dt)
+            w[np.abs(w) < w_stop] = 0.0
+
     # Simulate step by step
     for i in range(1, len(t)):
         # Table friction acts continuously (if slipping)
         for j in range(num_balls):
-            _apply_table_slip_friction(j)
+            if active[j]:
+                _apply_table_slip_friction(j)
+
+        # Air drag acts continuously
+        _apply_air_drag_full_dt()
 
         # Update positions for all balls
         x_all[:, i] = x_all[:, i-1] + v[:, 0] * dt
         y_all[:, i] = y_all[:, i-1] + v[:, 1] * dt
+
+        # Pocket detection happens before wall bounces, so a ball can fall instead of bouncing.
+        _maybe_pocket_balls(i)
         
         # Check for collisions between all pairs
         for j in range(num_balls):
@@ -158,6 +233,8 @@ def engine(positions, velocities, omegas, num_balls, *, mu=0.2, g=9.81, e=1.0, e
         
         # Handle wall collisions (bounce)
         for j in range(num_balls):
+            if not active[j]:
+                continue
             # Left/right walls
             if x_all[j, i] - R <= x_min:
                 x_all[j, i] = x_min + R
@@ -176,31 +253,57 @@ def engine(positions, velocities, omegas, num_balls, *, mu=0.2, g=9.81, e=1.0, e
 
         w_all[:, :, i] = w
     
-    return x_all, y_all, w_all
+    return x_all, y_all, w_all, pocketed_step
 
-# Define initial conditions for N balls
-num_balls = 2
-positions = np.array([
-    [1.0, 1.0],   # Ball 1
-    [1.5, 1.0 + R],   # Ball 2
-])
-velocities = np.array([
-    [10.0, 0.0],    # Ball 1
-    [0.0, 0.0],   # Ball 2
-])
+# Define initial conditions: cue ball + 15-ball rack
+num_balls = 16
 
-omegas = np.array([
-    [0.0, 10.0/R, 0.0],  # Ball 1 spin about z
-    [0.0, 0.0, 0.0],   # Ball 2
-])
+# Layout: x axis along table length, y axis along width
+y_center = 0.5 * (y_min + y_max)
 
-x_all, y_all, w_all = engine(positions, velocities, omegas, num_balls)
+# Rack (15 balls) in a triangle, touching (center spacing = 2R)
+rack_apex_x = x_max * 0.75
+rack_apex_y = y_center
+dx_row = np.sqrt(3.0) * R
 
-# Define colors for each ball
-colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'pink', 'brown', 'gray', 'cyan']
+rack_positions = []
+for row in range(5):
+    x = rack_apex_x + row * dx_row
+    y_start = rack_apex_y - row * R
+    for k in range(row + 1):
+        rack_positions.append([x, y_start + 2.0 * R * k])
+
+# Cue ball
+cue_x = x_max * 0.25
+cue_y = y_center + 2*R
+
+positions = np.array([[cue_x, cue_y], *rack_positions], dtype=float)
+
+velocities = np.zeros((num_balls, 2), dtype=float)
+velocities[0] = [10.0, 0.0]  # cue ball initial speed
+
+omegas = np.zeros((num_balls, 3), dtype=float)
+omegas[0] = [0.0, -10.0 / R, 0.0]  # cue ball spin
+
+x_all, y_all, w_all, pocketed_step = engine(
+    positions,
+    velocities,
+    omegas,
+    num_balls,
+    pocket_centers=pocket_centers,
+    pocket_radius=pocket_radius,
+)
+
+# Define colors for each ball (cue ball first)
+colors = ['black', 'yellow', 'blue', 'red', 'purple', 'orange', 'green', 'maroon', 'black',
+          'yellow', 'blue', 'red', 'purple', 'orange', 'green', 'maroon']
 
 
 fig, ax = plt.subplots()
+
+# Draw pockets
+for (px, py) in pocket_centers:
+    ax.add_patch(plt.Circle((px, py), pocket_radius, color='black'))
 
 # Create lines and spheres for each ball
 lines = []
@@ -216,13 +319,13 @@ ax.set_title(f'Collision Simulation - {num_balls} Balls')
 
 
 
-ax.legend()
 ax.set_xlim(x_min, x_max)
 ax.set_ylim(y_min, y_max)
 ax.set_ylabel("Position y")
 ax.set_xlabel("Position x")
 ax.set_aspect('equal')
 time_text = ax.text(0.02, 0.95,  "", transform=ax.transAxes)
+pocket_text = ax.text(0.02, 0.90, "", transform=ax.transAxes)
 
 # Track length
 N = 200  # Number of points to show in the track
@@ -231,12 +334,22 @@ def animate(i):
     # Show only the last N points of the trajectories
     start_idx = max(0, i - N)
     
+    pocketed_now = []
     for j in range(num_balls):
+        is_pocketed = pocketed_step[j] != -1 and i >= pocketed_step[j]
+        if is_pocketed:
+            lines[j].set_data([], [])
+            circles[j].set_visible(False)
+            pocketed_now.append(j + 1)
+            continue
+
+        circles[j].set_visible(True)
         lines[j].set_data(x_all[j, start_idx:i], y_all[j, start_idx:i])
         circles[j].set_center((x_all[j, i], y_all[j, i]))
         
     time_text.set_text(f't={t[i]:.2f}s')
-    return (*lines, *circles, time_text)
+    pocket_text.set_text('Pocketed: ' + (', '.join(map(str, pocketed_now)) if pocketed_now else 'None'))
+    return (*lines, *circles, time_text, pocket_text)
 
 ###########
 ###########
