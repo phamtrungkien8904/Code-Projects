@@ -58,31 +58,33 @@ def motion(r0,v0, w0):
 
         # Angular acceleration from torque: I = (2/5) m R^2
         #   dw/dt = (5/2) * (mu * g / R) * (k x vC_hat)
-        w[i] = w[i - 1] + dt * (-(5 / 2) * mu * g / R**2 * np.cross(np.array([0, 0, -R]), vC_hat))
+        w[i] = w[i - 1] + dt * (-(5 / 2) * mu * g / R * np.cross(np.array([0, 0, -1]), vC_hat))
 
         # Linear acceleration from friction:
         #   dv/dt = -mu * g * vC_hat
         v[i] = v[i - 1] + dt * (-mu * g * vC_hat)
         r[i] = r[i - 1] + v[i - 1] * dt
-    return r[:,0], r[:,1], tau
+    return r[:,0], r[:,1], tau, vC[:,0]**2 + vC[:,1]**2
 
     
 
 
 r0 = [3, 5, 0]
 v0 = [2, 2, 0]
-w0 = [0, 0, 10]
+w0 = [20,-20, 0]
 
-x, y, tau = motion(r0=r0, v0=v0, w0=w0)
+x, y, tau, vC_norm = motion(r0=r0, v0=v0, w0=w0)
 
 
 print(tau)
 
 
-
-
-
-
+plt.plot(t, vC_norm)
+plt.xlabel('t (s)')
+plt.ylabel('vC (m/s)')
+plt.title('Contact Point Velocity over Time')
+plt.grid()
+plt.show()
 
 
 fig, ax = plt.subplots()
