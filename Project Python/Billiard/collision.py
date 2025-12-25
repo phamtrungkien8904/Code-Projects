@@ -24,77 +24,219 @@ g = 9.81  # m/s^2 (magnitude)
 R = 0.1  # radius of ball
 mu = 0.2  # kinetic friction coefficient with table
 
-def motion(r0,v0, w0):
-    r = np.zeros((len(t), 3))
-    v = np.zeros((len(t), 3))
-    w = np.zeros((len(t), 3))
-    vC = np.zeros((len(t), 3))  # contact point velocity
-    r[0] = r0
-    v[0] = v0
-    w[0] = w0
-    vC[0] = v0 + np.cross(w0, np.array([0,0,-R]))
+def collision(r1, v1, r2, v2, *, R=R, e=1.0, m1=1.0, m2=1.0, eps=1e-12, separate=True):
+    """Resolve a 2D collision between two equal-radius balls.
 
-    # Slipping time
-    tau = 2 / (7 * mu * g) * np.linalg.norm(vC[0])
+    r1, r2: (3,) or (2,) positions (only x,y used)
+    v1, v2: (3,) or (2,) velocities (only x,y updated)
+
+    Returns updated (r1, v1, r2, v2).
+    """
+    r1 = np.asarray(r1, dtype=float).copy()
+    r2 = np.asarray(r2, dtype=float).copy()
+    v1 = np.asarray(v1, dtype=float).copy()
+    v2 = np.asarray(v2, dtype=float).copy()
+
+    dr = r2[:2] - r1[:2]
+    dist2 = float(np.dot(dr, dr))
+    if dist2 <= eps:
+        n = np.array([1.0, 0.0], dtype=float)
+        dist = 0.0
+    else:
+        dist = float(np.sqrt(dist2))
+        n = dr / dist
+
+    min_dist = 2.0 * float(R)
+    if dist > min_dist + 1e-12:
+        return r1, v1, r2, v2
+
+    vrel = v2[:2] - v1[:2]
+    vn = float(np.dot(vrel, n))
+    if vn >= 0.0:
+        # Separating: optionally just de-overlap
+        if separate and dist < min_dist - 1e-12:
+            overlap = min_dist - dist
+            inv_m1 = 0.0 if m1 <= 0 else 1.0 / float(m1)
+            inv_m2 = 0.0 if m2 <= 0 else 1.0 / float(m2)
+            inv_sum = inv_m1 + inv_m2
+            if inv_sum > 0.0:
+                r1[:2] -= n * overlap * (inv_m1 / inv_sum)
+                r2[:2] += n * overlap * (inv_m2 / inv_sum)
+        return r1, v1, r2, v2
+
+    inv_m1 = 0.0 if m1 <= 0 else 1.0 / float(m1)
+    inv_m2 = 0.0 if m2 <= 0 else 1.0 / float(m2)
+    inv_sum = inv_m1 + inv_m2
+    if inv_sum <= 0.0:
+        return r1, v1, r2, v2
+
+    e = float(e)
+    if e < 0.0:
+        e = 0.0
+
+    # Impulse magnitude
+    j = -(1.0 + e) * vn / inv_sum
+    impulse = j * n
+    v1[:2] -= impulse * inv_m1
+    v2[:2] += impulse * inv_m2
+
+    if separate and dist < min_dist - 1e-12:
+        overlap = min_dist - dist
+        r1[:2] -= n * overlap * (inv_m1 / inv_sum)
+        r2[:2] += n * overlap * (inv_m2 / inv_sum)
+
+    return r1, v1, r2, v2
+
+
+def motion(r01, v01, w01, r02, v02, w02, *, e=1.0):
+    """Simulate two balls with spin + table slipping friction + ball-ball collision."""
+    r1 = np.zeros((len(t), 3))
+    r2 = np.zeros((len(t), 3))
+    v1 = np.zeros((len(t), 3))
+    v2 = np.zeros((len(t), 3))
+    w1 = np.zeros((len(t), 3))
+    w2 = np.zeros((len(t), 3))
+    vC1 = np.zeros((len(t), 3))
+    vC2 = np.zeros((len(t), 3))
+
+    r1[0] = r01
+    v1[0] = v01
+    w1[0] = w01
+    r2[0] = r02
+    v2[0] = v02
+    w2[0] = w02
+
+    Rvec = np.array([0, 0, -R], dtype=float)
+    vC1[0] = v1[0] + np.cross(w1[0], Rvec)
+    vC2[0] = v2[0] + np.cross(w2[0], Rvec)
+
 
     eps = 1e-12
 
     for i in range(1, len(t)):
+        # --- Ball 1 table friction (slip) ---
+        vC1_norm = np.linalg.norm(vC1[i - 1])
+        if vC1_norm < eps:
+            vC1[i] = np.zeros(3)
+            w1[i] = w1[i - 1]
+            v1[i] = v1[i - 1]
+        else:
+            vC1_hat = vC1[i - 1] / vC1_norm
+            vC1[i] = vC1[i - 1] + dt * (-(7 / 2) * mu * g * vC1_hat)
+            w1[i] = w1[i - 1] + dt * (-(5 / 2) * mu * g / R * np.cross(np.array([0, 0, -1]), vC1_hat))
+            v1[i] = v1[i - 1] + dt * (-mu * g * vC1_hat)
 
-        vC_norm = np.linalg.norm(vC[i - 1])
-        if vC_norm < eps:
-            # No slipping: with this simple model we stop applying kinetic friction.
-            vC[i] = np.zeros(3)
-            w[i] = w[i - 1]
-            v[i] = v[i - 1]
-            r[i] = r[i - 1] + v[i - 1] * dt
-            continue
+        # --- Ball 2 table friction (slip) ---
+        vC2_norm = np.linalg.norm(vC2[i - 1])
+        if vC2_norm < eps:
+            vC2[i] = np.zeros(3)
+            w2[i] = w2[i - 1]
+            v2[i] = v2[i - 1]
+        else:
+            vC2_hat = vC2[i - 1] / vC2_norm
+            vC2[i] = vC2[i - 1] + dt * (-(7 / 2) * mu * g * vC2_hat)
+            w2[i] = w2[i - 1] + dt * (-(5 / 2) * mu * g / R * np.cross(np.array([0, 0, -1]), vC2_hat))
+            v2[i] = v2[i - 1] + dt * (-mu * g * vC2_hat)
 
-        vC_hat = vC[i - 1] / vC_norm
+        # --- Integrate positions (using previous-step velocity, consistent with your original) ---
+        r1[i] = r1[i - 1] + v1[i - 1] * dt
+        r2[i] = r2[i - 1] + v2[i - 1] * dt
 
-        # Contact point velocity decays linearly during slipping:
-        #   dvC/dt = -(7/2) * mu * g * vC_hat
-        vC[i] = vC[i - 1] + dt * (-(7 / 2) * mu * g * vC_hat)
+        # --- Ball-ball collision (2D), update velocities and separate centers ---
+        r1_i, v1_i, r2_i, v2_i = collision(r1[i], v1[i], r2[i], v2[i], R=R, e=e, m1=m, m2=m, eps=eps)
+        r1[i], v1[i], r2[i], v2[i] = r1_i, v1_i, r2_i, v2_i
 
-        # Angular acceleration from torque: I = (2/5) m R^2
-        #   dw/dt = (5/2) * (mu * g / R) * (k x vC_hat)
-        w[i] = w[i - 1] + dt * (-(5 / 2) * mu * g / R * np.cross(np.array([0, 0, -1]), vC_hat))
+        # After collision, recompute contact velocities so friction direction next step is correct.
+        vC1[i] = v1[i] + np.cross(w1[i], Rvec)
+        vC2[i] = v2[i] + np.cross(w2[i], Rvec)
 
-        # Linear acceleration from friction:
-        #   dv/dt = -mu * g * vC_hat
-        v[i] = v[i - 1] + dt * (-mu * g * vC_hat)
-        r[i] = r[i - 1] + v[i - 1] * dt
-    return r[:,0], r[:,1], tau, vC[:,0]**2 + vC[:,1]**2
+    vC1_norm2 = vC1[:, 0] ** 2 + vC1[:, 1] ** 2
+    vC2_norm2 = vC2[:, 0] ** 2 + vC2[:, 1] ** 2
+    return r1[:, 0], r1[:, 1], r2[:, 0], r2[:, 1], vC1_norm2, vC2_norm2
+
+
+def motion_no_friction_no_spin(r01, v01, r02, v02, *, e=1.0):
+    """Two-ball motion with no table friction and no spin (still resolves ball-ball collisions)."""
+    r1 = np.zeros((len(t), 3))
+    r2 = np.zeros((len(t), 3))
+    v1 = np.zeros((len(t), 3))
+    v2 = np.zeros((len(t), 3))
+
+    r1[0] = r01
+    r2[0] = r02
+    v1[0] = v01
+    v2[0] = v02
+
+    eps = 1e-12
+    for i in range(1, len(t)):
+        # Constant velocities (no table friction), but collisions can change v.
+        v1[i] = v1[i - 1]
+        v2[i] = v2[i - 1]
+
+        r1[i] = r1[i - 1] + v1[i - 1] * dt
+        r2[i] = r2[i - 1] + v2[i - 1] * dt
+
+        r1_i, v1_i, r2_i, v2_i = collision(r1[i], v1[i], r2[i], v2[i], R=R, e=e, m1=m, m2=m, eps=eps)
+        r1[i], v1[i], r2[i], v2[i] = r1_i, v1_i, r2_i, v2_i
+
+    return r1[:, 0], r1[:, 1], r2[:, 0], r2[:, 1]
 
     
 
 
-r0 = [3, 5, 0]
-v0 = [1, 0, 0]
-w0 = [10,0, 0]
-
-x, y, tau, vC_norm = motion(r0=r0, v0=v0, w0=w0)
 
 
-print(tau)
+r01 = [2, 5.1, 0]
+v01 = [5, 0, 0]
+w01 = [0, 0, 50]
+r02 = [5, 5, 0]
+v02 = [0, 0, 0]
+w02 = [0, 0, 0]
+
+x1, y1, x2, y2, vC1_norm, vC2_norm = motion(
+    r01=r01,
+    v01=v01,
+    w01=w01,
+    r02=r02,
+    v02=v02,
+    w02=w02,
+    e=1.0,
+)
+
+# Dashed reference: no table friction + no spin
+x1_nf, y1_nf, x2_nf, y2_nf = motion_no_friction_no_spin(
+    r01=r01,
+    v01=v01,
+    r02=r02,
+    v02=v02,
+    e=1.0,
+)
 
 
-plt.plot(t, vC_norm)
+
+    
+
+
+plt.plot(t, vC1_norm, label='Ball 1 |vC|^2')
+plt.plot(t, vC2_norm, label='Ball 2 |vC|^2')
 plt.xlabel('t (s)')
-plt.ylabel('vC (m/s)')
+plt.ylabel('|vC|^2 (m^2/s^2)')
 plt.title('Contact Point Velocity over Time')
 plt.grid()
+plt.legend()
 plt.show()
 
 
 fig, ax = plt.subplots()
-line1, = ax.plot([], [], lw=2, color='blue', label='Trajectory')  # Trajectory track
-circle = plt.Circle((0, 0),R, color='red')  # Projectile circle
-ax.add_patch(circle)   
+line1, = ax.plot([], [], lw=2, color='blue')  # Trajectory ball 1 (with friction+spin)
+line2, = ax.plot([], [], lw=2, color='red')   # Trajectory ball 2 (with friction+spin)
+line1_nf, = ax.plot([], [], lw=1.5, color='blue', linestyle='--', alpha=0.6)  # No friction/spin
+line2_nf, = ax.plot([], [], lw=1.5, color='red', linestyle='--', alpha=0.6)   # No friction/spin
+circle1 = plt.Circle((0, 0),R, color='blue')  # Projectile circle
+circle2 = plt.Circle((0, 0),R, color='red')  # Target circle
+ax.add_patch(circle1)   
+ax.add_patch(circle2)
 ax.set_title('Projectile Motion')
-
-# Dashed line in the direction of v0 passing through r0 (in x-y plane)
-aim_line, = ax.plot([], [], linestyle='--', color='black', lw=1, label='v0 direction')
 
 
 ax.set_xlim(x_min, x_max)
@@ -104,51 +246,26 @@ ax.set_ylabel("Height y")
 ax.set_xlabel("Position x")
 time_text = ax.text(0.02, 0.95,  "", transform=ax.transAxes)
 
-# Track length
-N = 1000  # Number of points to show in the track
 
-def _set_aim_line():
-    x0, y0 = float(r0[0]), float(r0[1])
-    vx, vy = float(v0[0]), float(v0[1])
-    eps = 1e-12
-    if abs(vx) < eps and abs(vy) < eps:
-        aim_line.set_data([], [])
-        return
 
-    candidates = []  # list of (s, x, y)
-    if abs(vx) >= eps:
-        for xb in (x_min, x_max):
-            s = (xb - x0) / vx
-            yb = y0 + s * vy
-            if y_min - 1e-9 <= yb <= y_max + 1e-9:
-                candidates.append((s, xb, yb))
-    if abs(vy) >= eps:
-        for yb in (y_min, y_max):
-            s = (yb - y0) / vy
-            xb = x0 + s * vx
-            if x_min - 1e-9 <= xb <= x_max + 1e-9:
-                candidates.append((s, xb, yb))
-
-    if len(candidates) < 2:
-        aim_line.set_data([], [])
-        return
-
-    candidates.sort(key=lambda item: item[0])
-    _, x1, y1 = candidates[0]
-    _, x2, y2 = candidates[-1]
-    aim_line.set_data([x1, x2], [y1, y2])
 
 def animate(i):
     # Show only the last N points of the trajectory
+    
+    # Track length
+    N = 1000  # Number of points to show in the track
     start_idx = max(0, i - N)
-    line1.set_data(x[start_idx:i], y[start_idx:i])  # Draw trajectory track up to current position
-    circle.set_center((x[i], y[i]))  # Update projectile position
+    line1.set_data(x1[start_idx:i], y1[start_idx:i])  # Draw trajectory track up to current position
+    circle1.set_center((x1[i], y1[i]))  # Update projectile position
 
-    if i == 1:
-        _set_aim_line()
+    line2.set_data(x2[start_idx:i], y2[start_idx:i])  # Draw trajectory track up to current position
+    circle2.set_center((x2[i], y2[i]))  # Update projectile position
+
+    line1_nf.set_data(x1_nf[start_idx:i], y1_nf[start_idx:i])
+    line2_nf.set_data(x2_nf[start_idx:i], y2_nf[start_idx:i])
 
     time_text.set_text(f't={t[i]:.1f}s')
-    return line1, aim_line, circle, time_text
+    return line1, line2, line1_nf, line2_nf, circle1, circle2, time_text
 
 ###########
 ###########
