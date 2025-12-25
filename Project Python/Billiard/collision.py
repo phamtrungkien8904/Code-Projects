@@ -22,7 +22,35 @@ y_max = 10
 m = 1.0  # mass of ball
 g = 9.81  # m/s^2 (magnitude)
 R = 0.1  # radius of ball
-mu = 0.2  # kinetic friction coefficient with table
+mu = 0.3  # kinetic friction coefficient with table
+
+
+def bounce_walls(r, v, *, R=R, x_min=x_min, x_max=x_max, y_min=y_min, y_max=y_max, e_wall=1.0):
+    """Reflect a ball off axis-aligned walls (window limits), accounting for radius.
+
+    Updates x/y position to stay inside [min+R, max-R] and flips the corresponding
+    velocity component.
+    """
+    r = np.asarray(r, dtype=float).copy()
+    v = np.asarray(v, dtype=float).copy()
+
+    # Left / right
+    if r[0] - R < x_min:
+        r[0] = x_min + R
+        v[0] = -e_wall * v[0]
+    elif r[0] + R > x_max:
+        r[0] = x_max - R
+        v[0] = -e_wall * v[0]
+
+    # Bottom / top
+    if r[1] - R < y_min:
+        r[1] = y_min + R
+        v[1] = -e_wall * v[1]
+    elif r[1] + R > y_max:
+        r[1] = y_max - R
+        v[1] = -e_wall * v[1]
+
+    return r, v
 
 def collision(r1, v1, r2, v2, *, R=R, e=1.0, m1=1.0, m2=1.0, eps=1e-12, separate=True):
     """Resolve a 2D collision between two equal-radius balls.
@@ -142,9 +170,17 @@ def motion(r01, v01, w01, r02, v02, w02, *, e=1.0):
         r1[i] = r1[i - 1] + v1[i - 1] * dt
         r2[i] = r2[i - 1] + v2[i - 1] * dt
 
+        # --- Wall bounces (window limits) ---
+        r1[i], v1[i] = bounce_walls(r1[i], v1[i], R=R, x_min=x_min, x_max=x_max, y_min=y_min, y_max=y_max, e_wall=1.0)
+        r2[i], v2[i] = bounce_walls(r2[i], v2[i], R=R, x_min=x_min, x_max=x_max, y_min=y_min, y_max=y_max, e_wall=1.0)
+
         # --- Ball-ball collision (2D), update velocities and separate centers ---
         r1_i, v1_i, r2_i, v2_i = collision(r1[i], v1[i], r2[i], v2[i], R=R, e=e, m1=m, m2=m, eps=eps)
         r1[i], v1[i], r2[i], v2[i] = r1_i, v1_i, r2_i, v2_i
+
+        # If collision pushed a ball outside the window (rare), clamp/bounce again.
+        r1[i], v1[i] = bounce_walls(r1[i], v1[i], R=R, x_min=x_min, x_max=x_max, y_min=y_min, y_max=y_max, e_wall=1.0)
+        r2[i], v2[i] = bounce_walls(r2[i], v2[i], R=R, x_min=x_min, x_max=x_max, y_min=y_min, y_max=y_max, e_wall=1.0)
 
         # After collision, recompute contact velocities so friction direction next step is correct.
         vC1[i] = v1[i] + np.cross(w1[i], Rvec)
@@ -176,8 +212,15 @@ def motion_no_friction_no_spin(r01, v01, r02, v02, *, e=1.0):
         r1[i] = r1[i - 1] + v1[i - 1] * dt
         r2[i] = r2[i - 1] + v2[i - 1] * dt
 
+        # Wall bounces
+        r1[i], v1[i] = bounce_walls(r1[i], v1[i], R=R, x_min=x_min, x_max=x_max, y_min=y_min, y_max=y_max, e_wall=1.0)
+        r2[i], v2[i] = bounce_walls(r2[i], v2[i], R=R, x_min=x_min, x_max=x_max, y_min=y_min, y_max=y_max, e_wall=1.0)
+
         r1_i, v1_i, r2_i, v2_i = collision(r1[i], v1[i], r2[i], v2[i], R=R, e=e, m1=m, m2=m, eps=eps)
         r1[i], v1[i], r2[i], v2[i] = r1_i, v1_i, r2_i, v2_i
+
+        r1[i], v1[i] = bounce_walls(r1[i], v1[i], R=R, x_min=x_min, x_max=x_max, y_min=y_min, y_max=y_max, e_wall=1.0)
+        r2[i], v2[i] = bounce_walls(r2[i], v2[i], R=R, x_min=x_min, x_max=x_max, y_min=y_min, y_max=y_max, e_wall=1.0)
 
     return r1[:, 0], r1[:, 1], r2[:, 0], r2[:, 1]
 
@@ -186,9 +229,9 @@ def motion_no_friction_no_spin(r01, v01, r02, v02, *, e=1.0):
 
 
 
-r01 = [2, 5.1, 0]
+r01 = [2, 5.05, 0]
 v01 = [5, 0, 0]
-w01 = [0, 0, 50]
+w01 = [0, -80, 0]
 r02 = [5, 5, 0]
 v02 = [0, 0, 0]
 w02 = [0, 0, 0]
@@ -242,7 +285,7 @@ ax.set_title('Projectile Motion')
 ax.set_xlim(x_min, x_max)
 ax.set_ylim(y_min, y_max)
 ax.set_aspect('equal', adjustable='box')
-ax.set_ylabel("Height y")
+ax.set_ylabel("Position y")
 ax.set_xlabel("Position x")
 time_text = ax.text(0.02, 0.95,  "", transform=ax.transAxes)
 
@@ -274,3 +317,22 @@ nframes = int(Nt)
 interval = 1000 * dt
 ani = animation.FuncAnimation(fig, animate, frames=nframes, repeat=False, interval=interval, blit=True)
 plt.show()
+
+# Static plot of trajectories
+
+plt.plot(x1,y1)
+plt.plot(x2,y2)
+plt.plot(x1_nf,y1_nf, linestyle='--', alpha=0.6)
+plt.plot(x2_nf,y2_nf, linestyle='--', alpha=0.6)
+plt.title('Ball Trajectories')
+plt.xlabel('Position x')
+plt.ylabel('Position y')
+plt.xlim(x_min, x_max)
+plt.ylim(y_min, y_max)
+plt.gca().set_aspect('equal', adjustable='box')
+plt.grid()
+plt.show()
+
+
+# Note
+# Ignore: ball-to-ball friction, spin transfer during collision with walls and balls, air resistance, inelastic collisions. 
