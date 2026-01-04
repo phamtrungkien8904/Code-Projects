@@ -20,7 +20,7 @@ dx = 0.05
 x_min = -25
 x_max = 25
 Nx = int((x_max - x_min) / dx)
-k = 20  # wave number -> classic with larger k
+k = 10  # wave number -> classic with larger k
 wavelength = 2 * np.pi / k
 # w = hbar * k**2 / (2 * m)  # angular frequency
 alpha = 0.5  # packet width
@@ -34,7 +34,7 @@ x = np.linspace(x_min, x_max, Nx + 1)
 
 # Potential function
 V = np.zeros(Nx-1)
-ratio = 50
+ratio = 10
 for i in range(Nx-1):
     if x[i]>-1 and x[i]<1:
         V[i] = ratio*KE
