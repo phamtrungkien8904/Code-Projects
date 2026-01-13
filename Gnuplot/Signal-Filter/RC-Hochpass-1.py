@@ -6,14 +6,14 @@ RC High-Pass Filter (1st order) Data Generator
 """
 
 # Set the parameters for the filter
-tau = 2.0  # Time constant
-dt = 0.05   # Time step
-t = np.arange(0, 40, dt)  # Time array
+tau = 10000* 2.2e-6  # Time constant
+dt = 0.000001   # Time step
+t = np.arange(0, 0.040, dt)  # Time array
 f0 = 1/(2*np.pi*np.sqrt(tau))  # Limit frequency
 
 # Generate the input signal (square wave)
-f = 1*f0  # Frequency of the square wave
-u_in = (np.sin(2 * np.pi *f* t))
+f = 200*f0  # Frequency of the square wave
+u_in = 1+np.sign(np.sin(2 * np.pi *f* t))
 
 # Apply the low-pass filter
 def high_pass_filter(u_in, tau, dt):
