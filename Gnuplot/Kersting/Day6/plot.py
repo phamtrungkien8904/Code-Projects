@@ -6,7 +6,7 @@ RC Low-Pass Filter (1st order) Data Generator
 """
 
 # Set the parameters for the filter
-R = 220
+R = 270
 C = 2.2e-6
 tau = R*C  # Time constant
 dt = 0.000001   # Time step (dt << tau)
