@@ -38,7 +38,7 @@ f = f0 # Frequency of wave
 # AM
 u_DC = 5
 u_sig = 2*np.sin(2 * np.pi * 50*f * t)
-u_noise = 0.5*np.sin(2 * np.pi * 100*f * t) + 0.2*np.sin(2 * np.pi * 150*f * t) + 0.1*np.sin(2 * np.pi * 200*f * t)
+u_noise = 1.0*np.sin(2 * np.pi * 500*f * t)
 u_ref = 1*np.sin(2 * np.pi * 50 * f * t)  # Reference signal with phase shift
 u_in = u_DC + u_sig + u_noise
 u_mix = u_in * u_ref
