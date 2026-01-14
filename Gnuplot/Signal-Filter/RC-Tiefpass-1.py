@@ -9,7 +9,7 @@ RC Low-Pass Filter (1st order) Data Generator
 R = 220
 C = 2.2e-6
 tau = R*C  # Time constant
-dt = 0.000001   # Time step (dt << tau)
+dt = 0.001*tau   # Time step (dt << tau)
 t = np.arange(0, 0.01, dt)  # Time array
 f0 = 1/(2*np.pi*tau)  # Limit frequency
 
@@ -34,6 +34,9 @@ u_in =np.sign(np.sin(2 * np.pi *3.6*f* t))
 
 # Fourier series (random noising waves)
 # u_in = 1*np.sin(2 * np.pi * f * t) + (1/5)*np.sin(2 * np.pi * 10 * f * t) + (1/5)*np.sin(2 * np.pi * 20 * f * t) + (1/5)*np.sin(2 * np.pi * 15 * f * t)
+
+# # AM
+# u_in = 1*np.sin(2 * np.pi * 5 * f * t) * (0.5*np.sin(2 * np.pi * 50*f * t) + 2*np.sin(2 * np.pi * 5*f * t))
 
 # # AC sweep
 # f_start = 10
