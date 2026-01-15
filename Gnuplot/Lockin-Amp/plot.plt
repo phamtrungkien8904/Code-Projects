@@ -2,14 +2,14 @@ reset
 set encoding utf8 
 
 # set terminal epslatex color
-# set out 'bandpass-sweep.tex' 
+# set out 'lockin.tex' 
 
 # ============================ Plot Settings ============================
 
-set title 'Signal Filter (RLC Bandpass)'
+set title 'Lock-in Amplifier Signals'
 set xlabel '$t$/ms'
 set ylabel '$U$/V'
-set xrange [2:3]
+set xrange [2:2.5]
 set yrange [-10:10]
 set sample 10000
 # set grid

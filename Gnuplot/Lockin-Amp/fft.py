@@ -13,7 +13,7 @@ f0 = 1/(2*np.pi*tau)  # Limit frequency
 f = f0 # Frequency of wave
 u_DC = 5
 u_sig = 2.0*np.sin(2 * np.pi * 50*f * t)
-u_noise = 1.0*np.sin(2 * np.pi * 500*f * t)
+u_noise = 1.0*np.sin(2 * np.pi * 500*f * t) + 0.5*np.sin(2 * np.pi * 200*f * t)
 u_ref = 1.0*np.sin(2 * np.pi * 50 * f * t)  # Reference signal with phase shift
 u_in = u_DC + u_sig + u_noise
 u_mix = u_in * u_ref
@@ -48,34 +48,55 @@ def fft_single_sided_spectrum(u: np.ndarray, sample_time: float):
     return freqs_hz, spectrum, amplitude, phase_rad
 
 
-freq_in, U_in, amp_in, phase_in = fft_single_sided_spectrum(u_in, dt)
-freq_out, U_out, amp_out, phase_out = fft_single_sided_spectrum(u_out, dt)
+def fft_two_sided_spectrum(u: np.ndarray, sample_time: float):
+    """Return two-sided FFT spectrum (includes negative frequencies).
 
-# Save FFT results to CSV (column 2 is amplitude for your gnuplot script)
-with open('fft_data.csv', mode='w', newline='') as file:
+    Frequencies are ordered from negative to positive using `fftshift`.
+
+    Amplitude scaling here is two-sided: for a real sinusoid
+    `A*sin(2*pi*f*t)`, peaks appear at ±f with amplitude about A/2 each.
+    """
+    n = len(u)
+    spectrum = np.fft.fft(u)
+    freqs_hz = np.fft.fftfreq(n, sample_time)
+
+    spectrum = np.fft.fftshift(spectrum)
+    freqs_hz = np.fft.fftshift(freqs_hz)
+
+    amplitude = np.abs(spectrum) / n
+    phase_rad = np.angle(spectrum)
+    return freqs_hz, spectrum, amplitude, phase_rad
+
+
+freq_in_full, _, amp_in_full, _ = fft_two_sided_spectrum(u_in, dt)
+freq_ref_full, _, amp_ref_full, _ = fft_two_sided_spectrum(u_ref, dt)
+freq_mix_full, _, amp_mix_full, _ = fft_two_sided_spectrum(u_mix, dt)
+freq_out_full, _, amp_out_full, _ = fft_two_sided_spectrum(u_out, dt)
+
+# Sanity: all FFT frequency grids must match (same n and dt)
+if not (
+    np.array_equal(freq_in_full, freq_ref_full)
+    and np.array_equal(freq_in_full, freq_mix_full)
+    and np.array_equal(freq_in_full, freq_out_full)
+):
+    raise ValueError('FFT frequency grids do not match; ensure same length and sample time.')
+
+
+# Save FFT results to CSV (two-sided: includes negative frequencies)
+with open('fft_data_full.csv', mode='w', newline='') as file:
     writer = csv.writer(file)
     writer.writerow([
         'Frequency (Hz)',
-        'Input Amplitude (V_peak)',
-        'Output Amplitude (V_peak)',
-        'Input Phase (rad)',
-        'Output Phase (rad)',
-        'Input Real',
-        'Input Imag',
-        'Output Real',
-        'Output Imag',
+        'Input Amplitude (two-sided)',
+        'Reference Amplitude (two-sided)',
+        'Mix Amplitude (two-sided)',
+        'Output Amplitude (two-sided)',
     ])
-    for f_hz, a_in, a_out, p_in, p_out, u_in_val, u_out_val in zip(
-        freq_in, amp_in, amp_out, phase_in, phase_out, U_in, U_out
+    for f_hz, a_in, a_ref, a_mix, a_out in zip(
+        freq_in_full,
+        amp_in_full,
+        amp_ref_full,
+        amp_mix_full,
+        amp_out_full,
     ):
-        writer.writerow([
-            f_hz,
-            a_in,
-            a_out,
-            p_in,
-            p_out,
-            u_in_val.real,
-            u_in_val.imag,
-            u_out_val.real,
-            u_out_val.imag,
-        ])
+        writer.writerow([f_hz, a_in, a_ref, a_mix, a_out])
