@@ -11,7 +11,7 @@ set xlabel '$t$/ms'
 set ylabel '$U$/V'
 set xrange [2:6]
 set yrange [-15:15]
-set sample 10000
+set samples 10000
 # set grid
 set datafile separator ','
 
