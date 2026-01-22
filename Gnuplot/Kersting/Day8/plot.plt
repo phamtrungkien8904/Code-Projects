@@ -20,7 +20,10 @@ set style line 2 lt 1 lw 2 lc rgb 'blue'
 set style line 3 lt 1 lw 2 lc rgb 'black' dt 2
 
 
-plot '1kHz-500-900DC-45V.csv' using 1:3 every 80 with lines linestyle 1 title 'Input Voltage', \
-     '1kHz-500-900DC-45V.csv' using 1:2 every 80 with lines linestyle 2 title 'Output Voltage', \
+# plot '1kHz-500-900DC-45V.csv' using 1:3 every 80 with lines linestyle 1 title 'Input Voltage', \
+#      '1kHz-500-900DC-45V.csv' using 1:2 every 80 with lines linestyle 2 title 'Output Voltage', \
+
+plot 'AM.csv' using 1:3 every 80 with lines linestyle 1 title 'Input Voltage', \
+     'AM.csv' using 1:2 every 80 with lines linestyle 2 title 'Output Voltage', \
 
 # set out
