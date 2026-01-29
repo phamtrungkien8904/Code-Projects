@@ -6,8 +6,8 @@ RC Low-Pass Filter (1st order) Data Generator
 """
 
 # Set the parameters for the filter
-R = 220
-C = 2.2e-6
+R = 3000
+C = 10e-9
 tau = R*C  # Time constant
 dt = 0.001*tau   # Time step (dt << tau)
 t = np.arange(0, 0.01, dt)  # Time array

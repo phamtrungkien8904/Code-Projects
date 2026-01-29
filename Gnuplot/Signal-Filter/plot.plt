@@ -9,7 +9,7 @@ set encoding utf8
 set title 'Signal Filter (RLC Bandpass)'
 set xlabel '$t$/ms'
 set ylabel '$U$/V'
-set xrange [2:6]
+set xrange [2:3]
 set yrange [-2:2]
 set sample 10000
 # set grid
