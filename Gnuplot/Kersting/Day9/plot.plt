@@ -1,12 +1,12 @@
 reset
 set encoding utf8 
 
-set terminal epslatex color
-set out 'FM.tex' 
+# set terminal epslatex color
+# set out 'AM.tex' 
 
 # ============================ Plot Settings ============================
 
-set title 'Signal Modulation'
+set title 'AM (Experiment)'
 set xlabel '$t$/ms'
 set ylabel '$U$/V'
 set xrange [0:3]
@@ -25,12 +25,12 @@ set style line 5 lt 1 lw 2 lc rgb 'black' dt 2
 # plot '1kHz-500-900DC-45V.csv' using 1:3 every 80 with lines linestyle 1 title 'Input Voltage', \
 #      '1kHz-500-900DC-45V.csv' using 1:2 every 80 with lines linestyle 2 title 'Output Voltage', \
 
-# plot 'AM.csv' using 1:2 every 50 with lines linestyle 1 title 'Message Signal', \
-#      'AM.csv' using 1:3 every 50 with lines linestyle 2 title 'AM Signal', \
+plot 'AM.csv' using 1:2 every 50 with lines linestyle 1 title 'Message Signal', \
+     'AM.csv' using 1:3 every 50 with lines linestyle 2 title 'AM Signal', \
 
-plot 'FM.csv' using 1:2 every 50 with lines linestyle 1 title 'Message Signal', \
-     'FM.csv' using 1:4 every 50 with lines linestyle 2 title 'FM Signal', \
-     'FM.csv' using 1:3 every 50 with lines linestyle 3 title 'Intermodulated Signal', \
-     'FM.csv' using 1:5 every 50 with lines linestyle 4 title 'Capacitor Voltage'
+# plot 'FM.csv' using 1:2 every 50 with lines linestyle 1 title 'Message Signal', \
+#      'FM.csv' using 1:4 every 50 with lines linestyle 2 title 'FM Signal', \
+#      'FM.csv' using 1:3 every 50 with lines linestyle 3 title 'Intermodulated Signal', \
+#      'FM.csv' using 1:5 every 50 with lines linestyle 4 title 'Capacitor Voltage'
 
-set out
+# set out
