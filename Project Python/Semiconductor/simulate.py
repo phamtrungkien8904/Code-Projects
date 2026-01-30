@@ -1,76 +1,97 @@
 import numpy as np
-
-# Simple 2D diffusion model for a PN junction (toy simulation)
-# This models carrier diffusion, not full drift-diffusion or Poisson coupling.
-
-nx, ny = 200, 100
-dx, dy = 1.0, 1.0
-dt = 0.1
-steps = 800
-D = 1.0  # diffusion coefficient
-mu = 0.5  # mobility (toy value)
-V_applied = 10.0  # applied voltage across the device (toy value)
-
-# Concentration grid
-n = np.zeros((ny, nx), dtype=float)
-
-# Initial PN profile: left (P) low n, right (N) high n
-n[:, : nx // 2] = 0.1
-n[:, nx // 2 :] = 1.0
-
-def step(u):
-    lap = (
-        (np.roll(u, 1, axis=0) - 2 * u + np.roll(u, -1, axis=0)) / dy**2
-        + (np.roll(u, 1, axis=1) - 2 * u + np.roll(u, -1, axis=1)) / dx**2
-    )
-
-    # Apply a constant electric field from the voltage across the x-direction
-    Lx = dx * (nx - 1)
-    Ex = -V_applied / Lx
-
-    # Upwind scheme for drift (advection) term
-    if Ex >= 0:
-        dudx = (u - np.roll(u, 1, axis=1)) / dx
-    else:
-        dudx = (np.roll(u, -1, axis=1) - u) / dx
-
-    drift = -mu * Ex * dudx
-
-    return u + D * dt * lap + dt * drift
-
+import torch
+import torch.nn as nn
+import torch.optim as optim
 import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
 
-fig, ax = plt.subplots(figsize=(8, 4))
-im = ax.imshow(n, origin="lower", cmap="viridis", aspect="auto", vmin=0.0, vmax=1.0)
-cbar = plt.colorbar(im, ax=ax, label="Carrier concentration")
-title = ax.set_title("PN Diffusion: step 0")
-ax.set_xlabel("x")
-ax.set_ylabel("y")
+# -----------------------------
+# Problem setup
+# -----------------------------
+omega_n = 2.0
+zeta = 0.15
+x0 = 1.0
+v0 = 0.0
 
-def apply_boundaries(u):
-    # Dirichlet boundaries: fixed concentrations at left/right contacts
-    u[:, 0] = 0.1
-    u[:, -1] = 1.0
-    # Neumann boundaries (zero-gradient) at top/bottom
-    u[0, :] = u[1, :]
-    u[-1, :] = u[-2, :]
-    return u
+# Analytic solution (underdamped)
+omega_d = omega_n * np.sqrt(1 - zeta**2)
+def analytic(t):
+    A = x0
+    B = (v0 + zeta*omega_n*x0) / omega_d
+    return np.exp(-zeta*omega_n*t) * (A*np.cos(omega_d*t) + B*np.sin(omega_d*t))
 
-def update(frame):
-    global n
-    n = step(n)
-    n = apply_boundaries(n)
-    im.set_data(n)
-    title.set_text(f"PN Diffusion: step {frame + 1}")
-    return im, title
+# -----------------------------
+# PINN model
+# -----------------------------
+class PINN(nn.Module):
+    def __init__(self, layers):
+        super().__init__()
+        self.net = nn.Sequential()
+        for i in range(len(layers)-1):
+            self.net.add_module(f"layer_{i}", nn.Linear(layers[i], layers[i+1]))
+            if i < len(layers)-2:
+                self.net.add_module(f"tanh_{i}", nn.Tanh())
 
-ani = FuncAnimation(fig, update, frames=steps, interval=30, blit=False, repeat=False)
+    def forward(self, t):
+        return self.net(t)
 
-plt.tight_layout()
+# Physics residual
+def physics_residual(model, t):
+    t.requires_grad_(True)
+    x = model(t)
+    x_t = torch.autograd.grad(x, t, grad_outputs=torch.ones_like(x), create_graph=True)[0]
+    x_tt = torch.autograd.grad(x_t, t, grad_outputs=torch.ones_like(x_t), create_graph=True)[0]
+    return x_tt + 2*zeta*omega_n*x_t + omega_n**2 * x
+
+# -----------------------------
+# Training data
+# -----------------------------
+t_colloc = torch.linspace(0, 10, 200).reshape(-1,1)
+t0 = torch.tensor([[0.0]], requires_grad=True)
+
+# Initial conditions
+x0_t = torch.tensor([[x0]])
+v0_t = torch.tensor([[v0]])
+
+# -----------------------------
+# Train PINN
+# -----------------------------
+model = PINN([1, 32, 32, 32, 1])
+optimizer = optim.Adam(model.parameters(), lr=1e-3)
+
+for epoch in range(3000):
+    optimizer.zero_grad()
+    # Physics loss
+    res = physics_residual(model, t_colloc)
+    loss_physics = torch.mean(res**2)
+
+    # Initial condition losses
+    x_init = model(t0)
+    x_t_init = torch.autograd.grad(x_init, t0, grad_outputs=torch.ones_like(x_init), create_graph=True)[0]
+    loss_ic = (x_init - x0_t).pow(2).mean() + (x_t_init - v0_t).pow(2).mean()
+
+    loss = loss_physics + loss_ic
+    loss.backward()
+    optimizer.step()
+
+    if epoch % 500 == 0:
+        print(f"Epoch {epoch}, Loss: {loss.item():.6e}")
+
+# -----------------------------
+# Compare with analytic solution
+# -----------------------------
+t_test = np.linspace(0, 10, 400)
+x_true = analytic(t_test)
+
+with torch.no_grad():
+    t_tensor = torch.tensor(t_test.reshape(-1,1), dtype=torch.float32)
+    x_pred = model(t_tensor).numpy().flatten()
+
+plt.figure(figsize=(8,5))
+plt.plot(t_test, x_true, label="Analytic", linewidth=2)
+plt.plot(t_test, x_pred, "--", label="PINN Prediction")
+plt.xlabel("t")
+plt.ylabel("x(t)")
+plt.legend()
+plt.title("Damped Oscillator: PINN vs Analytic")
+plt.grid(True)
 plt.show()
-
-# Save final concentration to a CSV for visualization
-np.savetxt("pn_diffusion_final.csv", n, delimiter=",")
-
-print("Simulation complete. Output: pn_diffusion_final.csv")
