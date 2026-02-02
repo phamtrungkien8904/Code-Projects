@@ -1,53 +1,49 @@
+# Hubble Expansion Simulation
 from math import sin, cos, pi
-from numpy import zeros 
+import numpy as np
+from numpy import zeros
 import matplotlib.pyplot as plt
 
+
 # Inputs
-ub = 2
+ub = 10
 lb = 0
 dt = 0.01
 N = int((ub - lb)/dt)
-x = zeros(N)
-vx = zeros(N)
-y = zeros(N)
-vy = zeros(N)
+r = zeros(N)
+v = zeros(N)
 t = zeros(N)
-analytical_x = zeros(N)
-analytical_y = zeros(N)
+rho = zeros(N)
+
 
 # Initial parameters
-v0 = 10
-theta = 45
-g = 9.81
-h0 = 10
+r0 = 0.1
+G = 1
+k = -1
+rho[0] = 4*pi*r0**3/3
+
 
 # Initial conditions
-x[0] = 0
-vx[0] = v0*cos(theta)
-y[0] = h0
-vy[0] = v0*sin(theta)
-t[0] = 0
-analytical_x[0] = x[0] + vx[0]*t[0]
-analytical_y[0] = y[0] + vy[0]*t[0] - 0.5*g*t[0]**2 
+r[0] = r0
+v[0] = 0
+
 
 
 # Derivative function
 for i in range(1, N):
     t[i] = t[i-1] + dt
-    vx[i] = vx[i-1]
-    x[i] = x[i-1] + dt*vx[i-1]
-    vy[i] = vy[i-1] - g*dt
-    y[i] = y[i-1] + dt*vy[i-1]
-    analytical_x[i] = x[0] + vx[0]*t[i]
-    analytical_y[i] = y[0] + vy[0]*t[i] - 0.5*g*t[i]**2
+    v[i] = v[i-1] + r[i-1]*np.sqrt(8*pi*G*rho[i-1]/3 - k/r[i-1]**2)*dt
+    r[i] = r[i-1] + dt*v[i-1]
+    rho[i] = rho[0]*(r0/r[i])**3
+
+
 
 
 # Plot
-plt.plot(x, y, label='Numerical')
-plt.plot(analytical_x, analytical_y, label='Analytical')
-plt.legend(['Numerical', 'Analytical'])
-plt.xlabel('$x$')
-plt.ylabel('$y$')
-plt.title('Projectile Motion')
+plt.plot(t, r, label='Numerical')
+plt.legend()
+plt.xlabel('$t$')
+plt.ylabel('$r$')
+plt.title('Hubble Expansion Simulation')
 plt.grid()
 plt.show()
