@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-data = np.loadtxt("data.csv", delimiter=",", comments="#")
+data = np.loadtxt("1300.csv", delimiter=",", comments="#")
 
 
 # Number of sample points
@@ -19,14 +19,14 @@ y_out = data[:, 2]
 yf_in = fft(y_in)
 yf_out = fft(y_out)
 
-# Only keep the positive frequency components for plotting/exporting
+# Only keep the positive frequency components for plotting/exporting|
 half = N // 2
 xf = fftfreq(N, T)[:half]
 yf_in_half = yf_in[:half]
 yf_out_half = yf_out[:half]
 
 # Truncate output once frequencies exceed 11 kHz
-mask = xf <= 11000
+mask = xf <= 3
 xf = xf[mask]
 yf_in_half = yf_in_half[mask]
 yf_out_half = yf_out_half[mask]
@@ -67,21 +67,21 @@ if np.any(valid):
 	phase_diff_rad[valid_idx] = phase_diff_rad_valid
 
 np.savetxt(
-	"fft.csv",
+	"fft1300.csv",
 	np.column_stack((xf, amp_in, amp_out, phase_in, phase_out, phase_diff_rad, phase_diff_deg)),
 	delimiter=",",
 	header="frequency,input_amplitude,output_amplitude,input_phase,output_phase,phase_diff_rad,phase_diff_deg",
 	comments="",
 )
 
-# plt.plot(xf, amp_in, label="Input")
-# plt.plot(xf, amp_out, label="Output")
-# plt.xlim(0, 2)
-# plt.xlabel("Frequency (kHz)")
-# plt.ylabel("Amplitude (V)")
-# plt.grid()
-# plt.legend()
-# plt.show()
+plt.plot(xf, amp_in, label="Input")
+plt.plot(xf, amp_out, label="Output")
+plt.xlim(0, 3)
+plt.xlabel("Frequency (kHz)")
+plt.ylabel("Amplitude (V)")
+plt.grid()
+plt.legend()
+plt.show()
 
 # plt.plot(xf, phase_in, label="Input")
 # plt.plot(xf, phase_out, label="Output")

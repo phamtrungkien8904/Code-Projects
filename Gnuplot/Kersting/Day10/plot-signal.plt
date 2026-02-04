@@ -29,8 +29,8 @@ set style line 4 pt 7 ps 0.3 lc rgb 'red'
 
 # Plot
 plot \
-    '1575.csv' using 1:2 every 3 with line ls 2 title 'Input Signal',\
-    '1575.csv' using 1:3 every 3 with line ls 4 title 'Output Signal'
+    '1300.csv' using 1:2 every 100 with line ls 2 title 'Input Signal',\
+    '1300.csv' using 1:3 every 100 with line ls 4 title 'Output Signal'
 
 
 
