@@ -10,8 +10,8 @@ set title 'Sweep Signal'
 set ylabel 'Signal (V)'
 set xlabel 'Time (ms)'
 # set grid
-set xrange [0:100]
-set yrange [-10:10]
+set xrange [0:50]
+set yrange [-4:4]
 set datafile separator ','
 set samples 10000
 
@@ -29,8 +29,8 @@ set style line 4 pt 7 ps 0.3 lc rgb 'red'
 
 # Plot
 plot \
-    '1300.csv' using 1:2 every 100 with line ls 2 title 'Input Signal',\
-    '1300.csv' using 1:3 every 100 with line ls 4 title 'Output Signal'
+    '10k.csv' using 1:2 with line ls 2 title 'Input Signal',\
+    '10k.csv' using 1:3 with line ls 4 title 'Output Signal'
 
 
 

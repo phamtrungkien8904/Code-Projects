@@ -10,12 +10,12 @@ set encoding utf8
 
 set title 'Bode diagram (Gain)'
 set ylabel 'Gain $G$ (dB)'
-set xlabel 'Frequency $f$ (Hz)'
+set xlabel 'Frequency $f$ (kHz)'
 # set grid
 set logscale x 10
-set xrange [1:3]
+set xrange [1:5]
 # set format x "%.0s%c"
-set yrange [0:20]
+set yrange [-10:20]
 set datafile separator ','
 set samples 10000
 
@@ -29,16 +29,32 @@ set style line 1 lw 2 pt 7 ps 0.5 lc rgb 'black'
 set style line 2 lw 2 pt 7 ps 0.5 lc rgb 'blue' 
 set style line 3 lw 2 pt 7 ps 0.5 lc rgb 'green'
 set style line 4 lw 2 pt 7 ps 0.5 lc rgb 'red'
+set style line 5 lw 2 pt 7 ps 0.5 lc rgb 'purple'
 
+set style line 6 lw 2 pt 7 ps 0.5 lc rgb 'red' dt 2
+set style line 7 lw 2 pt 7 ps 0.5 lc rgb 'blue' dt 2
+set style line 8 lw 2 pt 7 ps 0.5 lc rgb 'green' dt 2
+set style line 9 lw 2 pt 7 ps 0.5 lc rgb 'purple' dt 2
+set style line 10 lw 2 pt 7 ps 0.5 lc rgb 'black' dt 2
+
+f = 2.25
+G_theo(k,x) = 20*log10((k/(5-k))/sqrt(1+(sqrt(2)/(5-k)*(x/f - f/x))**2))
 
 
 
 # Plot
 plot \
-    'fft1575.csv' using 1:(20*log10($3/$2)) with line ls 4 title 'R=15.75kΩ',\
-    'fft1500.csv' using 1:(20*log10($3/$2)) with line ls 2 title 'R=15.00kΩ',\
-    'fft1400.csv' using 1:(20*log10($3/$2)) with line ls 3 title 'R=14.00kΩ',\
-    'fft1300.csv' using 1:(20*log10($3/$2)) with line ls 1 title 'R=13.00kΩ'
+    'fft-35k.csv' using 1:(20*log10($3/$2)) with lines ls 4 title 'R=35kΩ',\
+    'fft-30k.csv' using 1:(20*log10($3/$2)) with lines ls 2 title 'R=30kΩ',\
+    'fft-25k.csv' using 1:(20*log10($3/$2)) with lines ls 3 title 'R=25kΩ',\
+    'fft-20k.csv' using 1:(20*log10($3/$2)) with lines ls 1 title 'R=20kΩ',\
+    'fft-10k.csv' using 1:(20*log10($3/$2)) with lines ls 5 title 'R=10kΩ',\
+    G_theo(4.5,x) with lines ls 6 notitle,\
+    G_theo(4.0,x) with lines ls 7 notitle,\
+    G_theo(3.5,x) with lines ls 8 notitle,\
+    G_theo(3.0,x) with lines ls 10 notitle,\
+    G_theo(2.0,x) with lines ls 9 notitle
+
 
     # f(x) with line ls 2 title 'Theoretical Curve'
 
