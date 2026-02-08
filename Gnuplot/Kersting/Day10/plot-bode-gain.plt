@@ -2,7 +2,7 @@ reset
 set encoding utf8 
 
 # set terminal epslatex color
-# set out 'bodegain.tex' ################# n series RC low-pass filter bode plot
+# set out 'bode-exp.tex' ################# 
 
 # ============================ Plot Settings ============================
 
@@ -40,7 +40,14 @@ set style line 10 lw 2 pt 7 ps 0.5 lc rgb 'black' dt 2
 f = 2.25
 G_theo(k,x) = 20*log10((k/(5-k))/sqrt(1+(sqrt(2)/(5-k)*(x/f - f/x))**2))
 
+# Vertical marker at f = 2.25
+# set arrow 1 from f, graph 0 to f, graph 1 nohead lw 1 dt 2 lc rgb 'black'
+# set label 1 'f_0 = 2.25 kHz' at f-0.07, graph 0.32 rotate by 90 center tc rgb 'black'
 
+# Vertical marker at f_exp
+f_exp = 2.13
+set arrow 1 from f_exp, graph 0 to f_exp, graph 1 nohead lw 1 dt 2 lc rgb 'black'
+set label 1 'f_{0,theo} = 2.13 kHz' at f_exp-0.07, graph 0.32 rotate by 90 center tc rgb 'black'
 
 # Plot
 plot \
@@ -49,14 +56,15 @@ plot \
     'fft-25k.csv' using 1:(20*log10($3/$2)) with lines ls 3 title 'R=25kΩ',\
     'fft-20k.csv' using 1:(20*log10($3/$2)) with lines ls 1 title 'R=20kΩ',\
     'fft-10k.csv' using 1:(20*log10($3/$2)) with lines ls 5 title 'R=10kΩ',\
-    G_theo(4.5,x) with lines ls 6 notitle,\
-    G_theo(4.0,x) with lines ls 7 notitle,\
-    G_theo(3.5,x) with lines ls 8 notitle,\
-    G_theo(3.0,x) with lines ls 10 notitle,\
-    G_theo(2.0,x) with lines ls 9 notitle
+
+# plot \
+#     G_theo(4.5,x) with lines ls 4 title 'R=35kΩ',\
+#     G_theo(4.0,x) with lines ls 2 title 'R=30kΩ',\
+#     G_theo(3.5,x) with lines ls 3 title 'R=25kΩ',\
+#     G_theo(3.0,x) with lines ls 1 title 'R=20kΩ',\
+#     G_theo(2.0,x) with lines ls 5 title 'R=10kΩ'
 
 
-    # f(x) with line ls 2 title 'Theoretical Curve'
 
 
 # set out
