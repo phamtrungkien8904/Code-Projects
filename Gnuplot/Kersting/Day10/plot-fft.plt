@@ -1,8 +1,8 @@
 reset
 set encoding utf8 
 
-set terminal epslatex color
-set out 'fft.tex' ################# n series RC low-pass filter bode plot
+# set terminal epslatex color
+# set out 'fft.tex' #################
 
 # ============================ Plot Settings ============================
 
@@ -35,4 +35,4 @@ plot \
     'fft-35k.csv' using 1:($3*14) with line ls 4 title 'Output Signal'
 
 
-set out
+# set out
