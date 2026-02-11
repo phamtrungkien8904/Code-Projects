@@ -3,8 +3,8 @@ set encoding utf8
 
 # ============================ Plot Settings ============================
 
-set terminal epslatex color
-set out 'tv4.tex'
+# set terminal epslatex color
+# set out 'tv4.tex'
 
 set title 'Linearität des Induktionsgesetz'
 set xlabel 'Gradient $s = \Delta V_\text{F}/\Delta t$'
@@ -65,4 +65,4 @@ print sprintf('Goodness:      R^2 = %.6f, r = %.6f,  N=%d', R2, r, Y_records)
 # print sprintf('Estimated:     y(%.6f) = %.6f +- %.6f (%.2f%%)', x_test, y_esti, dy_esti, (y_esti!=0)?100.0*dy_esti/abs(y_esti):0/0)
 print sprintf('==================================== END ====================================')
 
-set out
+# set out
