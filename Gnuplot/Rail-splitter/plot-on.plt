@@ -12,7 +12,7 @@ set title "Temperature of circuit (Power on)\n(Ambient temperature: 26°C)"
 set ylabel 'Temperature $T$ (°C)'
 set xlabel 'Time $t$ (s)'
 # set grid
-set xrange [0:120]
+set xrange [0:300]
 set yrange [0:250]
 # set format x "%.0s%c"
 set datafile separator ','
