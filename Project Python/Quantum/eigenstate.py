@@ -16,9 +16,9 @@ dt = 0.1
 t_min = 0
 t_max = 40
 Nt = int((t_max - t_min) / dt) 
-dx = 0.05
-x_min = -25
-x_max = 25
+dx = 0.005
+x_min = -10
+x_max = 10
 Nx = int((x_max - x_min) / dx) 
 
 # Parameters
@@ -39,7 +39,8 @@ V = np.zeros(Nx-1)
 for i in range(Nx-1):
     # V[i] = 0.5 * K * (x[i]**2)  # Harmonic oscillator potential
     # V[i] = -5 if np.abs(x[i])<5 else 0  # infinite well potential
-    V[i]=-0.5 if (np.abs(x[i])<5 and np.abs(x[i])>0.1) else 0 # Double-well potential
+    # V[i]=-0.5 if (np.abs(x[i])<5 and np.abs(x[i])>0.1) else 0 # Double-well potential
+    V[i] = -100 if np.abs(x[i])<0.1 else 0  # Delta-Function potential
 
 plt.plot(x[1:-1], V, lw=2, label='V(x)')
 plt.legend()
