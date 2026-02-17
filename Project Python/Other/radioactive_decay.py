@@ -2,7 +2,7 @@ from numpy import zeros
 import matplotlib.pyplot as plt
 
 # Inputs
-t_end = 30
+t_end = 50
 t_start= 0
 dt = 0.01
 N = int((t_end - t_start)/dt)
@@ -13,7 +13,7 @@ N_C = zeros(N)
 
 # Constants
 k1 = 0.3
-k2 = 0.2
+k2 = 0.9
 
 # Initial conditions
 t[0] = 0
