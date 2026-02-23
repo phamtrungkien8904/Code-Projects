@@ -5,9 +5,9 @@ set encoding utf8
 
 # ============================ Plot Settings ============================
 
-set title 'Einstehende Wellen'
-set ylabel 'Signal (V)'
-set xlabel 'Position (mm)'
+set title 'Resonanzkurve für eine Oberschwingung'
+set ylabel 'Mikrofonspannung (mV)'
+set xlabel 'Frequenz (Hz)'
 # set grid
 set xrange [700:900]
 set yrange [0:1000]
