@@ -1,7 +1,8 @@
 reset
 set encoding utf8 
 
-
+# set terminal epslatex color
+# set out 'TV4.tex' #################
 
 # ============================ Plot Settings ============================
 
@@ -41,8 +42,7 @@ set label 1 sprintf('f_2 = %.0f Hz', f2) at f2 + 2, Vmax + 20 tc rgb 'black'
 
 # Plot
 plot \
-    'data-4.csv' using 1:2 with line ls 4 notitle, \
-    'data-4.csv' using 1:2 with point ls 4 title 'Messdaten', \
-
+    'data-4.csv' using 1:2 smooth csplines with line ls 4 title 'Fitkurve', \
+    'data-4.csv' using 1:2 with point ls 4 title 'Messdaten'
 
 # set out
