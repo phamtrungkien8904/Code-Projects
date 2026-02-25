@@ -20,9 +20,11 @@ set samples 10000
 
 set fit quiet
 f(x) = a*x + b
-fit f(x) 'data-3.csv' using 1:2 via a,b
+fit f(x) 'data-3.csv' using 1:2:(15) yerrors via a,b
 print sprintf('f(x) = (%.2f + %.2f) x + (%.2f + %.2f)', a, a_err, b, b_err)  
 
+f_up(x) = (a + a_err)*x + (b + b_err)
+f_down(x) = (a - a_err)*x + (b - b_err)
 
 
 
@@ -39,7 +41,8 @@ set style line 4 lw 1.5 pt 4 lc rgb 'red'
 # Plot
 plot \
     'data-3.csv' using 1:2 with point ls 4 title 'Messdaten', \
-    f(x) with line ls 4 title 'Fitgerade' \
-
-
+    f(x) with line ls 4 title 'Fitgerade',\
+    # f_up(x) with line ls 1 title 'Fehler', \
+    # f_down(x) with line ls 1 title 'Fehler'
+    
 # set out
