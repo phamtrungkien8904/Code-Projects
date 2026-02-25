@@ -630,3 +630,262 @@ correlation matrix of the fit parameters:
 a               1.000 
 b              -0.845  1.000 
 >>>>>>> Stashed changes
+
+
+*******************************************************************************
+Wed Feb 25 17:45:00 2026
+
+
+FIT:    data read from 'data-1.csv' using 1:2
+        format = x:z
+        x range restricted to [50.0000 : 300.000]
+        #datapoints = 49
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*abs(sin(2*pi/lambda*x + phi))
+fitted parameters initialized with current variable values
+
+   2 8.9605368147e+04   0.00e+00  3.12e+10    1.000001e+00   9.990541e-01   1.000001e+00
+
+After 2 iterations the fit converged.
+final sum of squares of residuals : 89605.4
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 46
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 44.1355
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1947.94
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 1                +/- 34.08        (3408%)
+lambda          = 0.999054         +/- 0.173        (17.32%)
+phi             = 1                +/- 53.55        (5355%)
+
+correlation matrix of the fit parameters:
+                a      lambda phi    
+a               1.000 
+lambda          0.960  1.000 
+phi             0.968  0.946  1.000 
+
+
+*******************************************************************************
+Wed Feb 25 17:45:15 2026
+
+
+FIT:    data read from 'data-1.csv' using 1:2
+        format = x:z
+        x range restricted to [50.0000 : 300.000]
+        #datapoints = 49
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*abs(sin(2*pi/lambda*x + phi))
+fitted parameters initialized with current variable values
+
+   2 8.9605368147e+04   0.00e+00  3.12e+10    1.000001e+00   9.990541e-01   1.000001e+00
+
+After 2 iterations the fit converged.
+final sum of squares of residuals : 89605.4
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 46
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 44.1355
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1947.94
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 1                +/- 34.08        (3408%)
+lambda          = 0.999054         +/- 0.173        (17.32%)
+phi             = 1                +/- 53.55        (5355%)
+
+correlation matrix of the fit parameters:
+                a      lambda phi    
+a               1.000 
+lambda          0.960  1.000 
+phi             0.968  0.946  1.000 
+
+
+*******************************************************************************
+Wed Feb 25 17:47:12 2026
+
+
+FIT:    data read from 'data-1.csv' using 1:2
+        format = x:z
+        x range restricted to [50.0000 : 300.000]
+        #datapoints = 49
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*abs(sin(2*pi/lambda*x + phi))
+fitted parameters initialized with current variable values
+
+   7 1.0862959706e+02  -5.23e-03  2.12e+02    7.559526e+01   1.390988e+02   2.143520e+00
+
+After 7 iterations the fit converged.
+final sum of squares of residuals : 108.63
+rel. change during last iteration : -5.2255e-08
+
+degrees of freedom    (FIT_NDF)                        : 46
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.53672
+variance of residuals (reduced chisquare) = WSSR/ndf   : 2.36151
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 75.5953          +/- 0.3841       (0.5081%)
+lambda          = 139.099          +/- 0.1772       (0.1274%)
+phi             = 2.14352          +/- 0.009973     (0.4653%)
+
+correlation matrix of the fit parameters:
+                a      lambda phi    
+a               1.000 
+lambda          0.106  1.000 
+phi             0.091  0.934  1.000 
+
+
+*******************************************************************************
+Wed Feb 25 17:47:48 2026
+
+
+FIT:    data read from 'data-1.csv' using 1:2
+        format = x:z
+        x range restricted to [50.0000 : 300.000]
+        #datapoints = 49
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*abs(sin(2*pi/lambda*x + phi))
+fitted parameters initialized with current variable values
+
+   7 1.0862959706e+02  -5.23e-03  2.12e+02    7.559526e+01   1.390988e+02   2.143520e+00
+
+After 7 iterations the fit converged.
+final sum of squares of residuals : 108.63
+rel. change during last iteration : -5.2255e-08
+
+degrees of freedom    (FIT_NDF)                        : 46
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.53672
+variance of residuals (reduced chisquare) = WSSR/ndf   : 2.36151
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 75.5953          +/- 0.3841       (0.5081%)
+lambda          = 139.099          +/- 0.1772       (0.1274%)
+phi             = 2.14352          +/- 0.009973     (0.4653%)
+
+correlation matrix of the fit parameters:
+                a      lambda phi    
+a               1.000 
+lambda          0.106  1.000 
+phi             0.091  0.934  1.000 
+
+
+*******************************************************************************
+Wed Feb 25 17:52:07 2026
+
+
+FIT:    data read from 'data-1-small.csv' using 1:2
+        format = x:z
+        x range restricted to [50.0000 : 300.000]
+        #datapoints = 18
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*abs(sin(2*pi/lambda*x + phi))
+fitted parameters initialized with current variable values
+
+   7 4.0739992531e+01  -5.93e-10  2.14e+06    7.544027e+01   1.389924e+02   2.132826e+00
+
+After 7 iterations the fit converged.
+final sum of squares of residuals : 40.74
+rel. change during last iteration : -5.92991e-15
+
+degrees of freedom    (FIT_NDF)                        : 15
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.64803
+variance of residuals (reduced chisquare) = WSSR/ndf   : 2.716
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 75.4403          +/- 0.5785       (0.7668%)
+lambda          = 138.992          +/- 0.385        (0.277%)
+phi             = 2.13283          +/- 0.02086      (0.9778%)
+
+correlation matrix of the fit parameters:
+                a      lambda phi    
+a               1.000 
+lambda          0.095  1.000 
+phi             0.108  0.942  1.000 
+
+
+*******************************************************************************
+Wed Feb 25 17:54:04 2026
+
+
+FIT:    data read from 'data-1-large.csv' using 1:2
+        format = x:z
+        x range restricted to [50.0000 : 300.000]
+        #datapoints = 49
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*abs(sin(2*pi/lambda*x + phi))
+fitted parameters initialized with current variable values
+
+   7 1.0862959706e+02  -5.23e-03  2.12e+02    7.559526e+01   1.390988e+02   2.143520e+00
+
+After 7 iterations the fit converged.
+final sum of squares of residuals : 108.63
+rel. change during last iteration : -5.2255e-08
+
+degrees of freedom    (FIT_NDF)                        : 46
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.53672
+variance of residuals (reduced chisquare) = WSSR/ndf   : 2.36151
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 75.5953          +/- 0.3841       (0.5081%)
+lambda          = 139.099          +/- 0.1772       (0.1274%)
+phi             = 2.14352          +/- 0.009973     (0.4653%)
+
+correlation matrix of the fit parameters:
+                a      lambda phi    
+a               1.000 
+lambda          0.106  1.000 
+phi             0.091  0.934  1.000 
+
+
+*******************************************************************************
+Wed Feb 25 17:59:22 2026
+
+
+FIT:    data read from 'data-1-large.csv' using 1:2
+        format = x:z
+        x range restricted to [50.0000 : 300.000]
+        #datapoints = 49
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*abs(sin(2*pi/lambda*x + phi))
+fitted parameters initialized with current variable values
+
+   7 1.0862959706e+02  -5.23e-03  2.12e+02    7.559526e+01   1.390988e+02   2.143520e+00
+
+After 7 iterations the fit converged.
+final sum of squares of residuals : 108.63
+rel. change during last iteration : -5.2255e-08
+
+degrees of freedom    (FIT_NDF)                        : 46
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.53672
+variance of residuals (reduced chisquare) = WSSR/ndf   : 2.36151
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 75.5953          +/- 0.3841       (0.5081%)
+lambda          = 139.099          +/- 0.1772       (0.1274%)
+phi             = 2.14352          +/- 0.009973     (0.4653%)
+
+correlation matrix of the fit parameters:
+                a      lambda phi    
+a               1.000 
+lambda          0.106  1.000 
+phi             0.091  0.934  1.000 
