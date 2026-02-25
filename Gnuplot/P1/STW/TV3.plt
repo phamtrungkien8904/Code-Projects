@@ -41,7 +41,7 @@ set style line 4 lw 1.5 pt 4 lc rgb 'red'
 # Plot
 plot \
     'data-3.csv' using 1:2 with point ls 4 title 'Messdaten', \
-    f(x) with line ls 4 title 'Fitgerade',\
+    f(x) with line ls 4 title 'Fitgerade'
     # f_up(x) with line ls 1 title 'Fehler', \
     # f_down(x) with line ls 1 title 'Fehler'
     
