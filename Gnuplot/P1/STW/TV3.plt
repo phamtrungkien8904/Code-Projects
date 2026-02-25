@@ -1,7 +1,8 @@
 reset
 set encoding utf8 
 
-
+# set terminal epslatex color
+# set out 'TV3.tex' #################
 
 # ============================ Plot Settings ============================
 
