@@ -38,7 +38,8 @@ fit [1080:1280] f(x) 'TV3.csv' using 1:2 via a,c,d
 fit f(x) 'TV3.csv' using 1:2 via a,k,c,d
 
 b = k*lambda*r/pi
-print sprintf("b = %7f mm", b*1e3)
+db = k_err*lambda*r/pi
+print sprintf("b = %4f +- %4f mm", b*1e3, db*1e3)
 
 
 
