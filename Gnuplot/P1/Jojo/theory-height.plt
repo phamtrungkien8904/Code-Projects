@@ -21,7 +21,8 @@ set samples 10000
 h0 = 1
 a = 2
 T = 2*sqrt(2*h0/a)
-h(x,n) = h0 - 0.5*a*(x-n*T)**2
+k = 0.5 # Dämpfungsfaktor
+h(x,n) = k**(n) * (h0 - 0.5*a*(x-n*T)**2)
 
 # Styling
 # Use valid color syntax and distinct colors per dataset
