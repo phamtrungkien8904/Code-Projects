@@ -19,7 +19,7 @@ set datafile separator ','
 set samples 10000
 
 h0 = 1
-a = 0.5
+a = 2
 T = 2*sqrt(2*h0/a)
 h(x,n) = h0 - 0.5*a*(x-n*T)**2
 
@@ -36,6 +36,9 @@ set style line 4 lw 2 pt 4 lc rgb 'red'
 plot \
     h(x,0) with lines ls 4 notitle, \
     h(x,1) with lines ls 4 notitle, \
+    h(x,2) with lines ls 4 notitle, \
+    h(x,3) with lines ls 4 notitle, \
+    h(x,4) with lines ls 4 notitle
 
 
 
