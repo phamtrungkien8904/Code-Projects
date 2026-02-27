@@ -1693,3 +1693,83 @@ a               1.000
 c              -0.125  1.000 
 k               0.479  0.126  1.000 
 d               0.027 -0.001  0.021  1.000 
+
+
+*******************************************************************************
+Fri Feb 27 13:32:07 2026
+
+
+FIT:    data read from 'TV3.csv' using 1:2
+        format = x:z
+        x range restricted to [0.00000 : 2048.00]
+        #datapoints = 2048
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*(sinc(k*(x-d)))**2 + c
+	sinc(z) = (abs(z) < 1e-12 ? 1.0 : sin(z)/z)
+fitted parameters initialized with current variable values
+
+   6 8.7821145406e+03  -7.78e-01  2.77e-04    9.284668e+01   7.342833e-01   5.023253e-02   1.174545e+03
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 8782.11
+rel. change during last iteration : -7.78315e-06
+
+degrees of freedom    (FIT_NDF)                        : 2044
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 2.07281
+variance of residuals (reduced chisquare) = WSSR/ndf   : 4.29653
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 92.8467          +/- 0.3744       (0.4033%)
+c               = 0.734283         +/- 0.04725      (6.435%)
+k               = 0.0502325        +/- 0.0002037    (0.4055%)
+d               = 1174.55          +/- 0.1089       (0.009271%)
+
+correlation matrix of the fit parameters:
+                a      c      k      d      
+a               1.000 
+c              -0.125  1.000 
+k               0.479  0.126  1.000 
+d               0.027 -0.001  0.021  1.000 
+
+
+*******************************************************************************
+Fri Feb 27 13:32:48 2026
+
+
+FIT:    data read from 'TV3.csv' using 1:2
+        format = x:z
+        x range restricted to [0.00000 : 2048.00]
+        #datapoints = 2048
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*(sinc(k*(x-d)))**2 + c
+	sinc(z) = (abs(z) < 1e-12 ? 1.0 : sin(z)/z)
+fitted parameters initialized with current variable values
+
+   6 8.7821145406e+03  -7.78e-01  2.77e-04    9.284668e+01   7.342833e-01   5.023253e-02   1.174545e+03
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 8782.11
+rel. change during last iteration : -7.78315e-06
+
+degrees of freedom    (FIT_NDF)                        : 2044
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 2.07281
+variance of residuals (reduced chisquare) = WSSR/ndf   : 4.29653
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 92.8467          +/- 0.3744       (0.4033%)
+c               = 0.734283         +/- 0.04725      (6.435%)
+k               = 0.0502325        +/- 0.0002037    (0.4055%)
+d               = 1174.55          +/- 0.1089       (0.009271%)
+
+correlation matrix of the fit parameters:
+                a      c      k      d      
+a               1.000 
+c              -0.125  1.000 
+k               0.479  0.126  1.000 
+d               0.027 -0.001  0.021  1.000 
