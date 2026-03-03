@@ -8,7 +8,7 @@ set encoding utf8
 
 
 
-set title "Jojo-Bewegung"
+set title "Jojo-Bewegung (t,y)"
 set ylabel 'Höhe (m)'
 set xlabel 'Zeit (s)'
 # set grid
@@ -21,7 +21,7 @@ set samples 10000
 h0 = 1
 a = 2
 T = 2*sqrt(2*h0/a)
-k = 0.5 # Dämpfungsfaktor
+k = 1 # Dämpfungsfaktor
 h(x,n) = k**(n) * (h0 - 0.5*a*(x-n*T)**2)
 
 # Styling
