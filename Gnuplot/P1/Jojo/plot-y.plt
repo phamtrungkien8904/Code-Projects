@@ -2,7 +2,7 @@ reset
 set encoding utf8 
 
 # set terminal epslatex color
-# set out 'TV1-y.tex' #################
+# set out 'TV1-y-par.tex' #################
 
 # ============================ Plot Settings ============================
 
@@ -37,7 +37,7 @@ fit [5.8:6.8] h5(x) 'data-60fps.csv' using 1:3 via a5, b5, c5
 # Styling
 # Use valid color syntax and distinct colors per dataset
 set style line 1 lw 1.5 pt 7 ps 0.5 lc rgb 'black' dt 4
-set style line 2 lw 2 pt 7 ps 0.5 lc rgb 'blue' 
+set style line 2 lw 2.5 pt 7 ps 0.5 lc rgb 'blue' 
 set style line 3 lw 2 pt 7 ps 0.5 lc rgb 'purple'
 set style line 4 lw 1.5 ps 0.5 pt 4 lc rgb 'red' 
 set style line 5 lw 2 pt 4 lc rgb 'black' 
