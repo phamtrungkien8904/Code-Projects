@@ -12,8 +12,8 @@ set title "Jojo-Bewegung Analyse der Peaks"
 set ylabel 'Höhe des Maximums (m)'
 set xlabel 'Quadrate der Schwingungsdauern (s^2)'
 # set grid
-set xrange [0:10]
-set yrange [0:1]
+set xrange [0:8]
+set yrange [-0.2:1]
 # set format x "%.0s%c"
 set datafile separator ','
 set samples 10000
@@ -33,6 +33,7 @@ set style line 4 lw 1.5 pt 4 lc rgb 'red'
 set style line 5 lw 2 pt 4 lc rgb 'black' 
 
 
+
 # Plot
 plot \
     'data-60fps-peaks.csv' using (($4-$3)**2):2 with points ls 4 title 'Peaks',\
@@ -40,6 +41,10 @@ plot \
         f_up(x) with lines ls 1 title 'Fit-Fehler',\
         f_down(x) with lines ls 1 notitle
 
+stats 'data-60fps-peaks.csv' using 2 name 'Y' nooutput
+stats 'data-60fps-peaks.csv' using (($2 - f(($4-$3)**2))**2) name 'E' nooutput
+R2 = 1 - E_sum / Y_ssd
+print sprintf("Fit-Parameter: a = %.4f ± %.4f, b = %.4f ± %.4f, R^2 = %.4f", a, a_err, b, b_err, R2)
 
 
 
