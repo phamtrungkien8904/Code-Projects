@@ -2,7 +2,7 @@ reset
 set encoding utf8 
 
 # set terminal epslatex color
-# set out 'TV3.tex' #################
+# set out 'peaks.tex' #################
 
 # ============================ Plot Settings ============================
 
@@ -36,7 +36,7 @@ set style line 5 lw 2 pt 4 lc rgb 'black'
 
 # Plot
 plot \
-    'data-60fps-peaks.csv' using (($4-$3)**2):2 with points ls 4 title 'Peaks',\
+    'data-60fps-peaks.csv' using (($4-$3)**2):2 with points ls 4 title 'Messdaten',\
      f(x) with lines ls 2 title 'Fitsgerade',\
         f_up(x) with lines ls 1 title 'Fit-Fehler',\
         f_down(x) with lines ls 1 notitle
