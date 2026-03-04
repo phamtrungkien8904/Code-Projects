@@ -45,7 +45,7 @@ stats 'data-TV4.csv' using 2 name 'Y' nooutput
 stats 'data-TV4.csv' using (($2 - f(($1)**2))**2) name 'E' nooutput
 R2 = 1 - E_sum / Y_ssd
 print sprintf("Fit-Parameter: a = %.4f ± %.4f, b = %.4f ± %.4f, R^2 = %.4f", a, a_err, b, b_err, R2)
-
+print sprintf("Gravitationsbeschleunigung g = (%.4f ± %.4f) m/s^2", 2*a, 2*a_err)
 
 
 
