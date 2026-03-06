@@ -2,7 +2,7 @@ reset
 set encoding utf8 
 
 # set terminal epslatex color
-# set out 'peaks.tex' #################
+# set out 'TV3.tex' #################
 
 # ============================ Plot Settings ============================
 
@@ -23,7 +23,6 @@ set fit quiet
 fit f(x) 'data.csv' using 1:2 via a,b
 f_up(x) = (a + a_err)*x + (b + b_err)
 f_down(x) = (a - a_err)*x + (b - b_err)
-g(x) = 140.0*x
 
 # Styling
 # Use valid color syntax and distinct colors per dataset
@@ -41,9 +40,7 @@ plot \
     'data.csv' using 1:2 with points ls 4 title 'Messdaten',\
      f(x) with lines ls 2 title 'Fitsgerade',\
         f_up(x) with lines ls 1 title 'Fit-Fehler',\
-        f_down(x) with lines ls 1 notitle,\
-        g(x) with lines ls 3 title 'Theoretische Gerade'
-
+        f_down(x) with lines ls 1 notitle
 stats 'data.csv' using 2 name 'Y' nooutput
 # FIT_WSSR is the residual sum of squares from the preceding fit command.
 R2 = 1 - FIT_WSSR / Y_ssd
