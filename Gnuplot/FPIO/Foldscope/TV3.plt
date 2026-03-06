@@ -12,7 +12,7 @@ set title "Vergrößerung des Foldscopes (Analyse)"
 set ylabel 'Bildgröße $B$ (mm)'
 set xlabel 'Gegenstandsgröße $G$ (mm)'
 # set grid
-set xrange [0.75:1.50]
+set xrange [0.75:1.75]
 set yrange [100:200]
 # set format x "%.0s%c"
 set datafile separator ','
