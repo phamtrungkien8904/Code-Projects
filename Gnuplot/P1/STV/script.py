@@ -4,7 +4,7 @@ import csv
 # Parameters
 n = 12  # number of coins to pick
 p = 0.22  # probability of a certain coin type
-N = 50  # number of repetitions
+N = 50 # number of repetitions
 
 # Perform N trials
 results = []
