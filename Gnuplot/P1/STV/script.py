@@ -17,14 +17,17 @@ for trial in range(N):
 unique, counts = np.unique(results, return_counts=True)
 frequency_dist = dict(zip(unique, counts))
 
+# Include all possible coin counts from 0 to n, even if frequency is 0
+full_frequency_dist = {coin_num: frequency_dist.get(coin_num, 0) for coin_num in range(n + 1)}
+
 # Save to CSV
 with open('data.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
-    writer.writerow(['Number of Coins', 'Frequency'])
-    for coin_num in sorted(frequency_dist.keys()):
-        writer.writerow([coin_num, frequency_dist[coin_num]])
+    writer.writerow(['# Number of Coins', 'Frequency'])
+    for coin_num in range(n + 1):
+        writer.writerow([coin_num, full_frequency_dist[coin_num]])
 
 print("Data saved to data.csv")
 print("Probability Distribution:")
-for coin_num in sorted(frequency_dist.keys()):
-    print(f"Coins: {coin_num}, Frequency: {frequency_dist[coin_num]}")
+for coin_num in range(n + 1):
+    print(f"Coins: {coin_num}, Frequency: {full_frequency_dist[coin_num]}")
