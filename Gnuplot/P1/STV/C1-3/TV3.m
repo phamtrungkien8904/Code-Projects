@@ -1,8 +1,8 @@
-data = dlmread('TV3_100Messungen.stat','',16,0)
+data = dlmread('TV3_100Messungen.stat','',16,0);
 x = data(:,1);
 y = data(:,2);
-E = dot(x,y)/sum(y) % Mittelwert
-sigma = sqrt(dot(y,(x-E).^2)/sum(y))
+E = dot(x,y)/sum(y); % Mittelwert
+sigma = sqrt(dot(y,(x-E).^2)/sum(y));
 
 
 
@@ -15,9 +15,9 @@ plot(x_plot,f_gauss,'r','LineWidth',2)
 f_poisson = 200*poisspdf(x_plot,E);
 plot(x_plot,f_poisson,'b','LineWidth',2)
 ylim([0 10]);
-xlabel('Anzahl der Zerfälle pro 2s');
-ylabel('Häufigkeit');
-title('Poissonverteilung und Messdaten der Radioaktivität');
+xlabel('Anzahl der Zerfï¿½lle pro 2s');
+ylabel('Hï¿½ufigkeit');
+title('Poissonverteilung und Messdaten der Radioaktivitï¿½t');
 legend('Messdaten','Normalverteilung','Poissonverteilung');
 hold on
 
