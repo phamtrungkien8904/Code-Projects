@@ -4,7 +4,7 @@ import csv
 # Parameters
 n = 12  # number of coins to pick
 p = 0.22  # probability of a certain coin type
-N = 1000# number of repetitions
+N = 50  # number of repetitions
 
 # Perform N trials
 results = []
@@ -23,8 +23,9 @@ full_frequency_dist = {coin_num: frequency_dist.get(coin_num, 0) for coin_num in
 # Save to CSV
 with open('data.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
-    writer.writerow(['# Number of Coins', 'Frequency','n','N','p'])
-    writer.writerow(['', '', n, N, p])
+    writer.writerow(['# n','N','p'])
+    writer.writerow([n, N, p])
+    writer.writerow(['# Number of Coins', 'Frequency'])
     for coin_num in range(n + 1):
         writer.writerow([coin_num, full_frequency_dist[coin_num]])
 
