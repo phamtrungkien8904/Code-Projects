@@ -1,0 +1,57 @@
+# Using the following parameters ...
+# ROI_filename: TV3.Roi
+# data_filename: TV3_100Messungen.Lis
+# number_of_measurements: 100
+# timestep: 2
+# ROI_min: 46
+# ROI_max: 981
+# WARNING: More data than necessary in data file
+#
+#
+# stats file:
+# channels     1024
+# region begin 46
+# region end   981
+# passes       100
+# imp occurence
+1 1
+34 1
+40 1
+41 1
+43 1
+61 1
+63 1
+65 2
+66 1
+71 1
+72 1
+73 1
+76 2
+77 6
+78 3
+79 4
+80 1
+81 5
+82 4
+83 2
+84 9
+85 3
+86 4
+87 1
+88 2
+89 4
+90 5
+91 3
+92 4
+93 2
+94 2
+95 5
+96 4
+97 2
+98 2
+101 2
+102 1
+104 1
+106 1
+109 2
+113 1

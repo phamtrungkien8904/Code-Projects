@@ -1,0 +1,25 @@
+# Using the following parameters ...
+# ROI_filename: TV2.Roi
+# data_filename: TV2_50Messungen.Lis
+# number_of_measurements: 50
+# timestep: 2
+# ROI_min: 192
+# ROI_max: 208
+#
+#
+# stats file:
+# channels     1024
+# region begin 192
+# region end   208
+# passes       50
+# imp occurence
+1 1
+2 3
+3 12
+4 9
+5 9
+6 4
+7 6
+8 2
+9 3
+10 1
