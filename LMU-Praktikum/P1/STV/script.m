@@ -1,3 +1,7 @@
+set(0,'defaulttextinterpreter','latex')
+set(0,'DefaultTextFontname', 'CMU Serif')
+set(0,'DefaultAxesFontName', 'CMU Serif')
+
 n = 12; % number of coins to pick
 p = 0.22; % probability of a certain coin type
 N = 50; % number of repetitions
@@ -24,8 +28,8 @@ xlabel('Erfolge')
 ylabel('Wahrscheinlichkeit (%)')
 xlim([0 n])
 ylim([0 40])
-title(sprintf('Data-generate vs. Theorie (N = %d)', N))
+title(sprintf('Data-generate vs. Theorie $(N = %d)$', N))
 legend('Binomialverteilung', '','Poissonverteilung','', 'Daten', '')
 
-
-exportgraphics(gcf, 'code-1.eps', 'ContentType', 'vector');
+set(gca,'fontname','cmr12');
+% exportgraphics(gcf, 'code-1.eps', 'ContentType', 'vector');
