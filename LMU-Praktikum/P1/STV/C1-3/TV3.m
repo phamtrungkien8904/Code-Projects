@@ -15,9 +15,9 @@ plot(x_plot,f_gauss,'r','LineWidth',2)
 f_poisson = 200*poisspdf(x_plot,E);
 plot(x_plot,f_poisson,'b','LineWidth',2)
 ylim([0 10]);
-xlabel('Anzahl der Zerf�lle pro 2s');
-ylabel('H�ufigkeit');
-title('Poissonverteilung und Messdaten der Radioaktivit�t');
+xlabel('Anzahl der Zerfälle pro 2s');
+ylabel('Häufigkeit');
+title('Poissonverteilung und Messdaten der Radioaktivität');
 legend('Messdaten','Normalverteilung','Poissonverteilung');
 hold on
 
