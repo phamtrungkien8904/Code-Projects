@@ -20,9 +20,9 @@ set datafile separator ','
 set samples 10000
 
 
-R = 13.75;
-up(x) = sqrt(R**2 - (x-11.95)**2)
-down(x) = -sqrt(R**2 - (x-11.95)**2)
+R = 12.85;
+up(x) = sqrt(R**2 - (x-12.85)**2)
+down(x) = -sqrt(R**2 - (x-12.85)**2)
 
 # Styling
 # Use valid color syntax and distinct colors per dataset
