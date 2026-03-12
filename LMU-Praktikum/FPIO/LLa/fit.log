@@ -1,0 +1,746 @@
+
+
+*******************************************************************************
+Thu Mar 12 15:55:34 2026
+
+
+FIT:    data read from 'data-TV2-papier.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0/2.2))
+        format = x:z
+
+
+*******************************************************************************
+Thu Mar 12 15:55:53 2026
+
+
+FIT:    data read from 'data-TV2-papier.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0/2.2))
+        format = x:z
+
+
+*******************************************************************************
+Thu Mar 12 15:56:10 2026
+
+
+FIT:    data read from 'data-TV2-papier.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0/2.2))
+        format = x:z
+
+
+*******************************************************************************
+Thu Mar 12 15:56:46 2026
+
+
+FIT:    data read from 'data-TV2-papier.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0/2.2))
+        format = x:z
+        #datapoints = 14
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x + b
+fitted parameters initialized with current variable values
+
+Warning: Initial value of parameter 'b' is zero.
+BREAK: Singular matrix in Invert_RtR
+
+*******************************************************************************
+Thu Mar 12 15:56:56 2026
+
+
+FIT:    data read from 'data-TV2-papier.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0/2.2))
+        format = x:z
+        #datapoints = 14
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x + b
+fitted parameters initialized with current variable values
+
+Warning: Initial value of parameter 'b' is zero.
+BREAK: Singular matrix in Invert_RtR
+
+*******************************************************************************
+Thu Mar 12 15:57:10 2026
+
+
+FIT:    data read from 'data-TV2-papier.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0/2.2))
+        format = x:z
+        #datapoints = 14
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x + b
+fitted parameters initialized with current variable values
+
+   4 2.5212314496e-01  -2.56e-03  4.88e-05    2.453515e+00  -3.283109e-01
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.252123
+rel. change during last iteration : -2.56002e-08
+
+degrees of freedom    (FIT_NDF)                        : 12
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.144949
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0210103
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 2.45352          +/- 0.1534       (6.252%)
+b               = -0.328311        +/- 0.1048       (31.91%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.929  1.000 
+
+
+*******************************************************************************
+Thu Mar 12 15:57:32 2026
+
+
+FIT:    data read from 'data-TV2-papier.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0/2.2))
+        format = x:z
+        #datapoints = 14
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x + b
+fitted parameters initialized with current variable values
+
+   4 2.5212314496e-01  -2.56e-03  4.88e-05    2.453515e+00  -3.283109e-01
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.252123
+rel. change during last iteration : -2.56002e-08
+
+degrees of freedom    (FIT_NDF)                        : 12
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.144949
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0210103
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 2.45352          +/- 0.1534       (6.252%)
+b               = -0.328311        +/- 0.1048       (31.91%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.929  1.000 
+
+
+*******************************************************************************
+Thu Mar 12 15:58:22 2026
+
+
+FIT:    data read from 'data-TV2-papier.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0/2.2))
+        format = x:z
+        #datapoints = 14
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x + b
+fitted parameters initialized with current variable values
+
+   4 2.6928108430e-01  -2.14e-03  4.88e-05    2.422546e+00  -3.043739e-01
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.269281
+rel. change during last iteration : -2.14341e-08
+
+degrees of freedom    (FIT_NDF)                        : 12
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.1498
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0224401
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 2.42255          +/- 0.1585       (6.544%)
+b               = -0.304374        +/- 0.1083       (35.57%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.929  1.000 
+
+
+*******************************************************************************
+Thu Mar 12 15:58:33 2026
+
+
+FIT:    data read from 'data-TV2-papier.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0/2.2))
+        format = x:z
+        #datapoints = 14
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x + b
+fitted parameters initialized with current variable values
+
+   4 2.4540900511e-01  -2.77e-03  4.88e-05    2.469000e+00  -3.402794e-01
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.245409
+rel. change during last iteration : -2.77496e-08
+
+degrees of freedom    (FIT_NDF)                        : 12
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.143006
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0204508
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 2.469            +/- 0.1513       (6.129%)
+b               = -0.340279        +/- 0.1034       (30.37%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.929  1.000 
+
+
+*******************************************************************************
+Thu Mar 12 15:58:46 2026
+
+
+FIT:    data read from 'data-TV2-papier.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0/2.2))
+        format = x:z
+        #datapoints = 14
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x + b
+fitted parameters initialized with current variable values
+
+   4 2.3698148288e-01  -3.13e-03  4.88e-05    2.494807e+00  -3.602269e-01
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.236981
+rel. change during last iteration : -3.13268e-08
+
+degrees of freedom    (FIT_NDF)                        : 12
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.140529
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0197485
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 2.49481          +/- 0.1487       (5.961%)
+b               = -0.360227        +/- 0.1016       (28.19%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.929  1.000 
+
+
+*******************************************************************************
+Thu Mar 12 15:58:54 2026
+
+
+FIT:    data read from 'data-TV2-papier.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0/2.2))
+        format = x:z
+        #datapoints = 14
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x + b
+fitted parameters initialized with current variable values
+
+   4 2.4540900511e-01  -2.77e-03  4.88e-05    2.469000e+00  -3.402794e-01
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.245409
+rel. change during last iteration : -2.77496e-08
+
+degrees of freedom    (FIT_NDF)                        : 12
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.143006
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0204508
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 2.469            +/- 0.1513       (6.129%)
+b               = -0.340279        +/- 0.1034       (30.37%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.929  1.000 
+
+
+*******************************************************************************
+Thu Mar 12 15:59:29 2026
+
+
+FIT:    data read from 'data-TV2-papier.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0/2.2))
+        format = x:z
+        #datapoints = 14
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x + b
+fitted parameters initialized with current variable values
+
+   4 2.4540900511e-01  -2.77e-03  4.88e-05    2.469000e+00  -3.402794e-01
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.245409
+rel. change during last iteration : -2.77496e-08
+
+degrees of freedom    (FIT_NDF)                        : 12
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.143006
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0204508
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 2.469            +/- 0.1513       (6.129%)
+b               = -0.340279        +/- 0.1034       (30.37%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.929  1.000 
+
+
+*******************************************************************************
+Thu Mar 12 15:59:46 2026
+
+
+FIT:    data read from 'data-TV2-papier.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0/2.2))
+        format = x:z
+        #datapoints = 13
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x + b
+fitted parameters initialized with current variable values
+
+   4 2.3048046304e-01  -1.38e-02  5.05e-05    2.544882e+00  -3.989324e-01
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.23048
+rel. change during last iteration : -1.38166e-07
+
+degrees of freedom    (FIT_NDF)                        : 11
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.144751
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0209528
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 2.54488          +/- 0.1776       (6.979%)
+b               = -0.398932        +/- 0.1256       (31.48%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.948  1.000 
+
+
+*******************************************************************************
+Thu Mar 12 15:59:58 2026
+
+
+FIT:    data read from 'data-TV2-papier.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0/2.2))
+        format = x:z
+        #datapoints = 14
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x + b
+fitted parameters initialized with current variable values
+
+   4 1.4346945830e-01  -4.07e-03  4.88e-05    2.394781e+00  -3.074698e-01
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.143469
+rel. change during last iteration : -4.07476e-08
+
+degrees of freedom    (FIT_NDF)                        : 12
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.109343
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0119558
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 2.39478          +/- 0.1157       (4.832%)
+b               = -0.30747         +/- 0.07903      (25.7%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.929  1.000 
+
+
+*******************************************************************************
+Thu Mar 12 16:00:10 2026
+
+
+FIT:    data read from 'data-TV2-papier.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0/2.2))
+        format = x:z
+        #datapoints = 14
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x + b
+fitted parameters initialized with current variable values
+
+   4 8.9795143189e-02  -5.57e-03  4.88e-05    2.323501e+00  -2.765242e-01
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.0897951
+rel. change during last iteration : -5.57243e-08
+
+degrees of freedom    (FIT_NDF)                        : 12
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0865039
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.00748293
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 2.3235           +/- 0.09154      (3.94%)
+b               = -0.276524        +/- 0.06252      (22.61%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.929  1.000 
+
+
+*******************************************************************************
+Thu Mar 12 16:00:41 2026
+
+
+FIT:    data read from 'data-TV2-papier.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0/2.2))
+        format = x:z
+        x range restricted to [0.00000 : 2.00000]
+        #datapoints = 14
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x + b
+fitted parameters initialized with current variable values
+
+   4 8.9795143189e-02  -5.57e-03  4.88e-05    2.323501e+00  -2.765242e-01
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.0897951
+rel. change during last iteration : -5.57243e-08
+
+degrees of freedom    (FIT_NDF)                        : 12
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0865039
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.00748293
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 2.3235           +/- 0.09154      (3.94%)
+b               = -0.276524        +/- 0.06252      (22.61%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.929  1.000 
+
+
+*******************************************************************************
+Thu Mar 12 16:01:02 2026
+
+
+FIT:    data read from 'data-TV2-papier.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0/2.2))
+        format = x:z
+        x range restricted to [0.00000 : 2.00000]
+        #datapoints = 14
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x + b
+fitted parameters initialized with current variable values
+
+   4 8.9795143189e-02  -5.57e-03  4.88e-05    2.323501e+00  -2.765242e-01
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.0897951
+rel. change during last iteration : -5.57243e-08
+
+degrees of freedom    (FIT_NDF)                        : 12
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0865039
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.00748293
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 2.3235           +/- 0.09154      (3.94%)
+b               = -0.276524        +/- 0.06252      (22.61%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.929  1.000 
+
+
+*******************************************************************************
+Thu Mar 12 16:01:10 2026
+
+
+FIT:    data read from 'data-TV2-papier.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0/2.2))
+        format = x:z
+        x range restricted to [0.00000 : 2.00000]
+        #datapoints = 14
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x + b
+fitted parameters initialized with current variable values
+
+   4 8.9795143189e-02  -5.57e-03  4.88e-05    2.323501e+00  -2.765242e-01
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.0897951
+rel. change during last iteration : -5.57243e-08
+
+degrees of freedom    (FIT_NDF)                        : 12
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0865039
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.00748293
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 2.3235           +/- 0.09154      (3.94%)
+b               = -0.276524        +/- 0.06252      (22.61%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.929  1.000 
+
+
+*******************************************************************************
+Thu Mar 12 16:01:24 2026
+
+
+FIT:    data read from 'data-TV2-papier.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0/2.2))
+        format = x:z
+        x range restricted to [0.00000 : 2.00000]
+        #datapoints = 14
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x + b
+fitted parameters initialized with current variable values
+
+   4 8.9795143189e-02  -5.57e-03  4.88e-05    2.323501e+00  -2.765242e-01
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.0897951
+rel. change during last iteration : -5.57243e-08
+
+degrees of freedom    (FIT_NDF)                        : 12
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0865039
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.00748293
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 2.3235           +/- 0.09154      (3.94%)
+b               = -0.276524        +/- 0.06252      (22.61%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.929  1.000 
+
+
+*******************************************************************************
+Thu Mar 12 16:12:28 2026
+
+
+FIT:    data read from 'data-TV2-glas.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0)/1.93)
+        format = x:z
+        x range restricted to [0.00000 : 2.00000]
+        #datapoints = 14
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x + b
+fitted parameters initialized with current variable values
+
+   4 3.0093007424e-02  -1.43e-02  4.88e-05    1.046506e+00  -2.647284e-01
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.030093
+rel. change during last iteration : -1.42563e-07
+
+degrees of freedom    (FIT_NDF)                        : 12
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0500774
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.00250775
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 1.04651          +/- 0.05299      (5.064%)
+b               = -0.264728        +/- 0.03619      (13.67%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.929  1.000 
+
+
+*******************************************************************************
+Thu Mar 12 16:12:35 2026
+
+
+FIT:    data read from 'data-TV2-glas.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0)/1.93)
+        format = x:z
+        x range restricted to [0.00000 : 2.00000]
+        #datapoints = 14
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x + b
+fitted parameters initialized with current variable values
+
+   4 3.0093007424e-02  -1.43e-02  4.88e-05    1.046506e+00  -2.647284e-01
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.030093
+rel. change during last iteration : -1.42563e-07
+
+degrees of freedom    (FIT_NDF)                        : 12
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0500774
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.00250775
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 1.04651          +/- 0.05299      (5.064%)
+b               = -0.264728        +/- 0.03619      (13.67%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.929  1.000 
+
+
+*******************************************************************************
+Thu Mar 12 16:12:48 2026
+
+
+FIT:    data read from 'data-TV2-glas.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0)/1.93)
+        format = x:z
+        x range restricted to [0.00000 : 2.00000]
+        #datapoints = 14
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x + b
+fitted parameters initialized with current variable values
+
+   4 3.0093007424e-02  -1.43e-02  4.88e-05    1.046506e+00  -2.647284e-01
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.030093
+rel. change during last iteration : -1.42563e-07
+
+degrees of freedom    (FIT_NDF)                        : 12
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0500774
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.00250775
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 1.04651          +/- 0.05299      (5.064%)
+b               = -0.264728        +/- 0.03619      (13.67%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.929  1.000 
+
+
+*******************************************************************************
+Thu Mar 12 16:13:07 2026
+
+
+FIT:    data read from 'data-TV2-glas.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0)/1.93)
+        format = x:z
+        x range restricted to [0.00000 : 2.00000]
+        #datapoints = 14
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x + b
+fitted parameters initialized with current variable values
+
+   4 3.0093007424e-02  -1.43e-02  4.88e-05    1.046506e+00  -2.647284e-01
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.030093
+rel. change during last iteration : -1.42563e-07
+
+degrees of freedom    (FIT_NDF)                        : 12
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0500774
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.00250775
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 1.04651          +/- 0.05299      (5.064%)
+b               = -0.264728        +/- 0.03619      (13.67%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.929  1.000 
+
+
+*******************************************************************************
+Thu Mar 12 16:13:16 2026
+
+
+FIT:    data read from 'data-TV2-glas.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0)/1.93)
+        format = x:z
+        x range restricted to [0.00000 : 2.00000]
+        #datapoints = 14
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x + b
+fitted parameters initialized with current variable values
+
+   4 3.0093007424e-02  -1.43e-02  4.88e-05    1.046506e+00  -2.647284e-01
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.030093
+rel. change during last iteration : -1.42563e-07
+
+degrees of freedom    (FIT_NDF)                        : 12
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0500774
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.00250775
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 1.04651          +/- 0.05299      (5.064%)
+b               = -0.264728        +/- 0.03619      (13.67%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.929  1.000 
+
+
+*******************************************************************************
+Thu Mar 12 16:13:43 2026
+
+
+FIT:    data read from 'data-TV2-papier.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0)/2.23)
+        format = x:z
+        x range restricted to [0.00000 : 2.00000]
+        #datapoints = 14
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x + b
+fitted parameters initialized with current variable values
+
+   4 1.8056897020e-02  -1.66e-02  4.88e-05    1.041929e+00  -2.047194e-01
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.0180569
+rel. change during last iteration : -1.65886e-07
+
+degrees of freedom    (FIT_NDF)                        : 12
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.038791
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.00150474
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 1.04193          +/- 0.04105      (3.94%)
+b               = -0.204719        +/- 0.02804      (13.69%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.929  1.000 
