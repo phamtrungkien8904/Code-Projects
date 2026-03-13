@@ -2,11 +2,11 @@ reset
 set encoding utf8 
 
 set terminal epslatex color
-set out 'TV2-glas.tex' #################
+set out 'TV2-metall.tex' #################
 
 # ============================ Plot Settings ============================
 
-set title 'Lambertsches Strahlungsgesetz (Glas)'
+set title 'Lambertsches Strahlungsgesetz (Metall)'
 set ylabel 'y'
 set xlabel 'x'
 # set grid
@@ -18,7 +18,7 @@ set samples 10000
 
 f(x) = 2.2*cos(x/180*pi)
 
-U0 = 0.33
+U0 = 0.10
 
 # Initial guesses for fit parameters (required before first use)
 a = 1.0
@@ -28,7 +28,7 @@ b = 0.01
 
 set fit quiet
 f(x) = a * x + b
-fit f(x) 'data-TV2-glas.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0)/(1.93 - U0)) via a,b
+fit f(x) 'data-TV2-metall.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0)/(0.74 - U0)) via a,b
 print sprintf('f(x) = (%.2f + %.2f) x + (%.2f + %.2f)', a, a_err, b, b_err)  
 
 f_up(x) = (a + a_err)*x + (b + b_err)
@@ -45,7 +45,7 @@ set style line 4 lw 1.5 pt 4 lc rgb 'red'
 
 # Plot
 plot \
-    'data-TV2-glas.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0)/(1.93 - U0)) with point ls 4 title 'Messdaten', \
+    'data-TV2-metall.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0)/(0.74 - U0)) with point ls 4 title 'Messdaten', \
     f(x) with lines ls 2 title 'Fit',\
     f_up(x) with lines ls 1 title 'Fehler', \
     f_down(x) with lines ls 1 notitle

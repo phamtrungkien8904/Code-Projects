@@ -2,11 +2,11 @@ reset
 set encoding utf8 
 
 # set terminal epslatex color
-# set out 'TV3.tex' #################
+# set out 'TV2-papier.tex' #################
 
 # ============================ Plot Settings ============================
 
-set title 'Lambertsches Strahlungsgesetz'
+set title 'Lambertsches Strahlungsgesetz (Papier)'
 set ylabel 'y'
 set xlabel 'x'
 # set grid
@@ -47,7 +47,7 @@ set style line 4 lw 1.5 pt 4 lc rgb 'red'
 plot \
     'data-TV2-papier.csv' using (cos($1/180*pi)/cos(15/180*pi)):(($2 - U0)/(2.23 - U0)) with point ls 4 title 'Messdaten', \
     f(x) with lines ls 2 title 'Fit',\
-    f_up(x) with lines ls 1 title 'Fit + Fehler', \
+    f_up(x) with lines ls 1 title 'Fehler', \
     f_down(x) with lines ls 1 notitle
     
 # set out
