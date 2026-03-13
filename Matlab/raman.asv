@@ -1,8 +1,0 @@
-x = linspace(-1000,1000,2001);
-y = 10*normpdf(x,-500,10) + 13*normpdf(x,0,10) + 1*normpdf(x,500,10);
-
-plot(x,y,'LineWidth',2,'Color','r','LineStyle','-')
-
-xlabel('Raman-Verschiebung (cm^{-1})')
-ylabel('Raman-Intensität (arb. u.)')
-legend(sprin'$\lambda = 514$ nm')
