@@ -7,7 +7,7 @@ import matplotlib.animation as animation
 
 # Constant
 hbar = 1.0  # Reduced Planck's constant
-m = 5.0    # Particle mass
+m = 1.0    # Particle mass
 
 
 
@@ -17,8 +17,8 @@ t_min = 0
 t_max = 40
 Nt = int((t_max - t_min) / dt) 
 dx = 0.005
-x_min = -10
-x_max = 10
+x_min = -2
+x_max = 2
 Nx = int((x_max - x_min) / dx) 
 
 # Parameters
@@ -38,13 +38,10 @@ x = np.linspace(x_min, x_max, Nx + 1)
 V = np.zeros(Nx-1)
 for i in range(Nx-1):
     # V[i] = 0.5 * K * (x[i]**2)  # Harmonic oscillator potential
-    V[i] = -5 if np.abs(x[i])<5 else 0  # infinite well potential
+    V[i] = 1000 if np.abs(x[i])>1 else 0  # infinite well potential
     # V[i]=-0.5 if (np.abs(x[i])<5 and np.abs(x[i])>0.1) else 0 # Double-well potential
     # V[i] = -100 if np.abs(x[i])<0.1 else 0  # Delta-Function potential
 
-plt.plot(x[1:-1], V, lw=2, label='V(x)')
-plt.legend()
-plt.show()
 
 
 # Halmiltonian matrix
@@ -54,20 +51,15 @@ E,psi = np.linalg.eigh(H)  # Eigenvalue decomposition
 psi = psi.T  
 # Plot Eigenstates
 # plt.plot(x[1:-1], np.real(psi[3,:]), lw=2, label=f'n={3}, E={E[3]:.2f}')
-plt.plot(x[1:-1], np.abs(psi[30,:])**2, lw=2, label=f'n={30}, E={E[30]:.2f}')
-V_map = np.tile(V, (10, 1))
-plt.imshow(
-    V_map,
-    extent=[x[1], x[-1], -0.25, 0.25],
-    origin="lower",
-    aspect="auto",
-    cmap="hot",
-)
-plt.colorbar(label="V(x)")
-plt.title('First Four Eigenstates')
-plt.xlim(-10,10)
-plt.ylim(-0.025,0.025)
+
+
+plt.plot(x[1:-1], V, lw=2, label='V(x)')
+for i in range(5):
+    plt.plot(x[1:-1], E[i] + 10*np.real(psi[i,:]), lw=2, label=f'n={i+1}, E={E[i+1]:.2f}')
+plt.xlim(-2,2)
+plt.ylim(0,20)
 plt.legend()
+plt.show()
 plt.show()
 
 
