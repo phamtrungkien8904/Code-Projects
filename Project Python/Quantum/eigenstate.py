@@ -23,7 +23,7 @@ x = np.linspace(x_min, x_max, Nx + 1)
 V = np.zeros(Nx-1)
 for i in range(Nx-1):
     # V[i] = 0.5 * K * (x[i]**2)  # Harmonic oscillator potential
-    V[i] = 10 if np.abs(x[i])>1 else 0  # infinite well potential
+    V[i] = 20 if np.abs(x[i])>1 else 0  # infinite well potential
     # V[i]=-0.5 if (np.abs(x[i])<5 and np.abs(x[i])>0.1) else 0 # Double-well potential
     # V[i] = -100 if np.abs(x[i])<0.1 else 0  # Delta-Function potential
 
@@ -37,11 +37,11 @@ psi = psi.T
 
 # Plot Eigenstates
 plt.plot(x[1:-1], V, lw=2, label='V(x)')
-for i in range(10):
+for i in range(20):
     plt.plot(x[1:-1], E[i] + 50*np.real(psi[i,:]), lw=2, label=f'n={i+1}, E={E[i]:.2f}')
 plt.xlim(-2,2)
-plt.ylim(0,20)
-plt.legend()
+plt.ylim(0,30)
+# plt.legend()
 plt.show()
 
 
