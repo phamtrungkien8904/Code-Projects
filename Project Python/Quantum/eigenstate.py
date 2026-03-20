@@ -27,12 +27,15 @@ x = np.linspace(x_min, x_max, Nx + 1)
 # Potential function
 V = np.zeros(Nx-1)
 
-# # Semi-harmonic oscillator potential
-# for i in range(Nx-1):
-#     V[i] = 30 if x[i]<-1 else 0  
-#     V[i] = 0 if x[i]>-1 and x[i]<1 else V[i]
-#     V[i] = 10*x[i]**2 if x[i]>0 else V[i]
+### Basic potentials
 
+# # Infinite square well potential
+# for i in range(Nx-1):
+#     V[i] = 0 if (x[i] >= -1 and x[i] <= 1) else 1000
+
+# # Finite square well potential
+# for i in range(Nx-1):
+#     V[i] = 0 if (x[i] >= -1 and x[i] <= 1) else 30
 
 # # Double-well potential
 # for i in range(Nx-1):
@@ -41,6 +44,13 @@ V = np.zeros(Nx-1)
 # # Harmonic oscillator potential
 # for i in range(Nx-1):
 #     V[i] = 10*x[i]**2
+
+### Advanced potentials
+
+# # Infinite square well potential with step
+# for i in range(Nx-1):
+#     V[i] = 0 if (x[i] >= -1 and x[i] <= 0) else 1000
+#     V[i] = 20 if (x[i] >= 0 and x[i] <= 1) else V[i]
 
 # # Harmonic oscillator potential with perturbation
 # for i in range(Nx-1):
@@ -54,6 +64,12 @@ V = np.zeros(Nx-1)
 # for i in range(Nx-1):
 #     V[i] = 50*x[i] if x[i]>-1 else 100
 
+
+# # Semi-harmonic oscillator potential
+# for i in range(Nx-1):
+#     V[i] = 30 if x[i]<-1 else 0  
+#     V[i] = 0 if x[i]>-1 and x[i]<1 else V[i]
+#     V[i] = 10*x[i]**2 if x[i]>0 else V[i]
 
 
 # Halmiltonian matrix
