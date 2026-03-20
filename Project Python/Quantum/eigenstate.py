@@ -1,33 +1,40 @@
 # Solve Schrödinger equation for every 1D system using Finite Difference Method and Eigenvalue Decomposition
 import numpy as np
 import matplotlib.pyplot as plt
+plt.style.use('classic')
+
+
+plt.rcParams.update({
+    'font.family': 'STIXGeneral',
+    'mathtext.fontset': 'stix',
+    'axes.unicode_minus': False,
+})
+ax = plt.gca()
+for label in ax.get_xticklabels() + ax.get_yticklabels():
+    label.set_fontfamily('STIXGeneral')
 
 # Constant
 hbar = 1.0  # Reduced Planck's constant
 m = 1.0    # Particle mass
 
-# Time steps
-dt = 0.1
-t_min = 0
-t_max = 40
-Nt = int((t_max - t_min) / dt) 
-dx = 0.005
+dx = 0.001
 x_min = -5
 x_max = 5
 Nx = int((x_max - x_min) / dx) 
-t = np.linspace(t_min, t_max, Nt + 1)
 x = np.linspace(x_min, x_max, Nx + 1)
 
 
 # Potential function
 V = np.zeros(Nx-1)
+
+# # Semi-harmonic oscillator potential
+# for i in range(Nx-1):
+#     V[i] = 30 if x[i]<-1 else 0  
+#     V[i] = 0 if x[i]>-1 and x[i]<1 else V[i]
+#     V[i] = 10*x[i]**2 if x[i]>0 else V[i]
+
 for i in range(Nx-1):
-    # V[i] = 0.5 * K * (x[i]**2)  # Harmonic oscillator potential
-    V[i] = 30 if x[i]<-1 else 0  # infinite well potential
-    V[i] = 0 if x[i]>-1 and x[i]<1 else V[i]
-    V[i] = 10*x[i]**2 if x[i]>0 else V[i]
-    # V[i]=-0.5 if (np.abs(x[i])<5 and np.abs(x[i])>0.1) else 0 # Double-well potential
-    # V[i] = -100 if np.abs(x[i])<0.1 else 0  # Delta-Function potential
+    V[i] = 0 if (np.abs(x[i]) <= 1 and np.abs(x[i]) >= 0.5) else 30  # Double-well potential
 
 
 
@@ -38,18 +45,30 @@ E,psi = np.linalg.eigh(H)  # Eigenvalue decomposition
 psi = psi.T  
 
 # Plot Eigenstates
-plt.plot(x[1:-1], V, lw=2, label='V(x)')
-for i in range(20):
-    plt.plot(x[1:-1], E[i] + 1000*np.abs(psi[i,:])**2, lw=2, label=f'n={i+1}, E={E[i]:.2f}')
+N = 20  # Number of eigenstates to plot
+plt.plot(x[1:-1], V, lw=2, label='V(x)', color='k')
+plt.fill_between(x[1:-1], -10, V, color='#dbe9ff')
+for i in range(N):
+    plt.plot(x[1:-1], E[i] - 50*np.real(psi[i,:]), lw=2, label=f'n={i+1}, E={E[i]:.2f}')
     plt.plot(x[1:-1], np.full_like(x[1:-1], E[i]), lw=1, ls='--', color='k')
 plt.xlim(-2,2)
 plt.ylim(-10,50)
+plt.xlabel('Position', fontsize=12)
+plt.ylabel('Energy', fontsize=12)
+plt.title('Eigenstates of 1D Quantum System', fontsize=12)
 # plt.legend()
+# plt.savefig('eigenstate.eps', format='eps', bbox_inches='tight')
 plt.show()
 
+n = np.arange(N)
+plt.plot(n, E[n], marker='o', color='r', label='Eigenvalues')
+plt.xlabel('Eigenstate Index', fontsize=12)
+plt.ylabel('Energy', fontsize=12)
+plt.xlim(-1, N)
+plt.title('Eigenvalues of 1D Quantum System', fontsize=12)
+# plt.legend()
+# plt.savefig('eigenvalues.eps', format='eps', bbox_inches='tight')
+plt.show()
 
-plt.savefig('eigenstates.eps', format='eps')
-
-
-
-
+print(f'E1 - E0 = {E[1] - E[0]:.2f}')
+print(f'E3 - E2 = {E[3] - E[2]:.2f}')
