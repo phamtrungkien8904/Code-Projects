@@ -29,11 +29,13 @@ V = np.zeros(Nx-1)
 
 def potential_0():
     for i in range(Nx-1):
-      V[i] = 10*x[i]**2
+      V[i] = 0.5*x[i]**2
     return V
+
+alpha = 0.005
 def potential_per():
     for i in range(Nx-1):
-      V[i] = 10*x[i]**2 + 5*x[i]**4
+      V[i] = 0.5*x[i]**2 + alpha*x[i]**4
     return V
 
 ### Basic potentials
@@ -78,22 +80,24 @@ def solve(V):
 E_0, psi_0 = solve(potential_0())
 E_per, psi_per = solve(potential_per())
 
-print(f'(E_per[0] - E_0[0])/E_0[0]: {((E_per[0] - E_0[0])/E_0[0]):.4f}')
-print(f'First-order energy correction (Theory):')
+k = 5
+theory = 0.75*alpha*(2*k**2 + 2*k + 1)
+print(f'E_per[5] - E_0[5] = {E_per[5] - E_0[5]:.4f}')
+print(f'First-order energy correction (Theory): {theory:.4f}')
 
 
 # Plot Eigenstates
-N = 20  # Number of eigenstates to plot
+N = 4  # Number of eigenstates to plot
 plt.plot(x[1:-1], potential_0(), lw=2, label='V(x)', color='k')
 plt.plot(x[1:-1], potential_per(), lw=2, label='V\'(x)', color='k', ls='--')
 # plt.fill_between(x[1:-1], -10, V, color='#dbe9ff')
 for i in range(N):
-    plt.plot(x[1:-1], E_0[i] + 50*np.real(psi_0[i,:]), lw=2, label=f'n={i+1}, E={E_0[i]:.2f}')
+    plt.plot(x[1:-1], E_0[i] + 3*np.real(psi_0[i,:]), lw=2, label=f'n={i+1}, E={E_0[i]:.2f}')
     plt.plot(x[1:-1], np.full_like(x[1:-1], E_0[i]), lw=1, ls='--', color='k')
-    plt.plot(x[1:-1], E_per[i] + 50*np.real(psi_per[i,:]), lw=2, label=f'n={i+1}, E\'={E_per[i]:.2f}', ls='--')
+    plt.plot(x[1:-1], E_per[i] + 3*np.real(psi_per[i,:]), lw=2, label=f'n={i+1}, E\'={E_per[i]:.2f}', ls='--')
     plt.plot(x[1:-1], np.full_like(x[1:-1], E_per[i]), lw=1, ls='--', color='k')
 plt.xlim(-2,2)
-plt.ylim(0,20)
+plt.ylim(0,2)
 plt.xlabel('Position', fontsize=12)
 plt.ylabel('Energy', fontsize=12)
 plt.title('Eigenstates of 1D Quantum System', fontsize=12)

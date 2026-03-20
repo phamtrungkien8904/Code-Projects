@@ -27,7 +27,7 @@ x = np.linspace(x_min, x_max, Nx + 1)
 # Potential function
 V = np.zeros(Nx-1)
 
-### Basic potentials
+### Basic potentials ###
 
 # # Infinite square well potential
 # for i in range(Nx-1):
@@ -45,7 +45,7 @@ V = np.zeros(Nx-1)
 # for i in range(Nx-1):
 #     V[i] = 10*x[i]**2
 
-### Advanced potentials
+### Advanced potentials ###
 
 # # Infinite square well potential with step
 # for i in range(Nx-1):
@@ -58,11 +58,11 @@ V = np.zeros(Nx-1)
 
 # # V-shape potential
 # for i in range(Nx-1):
-#     V[i] = 20*np.abs(x[i])
+#     V[i] = 50*np.abs(x[i])
 
 # # Linear potential (Free fall)
 # for i in range(Nx-1):
-#     V[i] = 50*x[i] if x[i]>-1 else 100
+#     V[i] = 50*x[i] if x[i]>0 else 100
 
 
 # # Semi-harmonic oscillator potential
@@ -70,6 +70,10 @@ V = np.zeros(Nx-1)
 #     V[i] = 30 if x[i]<-1 else 0  
 #     V[i] = 0 if x[i]>-1 and x[i]<1 else V[i]
 #     V[i] = 10*x[i]**2 if x[i]>0 else V[i]
+
+# Semi-harmonic oscillator potential 2
+for i in range(Nx-1):
+    V[i] = 10*x[i]**2 if x[i]>0 else 1000
 
 
 # Halmiltonian matrix
@@ -114,6 +118,9 @@ plt.show()
 
 # Plot Eigenvalues
 n = np.arange(N)
+# f = lambda n: 0.5*(50*1.5*(n+0.5)*3.141596)**(2/3)
+# plt.plot(n, f(n), color='b', label='Theoretical')
+
 plt.plot(n, E[n], marker='o', color='r', label='Eigenvalues')
 plt.xlabel('Eigenstate Index', fontsize=12)
 plt.ylabel('Energy', fontsize=12)
