@@ -27,6 +27,15 @@ x = np.linspace(x_min, x_max, Nx + 1)
 # Potential function
 V = np.zeros(Nx-1)
 
+def potential_0():
+    for i in range(Nx-1):
+      V[i] = 10*x[i]**2
+    return V
+def potential_per():
+    for i in range(Nx-1):
+      V[i] = 10*x[i]**2 + 5*x[i]**4
+    return V
+
 ### Basic potentials
 
 # # Infinite square well potential
@@ -56,40 +65,35 @@ V = np.zeros(Nx-1)
 # for i in range(Nx-1):
 #     V[i] = 10*x[i]**2 + 1*x[i]**4
 
-# # V-shape potential
-# for i in range(Nx-1):
-#     V[i] = 20*np.abs(x[i])
-
-# # Linear potential (Free fall)
-# for i in range(Nx-1):
-#     V[i] = 50*x[i] if x[i]>-1 else 100
-
-
-# # Semi-harmonic oscillator potential
-# for i in range(Nx-1):
-#     V[i] = 30 if x[i]<-1 else 0  
-#     V[i] = 0 if x[i]>-1 and x[i]<1 else V[i]
-#     V[i] = 10*x[i]**2 if x[i]>0 else V[i]
 
 
 # Halmiltonian matrix
-lamb = hbar**2/(2*m*dx**2)
-H =lamb*(np.diag(2*np.ones(Nx-1) + V/lamb,0) + (-1)*np.diag(np.ones(Nx-2),1) + (-1)*np.diag(np.ones(Nx-2),-1))
-E,psi = np.linalg.eigh(H)  # Eigenvalue decomposition
-psi = psi.T  
+def solve(V):
+    lamb = hbar**2/(2*m*dx**2)
+    H =lamb*(np.diag(2*np.ones(Nx-1) + V/lamb,0) + (-1)*np.diag(np.ones(Nx-2),1) + (-1)*np.diag(np.ones(Nx-2),-1))
+    E,psi = np.linalg.eigh(H)  # Eigenvalue decomposition
+    psi = psi.T 
+    return E, psi 
 
-print(f'E1 - E0 = {E[1] - E[0]:.2f}')
-print(f'E3 - E2 = {E[3] - E[2]:.2f}')
+E_0, psi_0 = solve(potential_0())
+E_per, psi_per = solve(potential_per())
+
+print(f'(E_per[0] - E_0[0])/E_0[0]: {((E_per[0] - E_0[0])/E_0[0]):.4f}')
+print(f'First-order energy correction (Theory):')
+
 
 # Plot Eigenstates
 N = 20  # Number of eigenstates to plot
-plt.plot(x[1:-1], V, lw=2, label='V(x)', color='k')
-plt.fill_between(x[1:-1], -10, V, color='#dbe9ff')
+plt.plot(x[1:-1], potential_0(), lw=2, label='V(x)', color='k')
+plt.plot(x[1:-1], potential_per(), lw=2, label='V\'(x)', color='k', ls='--')
+# plt.fill_between(x[1:-1], -10, V, color='#dbe9ff')
 for i in range(N):
-    plt.plot(x[1:-1], E[i] + 50*np.real(psi[i,:]), lw=2, label=f'n={i+1}, E={E[i]:.2f}')
-    plt.plot(x[1:-1], np.full_like(x[1:-1], E[i]), lw=1, ls='--', color='k')
+    plt.plot(x[1:-1], E_0[i] + 50*np.real(psi_0[i,:]), lw=2, label=f'n={i+1}, E={E_0[i]:.2f}')
+    plt.plot(x[1:-1], np.full_like(x[1:-1], E_0[i]), lw=1, ls='--', color='k')
+    plt.plot(x[1:-1], E_per[i] + 50*np.real(psi_per[i,:]), lw=2, label=f'n={i+1}, E\'={E_per[i]:.2f}', ls='--')
+    plt.plot(x[1:-1], np.full_like(x[1:-1], E_per[i]), lw=1, ls='--', color='k')
 plt.xlim(-2,2)
-plt.ylim(-10,50)
+plt.ylim(0,20)
 plt.xlabel('Position', fontsize=12)
 plt.ylabel('Energy', fontsize=12)
 plt.title('Eigenstates of 1D Quantum System', fontsize=12)
@@ -97,29 +101,29 @@ plt.title('Eigenstates of 1D Quantum System', fontsize=12)
 # plt.savefig('eigenstate.eps', format='eps', bbox_inches='tight')
 plt.show()
 
-# Plot Probability Density of Eigenstates
-plt.plot(x[1:-1], V, lw=2, label='V(x)', color='k')
-plt.fill_between(x[1:-1], -10, V, color='#dbe9ff')
-for i in range(N):
-    plt.plot(x[1:-1], E[i] + 1000*np.abs(psi[i,:])**2, lw=2, label=f'n={i+1}, E={E[i]:.2f}')
-    plt.plot(x[1:-1], np.full_like(x[1:-1], E[i]), lw=1, ls='--', color='k')
-plt.xlim(-2,2)
-plt.ylim(-10,50)
-plt.xlabel('Position', fontsize=12)
-plt.ylabel('Energy', fontsize=12)
-plt.title('Eigenstates of 1D Quantum System', fontsize=12)
-# plt.legend()
-# plt.savefig('eigenstate.eps', format='eps', bbox_inches='tight')
-plt.show()
+# # Plot Probability Density of Eigenstates
+# plt.plot(x[1:-1], V, lw=2, label='V(x)', color='k')
+# plt.fill_between(x[1:-1], -10, V, color='#dbe9ff')
+# for i in range(N):
+#     plt.plot(x[1:-1], E[i] + 1000*np.abs(psi[i,:])**2, lw=2, label=f'n={i+1}, E={E[i]:.2f}')
+#     plt.plot(x[1:-1], np.full_like(x[1:-1], E[i]), lw=1, ls='--', color='k')
+# plt.xlim(-2,2)
+# plt.ylim(-10,50)
+# plt.xlabel('Position', fontsize=12)
+# plt.ylabel('Energy', fontsize=12)
+# plt.title('Eigenstates of 1D Quantum System', fontsize=12)
+# # plt.legend()
+# # plt.savefig('eigenstate.eps', format='eps', bbox_inches='tight')
+# plt.show()
 
-# Plot Eigenvalues
-n = np.arange(N)
-plt.plot(n, E[n], marker='o', color='r', label='Eigenvalues')
-plt.xlabel('Eigenstate Index', fontsize=12)
-plt.ylabel('Energy', fontsize=12)
-plt.xlim(-1, N)
-plt.title('Eigenvalues of 1D Quantum System (discrete)', fontsize=12)
-# plt.legend()
-# plt.savefig('eigenvalues.eps', format='eps', bbox_inches='tight')
-plt.show()
+# # Plot Eigenvalues
+# n = np.arange(N)
+# plt.plot(n, E[n], marker='o', color='r', label='Eigenvalues')
+# plt.xlabel('Eigenstate Index', fontsize=12)
+# plt.ylabel('Energy', fontsize=12)
+# plt.xlim(-1, N)
+# plt.title('Eigenvalues of 1D Quantum System (discrete)', fontsize=12)
+# # plt.legend()
+# # plt.savefig('eigenvalues.eps', format='eps', bbox_inches='tight')
+# plt.show()
 
