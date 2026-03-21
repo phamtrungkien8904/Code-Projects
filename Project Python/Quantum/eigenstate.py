@@ -10,8 +10,8 @@ hbar = 1.0  # Reduced Planck's constant
 m = 1.0    # Particle mass
 
 dx = 0.005
-x_min = -5
-x_max = 5
+x_min = -10
+x_max = 10
 Nx = int((x_max - x_min) / dx) 
 x = np.linspace(x_min, x_max, Nx + 1)
 
@@ -46,7 +46,7 @@ V = np.zeros(Nx-1)
 
 # # Harmonic oscillator potential with perturbation
 # for i in range(Nx-1):
-#     V[i] = 10*x[i]**2 + 1*x[i]**4
+#     V[i] = 10*x[i]**2 + 0.25*x[i]**4
 
 # # V-shape potential
 # for i in range(Nx-1):
@@ -63,9 +63,13 @@ V = np.zeros(Nx-1)
 #     V[i] = 0 if x[i]>-1 and x[i]<1 else V[i]
 #     V[i] = 10*x[i]**2 if x[i]>0 else V[i]
 
-# Semi-harmonic oscillator potential 2
+# # Semi-harmonic oscillator potential 2
+# for i in range(Nx-1):
+#     V[i] = 10*x[i]**2 if x[i]>0 else 1000
+
+# 1D Helium atom potential
 for i in range(Nx-1):
-    V[i] = 10*x[i]**2 if x[i]>0 else 1000
+    V[i] = -2/np.sqrt(x[i]**2 + 1)
 
 
 # Halmiltonian matrix
@@ -84,8 +88,8 @@ plt.fill_between(x[1:-1], -10, V, color='#dbe9ff')
 for i in range(N):
     plt.plot(x[1:-1], E[i] + 50*np.real(psi[i,:]), lw=2, label=f'n={i+1}, E={E[i]:.2f}')
     plt.plot(x[1:-1], np.full_like(x[1:-1], E[i]), lw=1, ls='--', color='k')
-plt.xlim(-2,2)
-plt.ylim(-10,50)
+plt.xlim(-5,5)
+plt.ylim(-10,10)
 plt.xlabel('Position', fontsize=12)
 plt.ylabel('Energy', fontsize=12)
 plt.title('Eigenstates of 1D Quantum System', fontsize=12)
@@ -99,8 +103,8 @@ plt.fill_between(x[1:-1], -10, V, color='#dbe9ff')
 for i in range(N):
     plt.plot(x[1:-1], E[i] + 1000*np.abs(psi[i,:])**2, lw=2, label=f'n={i+1}, E={E[i]:.2f}')
     plt.plot(x[1:-1], np.full_like(x[1:-1], E[i]), lw=1, ls='--', color='k')
-plt.xlim(-2,2)
-plt.ylim(-10,50)
+plt.xlim(-5,5)
+plt.ylim(-10,10)
 plt.xlabel('Position', fontsize=12)
 plt.ylabel('Energy', fontsize=12)
 plt.title('Eigenstates of 1D Quantum System', fontsize=12)
