@@ -2,8 +2,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 plt.style.use('classic')
-# plt.rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
-# plt.rc('text', usetex=True) 
+plt.rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
+plt.rc('text', usetex=True) 
 
 # Constant
 hbar = 1.0  # Reduced Planck's constant
