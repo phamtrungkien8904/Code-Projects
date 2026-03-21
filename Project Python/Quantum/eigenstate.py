@@ -2,16 +2,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 plt.style.use('classic')
-
-
-plt.rcParams.update({
-    'font.family': 'STIXGeneral',
-    'mathtext.fontset': 'stix',
-    'axes.unicode_minus': False,
-})
-ax = plt.gca()
-for label in ax.get_xticklabels() + ax.get_yticklabels():
-    label.set_fontfamily('STIXGeneral')
+plt.rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
+plt.rc('text', usetex=True) 
 
 # Constant
 hbar = 1.0  # Reduced Planck's constant
