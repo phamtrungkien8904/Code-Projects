@@ -27,7 +27,7 @@ V = np.zeros(Nx-1)
 
 # # Finite square well potential
 # for i in range(Nx-1):
-#     V[i] = 0 if (x[i] >= -1 and x[i] <= 1) else 30
+#     V[i] = 0 if (x[i] >= -1 and x[i] <= 1) else 20
 
 # # Double-well potential
 # for i in range(Nx-1):
@@ -57,19 +57,19 @@ V = np.zeros(Nx-1)
 #     V[i] = 50*x[i] if x[i]>0 else 100
 
 
-# # Semi-harmonic oscillator potential
-# for i in range(Nx-1):
-#     V[i] = 30 if x[i]<-1 else 0  
-#     V[i] = 0 if x[i]>-1 and x[i]<1 else V[i]
-#     V[i] = 10*x[i]**2 if x[i]>0 else V[i]
+# Semi-harmonic oscillator potential
+for i in range(Nx-1):
+    V[i] = 20 if x[i]<-1 else 0  
+    V[i] = 0 if x[i]>-1 and x[i]<1 else V[i]
+    V[i] = 20*x[i]**2 if x[i]>0 else V[i]
 
 # # Semi-harmonic oscillator potential 2
 # for i in range(Nx-1):
 #     V[i] = 10*x[i]**2 if x[i]>0 else 1000
 
-# 1D Helium atom potential
-for i in range(Nx-1):
-    V[i] = -2/np.sqrt(x[i]**2 + 1)
+# # 1D Helium atom potential
+# for i in range(Nx-1):
+#     V[i] = -2/np.sqrt(x[i]**2 + 1)
 
 
 # Halmiltonian matrix
@@ -80,16 +80,17 @@ psi = psi.T
 
 print(f'E1 - E0 = {E[1] - E[0]:.2f}')
 print(f'E3 - E2 = {E[3] - E[2]:.2f}')
+print(f'E0 = {E[0]:.2f}')
 
 # Plot Eigenstates
-N = 20  # Number of eigenstates to plot
+N = 10  # Number of eigenstates to plot
 plt.plot(x[1:-1], V, lw=2, label='V(x)', color='k')
 plt.fill_between(x[1:-1], -10, V, color='#dbe9ff')
 for i in range(N):
     plt.plot(x[1:-1], E[i] + 50*np.real(psi[i,:]), lw=2, label=f'n={i+1}, E={E[i]:.2f}')
     plt.plot(x[1:-1], np.full_like(x[1:-1], E[i]), lw=1, ls='--', color='k')
 plt.xlim(-5,5)
-plt.ylim(-10,10)
+plt.ylim(-10,30)
 plt.xlabel('Position', fontsize=12)
 plt.ylabel('Energy', fontsize=12)
 plt.title('Eigenstates of 1D Quantum System', fontsize=12)
@@ -104,7 +105,7 @@ for i in range(N):
     plt.plot(x[1:-1], E[i] + 1000*np.abs(psi[i,:])**2, lw=2, label=f'n={i+1}, E={E[i]:.2f}')
     plt.plot(x[1:-1], np.full_like(x[1:-1], E[i]), lw=1, ls='--', color='k')
 plt.xlim(-5,5)
-plt.ylim(-10,10)
+plt.ylim(-10,30)
 plt.xlabel('Position', fontsize=12)
 plt.ylabel('Energy', fontsize=12)
 plt.title('Eigenstates of 1D Quantum System', fontsize=12)
