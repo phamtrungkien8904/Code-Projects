@@ -1,8 +1,8 @@
 reset
 set encoding utf8 
 
-set terminal epslatex color
-set out 'dichte.tex' #################
+# set terminal epslatex color
+# set out 'dichte.tex' #################
 
 # ============================ Plot Settings ============================
 
@@ -11,16 +11,14 @@ set ylabel 'Senklänge [mm]'
 set xlabel 'Anzahl der Murmeln'
 # set grid
 set xrange [0:8]
-set yrange [0:100]
+set yrange [10:70]
 set datafile separator ','
 set samples 1000
 
 set fit quiet
 f(x) = a*x + b
-fit f(x) 'dichte.csv' using 1:2 via a,b
+fit f(x) 'dichte.csv' using 1:2:(1) yerrors via a,b
 print sprintf('Fitergebnis: y = (%.4f + %.4f) x + (%.4f + %.4f)', a, a_err, b, b_err)  
-f_up(x) = (a + a_err)*x + (b + b_err)
-f_down(x) = (a - a_err)*x + (b - b_err)
 
 ##### Auswertung #####
 m = 5.5e-3 # Masse einer Murmel in kg
@@ -34,20 +32,18 @@ rho0_err = rho0 * sqrt((a_err/a)**2 + (2* d_err/d)**2 + (m_err/m)**2 ) # Fehler 
 print sprintf('Dichte der Spülmittel: rho0_exp = (%.4f ± %.4f) kg/m^3', rho0, rho0_err)
 
 # Values box in the top-left corner of the plot
-set label 1 sprintf("a = %.4f ± %.4f\nb = %.4f ± %.4f\nρ_0 = %.4f ± %.4f kg/m^3", a, a_err, b, b_err, rho0, rho0_err) at graph 0.03, graph 0.97 left tc rgb 'black' front
+set label 1 sprintf("a = %.4f ± %.4f\nb = %.4f ± %.4f", a, a_err, b, b_err) at graph 0.05, graph 0.90 left tc rgb 'black' front
 
 # Styling
 # Use valid color syntax and distinct colors per dataset
 set style line 1 lw 1.5 pt 7 ps 0.5 lc rgb 'black' dt 4
 set style line 2 lw 2 pt 7 ps 0.5 lc rgb 'blue' 
 set style line 3 lw 2 pt 7 ps 0.5 lc rgb 'purple'
-set style line 4 lw 2 pt 4 ps 1.5 lc rgb 'red' 
+set style line 4 lw 2 pt 7 ps 1.0 lc rgb 'red' 
 
 # Plot
 plot \
-    'dichte.csv' using 1:2 with point ls 4 title 'Messdaten', \
-    f(x) with line ls 2 title 'Fitgerade',\
-    f_up(x) with line ls 1 title 'Fehler', \
-    f_down(x) with line ls 1 title 'Fehler'
+    'dichte.csv' using 1:2:(1) with yerrorbars ls 4 title 'Messdaten', \
+    f(x) with line ls 2 title 'Fitgerade'
     
-set out
+# set out
