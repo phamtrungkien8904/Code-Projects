@@ -8,7 +8,7 @@ plt.style.use('classic')
 
 
 note = np.array([])
-with open('T2-hauptklausur.csv', 'r') as rf:
+with open('T2-nachklausur.csv', 'r') as rf:
     reader = csv.reader(rf, delimiter=',')
     next(reader)  # Skip header
     for row in reader:
