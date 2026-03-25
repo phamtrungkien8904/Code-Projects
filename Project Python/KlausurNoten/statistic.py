@@ -14,8 +14,9 @@ with open('T2-hauptklausur.csv', 'r') as rf:
     for row in reader:
       note = np.append(note, float(row[1]))
 
-
-
+# Schema T2 haupt
+cutoff = 25
+top = 55
 def grade_for_points(points):
   # Notenschema 
   if points >= 55:
@@ -28,6 +29,19 @@ def grade_for_points(points):
     return '4.0'
   return '5.0 (NB)'
 
+# cutoff = 10.5
+# top = 33
+# def grade_for_points(points):
+#   # Notenschema 
+#   if points >= top:
+#     return '1.0'
+#   if points >= 22.5:
+#     return '2.0'
+#   if points >= 18:
+#     return '3.0'
+#   if points >= cutoff:
+#     return '4.0'
+#   return '5.0 (NB)'
 
 grade_colors = {
   '1.0': '#1b9e77',
@@ -38,15 +52,15 @@ grade_colors = {
 }
 
 # Analysis
-Kien_Punkte = 23.0
+Kien_Punkte = 20.0
 mu = np.mean(note)
 sigma = np.std(note)
 
 Max = 79.0
 print('Total number of students: ', len(note))
 print(f'Number of blank papers (not come): {np.sum(note == 0)} ({np.sum(note == 0) / len(note) * 100:.1f}%)')
-print(f'Number of failed students: {np.sum(note < 25)} ({np.sum(note < 25) / len(note) * 100:.1f}%)')
-print(f'Number of top students: {np.sum(note >= 55)} ({np.sum(note >= 55) / len(note) * 100:.1f}%)')
+print(f'Number of failed students: {np.sum(note < cutoff)} ({np.sum(note < cutoff) / len(note) * 100:.1f}%)')
+print(f'Number of top students: {np.sum(note >= top)} ({np.sum(note >= top) / len(note) * 100:.1f}%)')
 print(f'Mean: {mu:.2f} (Note: {grade_for_points(mu)})')
 print(f'Standard Deviation: {sigma:.2f}')
 print("---------------------------")
@@ -54,8 +68,8 @@ print(f'Kien Punkte: {Kien_Punkte} (Note: {grade_for_points(Kien_Punkte)})')
 
 stats_text = (
   f'Total students: {len(note)}\n'
-  f'Failed (<25): {np.sum(note < 25)} ({np.sum(note < 25) / len(note) * 100:.1f}%)\n'
-  f'Nerd (>=55): {np.sum(note >= 55)} ({np.sum(note >= 55) / len(note) * 100:.1f}%)\n'
+  f'Failed (<{cutoff}): {np.sum(note < cutoff)} ({np.sum(note < cutoff) / len(note) * 100:.1f}%)\n'
+  f'Nerd (>= {top}): {np.sum(note >= top)} ({np.sum(note >= top) / len(note) * 100:.1f}%)\n'
   f'Mean: {mu:.2f} ({grade_for_points(mu)})\n'
   f'Std: {sigma:.2f}'
 )
@@ -77,19 +91,19 @@ plt.text(mu - 0.4, np.max(counts) * 0.95, rf'$\mu = {mu:.2f}$', rotation=90, col
 # plt.text(Kien_Punkte - 0.4, np.max(counts) * 0.95, f'$Kien = {Kien_Punkte:.2f}$', rotation=90, color='navy', ha='right', va='top')
 
 # Gaussian fit scaled to histogram counts
-if sigma > 0:
-  x = np.linspace(bin_edges[0], bin_edges[-1], 600)
-  bin_width = bin_edges[1] - bin_edges[0]
-  gaussian = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((x - mu) / sigma) ** 2)
-  gaussian_scaled = gaussian * bin_width * 100
-  plt.plot(x, gaussian_scaled, color='black', linewidth=3, label='Gaussian')
+
+x = np.linspace(bin_edges[0], bin_edges[-1], 600)
+bin_width = bin_edges[1] - bin_edges[0]
+gaussian = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((x - mu) / sigma) ** 2)
+gaussian_scaled = gaussian * bin_width * 100
+plt.plot(x, gaussian_scaled, color='black', linewidth=3, label='Gaussian')
 
 plt.xlabel('Points (0-80)')
 plt.ylabel('Students [%]')
 plt.title('Distribution of Points in QM Exam at LMU')
 plt.text(
   0.5,
-  0.5,
+  0.6,
   stats_text,
   transform=plt.gca().transAxes,
   ha='left',
