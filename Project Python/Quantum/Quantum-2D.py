@@ -56,7 +56,7 @@ def double_slit_potential(
     y,
     barrier_x=0.0,
     barrier_half_width=0.05,
-    slit_width=0.02,
+    slit_width=0.05,
     slit_separation=0.2,
     v0=10000.0,
 ):
@@ -138,7 +138,7 @@ for i in range(1, n_steps):
     psi_in = solve_A.solve(B @ psi_in)
     psi_t_grid[i, 1:-1, 1:-1] = psi_in.reshape(N_in, N_in)
 
-prob_t = np.real(psi_t_grid) # 2 is the probability density |psi|^2 at each time step on the grid.
+prob_t = np.abs(psi_t_grid) # 2 is the probability density |psi|^2 at each time step on the grid.
 
 # Optional diagnostic: norm should stay approximately constant in time.
 norms = np.sum(prob_t, axis=(1, 2)) * dx * dy
