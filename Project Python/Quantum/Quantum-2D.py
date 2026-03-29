@@ -9,7 +9,7 @@ from matplotlib.animation import PillowWriter  # For saving animations as GIFs.
 from scipy import sparse
 
 # Number of grid points per axis.
-N = 140
+N = 100
 
 # Create a uniform 2D grid over [-2, 2] x [-2, 2].
 # The '*1j' form tells NumPy to create exactly N points including endpoints.
@@ -19,15 +19,15 @@ X, Y = np.mgrid[-2:2:N*1j,-2:2:N*1j]
 m = 2.0
 omega = 1.0
 hbar = 1.0
-k = 10.0
+k = 100.0
 
 # Gaussian initial wave function centered at (x0, y0).
 x0, y0 = -0.5, 0.0
-sigma = 0.18
+sigma = 0.1
 
 # Unnormalized Gaussian packet.
 # psi0 = np.exp(-((X - x0)**2 + (Y - y0)**2) / (2 * sigma**2))
-psi0 = np.exp(-((X - x0)**2 + (Y - y0)**2) / (2 * sigma**2)) * np.exp(1j * k * (X-x0))  # Added a phase factor for some initial momentum in x-direction.
+psi0 = np.exp(-((X - x0)**2) / (2 * sigma**2))* np.exp(1j * k * (X-x0))  # Added a phase factor for some initial momentum in x-direction.
 
 
 # Normalize so that sum |psi0|^2 dA = 1.
@@ -56,10 +56,10 @@ def double_slit_potential(
     x,
     y,
     barrier_x=0.0,
-    barrier_half_width=0.03,
-    slit_width=0.06,
-    slit_separation=0.30,
-    v0=500.0,
+    barrier_half_width=0.2,
+    slit_width=0.05,
+    slit_separation=0.5,
+    v0=5000.0,
 ):
     """Vertical barrier with two open slits centered at y=+-slit_separation/2."""
     barrier_region = np.abs(x - barrier_x) <= barrier_half_width
@@ -152,6 +152,8 @@ print(
     f"min {x_mean.min():.3f}, max {x_mean.max():.3f}"
 )
 
+
+
 # Animate probability density |psi(x,y,t)|^2.
 fig, ax = plt.subplots(figsize=(6, 5))
 
@@ -176,4 +178,25 @@ def update(frame):
     return (img, time_text)
 
 anim = animation.FuncAnimation(fig, update, frames=n_steps, interval=80, blit=False)
+plt.show()
+
+# Detector-screen intensity profile I(y) at a fixed x position to the right of the slits.
+# I(y) is time-integrated probability density on that screen line.
+x_screen_target = X.max() - 0.25
+x_axis = X[:, 0]
+y_axis = Y[0, :]
+screen_idx = np.argmin(np.abs(x_axis - x_screen_target))
+x_screen = x_axis[screen_idx]
+if hasattr(np, 'trapezoid'):
+    I_y = np.trapezoid(prob_t[:, screen_idx, :], times, axis=0)
+else:
+    I_y = np.trapz(prob_t[:, screen_idx, :], times, axis=0)
+
+plt.figure(figsize=(7, 4))
+plt.plot(y_axis, I_y, color='navy', lw=2)
+plt.title(f'Screen Probability Profile I(y) at x = {x_screen:.3f}')
+plt.xlabel('y')
+plt.ylabel('I(y) = integral |psi(x_screen, y, t)|^2 dt')
+plt.grid(alpha=0.25)
+plt.tight_layout()
 plt.show()
