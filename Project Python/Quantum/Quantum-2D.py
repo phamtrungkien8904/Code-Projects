@@ -9,25 +9,24 @@ from matplotlib.animation import PillowWriter  # For saving animations as GIFs.
 from scipy import sparse
 
 # Number of grid points per axis.
-N = 200
+N = 100
 
 # Create a uniform 2D grid over [-2, 2] x [-2, 2].
 # The '*1j' form tells NumPy to create exactly N points including endpoints.
 X, Y = np.mgrid[-2:2:N*1j,-2:2:N*1j]
 
 # Physical parameters (dimensionless units here).
-m = 2.0
+m = 1.0
 omega = 1.0
 hbar = 1.0
-k = 1000.0
+k = 100.0
 
 # Gaussian initial wave function centered at (x0, y0).
-x0, y0 = -0.5, 0.0
-sigma = 0.1
-
+x0, y0 = -1.0, 0.0
+sigma = 0.2
 # Unnormalized Gaussian packet.
 # psi0 = np.exp(-((X - x0)**2 + (Y - y0)**2) / (2 * sigma**2))
-psi0 = np.exp(-((X - x0)**2) / (2 * sigma**2))* np.exp(1j * k * (X-x0))  # Added a phase factor for some initial momentum in x-direction.
+psi0 = np.exp(-((X - x0)**2) / (2 * sigma**2))* np.exp(1j * k * (X-x0))*np.cos(20*k*(X-x0))  # Added a phase factor for some initial momentum in x-direction.
 
 
 # Normalize so that sum |psi0|^2 dA = 1.
@@ -56,10 +55,10 @@ def double_slit_potential(
     x,
     y,
     barrier_x=0.0,
-    barrier_half_width=0.04,
+    barrier_half_width=0.05,
     slit_width=0.05,
-    slit_separation=0.4,
-    v0=5000.0,
+    slit_separation=0.2,
+    v0=10000.0,
 ):
     """Vertical barrier with two open slits centered at y=+-slit_separation/2."""
     barrier_region = np.abs(x - barrier_x) <= barrier_half_width
@@ -139,7 +138,7 @@ for i in range(1, n_steps):
     psi_in = solve_A.solve(B @ psi_in)
     psi_t_grid[i, 1:-1, 1:-1] = psi_in.reshape(N_in, N_in)
 
-prob_t = np.abs(psi_t_grid)**2
+prob_t = np.abs(psi_t_grid)**1 # 2 is the probability density |psi|^2 at each time step on the grid.
 
 # Optional diagnostic: norm should stay approximately constant in time.
 norms = np.sum(prob_t, axis=(1, 2)) * dx * dy
