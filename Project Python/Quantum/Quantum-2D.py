@@ -9,7 +9,7 @@ from matplotlib.animation import PillowWriter  # For saving animations as GIFs.
 from scipy import sparse
 
 # Number of grid points per axis.
-N = 100
+N = 200
 
 # Create a uniform 2D grid over [-2, 2] x [-2, 2].
 # The '*1j' form tells NumPy to create exactly N points including endpoints.
@@ -19,7 +19,7 @@ X, Y = np.mgrid[-2:2:N*1j,-2:2:N*1j]
 m = 2.0
 omega = 1.0
 hbar = 1.0
-k = 100.0
+k = 1000.0
 
 # Gaussian initial wave function centered at (x0, y0).
 x0, y0 = -0.5, 0.0
@@ -56,9 +56,9 @@ def double_slit_potential(
     x,
     y,
     barrier_x=0.0,
-    barrier_half_width=0.2,
+    barrier_half_width=0.04,
     slit_width=0.05,
-    slit_separation=0.5,
+    slit_separation=0.4,
     v0=5000.0,
 ):
     """Vertical barrier with two open slits centered at y=+-slit_separation/2."""
