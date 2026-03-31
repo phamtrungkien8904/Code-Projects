@@ -9,7 +9,7 @@ from matplotlib.animation import PillowWriter  # For saving animations as GIFs.
 from scipy import sparse
 
 # Number of grid points per axis.
-N = 500
+N = 100
 
 # Create a uniform 2D grid over [-2, 2] x [-2, 2].
 # The '*1j' form tells NumPy to create exactly N points including endpoints.
