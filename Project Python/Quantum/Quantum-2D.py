@@ -1,32 +1,28 @@
-# Imports for sparse-matrix eigenvalue solution of the 2D time-independent SchrÃ¶dinger equation.
+# Imports for sparse-matrix time evolution of the 2D Schrodinger equation.
 import numpy as np
+from scipy import sparse
 from scipy.sparse.linalg import splu
 import matplotlib.pyplot as plt
 from matplotlib.colors import PowerNorm
-from matplotlib import animation  # Imported for potential animations in later extensions.
-from mpl_toolkits.mplot3d import Axes3D  # Enables 3D plotting.
-from matplotlib.animation import PillowWriter  # For saving animations as GIFs.
-from scipy import sparse
+from matplotlib import animation
 
 # Number of grid points per axis.
-N = 100
+N = 1000
 
 # Create a uniform 2D grid over [-2, 2] x [-2, 2].
 # The '*1j' form tells NumPy to create exactly N points including endpoints.
 X, Y = np.mgrid[-2:2:N*1j,-2:2:N*1j]
 
-# Physical parameters (dimensionless units here).
+# Physical parameters (dimensionless units).
 m = 1.0
-omega = 1.0
 hbar = 1.0
-k = 50.0
+q = 1.0
+k = 42.0
 
 # Gaussian initial wave function centered at (x0, y0).
-x0, y0 = -1.0, 0.0
-sigma = 0.2
-# Unnormalized Gaussian packet.
-# psi0 = np.exp(-((X - x0)**2 + (Y - y0)**2) / (2 * sigma**2))
-psi0 = np.exp(-((X - x0)**2) / (2 * sigma**2))* np.exp(1j * k * (X-x0))  # Added a phase factor for some initial momentum in x-direction.
+x0, y0 = -1.55, 0.0
+sigma = 0.18
+psi0 = np.exp(-((X - x0) ** 2 + (Y - y0) ** 2) / (2 * sigma**2)) * np.exp(1j * k * (X - x0))
 
 
 # Normalize so that sum |psi0|^2 dA = 1.
@@ -44,20 +40,13 @@ plt.xlabel('x')
 plt.ylabel('y')
 plt.show()
 
-# Define the 2D harmonic oscillator potential V(x, y) = 1/2 * m * omega^2 * (x^2 + y^2).
-# def harmonic_oscillator(x, y, m=m, omega=omega):
-#     return 0.5 * m * omega**2 * (x**2 + y**2)
-
-def free_particle(x, y):
-    return np.zeros_like(x)
-
 def double_slit_potential(
     x,
     y,
-    barrier_x=0.0,
-    barrier_half_width=0.05,
-    slit_width=0.05,
-    slit_separation=0.2,
+    barrier_x=-0.7,
+    barrier_half_width=0.06,
+    slit_width=0.16,
+    slit_separation=0.52,
     v0=10000.0,
 ):
     """Vertical barrier with two open slits centered at y=+-slit_separation/2."""
@@ -70,11 +59,128 @@ def double_slit_potential(
     V[barrier_region & (~slit_opening)] = v0
     return V
 
-    
 
-# Evaluate potential on the full 2D grid using the chosen (m, omega).
-# V = harmonic_oscillator(X, Y, m=m, omega=omega)
-V = double_slit_potential(X, Y)
+def solenoid_core_potential(x, y, x_c=0.15, y_c=0.0, radius=0.12, v0=15000.0):
+    """Impenetrable core representing a confined-flux solenoid region."""
+    r2 = (x - x_c) ** 2 + (y - y_c) ** 2
+    V = np.zeros_like(x, dtype=float)
+    V[r2 <= radius**2] = v0
+    return V
+
+
+def aharonov_bohm_vector_potential(
+    x,
+    y,
+    alpha,
+    x_c=0.15,
+    y_c=0.0,
+    core_radius=0.12,
+):
+    """
+    Vector potential for a thin flux tube with reduced flux alpha = Phi / Phi0.
+    Outside the core: A_phi = Phi/(2*pi*r), with Phi0 = 2*pi*hbar/q.
+    """
+    xr = x - x_c
+    yr = y - y_c
+    r2 = xr**2 + yr**2
+    r2_safe = np.maximum(r2, core_radius**2)
+
+    # Phi/(2*pi) = alpha * hbar / q in these units.
+    pref = alpha * hbar / q
+    ax = -pref * yr / r2_safe
+    ay = pref * xr / r2_safe
+    return ax, ay
+
+
+def build_hamiltonian_with_gauge(v_grid, ax_grid, ay_grid, dx, dy, m, hbar, q):
+    """Gauge-covariant finite-difference Hamiltonian using link-variable phases."""
+    n_full = v_grid.shape[0]
+    n_in = n_full - 2
+
+    v_in = v_grid[1:-1, 1:-1]
+    ax_in = ax_grid[1:-1, 1:-1]
+    ay_in = ay_grid[1:-1, 1:-1]
+
+    tx = hbar**2 / (2.0 * m * dx**2)
+    ty = hbar**2 / (2.0 * m * dy**2)
+
+    rows = []
+    cols = []
+    data = []
+
+    def idx(i, j):
+        return i * n_in + j
+
+    for i in range(n_in):
+        for j in range(n_in):
+            p = idx(i, j)
+            diag = 2.0 * tx + 2.0 * ty + v_in[i, j]
+
+            # +x neighbor
+            if i < n_in - 1:
+                phase_x = np.exp(-1j * q * ax_in[i, j] * dx / hbar)
+                rows.append(p)
+                cols.append(idx(i + 1, j))
+                data.append(-tx * phase_x)
+
+            # -x neighbor
+            if i > 0:
+                phase_xm = np.exp(1j * q * ax_in[i - 1, j] * dx / hbar)
+                rows.append(p)
+                cols.append(idx(i - 1, j))
+                data.append(-tx * phase_xm)
+
+            # +y neighbor
+            if j < n_in - 1:
+                phase_y = np.exp(-1j * q * ay_in[i, j] * dy / hbar)
+                rows.append(p)
+                cols.append(idx(i, j + 1))
+                data.append(-ty * phase_y)
+
+            # -y neighbor
+            if j > 0:
+                phase_ym = np.exp(1j * q * ay_in[i, j - 1] * dy / hbar)
+                rows.append(p)
+                cols.append(idx(i, j - 1))
+                data.append(-ty * phase_ym)
+
+            rows.append(p)
+            cols.append(p)
+            data.append(diag)
+
+    h_in = sparse.csr_matrix((data, (rows, cols)), shape=(n_in**2, n_in**2), dtype=complex)
+    return h_in
+
+
+def evolve_case(v_grid, alpha, psi_initial, times, dx, dy):
+    """Run Crank-Nicolson evolution for one magnetic-flux value alpha."""
+    n_full = v_grid.shape[0]
+    n_in = n_full - 2
+    dt_local = times[1] - times[0]
+
+    ax, ay = aharonov_bohm_vector_potential(X, Y, alpha=alpha)
+    h_in = build_hamiltonian_with_gauge(v_grid, ax, ay, dx, dy, m=m, hbar=hbar, q=q)
+
+    i_in = sparse.identity(n_in**2, format='csc', dtype=complex)
+    a_mat = (i_in + 1j * dt_local * h_in / (2.0 * hbar)).tocsc()
+    b_mat = (i_in - 1j * dt_local * h_in / (2.0 * hbar)).tocsr()
+    solver = splu(a_mat)
+
+    psi_in = psi_initial[1:-1, 1:-1].reshape(n_in**2).astype(complex)
+    psi_t = np.zeros((len(times), n_full, n_full), dtype=complex)
+    psi_t[0, 1:-1, 1:-1] = psi_in.reshape(n_in, n_in)
+
+    for it in range(1, len(times)):
+        psi_in = solver.solve(b_mat @ psi_in)
+        psi_t[it, 1:-1, 1:-1] = psi_in.reshape(n_in, n_in)
+
+    prob = np.abs(psi_t) ** 2
+    norms_local = np.sum(prob, axis=(1, 2)) * dx * dy
+    return prob, norms_local
+
+
+# Compose AB setup: slit splitter + impenetrable solenoid core.
+V = double_slit_potential(X, Y) + solenoid_core_potential(X, Y)
 
 # Inspect the double-slit barrier profile.
 plt.figure(figsize=(6, 5))
@@ -85,81 +191,44 @@ plt.xlabel('x')
 plt.ylabel('y')
 plt.show()
 
-# Build sparse finite-difference operators for the Hamiltonian H = T + U.
-
-# 1D second-derivative stencil coefficients [1, -2, 1].
-diag = np.ones([N])
-diags = np.array([diag, -2*diag, diag])
-
-# Sparse tridiagonal 1D Laplacian block with finite-difference scaling.
-# Including 1/dx^2 keeps the physical length scale consistent as N changes.
-D = sparse.spdiags(diags, np.array([-1, 0, 1]), N, N) / (dx**2)
-
-# 2D kinetic operator using Kronecker sum of 1D operators.
-T = -(hbar**2) / (2 * m) * sparse.kronsum(D, D)
-
-# Potential operator as diagonal sparse matrix on flattened grid values.
-U = sparse.diags(V.reshape(N**2), (0))
-
-# Total Hamiltonian matrix.
-H = T + U
-
-# Time evolution with Crank-Nicolson under the full potential.
-
 # Time grid for evolution.
-t_max = 0.5
-n_steps = 220
+t_max = 0.6
+n_steps = 240
 times = np.linspace(0.0, t_max, n_steps)
 dt = times[1] - times[0]
 
-# Crank-Nicolson on the interior grid with hard-wall boundaries.
-# This imposes psi=0 at the box edges and produces reflection (bounce-back).
-N_in = N - 2
-if N_in < 2:
-    raise ValueError("N must be at least 4 to use hard-wall boundary evolution.")
+# Run two cases to reveal the AB phase shift in the interference pattern.
+alpha_ref = 0.0
+alpha_ab = 0.35
 
-# Interior operators (boundaries fixed to zero -> Dirichlet walls).
-diag_in = np.ones(N_in)
-D_in = sparse.spdiags([diag_in, -2 * diag_in, diag_in], [-1, 0, 1], N_in, N_in) / (dx**2)
-L_in = sparse.kronsum(D_in, D_in)
-V_in = V[1:-1, 1:-1].reshape(N_in**2)
-H_in = -(hbar**2) / (2 * m) * L_in + sparse.diags(V_in, 0)
-
-I_in = sparse.identity(N_in**2, format='csc')
-A = (I_in + 1j * dt * H_in / (2 * hbar)).tocsc()
-B = (I_in - 1j * dt * H_in / (2 * hbar)).tocsr()
-solve_A = splu(A)
-
-psi_in = psi0[1:-1, 1:-1].reshape(N_in**2).astype(complex)
-psi_t_grid = np.zeros((n_steps, N, N), dtype=complex)
-psi_t_grid[0, 1:-1, 1:-1] = psi_in.reshape(N_in, N_in)
-
-for i in range(1, n_steps):
-    psi_in = solve_A.solve(B @ psi_in)
-    psi_t_grid[i, 1:-1, 1:-1] = psi_in.reshape(N_in, N_in)
-
-prob_t = np.abs(psi_t_grid) # 2 is the probability density |psi|^2 at each time step on the grid.
+prob_ref, norms_ref = evolve_case(V, alpha_ref, psi0, times, dx, dy)
+prob_ab, norms_ab = evolve_case(V, alpha_ab, psi0, times, dx, dy)
 
 # Optional diagnostic: norm should stay approximately constant in time.
-norms = np.sum(prob_t, axis=(1, 2)) * dx * dy
-print(f"Discrete norm range over time: [{norms.min():.6f}, {norms.max():.6f}]")
+print(f"alpha={alpha_ref:.2f} norm range: [{norms_ref.min():.6f}, {norms_ref.max():.6f}]")
+print(f"alpha={alpha_ab:.2f} norm range: [{norms_ab.min():.6f}, {norms_ab.max():.6f}]")
 
 # Simple diagnostic for trajectory/spread through slits and reflections.
-x_mean = np.sum(prob_t * X[None, :, :], axis=(1, 2)) * dx * dy
+x_mean_ref = np.sum(prob_ref * X[None, :, :], axis=(1, 2)) * dx * dy
+x_mean_ab = np.sum(prob_ab * X[None, :, :], axis=(1, 2)) * dx * dy
 print(
-    f"<x>: start {x_mean[0]:.3f}, end {x_mean[-1]:.3f}, "
-    f"min {x_mean.min():.3f}, max {x_mean.max():.3f}"
+    f"<x> alpha={alpha_ref:.2f}: start {x_mean_ref[0]:.3f}, end {x_mean_ref[-1]:.3f}, "
+    f"min {x_mean_ref.min():.3f}, max {x_mean_ref.max():.3f}"
+)
+print(
+    f"<x> alpha={alpha_ab:.2f}: start {x_mean_ab[0]:.3f}, end {x_mean_ab[-1]:.3f}, "
+    f"min {x_mean_ab.min():.3f}, max {x_mean_ab.max():.3f}"
 )
 
 
 
-# Animate probability density |psi(x,y,t)|^2.
+# Animate probability density |psi(x,y,t)|^2 for the flux-on case.
 fig, ax = plt.subplots(figsize=(6, 5))
 
 # Visualization-only scaling so the packet does not look like it vanishes as it spreads.
-vmax_vis = np.percentile(prob_t, 99.7)
+vmax_vis = np.percentile(prob_ab, 99.7)
 img = ax.imshow(
-    prob_t[0],
+    prob_ab[0],
     origin='lower',
     extent=[X.min(), X.max(), Y.min(), Y.max()],
     cmap='viridis',
@@ -172,30 +241,34 @@ ax.set_xlabel('x')
 ax.set_ylabel('y')
 
 def update(frame):
-    img.set_data(prob_t[frame])
+    img.set_data(prob_ab[frame])
     time_text.set_text(f't = {times[frame]:.2f}')
     return (img, time_text)
 
 anim = animation.FuncAnimation(fig, update, frames=n_steps, interval=80, blit=False)
 plt.show()
 
-# Detector-screen intensity profile I(y) at a fixed x position to the right of the slits.
-# I(y) is time-integrated probability density on that screen line.
+# Detector-screen intensity profiles at a fixed x position to the right.
+# Compare alpha=0 and alpha!=0 to show AB fringe displacement.
 x_screen_target = X.max() - 0.25
 x_axis = X[:, 0]
 y_axis = Y[0, :]
 screen_idx = np.argmin(np.abs(x_axis - x_screen_target))
 x_screen = x_axis[screen_idx]
 if hasattr(np, 'trapezoid'):
-    I_y = np.trapezoid(prob_t[:, screen_idx, :], times, axis=0)
+    i_y_ref = np.trapezoid(prob_ref[:, screen_idx, :], times, axis=0)
+    i_y_ab = np.trapezoid(prob_ab[:, screen_idx, :], times, axis=0)
 else:
-    I_y = np.trapz(prob_t[:, screen_idx, :], times, axis=0)
+    i_y_ref = np.trapz(prob_ref[:, screen_idx, :], times, axis=0)
+    i_y_ab = np.trapz(prob_ab[:, screen_idx, :], times, axis=0)
 
 plt.figure(figsize=(7, 4))
-plt.plot(y_axis, I_y, color='navy', lw=2)
-plt.title(f'Screen Probability Profile I(y) at x = {x_screen:.3f}')
+plt.plot(y_axis, i_y_ref, color='black', lw=2, label=f'alpha={alpha_ref:.2f}')
+plt.plot(y_axis, i_y_ab, color='crimson', lw=2, label=f'alpha={alpha_ab:.2f}')
+plt.title(f'Aharonov-Bohm Fringe Shift at x = {x_screen:.3f}')
 plt.xlabel('y')
 plt.ylabel('I(y) = integral |psi(x_screen, y, t)|^2 dt')
 plt.grid(alpha=0.25)
+plt.legend()
 plt.tight_layout()
 plt.show()
