@@ -1,9 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.patches import Circle
 
 # Domain and grid
 Lx, Ly = 1.0, 1.0
-Nx, Ny = 1001, 1001
+Nx, Ny = 201, 201
 x = np.linspace(-Lx, Lx, Nx)
 y = np.linspace(-Ly, Ly, Ny)
 dx = x[1] - x[0]
@@ -24,6 +25,12 @@ plate_y_top = plate_sep / 2
 plate_y_bottom = -plate_sep / 2
 line_thickness = 2  # in grid points
 
+# Metal sphere (2D circular cross-section) in the gap
+sphere_center_x = 0.0
+sphere_center_y = 0.0
+sphere_radius = 0.1
+sphere_potential = 0.0
+
 ix = np.where(np.abs(x) <= half_len)[0]
 iy_top = np.argmin(np.abs(y - plate_y_top))
 iy_bottom = np.argmin(np.abs(y - plate_y_bottom))
@@ -36,8 +43,12 @@ rho[iy_bottom - line_thickness:iy_bottom + line_thickness + 1, ix] = -sigma / dy
 # Dirichlet boundary condition: V = 0 at domain boundaries
 V = np.zeros((Ny, Nx))
 
+# Fixed-potential conductor region mask
+sphere_mask = (X - sphere_center_x) ** 2 + (Y - sphere_center_y) ** 2 <= sphere_radius ** 2
+V[sphere_mask] = sphere_potential
+
 # Jacobi solver for Poisson equation
-max_iter = 4000
+max_iter = 10000
 tol = 1e-6
 
 for it in range(max_iter):
@@ -55,6 +66,7 @@ for it in range(max_iter):
     V[-1, :] = 0.0
     V[:, 0] = 0.0
     V[:, -1] = 0.0
+    V[sphere_mask] = sphere_potential
 
     err = np.max(np.abs(V - V_old))
     if err < tol:
@@ -76,6 +88,12 @@ ax.set_ylabel('y (m)')
 # Draw capacitor plates
 ax.plot(x[ix], np.full_like(x[ix], y[iy_top]), 'k-', lw=2, label='Plates')
 ax.plot(x[ix], np.full_like(x[ix], y[iy_bottom]), 'k-', lw=2)
+
+# Draw metal sphere
+sphere_outline = Circle((sphere_center_x, sphere_center_y), sphere_radius,
+                        facecolor='none', edgecolor='white', lw=2, label='Metal sphere')
+ax.add_patch(sphere_outline)
+
 ax.legend(loc='upper right')
 ax.set_aspect('equal')
 
