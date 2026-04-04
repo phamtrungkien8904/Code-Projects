@@ -1,12 +1,13 @@
 # Drude Model
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
 
 
 # Plot hexagonal grid
 # 1D coordinate axes for x and y in the range [-2, 2].
 # Resolution
-N = 400
+N = 100
 x = np.linspace(-1, 1, N+1)
 y = np.linspace(-1, 1, N+1)
 
@@ -17,7 +18,7 @@ X, Y = np.meshgrid(x, y)
 a = 0.2 # Distance between centers of adjacent Gaussians
 spacing_x = a
 spacing_y = a * np.sqrt(3)
-sigma = 0.03
+sigma = 0.02
 # Build an (N+1)x(N+1) matrix: 1 means a Gaussian center at that grid point.
 # Hexagonal grid spacing: centers are separated by center_step in both x and y directions.
 
@@ -52,15 +53,51 @@ Z = np.zeros_like(X)
 
 
 for xc, yc in zip(x0.ravel(), y0.ravel()):
-    Z += np.exp(-(X-xc)**2/(2*sigma**2))*np.exp(-(Y-yc)**2/(2*sigma**2))
+    Z += 1/(2*np.pi*sigma**2) *np.exp(-(X-xc)**2/(2*sigma**2))*np.exp(-(Y-yc)**2/(2*sigma**2))
+
+
+# Electron Gaussian parameters.
+xe0 = 0.1
+ye0 = 0.1
+sigma_e = 0.02
+
+
+def electron_gaussian(xe, ye):
+    return 0.5 / (2 * np.pi * sigma_e**2) * np.exp(-((X - xe) ** 2 + (Y - ye) ** 2) / (2 * sigma_e**2))
 
 # Plot only filled contour (top view).
 fig, ax = plt.subplots(figsize=(8, 6))
 contour = ax.contourf(X, Y, Z, levels=50, cmap="hot")
+electron_img = ax.imshow(
+    electron_gaussian(xe0, ye0),
+    extent=(x.min(), x.max(), y.min(), y.max()),
+    origin="lower",
+    cmap="Blues",
+    interpolation="gaussian",
+    alpha=0.8,
+)
 ax.set_title("2D Contour Plot")
 ax.set_xlabel("x")
 ax.set_ylabel("y")
 fig.colorbar(contour, ax=ax, label="Probability Density")
+
+# Animation function to update the electron position xe = 0.1 + vx * t, ye = 0.1
+def animate(i):
+    t = i * 0.05
+    vx = 0.5
+    xe = xe0 + vx * t
+    ye = ye0
+
+    # Wrap to keep electron in the visible domain.
+    span = x.max() - x.min()
+    xe = x.min() + ((xe - x.min()) % span)
+
+    electron_img.set_data(electron_gaussian(xe, ye))
+    return electron_img
+
+
+ani = FuncAnimation(fig, animate, frames=200, interval=50, blit=False)
+
 
 # Improve spacing and render.
 fig.tight_layout()
