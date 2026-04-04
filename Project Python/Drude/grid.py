@@ -17,7 +17,7 @@ X, Y = np.meshgrid(x, y)
 a = 0.2 # Distance between centers of adjacent Gaussians
 spacing_x = a
 spacing_y = a * np.sqrt(3)
-sigma = 0.01
+sigma = 0.03
 # Build an (N+1)x(N+1) matrix: 1 means a Gaussian center at that grid point.
 # Hexagonal grid spacing: centers are separated by center_step in both x and y directions.
 
