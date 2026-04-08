@@ -2,12 +2,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
+import time
 
+t0 = time.time()
 
 # Plot hexagonal grid
 # 1D coordinate axes for x and y in the range [-2, 2].
 # Resolution
-N = 100
+N = 400
 x = np.linspace(-1, 1, N+1)
 y = np.linspace(-1, 1, N+1)
 
@@ -68,37 +70,16 @@ def electron_gaussian(xe, ye):
 # Plot only filled contour (top view).
 fig, ax = plt.subplots(figsize=(8, 6))
 contour = ax.contourf(X, Y, Z, levels=50, cmap="hot")
-electron_img = ax.imshow(
-    electron_gaussian(xe0, ye0),
-    extent=(x.min(), x.max(), y.min(), y.max()),
-    origin="lower",
-    cmap="Blues",
-    interpolation="gaussian",
-    alpha=0.8,
-)
 ax.set_title("2D Contour Plot")
 ax.set_xlabel("x")
 ax.set_ylabel("y")
 fig.colorbar(contour, ax=ax, label="Probability Density")
 
-# Animation function to update the electron position xe = 0.1 + vx * t, ye = 0.1
-def animate(i):
-    t = i * 0.05
-    vx = 0.5
-    xe = xe0 + vx * t
-    ye = ye0
 
-    # Wrap to keep electron in the visible domain.
-    span = x.max() - x.min()
-    xe = x.min() + ((xe - x.min()) % span)
-
-    electron_img.set_data(electron_gaussian(xe, ye))
-    return electron_img
-
-
-ani = FuncAnimation(fig, animate, frames=200, interval=50, blit=False)
-
-
+t1 = time.time()
+print(f"Execution time: {t1 - t0:.2f} seconds")
 # Improve spacing and render.
 fig.tight_layout()
 plt.show()
+
+
