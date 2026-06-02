@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 import csv
 
 """
@@ -19,8 +20,8 @@ f = f0 # Frequency of wave
 # Sine wave
 # u_in = np.sin(2 * np.pi *f* t)
 
-# Square wave
-u_in =np.sign(np.sin(2 * np.pi *3.6*f* t))
+# # Square wave
+# u_in =np.sign(np.sin(2 * np.pi *3.6*f* t))
 
 # Fourier series approximation of square wave
 # u_in = np.sum([ (4/(np.pi*(2*n+1))) * np.sin(2 * np.pi * (2*n+1) * f * t) for n in range(3)], axis=0)
@@ -32,17 +33,17 @@ u_in =np.sign(np.sin(2 * np.pi *3.6*f* t))
 # u_in = 1/3*np.sum([ ((-1)**n)/(n+1) * np.sin(2 * np.pi * (n+1) * f * t) for n in range(20)], axis=0)
 
 
-# Fourier series (random noising waves)
+# # Fourier series (random noising waves)
 # u_in = 1*np.sin(2 * np.pi * f * t) + (1/5)*np.sin(2 * np.pi * 10 * f * t) + (1/5)*np.sin(2 * np.pi * 20 * f * t) + (1/5)*np.sin(2 * np.pi * 15 * f * t)
 
 # # AM
 # u_in = 1*np.sin(2 * np.pi * 5 * f * t) * (0.5*np.sin(2 * np.pi * 50*f * t) + 2*np.sin(2 * np.pi * 5*f * t))
 
-# # AC sweep
-# f_start = 10
-# f_end = 1000
-# df = (f_end - f_start)/len(t)
-# u_in = np.sin(2 * np.pi * (f_start + df*t*100000) * t) 
+# AC sweep
+f_start = 1000
+f_end = 10000000
+df = (f_end - f_start)/len(t)
+u_in = np.sin(2 * np.pi * (f_start + df*t*100000) * t) 
 
 # Apply the low-pass filter
 def low_pass_filter(u_in, tau, dt):
@@ -68,3 +69,13 @@ with open("data.csv", "w", newline="") as csvfile:
     csvwriter.writerow(["# Time", "Input", "Output"])
     for i in range(len(t)):
         csvwriter.writerow([t[i], u_in[i], u_out[i]])  
+
+plt.figure(figsize=(10, 6))
+plt.plot(t, u_in, '-', label="Input Signal", lw = 1.5)
+plt.plot(t, u_out, '-', label="Output Signal", lw = 1.5)
+plt.title("RC Low-Pass Filter Response")
+plt.xlabel("Time (s)")
+plt.ylabel("Voltage (V)")
+plt.legend()
+plt.xlim(0, 0.01)
+plt.show()
