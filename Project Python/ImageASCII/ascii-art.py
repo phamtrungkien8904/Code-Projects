@@ -4,8 +4,9 @@ from PIL import Image
 
 # Contrast on a scale -10 -> 10
 contrast = 10
-density = ('$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|'
-           '()1{}[]?-_+~<>i!lI;:,"^`\'.            ')
+# R-String (raw string) verhindert den Escape-Fehler bei \|
+density = (r'$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|'
+           r'()1{}[]?-_+~<>i!lI;:,"^`    \'.            ')
 density = density[:-11+contrast]
 n = len(density)
 
@@ -17,7 +18,7 @@ except IndexError:
     width = 100
 
 # Read in the image, convert to greyscale.
-img = Image.open("anh.png")
+img = Image.open(img_name)
 img = img.convert('L')
 # Resize the image as required.
 orig_width, orig_height = img.size
@@ -25,7 +26,9 @@ r = orig_height / orig_width
 # The ASCII character glyphs are taller than they are wide. Maintain the aspect
 # ratio by reducing the image height.
 height = int(width * r * 0.5)
-img = img.resize((width, height), Image.ANTIALIAS)
+
+# BEHOBEN: Resampling-Filter für aktuelle Pillow-Versionen angepasst
+img = img.resize((width, height), Image.Resampling.LANCZOS)
 
 # Now map the pixel brightness to the ASCII density glyphs.
 arr = np.array(img)
