@@ -9,9 +9,9 @@ k = 2 * np.pi / wavelength    # Wave number
 screen_distance = 1.0         # Distance from slits to screen [m]
 
 # -------------------------------------------------
-# 51 x 51 source grid
+# 101 x 101 source grid
 # -------------------------------------------------
-number_source_points = 51
+number_source_points = 101
 source_size = 1.0e-3          # Total source-plane width and height [m]
 
 x_source = np.linspace(
@@ -31,9 +31,10 @@ Xs, Ys = np.meshgrid(x_source, y_source)
 # -------------------------------------------------
 # Double-slit geometry
 # -------------------------------------------------
-slit_width = 0.01e-3          # Width of each slit [m]
-slit_height = 0.8e-3         # Height of each slit [m]
-slit_separation = 0.20e-3     # Distance between slit centers [m]
+double_slit_dark = True        # False: slits are dark, everything else is bright
+slit_width = 0.1e-3          # Width of each slit [m]
+slit_height = 0.2e-3         # Height of each slit [m]
+slit_separation = 0.2e-3     # Distance between slit centers [m]
 
 left_slit = (
     (np.abs(Xs + slit_separation / 2) <= slit_width / 2)
@@ -46,12 +47,15 @@ right_slit = (
 )
 
 # Points that emit light
-source_mask = left_slit | right_slit
+source_mask = ~(left_slit | right_slit) if not double_slit_dark else (left_slit | right_slit)
 
 active_x = Xs[source_mask]
 active_y = Ys[source_mask]
 
+source_mode = "slits dark, outside bright" if not double_slit_dark else "double slit bright"
+
 print("Total source grid points:", number_source_points**2)
+print("Source mode:", source_mode)
 print("Active source points:", len(active_x))
 
 # -------------------------------------------------
@@ -117,7 +121,7 @@ im1 = ax1.imshow(
 )
 ax1.set_xlabel("x [mm]")
 ax1.set_ylabel("y [mm]")
-ax1.set_title("51 × 51 source grid: double slit")
+ax1.set_title(f"51 × 51 source grid: {source_mode}")
 fig.colorbar(im1, ax=ax1, label="Source amplitude")
 
 im2 = ax2.imshow(
