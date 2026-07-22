@@ -45,6 +45,10 @@ dates = Time(
     scale="tdb"
 ).to_datetime()
 
+# Precompute Voyager 2 speeds (km/s) for plotting
+voy = data["Voyager 2"]
+speeds = np.sqrt(voy["vx"][:frames] ** 2 + voy["vy"][:frames] ** 2 + voy["vz"][:frames] ** 2) * AU_KM / 86400
+
 # ------------------------------------------------------------
 # Figure
 # ------------------------------------------------------------
@@ -153,3 +157,14 @@ animation = FuncAnimation(
 )
 
 plt.show()
+
+# Additional static plot: Voyager 2 speed vs time
+fig2, ax2 = plt.subplots(figsize=(10, 4))
+ax2.plot(dates, speeds, color="orangered")
+ax2.set_xlabel("Date")
+ax2.set_ylabel("Speed (km/s)")
+ax2.set_title("Voyager 2 speed vs time")
+ax2.grid(True)
+fig2.autofmt_xdate()
+plt.show()
+
